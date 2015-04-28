@@ -43,3 +43,6 @@ Temporary Items
 .apdisk
 
 *.jpg
+log.txt
+
+temp/
