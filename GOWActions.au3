@@ -3,7 +3,6 @@
 #include "MachineConfig.au3"
 #include "LoginObject.au3"
 #include <MsgBoxConstants.au3>
-
 #include <FileConstants.au3>
 #include <File.au3>
 #include <Date.au3>
@@ -1395,6 +1394,7 @@ Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout)
 EndFunc
 
 Func LogMessage($message)
+
    FileWriteLine( $LogFileName,$message)
 
    Local $loginID = Login_LoginID()
@@ -1410,8 +1410,7 @@ Func LogMessage($message)
 
    ;Read from the specific File for this login
    _SqlConnect()
-   _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values (" & $MachineID & ",0," & $loginID & ",'" & $message & "')" )
-
+   _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "',0," & $loginID & ",'" & $message & "')" )
    _SQL_Close()
 
 EndFunc

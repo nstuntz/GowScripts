@@ -164,7 +164,7 @@ Func GetOldestActiveLogin()
    Local $iRows
    Local $iColumns
    ;Local $iRval = _SQL_GetTable2D(-1,"SELECT top 1 UserName,Password,LastRun,LoginID, Convert(varchar(20),LastRun,120) as LastRunConvert FROM Login where Active = 1 and ( InProcess = 0 or DATEADD(hh,1,LastRun) < GetDate() ) order by LastRun",$aData,$iRows,$iColumns)
-   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin2 " & $MachineID,$aData,$iRows,$iColumns)
+   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin2 '" & $MachineID & "'",$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("GetOldestLogin2 -- " & _SQL_GetErrMsg())

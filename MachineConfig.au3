@@ -1,3 +1,3 @@
 #include-once
 Global Const $MachineID = @ComputerName
-Global Const $DonationConfirmation = 0
+Global Const $DonationConfirmation = 1

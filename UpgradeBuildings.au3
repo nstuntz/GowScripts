@@ -3,9 +3,6 @@
 #include <Date.au3>
 #include <Array.au3>
 
-Local $NewCode = 555421
-Local $StartTime = _NowCalc()
-
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
