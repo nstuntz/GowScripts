@@ -82,13 +82,6 @@ For $k = 1 to 100000 ;go through them all lots
 
    CollectAthenaGift()
 
-   CollectQuests()
-   If Not CheckForCityScreen(0) Then
-	  LogMessage("Collect Quests Failed - 5")
-	  CloseGOW()
-	  ContinueLoop
-   EndIf
-
    Gifts()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Gifts Failed - 5")
@@ -281,6 +274,11 @@ For $k = 1 to 100000 ;go through them all lots
 			   ;Done building, We got a speed up
 			   ExitLoop
 			EndIf
+
+			If Not CheckForCityScreen(0) Then
+			   LogMessage("Looks like something very bad happened.  We don't have a city screen when trying to upgrade building.")
+			   ExitLoop
+			EndIf
 		 Next
 
 		 ;Should we upgrade the stronghold if nothing was built
@@ -305,6 +303,12 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
+   CollectQuests()
+   If Not CheckForCityScreen(0) Then
+	  LogMessage("Collect Quests Failed - 5")
+	  CloseGOW()
+	  ContinueLoop
+   EndIf
 
    ;Logout
    LogMessage("Attempting Logout from Main Loop")
