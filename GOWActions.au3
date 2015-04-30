@@ -549,6 +549,14 @@ Func SendRSS($type)
 		 return false
 	  Endif
 
+	  ;Max the food if we can by filling silver marches with it
+
+	  If ($type = $eSilver) AND ((Login_RSSType()-1) = $eFood) Then
+		 LogMessage("Banking - Maxing silver march with food")
+		 SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+	  EndIf
+
+
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
 
 	  Sleep(1000)
@@ -738,11 +746,11 @@ Func Rally()
    EndIf
 
    SendMouseClick($RallyButton[0],$RallyButton[1])
-   Sleep(500)
+   Sleep(1000)
 
    ;Click the 8 Hour check mark
    SendMouseClick($Rally8HourCheckBox[0],$Rally8HourCheckBox[1])
-   Sleep(500)
+   Sleep(1000)
 
    ;Click the Set button
    If PollForColor($RallySetButton[0],$RallySetButton[1],$Blue,3000) Then
@@ -757,7 +765,7 @@ Func Rally()
 
    ;Click the Queue Max button
    SendMouseClick($RallyQueueMaxButton[0],$RallyQueueMaxButton[1])
-   Sleep(500)
+   Sleep(1000)
 
    ;Click the Send button
    SendMouseClick($RallySendButton[0],$RallySendButton[1])
