@@ -39,8 +39,8 @@ Global Const $RedeemButton = [952,642]
 Global Const $AccountButton = [650,360]
 Global Const $LogoutButton = [1010,550]
 Global Const $LogoutYesButton = [720,600]
-Global Const $MarchesButton = [875,200] ;[1000,640] ;[1000,640]
-Global Const $MarchesButtonColor = 7362600 ;1050624 ;6308896
+Global Const $MarchesButton = [1000,640]; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
+Global Const $MarchesButtonColor = 1050624; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
 
 ;Helps set
 Global Const $AllianceMenu = [1145,370]
