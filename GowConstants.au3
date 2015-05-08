@@ -242,5 +242,5 @@ Global Const $AndroidHomeButtonBottom  = [690,711]
 Global Const $GiftBox[] = [1124,390]
 Global Const $GiftBoxColor = 11568136
 Global Const $GiftButton[] = [644,210]
-Global Const $GiftGetClearButton[] = [608,208]
+Global Const $GiftGetClearButton[] = [665,185] ; [608,208]
 Global Const $GiftGetClearButtonRed = 3672064
