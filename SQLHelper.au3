@@ -129,12 +129,14 @@ Func _SQL_Connect($ADODBHandle, $server, $db, $username, $password)
     $ADODBHandle.Open("DRIVER={SQL Server};SERVER=" & $server & ";DATABASE=" & $db & ";uid=" & $username & ";pwd=" & $password & ";") ;<==Connect with required credentials
 
     If Not @error Then
-        Return SetError($SQL_OK, 0, $SQL_OK)
+		 Return SetError($SQL_OK, 0, $SQL_OK)
     Else
-        $SQLErr = "Connection Error"
-		 LogMessage("-- SQL_Connect  --  " & @error)
-		 LogMessage("-- SQL_Connect  --  " & _SQL_GetErrMsg())
-        Return SetError($SQL_ERROR, 0, $SQL_ERROR)
+		 $SQLErr = "Connection Error"
+		 LogMessage("-- SQL_Connect(1)  --  " & @error)
+		 LogMessage("-- SQL_Connect(2)  --  " & _SQL_GetErrMsg())
+		 Sleep(60000)
+		 LogMessage("-- Slept (1 Min) --")
+		 Return SetError($SQL_ERROR, 0, $SQL_ERROR)
     EndIf
 EndFunc   ;==>_SQL_Connect
 
