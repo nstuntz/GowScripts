@@ -128,7 +128,7 @@ Global Const $RallyAttackButton = [660,530] ;815 ;970
 Global Const $RallyAttackButtonOffsetX = 155
 Global Const $RallyAttachButtonColor = 4211776
 Global Const $RallyCancelButton = [660,670] ;815 ;970
-Global Const $RallyCancelConfirmButton = [780,500]
+Global Const $RallyCancelConfirmButton = [720,500]
 ;Rally - Actual rally
 Global Const $RallyButton = [820,460] ; Blue
 Global Const $Rally8HourCheckBox = [890,515]
