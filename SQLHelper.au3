@@ -132,9 +132,9 @@ Func _SQL_Connect($ADODBHandle, $server, $db, $username, $password)
 		 Return SetError($SQL_OK, 0, $SQL_OK)
     Else
 		 $SQLErr = "Connection Error"
+		 Sleep(60000)
 		 LogMessage("-- SQL_Connect(1)  --  " & @error)
 		 LogMessage("-- SQL_Connect(2)  --  " & _SQL_GetErrMsg())
-		 Sleep(60000)
 		 LogMessage("-- Slept (1 Min) --")
 		 Return SetError($SQL_ERROR, 0, $SQL_ERROR)
     EndIf
