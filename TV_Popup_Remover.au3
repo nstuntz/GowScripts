@@ -1,7 +1,8 @@
 Local $tvHandle = 0
 while True
-	$tvHandle = WinWaitActive("Sponsored session")
-	if Not ($tvHandle = 0) Then
-		Send("{Enter}")
-	EndIf
+   $tvHandle = WinWait("Sponsored session")
+   if Not ($tvHandle = 0) Then
+	  WinActivate("Sponsored session")
+	  Send("{Enter}")
+   EndIf
 WEnd
