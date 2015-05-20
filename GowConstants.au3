@@ -109,7 +109,7 @@ Global Const $HelpRSSMax[][] = [[575,342], _ ;Stone
 								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [994,220] ; Blue
+Global Const $RSSHelpButton = [990,370] ; Blue
 Global Const $RSSOKButton = [666,325] ; Blue
 Global Const $MarketLocation = [869,538] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
@@ -230,7 +230,7 @@ Global Const $GoldExitButton1 = [435,160]
 Global Const $GoldExitButton2 = [583,183]
 Global Const $GoldExitButton3 = [523,168]
 Global Const $GoldBuyButton = [1140,340]
-Global Const $GoldBuyButton2 = [1140,540]
+Global Const $GoldBuyButton2 = [1152,545]
 Global Const $BuyGoldColor = 11033608
 Global Const $GetGoldButton = 4196352
 

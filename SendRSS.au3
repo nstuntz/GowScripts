@@ -3,24 +3,26 @@
 #include <Date.au3>
 #include <Array.au3>
 
-Global $loginEmail = "gowgunta.r@gmail.com" ;"tanielamelia@gmail.com"
-Global $loginPWD = "gowguntar";"danmelia"
+Global $loginEmail = "mooskafarms@gmail.com" ; ;gowgunta.r@gmail.com
+Global $loginPWD = "danmelia"; gowguntar ;
 
 Global $MarchesAllowed = 5
-Local $RSSAmountPerSend = 3 ;this is in millions since the send string is millions and the requested is in millions
+Local $RSSAmountPerSend = 3.5 ;this is in millions since the send string is millions and the requested is in millions
 Local $RSSAmountPerSendString = "7000000"
 Local $Tries = 1
 
 Global $SendToX = "482";"482"
 Global $SendToY = "30";"30"
-Global $RoundTripTimeInMS = 55000
+Global $RoundTripTimeInMS = 35000
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
-Local $RSSRequests = [0,0,0,0,200] ; stone, wood, ore, food,  silver (in millions)
+Local $RSSRequests = [0,100,750,0,0] ; stone, wood, ore, food,  silver (in millions)
 
 Global $ResourceButton = [776,424]
 ;Local $RSSBoxes[][] = [[559,245],[623,245],[687,245],[751,245],[815,245]] ; Stone - Wood - Ore - Food - Silver  64 px offset
 
-
+If FileExists($LogFileName) = 1 Then
+   FileDelete($LogFileName)
+EndIf
 
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
 HotKeySet("{F9}","HotKeyPressed")
@@ -63,6 +65,7 @@ Local $RssAmount
 For $RSSId = 0 to UBound($RSSRequests)-1
    $RssAmount = $RSSRequests[$RSSId]
    $RSSSent = 0
+   LogMessage("Sending RSS Type = " & $RSSId)
 
    While $RssSent < $RssAmount
 
@@ -77,9 +80,19 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 		 EndIf
 
 		 $RssSent = $RssSent + $RSSAmountPerSend
-	  else
+		 LogMessage("RSS Sent = " & $RssSent)
+	  Else
+		 LogMessage("Send RSS Failed, seeing if the help button is still there")
+
+			   If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 1000) Then
+				  SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+			   Else
+				  LogMessage("Send RSS button not there at the bottom.")
+
+				  MsgBox(0,"Success","Something went wrong.  Get me back to the market with the target city at the top.")
+			   Endif
 		 Sleep(2000)
-	  endif
+	  Endif
    WEnd
 Next
 
