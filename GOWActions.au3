@@ -618,7 +618,7 @@ Func Rally()
 	  Return
    EndIf
 
-   If (Login_RallyX() < 1 or Login_RallyX() > 1024 ) OR (Login_RallyY() < 1 OR Login_RallyY() > 512) Then
+   If (Login_RallyX() < 1 or Login_RallyX() > 512 ) OR (Login_RallyY() < 1 OR Login_RallyY() > 1024) Then
 	  LogMessage("Rally Coords are bad (" & Login_RallyX() & "," & Login_RallyY() & ")")
 	  Return
    EndIf

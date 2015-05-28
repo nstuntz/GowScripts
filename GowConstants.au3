@@ -2,10 +2,12 @@
 
 Global Const $GOWVBHostWindow[] = [401,77]
 ;Global Const $GOWVBHostWindow[] = [431,77]
-;Global Const $GOWIcon[] = [815,330]
-;Global Const $GOWColor = 14727280
-Global Const $GOWIcon[] = [831,331]
-Global Const $GOWColor = 16384
+Global Const $GOWIcon[] = [815,330]
+Global Const $GOWColor = 14727280
+
+;These are from the MemDayFix
+;Global Const $GOWIcon[] = [831,331]
+;Global Const $GOWColor = 16384
 
 
 
@@ -20,8 +22,6 @@ Global Const $LoginButton = [855,550]
 Global Const $FirstPinBox = [575,550]
 Global Const $SecondPinBox = [575,450]
 Global Const $PinBoxColor = 16317688
-
-;	balvenie59@gmail.com	jack1234	0906
 
 ;Menus
 Global Const $CityMenu = [1150,680]
@@ -59,7 +59,7 @@ Global Const $AllianceHelpsMenu = [930,510]
 Global Const $AllianceHelpHelpAllButton = [1020,345]
 
 Global Const $HelpButton = [989,140]
-Global Const $HelpButtonColor = 6303776 ;4742248 ;3676168 ; 6303776       4221056
+Global Const $HelpButtonColor = 8931376 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
 Global Const $NOHelpColor = 9997432
 ;Boucers
 Global Const $AthenaGift = [990,537]
