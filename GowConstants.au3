@@ -1,14 +1,22 @@
 #include-once
 
 Global Const $GOWVBHostWindow[] = [401,77]
-Global Const $GOWIcon[] = [815,330]
-Global Const $GOWColor = 14727280
+;Global Const $GOWVBHostWindow[] = [431,77]
+;Global Const $GOWIcon[] = [815,330]
+;Global Const $GOWColor = 14727280
+Global Const $GOWIcon[] = [831,331]
+Global Const $GOWColor = 16384
+
+
 
 ;Login Set
-Global Const $UserNameTextBox = [735,540]
+;Global Const $UserNameTextBox = [735,540]
+Global Const $UserNameTextBox = [705,540]
 Global Const $UserNameTextBoxColor = 16317688
-Global Const $PasswordTextBox = [805,550]
-Global Const $LoginButton = [885,550]
+;Global Const $PasswordTextBox = [805,550]
+Global Const $PasswordTextBox = [775,550]
+;Global Const $LoginButton = [885,550]
+Global Const $LoginButton = [855,550]
 Global Const $FirstPinBox = [575,550]
 Global Const $SecondPinBox = [575,450]
 Global Const $PinBoxColor = 16317688
@@ -37,11 +45,12 @@ Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
 Global Const $MoreMenu = [1140,175]
 Global Const $RedeemButton = [952,642]
 Global Const $AccountButton = [650,360]
-Global Const $LogoutButton = [1010,550]
+;Global Const $LogoutButton = [1010,550]
+Global Const $LogoutButton = [960,550]
 Global Const $LogoutYesButton = [720,600]
 Global Const $MarchesButton = [1000,640]; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
 Global Const $MarchesButtonColor = 1050624; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
-
+;Global Const $MarchesButtonColor = 2102272
 ;Helps set
 Global Const $AllianceMenu = [1145,370]
 Global Const $AllianceHelpMenuDragStart = [1000,450]
@@ -102,14 +111,20 @@ Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 								   [687,245], _ ;Ore
 								   [751,245], _ ;Food
 								   [815,245]] ; Silver
-Global Const $HelpRSSMax[][] = [[575,342], _ ;Stone
-								   [640,342], _ ;Wood
-								   [705,342], _ ;Ore
-								   [770,342], _ ;Food
-								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
+;Global Const $HelpRSSMax[][] = [[575,342], _ ;Stone
+;								   [640,342], _ ;Wood
+;								   [705,342], _ ;Ore
+;								   [770,342], _ ;Food
+;								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
+
+Global Const $HelpRSSMax[][] = [[565,345], _ ;Stone
+								   [630,345], _ ;Wood
+								   [695,345], _ ;Ore
+								   [760,345], _ ;Food
+								   [825,345]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [990,370] ; Blue
+Global Const $RSSHelpButton = [994,220] ; Blue
 Global Const $RSSOKButton = [666,325] ; Blue
 Global Const $MarketLocation = [869,538] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
@@ -137,6 +152,7 @@ Global Const $RallyQueueMaxButton = [700,450]
 Global Const $RallySendButton = [690,377]
 Global Const $SearchKingdomButton = [435,558]
 Global Const $SearchKingdomButtonColor = 4740176
+;Global Const $SearchKingdomButtonColor = 3682344
 Global Const $SearchKingdomX = [636,423]
 Global Const $SearchKingdomY = [636,284]
 Global Const $SearchKingdomGoButton = [739,377]
@@ -229,10 +245,15 @@ Global Const $GoldExitButton = [435,160]
 Global Const $GoldExitButton1 = [435,160]
 Global Const $GoldExitButton2 = [583,183]
 Global Const $GoldExitButton3 = [523,168]
-Global Const $GoldBuyButton = [1140,340]
-Global Const $GoldBuyButton2 = [1152,545]
+
+;Global Const $GoldBuyButton = [1140,340]
+;Global Const $GoldBuyButton2 = [1140,540]
+
+Global Const $GoldBuyButton = [1145,340]
+Global Const $GoldBuyButton2 = [1145,540]
 Global Const $BuyGoldColor = 11033608
 Global Const $GetGoldButton = 4196352
+;Global Const $GetGoldButton = 3672064
 
 ;; Than Updated for my machine
 Global Const $AndroidHomeButton  = [1186,560]
