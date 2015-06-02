@@ -101,6 +101,7 @@ Global Const $ShieldButton8Hr = [640,250]
 Global Const $ShieldButton24Hr = [780,250]
 Global Const $ShieldButton3Day = [960,250]
 Global Const $ShieldReplaceButton = [700,360]
+Global Const $ShieldVerifyMaxLength = [560,250]
 
 ;Banking
 Global Const $HelpTopMember = [625,250] ; Blue Color
@@ -237,6 +238,7 @@ Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16448
 Global Const $AccountButtonColor = 16317688
 Global Const $GreyedOutButton = 4211776
+Global Const $ShieldCountDownBlue = 1074272
 
 ;Paused?
 Global $g_bPaused = false

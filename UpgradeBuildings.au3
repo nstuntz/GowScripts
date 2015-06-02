@@ -89,7 +89,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
-   Shield()
+   Shield(1)
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Shield Failed - 6")
 	  CloseGOW()

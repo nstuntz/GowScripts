@@ -430,14 +430,14 @@ Func Chests()
 EndFunc
 
 ;Will shield if the login information says to
-Func Shield()
+Func Shield($attempt)
 
    ;Check if we should shield
    If Login_Shield() <> 1 Then
 	  return True
    EndIf
 
-   LogMessage("Checking Shield")
+   LogMessage("Checking Shield.  Attempt " & $attempt)
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),_NowCalc()))) > (_DateDiff('n',Login_LastRun(),_NowCalc())*1.5) Then
@@ -471,7 +471,19 @@ Func Shield()
 	  Sleep(2000)
    EndIf
 
-   Login_WriteShield()
+   LogMessage("Verifying Shield")
+
+   If PollForColor($ShieldVerifyMaxLength[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000) Then
+	  LogMessage("Shield Verified")
+	  Login_WriteShield()
+   Else
+	  If $attempt < 4 Then
+		 LogMessage("Shield Not replaced, trying again")
+		 Shield($attempt+1)
+	  Else
+		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED")
+	  EndIf
+   EndIf
 
    ;City Menu
    ClickCityScreen()
