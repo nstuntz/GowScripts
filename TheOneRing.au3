@@ -6,9 +6,13 @@
 
 HotKeySet("{F10}","HotKeyPressed")
 
+;Delay the start of doing anything so that this script can start another instance and kill itself if it is updated
+Sleep(15000) ; 15 seconds
+
 ;Find Git
 Local $FirstTime = True
 Local $GitPath
+Local $MyDate
 Local $gitExes = _FileListToArrayRec(@LocalAppDataDir, "Git.exe",$FLTAR_FILES ,$FLTAR_RECUR ,$FLTAR_NOSORT ,$FLTAR_FULLPATH)
 
 For $i = 0 to UBound($gitExes)-1
@@ -32,6 +36,10 @@ While 1
    For $i = 0 to UBound($aFileList)-1
 	  $FileDates[$i][0] = $aFileList[$i]
 	  $FileDates[$i][1] = FileGetTime($aFileList[$i],0,1)
+
+	  If @ScriptName = $aFileList[$i] Then
+		 $MyDate = FileGetTime($aFileList[$i],0,1)
+	  EndIf
    Next
 
    ;Sync Git
@@ -47,7 +55,6 @@ While 1
 		 If $FileDates[$k][0] = $UpdatedFileList[$i] Then
 			If ($FileDates[$k][1] <> FileGetTime($UpdatedFileList[$i],0,1)) Then
 			   $fileChanged = True
-			   MsgBox($MB_SYSTEMMODAL, "", $UpdatedFileList[$i])
 			EndIf
 			ExitLoop
 		 EndIf
@@ -59,6 +66,7 @@ While 1
 
 	  Next
    Next
+
 
    If $fileChanged OR $FirstTime Then
 
@@ -79,11 +87,15 @@ While 1
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildings.au3")
 	  Sleep(1000)
+
+	  ;Should we restart the master script
+	  If $MyDate <> FileGetTime(@ScriptName,0,1)) Then
+		 Run(@AutoItExe & " /AutoIt3ExecuteScript  TheOneRing.au3")
+		 ProcessClose(@AutoItPID)
+	  EndIf
    EndIf
 
    ;Check every 4 hours
    Sleep(1000*60*60*4)
 WEnd
-
-MsgBox($MB_SYSTEMMODAL, "", "Done Master Script")
 
