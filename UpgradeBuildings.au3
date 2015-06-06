@@ -3,7 +3,7 @@
 #include <Date.au3>
 #include <Array.au3>
 
-;;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
+;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 HotKeySet("{F1}","HotKeyPressed")
