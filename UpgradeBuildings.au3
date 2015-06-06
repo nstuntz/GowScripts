@@ -24,6 +24,8 @@ Local $badBuildings[1] = [-1]
 For $k = 1 to 100000 ;go through them all lots
 
    WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+   WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+
    Sleep(1000)
 
    LogMessage("Logging IN New User -  "  &  _Now())

@@ -1443,6 +1443,8 @@ Func HotKeyPressed()
             MsgBox(0,"Paused", "Paused")
         Case "{F9}" ; String is the {ESC} hotkey.
             Exit
+        Case "{F10}" ; String is the {ESC} hotkey.
+            Exit
 
     EndSwitch
 EndFunc   ;==>HotKeyPressed
