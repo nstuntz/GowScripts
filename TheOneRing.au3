@@ -6,7 +6,8 @@
 
 HotKeySet("{F10}","HotKeyPressed")
 
-   ;Find Git
+;Find Git
+Local $FirstTime = True
 Local $GitPath
 Local $gitExes = _FileListToArrayRec(@LocalAppDataDir, "Git.exe",$FLTAR_FILES ,$FLTAR_RECUR ,$FLTAR_NOSORT ,$FLTAR_FULLPATH)
 
@@ -34,7 +35,7 @@ While 1
    Next
 
    ;Sync Git
-   RunWait(@ComSpec & " /k " & $GitPath & " pull")
+   RunWait(@ComSpec & " /c " & $GitPath & " pull")
 
    ;Check if any files are updated
    Local $UpdatedFileList = _FileListToArrayRec (@ScriptDir, "*.au3")
@@ -59,7 +60,9 @@ While 1
 	  Next
    Next
 
-   If $fileChanged Then
+   If $fileChanged OR $FirstTime Then
+
+	  $FirstTime = False
 
 	  ;If they are kill all autoit except this one
 	  Local $aProcessList = ProcessList("autoit3.exe")
