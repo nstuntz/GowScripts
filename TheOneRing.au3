@@ -12,7 +12,7 @@ Sleep(15000) ; 15 seconds
 ;Find Git
 Local $FirstTime = True
 Local $GitPath
-Local $MyDate
+Local $MyDate = ""
 Local $gitExes = _FileListToArrayRec(@LocalAppDataDir, "Git.exe",$FLTAR_FILES ,$FLTAR_RECUR ,$FLTAR_NOSORT ,$FLTAR_FULLPATH)
 
 For $i = 0 to UBound($gitExes)-1
@@ -89,7 +89,7 @@ While 1
 	  Sleep(1000)
 
 	  ;Should we restart the master script
-	  If $MyDate <> FileGetTime(@ScriptName,0,1)) Then
+	  If ($MyDate <> FileGetTime(@ScriptName,0,1)) Then
 		 Run(@AutoItExe & " /AutoIt3ExecuteScript  TheOneRing.au3")
 		 ProcessClose(@AutoItPID)
 	  EndIf
