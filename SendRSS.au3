@@ -3,8 +3,8 @@
 #include <Date.au3>
 #include <Array.au3>
 
-Global $loginEmail = ""
-Global $loginPWD =  ""
+Global $loginEmail = InputBox("Username", "UserName:")
+Global $loginPWD =  InputBox("Password", "Password:")
 
 Global $MarchesAllowed = 5
 Local $RSSAmountPerSend = 3.3 ;this is in millions since the send string is millions and the requested is in millions
