@@ -597,6 +597,12 @@ Func SendRSS($type)
 			;delay until the top help is back
 			If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000) Then
 			   ;Do nothing this is
+			Else
+			   ;Should check if the help button didn't really get clicked
+			   If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 3000) Then
+				  SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+				  Sleep(1000)
+			   EndIf
 			Endif
 		 Endif
 	  ;Endif
