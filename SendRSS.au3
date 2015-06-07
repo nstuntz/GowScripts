@@ -13,7 +13,7 @@ Local $Tries = 1
 
 Global $SendToX = "482";"482"
 Global $SendToY = "30";"30"
-Global $RoundTripTimeInMS = 305000
+Global $RoundTripTimeInMS = 35000
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
 Local $RSSRequests = [500,500,500,500,500] ; stone, wood, ore, food,  silver (in millions)
 
