@@ -2,22 +2,27 @@
 #include "GowActions.au3"
 #include <Date.au3>
 #include <Array.au3>
+Local $width = 250
+Local $height = 130
+Global $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
+Global $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
-Global $loginEmail = InputBox("Username", "UserName:")
-Global $loginPWD =  InputBox("Password", "Password:")
+Global $stone =  InputBox("Stone", "Stone:","0","",$width,$height)
+Global $wood =  InputBox("Wood", "Wood:","0","",$width,$height)
+Global $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
+Global $food =  InputBox("Food", "Food:","0","",$width,$height)
+Global $SendTimeInMS =  InputBox("Silver", "Silver:","0","",$width,$height)
+;Global $RoundTripTimeInMS = 35000
+Global $silver =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
 
-Global $MarchesAllowed = 5
-Local $RSSAmountPerSend = 3.3 ;this is in millions since the send string is millions and the requested is in millions
-Local $RSSAmountPerSendString = "7000000"
+Global $MarchesAllowed = InputBox("Marches", "Marches:","5","",$width,$height)
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","3.3","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
-Global $SendToX = "482";"482"
-Global $SendToY = "30";"30"
-Global $RoundTripTimeInMS = 35000
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
-Local $RSSRequests = [500,500,500,500,500] ; stone, wood, ore, food,  silver (in millions)
+Local $RSSRequests = [Number ($stone),Number ($wood),Number ($ore),Number ($food),Number ($silver)] ; stone, wood, ore, food,  silver (in millions)
 
-Global $ResourceButton = [776,424]
+;Global $ResourceButton = [776,424]
 ;Local $RSSBoxes[][] = [[559,245],[623,245],[687,245],[751,245],[815,245]] ; Stone - Wood - Ore - Food - Silver  64 px offset
 
 
