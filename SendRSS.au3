@@ -3,19 +3,19 @@
 #include <Date.au3>
 #include <Array.au3>
 
-Global $loginEmail = "gowgunta.r@gmail.com" ;"tanielamelia@gmail.com"
-Global $loginPWD = "gowguntar";"danmelia"
+Global $loginEmail = ""
+Global $loginPWD =  ""
 
 Global $MarchesAllowed = 5
-Local $RSSAmountPerSend = 3 ;this is in millions since the send string is millions and the requested is in millions
+Local $RSSAmountPerSend = 3.3 ;this is in millions since the send string is millions and the requested is in millions
 Local $RSSAmountPerSendString = "7000000"
 Local $Tries = 1
 
 Global $SendToX = "482";"482"
 Global $SendToY = "30";"30"
-Global $RoundTripTimeInMS = 55000
+Global $RoundTripTimeInMS = 305000
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
-Local $RSSRequests = [0,0,0,0,200] ; stone, wood, ore, food,  silver (in millions)
+Local $RSSRequests = [500,500,500,500,500] ; stone, wood, ore, food,  silver (in millions)
 
 Global $ResourceButton = [776,424]
 ;Local $RSSBoxes[][] = [[559,245],[623,245],[687,245],[751,245],[815,245]] ; Stone - Wood - Ore - Food - Silver  64 px offset
