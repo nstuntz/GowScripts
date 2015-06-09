@@ -440,18 +440,18 @@ Func Shield($attempt)
    LogMessage("Checking Shield.  Attempt " & $attempt)
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonShield - (_DateDiff('n',Login_LastShield(),_NowCalc()))) > (_DateDiff('n',Login_LastRun(),_NowCalc())*1.5) Then
+   If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.5) Then
 
 	  LogMessage("LastRun = " & Login_LastRun())
 	  LogMessage("Login_LastShield = " & Login_LastShield())
-	  LogMessage("_NowCalc = " & _NowCalc())
-	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),_NowCalc()))
+	  LogMessage("GetNowUTCCalc = " & GetNowUTCCalc())
+	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),GetNowUTCCalc()))
 
-	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),_NowCalc()))))
+	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
 	  Return
    EndIf
 
-   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),_NowCalc()))))
+   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
 
    ;Boosts menu
    SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
@@ -643,8 +643,8 @@ Func Rally()
 
    ;Check if we need to rally
    Local $minonRally = 480 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonRally - (_DateDiff('n',Login_LastRally(),_NowCalc()))) > (_DateDiff('n',Login_LastRun(),_NowCalc())*1.5) Then
-	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),_NowCalc()))))
+   If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.5) Then
+	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))))
 	  Return
    EndIf
 
@@ -1458,3 +1458,8 @@ EndFunc   ;==>HotKeyPressed
 Func quit()
    Exit
 EndFunc
+
+Func GetNowUTCCalc()
+   return _Date_Time_SystemTimeToDateTimeStr(_Date_Time_GetSystemTime(),1)
+EndFunc
+

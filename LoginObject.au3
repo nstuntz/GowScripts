@@ -57,6 +57,7 @@ Local $_RssMarches = 1
 Local $_SilveMarches = 1
 Local $_HasGoldMine = 0
 Local $_TreasuryDue = _Now()
+Local $_TimezoneOffsetMin = -240
 
 ; create connection to MSSQL
 Func _SqlConnect() ; connects to the database specified
@@ -126,7 +127,7 @@ Func Load_City($loginID)
 							  "[ProductionPerHour],[LastAthenaGift],[StrongHoldLevel],[TreasuryLevel],[Shield]," & _
 							  "Convert(varchar(20),LastShield,120) as LastShieldConvert,Convert(varchar(20),LastUpgradeBuilding,120) as LastUpgradeBuildingConvert,CollectAthenaGift,RedeemCode,Upgrade, " & _
 							  "RSSBankNum,SilverBankNum,RssMarches,SilverMarches,HasGoldMine," & _
-							  "Convert(varchar(20),TreasuryDue,120) as TreasuryDueConvert FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
+							  "Convert(varchar(20),TreasuryDue,120) as TreasuryDueConvert,DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
 
    $_Bank = $aData[1][1]
    $_Rally = $aData[1][2]
@@ -155,8 +156,17 @@ Func Load_City($loginID)
    $_SilveMarches = $aData[1][24]
    $_HasGoldMine = $aData[1][25]
    $_TreasuryDue = $aData[1][26]
+   $_TimezoneOffsetMin = $aData[1][27]
 
-   ;MsgBox(0,"4",$_CityName)
+
+   ;Convert dates to UTC
+   $_LastShield = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastShield)
+   $_LastRally = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastRally)
+   $_LastBank = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastBank)
+   $_LastUpgrade = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastUpgrade)
+   $_TreasuryDue = _DateAdd('n',-1*$_TimezoneOffsetMin,$_TreasuryDue)
+
+
 EndFunc
 
 Func GetOldestActiveLogin()
@@ -175,7 +185,9 @@ Func GetOldestActiveLogin()
    $_LastRun = $aData[1][4]
    $_LoginID = $aData[1][3]
    $_PIN = $aData[1][5]
+   $_TimezoneOffsetMin = $aData[1][6]
 
+   $_LastRun = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastRun)
 EndFunc
 
 Func Login_WriteShield()
@@ -213,6 +225,12 @@ EndFunc
 Func Login_WriteResourcesNeeded()
    _SqlConnect()
    _SQL_Execute(-1,"Update CityInfo Set NeedRSS = 1 Where CityID = " & Login_CityID())
+   _SQL_Close()
+EndFunc
+
+Func Login_WriteResourcesNotNeeded()
+   _SqlConnect()
+   _SQL_Execute(-1,"Update CityInfo Set NeedRSS = 0 Where CityID = " & Login_CityID())
    _SQL_Close()
 EndFunc
 
@@ -416,6 +434,9 @@ Func Login_SilveMarches()
 EndFunc
 Func Login_HasGoldMine()
    return $_HasGoldMine
+EndFunc
+Func Login_TimezoneOffsetMin()
+   return $_TimezoneOffsetMin
 EndFunc
 
 

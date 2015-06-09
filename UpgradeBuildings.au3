@@ -289,6 +289,8 @@ For $k = 1 to 100000 ;go through them all lots
 		 If $built = 1 Then
 			LogMessage("Maybe should upgrade this SH. Got through all the buildings without upgrading")
 			Login_WriteResourcesNeeded()
+		 Else
+			Login_WriteResourcesNotNeeded()
 		 EndIf
 	  EndIf
 
