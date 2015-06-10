@@ -11,9 +11,9 @@ Global $stone =  InputBox("Stone", "Stone:","0","",$width,$height)
 Global $wood =  InputBox("Wood", "Wood:","0","",$width,$height)
 Global $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
 Global $food =  InputBox("Food", "Food:","0","",$width,$height)
-Global $SendTimeInMS =  InputBox("Silver", "Silver:","0","",$width,$height)
+Global $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 ;Global $RoundTripTimeInMS = 35000
-Global $silver =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
+Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
 
 Global $MarchesAllowed = InputBox("Marches", "Marches:","5","",$width,$height)
 Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","3.3","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
