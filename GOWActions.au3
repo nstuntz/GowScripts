@@ -1293,18 +1293,31 @@ Func CheckForCityScreen($attempts)
 EndFunc
 
 Func SaveCityImage()
-   SaveImage('CityImage',409,128,1169,727)
+   SaveImage('CityImage',$CityImage[0],$CityImage[1],$CityImage[2],$CityImage[3])
 EndFunc
 
 Func SaveRSSImage()
-   SaveImage('RSSImage',470,185,505,655)
+   SaveImage('RSSImage',$RssImage[0],$RssImage[1],$RssImage[2],$RssImage[3])
+EndFunc
+
+
+Func SaveGoldImage()
+   SaveImage('GoldImage',$GoldImage[0],$GoldImage[1],$GoldImage[2],$GoldImage[3])
+EndFunc
+
+Func SaveHeroImage()
+   SaveImage('HeroImage',$HeroImage[0],$HeroImage[1],$HeroImage[2],$HeroImage[3])
+EndFunc
+
+Func SaveTreasuryImage()
+   SaveImage('TreasuryImage',$TreasuryImage[0],$TreasuryImage[1],$TreasuryImage[2],$TreasuryImage[3])
 EndFunc
 
 Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
    Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
-   ;Local $URL = "http://localhost:52417/api/Upload"
-   Local $URL = "http://ets-tfs.cloudapp.net:9090/api/Upload"
+   Local $URL = "http://localhost:52417/api/Upload"
+   ;Local $URL = "http://ets-tfs.cloudapp.net:9090/api/Upload"
 
    _ScreenCapture_SetJPGQuality (25)
 
@@ -1343,12 +1356,16 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
    $oHTTP.Open("POST", $URL, False)
    $oHTTP.SetRequestHeader("Content-Type", 'multipart/form-data; boundary="' & $sBoundary & '"')
    $oHTTP.SetRequestHeader("From", 'GowScript')
+   $oHTTP.SetRequestHeader("CityID", Login_CityID())
    $oHTTP.Send(StringToBinary($sPD))
    $oReceived = $oHTTP.ResponseText
    $oStatusCode = $oHTTP.Status
 
-   LogMessage("Image Saved - Status = " & $oStatusCode)
-   LogMessage("Image Saved - Response = " & $oReceived)
+   If ($oReceived <> "Sucess" Then
+	  LogMessage("Image Saved - Name = " & $imageName)
+	  LogMessage("Image Saved - Status = " & $oStatusCode)
+	  LogMessage("Image Saved - Response = " & $oReceived)
+   EndIf
 
 EndFunc
 

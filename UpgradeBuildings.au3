@@ -58,6 +58,9 @@ For $k = 1 to 100000 ;go through them all lots
 
    ;Save the City Image
    SaveCityImage()
+   SaveGoldImage()
+   SaveHeroImage()
+   SaveTreasuryImage()
 
    local $built = 0
 

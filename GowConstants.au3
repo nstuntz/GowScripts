@@ -267,3 +267,10 @@ Global Const $GiftBoxColor = 11568136
 Global Const $GiftButton[] = [644,210]
 Global Const $GiftGetClearButton[] = [665,185] ; [608,208]
 Global Const $GiftGetClearButtonRed = 3672064
+
+;Image Positions
+Global Const $RssImage[] = [470,185,505,655]
+Global Const $CityImage[] = [409,128,1169,727]
+Global Const $GoldImage[] = [410,185,460,295]
+Global Const $HeroImage[] = [410,650,480,725]
+Global Const $TreasuryImage[] = [665,545,785,655]
