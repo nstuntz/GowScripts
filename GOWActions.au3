@@ -440,15 +440,16 @@ Func Shield($attempt)
    LogMessage("Checking Shield.  Attempt " & $attempt)
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.5) Then
+   If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
+	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
+	  Return
+   EndIf
 
+   If (($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > 300) Then
 	  LogMessage("LastRun = " & Login_LastRun())
 	  LogMessage("Login_LastShield = " & Login_LastShield())
 	  LogMessage("GetNowUTCCalc = " & GetNowUTCCalc())
 	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),GetNowUTCCalc()))
-
-	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
-	  Return
    EndIf
 
    LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
@@ -643,7 +644,7 @@ Func Rally()
 
    ;Check if we need to rally
    Local $minonRally = 480 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.5) Then
+   If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
 	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))))
 	  Return
    EndIf
@@ -1361,7 +1362,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
    $oReceived = $oHTTP.ResponseText
    $oStatusCode = $oHTTP.Status
 
-   If ($oReceived <> "Sucess" Then
+   If $oReceived <> """Success""" Then
 	  LogMessage("Image Saved - Name = " & $imageName)
 	  LogMessage("Image Saved - Status = " & $oStatusCode)
 	  LogMessage("Image Saved - Response = " & $oReceived)
