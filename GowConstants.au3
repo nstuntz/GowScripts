@@ -274,3 +274,8 @@ Global Const $CityImage[] = [409,128,1169,727]
 Global Const $GoldImage[] = [410,185,460,295]
 Global Const $HeroImage[] = [410,650,480,725]
 Global Const $TreasuryImage[] = [665,545,785,655]
+
+Global Const $ShieldTime[] = [500,235,570,625]
+Global Const $ShieldCount[] = [910,590,1045,700]
+Global Const $RssProduction[] = [1111,1111,1111,1111]
+Global Const $SilverProduction[] = [1111,1111,1111,1111]

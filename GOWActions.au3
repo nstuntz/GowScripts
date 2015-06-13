@@ -442,6 +442,16 @@ Func Shield($attempt)
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
 	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
+
+	  ;Boosts menu
+	  SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
+	  Sleep(2000)
+	  ;Save Shield Time
+	  SaveShieldTimeImage()
+	  ;Back out
+	  Send("{ESC}")
+	  Sleep(1000)
+
 	  Return
    EndIf
 
@@ -462,6 +472,13 @@ Func Shield($attempt)
    SendMouseClick($ShieldButton[0],$ShieldButton[1])
    Sleep(2000)
 
+   ;Drag up so we can see the count for a picture
+   MouseClickDrag("left",888,460,842,460,20)
+   Sleep(500)
+
+   ;Store the count image
+   SaveShieldCountImage()
+
    ;Get Shield button button
    SendMouseClick($ShieldButton3Day[0],$ShieldButton3Day[1])
    Sleep(2000)
@@ -480,6 +497,10 @@ Func Shield($attempt)
    Else
 	  If $attempt < 4 Then
 		 LogMessage("Shield Not replaced, trying again")
+
+		 ;Go back to the City screen to start again
+		 ClickCityScreen()
+
 		 Shield($attempt+1)
 	  Else
 		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED")
@@ -1312,6 +1333,24 @@ EndFunc
 
 Func SaveTreasuryImage()
    SaveImage('TreasuryImage',$TreasuryImage[0],$TreasuryImage[1],$TreasuryImage[2],$TreasuryImage[3])
+EndFunc
+
+
+Func SaveShieldCountImage()
+   SaveImage('ShieldCount',$ShieldCount[0],$ShieldCount[1],$ShieldCount[2],$ShieldCount[3])
+EndFunc
+
+Func SaveShieldTimeImage()
+   SaveImage('ShieldTime',$ShieldTime[0],$ShieldTime[1],$ShieldTime[2],$ShieldTime[3])
+EndFunc
+
+
+
+Func SaveRSSProductionImage()
+   SaveImage('RSSProduction',$RssProduction[0],$RssProduction[1],$RssProduction[2],$RssProduction[3])
+EndFunc
+Func SaveSilverProductionImage()
+   SaveImage('SilverProduction',$SilverProduction[0],$SilverProduction[1],$SilverProduction[2],$SilverProduction[3])
 EndFunc
 
 Func SaveImage($imageName,$x1,$y1,$x2,$y2)
