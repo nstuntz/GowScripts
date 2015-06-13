@@ -43,7 +43,7 @@ While 1
    Next
 
    ;Sync Git
-   RunWait(@ComSpec & " /c " & $GitPath & " pull")
+   RunWait(@ComSpec & " /c """ & $GitPath & """ pull")
 
    ;Check if any files are updated
    Local $UpdatedFileList = _FileListToArrayRec (@ScriptDir, "*.au3")
