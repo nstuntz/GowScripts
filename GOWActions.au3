@@ -439,15 +439,17 @@ Func Shield($attempt)
 
    LogMessage("Checking Shield.  Attempt " & $attempt)
 
+   ;Boosts menu
+   SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
+   Sleep(2000)
+
+   ;Save Shield Time
+   SaveShieldTimeImage()
+
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
 	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
 
-	  ;Boosts menu
-	  SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
-	  Sleep(2000)
-	  ;Save Shield Time
-	  SaveShieldTimeImage()
 	  ;Back out
 	  Send("{ESC}")
 	  Sleep(1000)
@@ -463,10 +465,6 @@ Func Shield($attempt)
    EndIf
 
    LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
-
-   ;Boosts menu
-   SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
-   Sleep(3000)
 
    ;Get Shield button button
    SendMouseClick($ShieldButton[0],$ShieldButton[1])
