@@ -36,6 +36,8 @@ For $k = 1 to 100000 ;go through them all lots
    ;Read the Login File
    If Not Login_Load() Then
 	  LogMessage("-----Login Load Failed-----")
+	  LogMessage("-----Sleeping 3 minutes-----")
+	  Sleep(180000)
 	  ContinueLoop
    EndIf
    LogMessage("Logging in for " & Login_Email())
@@ -44,6 +46,8 @@ For $k = 1 to 100000 ;go through them all lots
    If Not Login(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed - 1")
 	  CloseGOW()
+	  LogMessage("-----Sleeping 3 minutes-----")
+	  Sleep(180000)
 	  ContinueLoop
    EndIf
 

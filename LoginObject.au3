@@ -86,13 +86,13 @@ Func Login_Load($_userNameToGet = "")
    ;Read from the specific File for this login
    _SqlConnect()
 
-   If GetOldestActiveLogin() = $SQL_ERROR then
+   If Not GetOldestActiveLogin() then
 	  LogMessage("Getting Login Failed - " & _SQL_GetErrMsg())
 	  _SQL_Close()
 	  return False
    EndIf
 
-   If Load_City(Login_LoginID()) = $SQL_ERROR  Then
+   If Not Load_City(Login_LoginID()) Then
 	  LogMessage("Loading Login Failed - " & _SQL_GetErrMsg())
 	  _SQL_Close()
 	  return False
@@ -111,6 +111,11 @@ Func Load_City($loginID)
 
    $iRval = _SQL_GetTable2D(-1,"SELECT [CityID],[LoginID],[CityName],[Kingdom],[LocationX],[LocationY],[Created],[Placed],[ResourceTypeID],[AllianceID] FROM City where LoginID=" & $loginID ,$aData,$iRows,$iColumns)
 
+   If $iRval = $SQL_ERROR Then
+	  LogMessage("Load_City (City) -- " & _SQL_GetErrMsg())
+	  return False
+   EndIf
+
    $_CityID = $aData[1][0]
    $_LoginID = $aData[1][1]
    $_CityName = $aData[1][2]
@@ -128,6 +133,11 @@ Func Load_City($loginID)
 							  "Convert(varchar(20),LastShield,120) as LastShieldConvert,Convert(varchar(20),LastUpgradeBuilding,120) as LastUpgradeBuildingConvert,CollectAthenaGift,RedeemCode,Upgrade, " & _
 							  "RSSBankNum,SilverBankNum,RssMarches,SilverMarches,HasGoldMine," & _
 							  "Convert(varchar(20),TreasuryDue,120) as TreasuryDueConvert,DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
+
+   If $iRval = $SQL_ERROR Then
+	  LogMessage("Load_City (CityInfo) -- " & _SQL_GetErrMsg())
+	  return False
+   EndIf
 
    $_Bank = $aData[1][1]
    $_Rally = $aData[1][2]
@@ -167,17 +177,19 @@ Func Load_City($loginID)
    $_TreasuryDue = _DateAdd('n',-1*$_TimezoneOffsetMin,$_TreasuryDue)
 
 
+   return True
 EndFunc
 
 Func GetOldestActiveLogin()
    Local $aData
    Local $iRows
    Local $iColumns
-   ;Local $iRval = _SQL_GetTable2D(-1,"SELECT top 1 UserName,Password,LastRun,LoginID, Convert(varchar(20),LastRun,120) as LastRunConvert FROM Login where Active = 1 and ( InProcess = 0 or DATEADD(hh,1,LastRun) < GetDate() ) order by LastRun",$aData,$iRows,$iColumns)
+
    Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin2 '" & $MachineID & "'",$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("GetOldestLogin2 -- " & _SQL_GetErrMsg())
+	  return False
    EndIf
 
    $_userName = $aData[1][0]
@@ -188,6 +200,8 @@ Func GetOldestActiveLogin()
    $_TimezoneOffsetMin = $aData[1][6]
 
    $_LastRun = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastRun)
+
+   return True
 EndFunc
 
 Func Login_WriteShield()
