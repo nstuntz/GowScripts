@@ -205,7 +205,26 @@ EndFunc
 
 Func CollectAthenaGift()
 
-   If Login_CollectAthenaGift() = 0 Then
+   ;If Login_CollectAthenaGift() = 0 Then
+   ;  Return
+   ;EndIf
+
+   If CheckForColor( $AthenaGift[0],$AthenaGift[1], $NoAthenaGiftColor) Then
+	  Return
+   EndIf
+
+   ;Check if this is bouncing
+   Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
+   Sleep(100)
+   Local $secondColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
+   Sleep(400)
+   Local $thirdColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
+
+   If $firstColor = $secondColor AND  $firstColor =  $thirdColor Then
+	  LogMessage("$firstColor=" & $firstColor)
+	  LogMessage("$secondColor=" & $secondColor)
+	  LogMessage("$thirdColor=" & $thirdColor)
+	  LogMessage("Looks like we have an Athena Gift but it is not ready to collect")
 	  Return
    EndIf
 
@@ -1224,7 +1243,7 @@ EndFunc
 
 Func ClickGoldButton()
 
-   If PollForColorTwoPlaces($GoldBuyButton[0],$GoldBuyButton[1],$GoldBuyButton2[0],$GoldBuyButton2[1], $BuyGoldColor, 40000) Then
+   If PollForColorTwoPlaces($GoldBuyButton[0],$GoldBuyButton[1],$GoldBuyButton2[0],$GoldBuyButton2[1], $BuyGoldColor, 30000) Then
 	  Send("{ESC}")
 	  Sleep(2000)
 	  return True

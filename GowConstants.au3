@@ -62,9 +62,10 @@ Global Const $HelpButton = [989,140]
 Global Const $HelpButtonColor = 8931376 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
 Global Const $NOHelpColor = 9997432
 ;Boucers
-Global Const $AthenaGift = [990,537]
-Global Const $SecretGift = [990,660]
+Global Const $AthenaGift = [977,537]
+Global Const $NoAthenaGiftColor = 3170328
 Global Const $AthenaGiftCollectButton = [925,485]
+Global Const $SecretGift = [990,660]
 Global Const $SecretGiftCollectButton = [895,510]
 
 ;Quests
