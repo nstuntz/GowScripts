@@ -120,7 +120,7 @@ Func Login($email, $pwd)
 
 	  ;Check the color again
 	  If Not CheckForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor) Then
-		 LogMessage("No UsernameText box Checking if we are already logged in ")
+		 LogMessage("No UsernameText box Checking if we are already logged in.")
 
 		 ;Check if you are already logged in Use the last attempt, don't do it lots
 		 If CheckForCityScreen(4) Then
@@ -182,13 +182,13 @@ Func Login($email, $pwd)
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
-		 LogMessage("******************* Resetting City and Map Colors ***********************")
+		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
 		 $MapMenuColor  = PixelGetColor($CityMenu[0],$CityMenu[1])
-		 LogMessage("New City Color = " & $MapMenuColor )
+		 LogMessage("New City Color = " & $MapMenuColor,5  )
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
 		 Sleep(2000)
 		 $CityScreenColor = PixelGetColor($CityMenu[0],$CityMenu[1])
-		 LogMessage("New Map Color = " & $CityScreenColor )
+		 LogMessage("New Map Color = " & $CityScreenColor ,5 )
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
 		 Sleep(2000)
 	  EndIf
@@ -196,7 +196,7 @@ Func Login($email, $pwd)
 
    ;If we didn't get the fity screen bailout
    If Not CheckForCityScreen(0) Then
-	  LogMessage("NO city screen after login, in login function")
+	  LogMessage("NO city screen after login, in login function",5 )
 	  return False
    EndIf
 
@@ -215,7 +215,7 @@ Func CollectAthenaGift()
 
    ;Check if this is bouncing
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
-   Sleep(100)
+   Sleep(400)
    Local $secondColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
    Sleep(400)
    Local $thirdColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
@@ -224,11 +224,11 @@ Func CollectAthenaGift()
 	  LogMessage("$firstColor=" & $firstColor)
 	  LogMessage("$secondColor=" & $secondColor)
 	  LogMessage("$thirdColor=" & $thirdColor)
-	  LogMessage("Looks like we have an Athena Gift but it is not ready to collect")
+	  LogMessage("We have an Athena Gift but it is not ready to collect",2)
 	  Return
    EndIf
 
-   LogMessage("Collecting Athena Gift")
+   LogMessage("Collecting Athena Gift",2)
 
    ;Collect the bouncer
    SendMouseClick($AthenaGift[0],$AthenaGift[1])
@@ -288,7 +288,7 @@ Func RedeemCode()
 	  Return
    EndIf
 
-   LogMessage("Redeeming Code = " & Login_RedeemCode())
+   LogMessage("Redeeming Code = " & Login_RedeemCode(),2)
 
    ;Collect the Daily Quest
    SendMouseClick($MoreMenu[0],$MoreMenu[1])
@@ -348,7 +348,7 @@ EndFunc
 
 Func CollectAllCityQuests()
 
-   LogMessage("Collecting All Empire Quests")
+   LogMessage("Collecting All Empire Quests",2)
    ;Open Quests screen
    SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
    Sleep(2000)
@@ -380,7 +380,7 @@ Func CollectAllCityQuests()
 	  Login_WriteHeroUpgradeNeeded()
    EndIf
 
-   LogMessage("Collecting All Empire Quests - Hero levels gained = " & $heroLevelCount)
+   LogMessage("Collecting All Empire Quests - Hero levels gained = " & $heroLevelCount,2)
 
    ClickCityScreen()
 
@@ -456,7 +456,7 @@ Func Shield($attempt)
 	  return True
    EndIf
 
-   LogMessage("Checking Shield.  Attempt " & $attempt)
+   LogMessage("Checking Shield.  Attempt " & $attempt,2)
 
    ;Boosts menu
    SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
@@ -467,7 +467,7 @@ Func Shield($attempt)
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
-	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
+	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),2)
 
 	  ;Back out
 	  Send("{ESC}")
@@ -483,7 +483,7 @@ Func Shield($attempt)
 	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),GetNowUTCCalc()))
    EndIf
 
-   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))))
+   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),2)
 
    ;Get Shield button button
    SendMouseClick($ShieldButton[0],$ShieldButton[1])
@@ -509,18 +509,18 @@ Func Shield($attempt)
    LogMessage("Verifying Shield")
 
    If PollForColor($ShieldVerifyMaxLength[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000) Then
-	  LogMessage("Shield Verified")
+	  LogMessage("Shield Verified",2)
 	  Login_WriteShield()
    Else
 	  If $attempt < 4 Then
-		 LogMessage("Shield Not replaced, trying again")
+		 LogMessage("Shield Not replaced, trying again",3)
 
 		 ;Go back to the City screen to start again
 		 ClickCityScreen()
 
 		 Shield($attempt+1)
 	  Else
-		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED")
+		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED",4)
 	  EndIf
    EndIf
 
@@ -542,7 +542,7 @@ Func Bank($scrolled,$previousBuildingType)
 	  Return
    EndIf
 
-   LogMessage("Banking ")
+   LogMessage("Banking ",2)
 
    ;reset the scrolling to start if this isn't the same type of building
    If $scrolled = 1  And $previousBuildingType <> 1 Then
@@ -603,7 +603,7 @@ Func SendRSS($type)
 	  ;Max the food if we can by filling silver marches with it
 
 	  If ($type = $eSilver) AND ((Login_RSSType()-1) = $eFood) Then
-		 LogMessage("Banking - Maxing silver march with food")
+		 LogMessage("Banking - Maxing silver march with food",2)
 		 SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
 	  EndIf
 
@@ -676,25 +676,25 @@ Func Rally()
    EndIf
 
    If (Login_RallyX() < 1 or Login_RallyX() > 512 ) OR (Login_RallyY() < 1 OR Login_RallyY() > 1024) Then
-	  LogMessage("Rally Coords are bad (" & Login_RallyX() & "," & Login_RallyY() & ")")
+	  LogMessage("Rally Coords are bad (" & Login_RallyX() & "," & Login_RallyY() & ")",4)
 	  Return
    EndIf
 
    ;Check if we need to rally
    Local $minonRally = 480 ;1440= 24Hr ,  4320 = 3 day
    If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
-	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))))
+	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))),2)
 	  Return
    EndIf
 
-   LogMessage("Starting Rally process")
+   LogMessage("Starting Rally process",2)
 
    If Not CheckForCityScreen(0) Then
 	  LogMessage("No city screen to start rallying, trying to get there")
 	  ClickCityScreen()
 
 	  If Not CheckForCityScreen(0) Then
-		 LogMessage("No city screen to start rallying, Canceling Rally")
+		 LogMessage("No city screen to start rallying, Canceling Rally",3)
 		 Return
 	  EndIf
    EndIf
@@ -726,7 +726,7 @@ Func Rally()
 		 Sleep(1000)
 		 SendMouseClick($RallyCancelConfirmButton[0],$RallyCancelConfirmButton[1])
 		 Sleep(1000)
-		 LogMessage("Rally Canceled.")
+		 LogMessage("Rally Canceled.",2)
 		 ExitLoop
 	  EndIf
    Next
@@ -740,7 +740,7 @@ Func Rally()
    If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000) Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
 	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000) Then
-		 LogMessage("No World screen to search for rallying target, canceling process")
+		 LogMessage("No World screen to search for rallying target, canceling process",4)
 		 Login_UpdateLastRallyFAILED()
 		 ClickCityScreen()
 		 Return
@@ -796,7 +796,7 @@ Func Rally()
    WEnd
 
    If $HaveRallyCity >= 4  Then
-	  LogMessage("Can not get city rallying target, canceling process")
+	  LogMessage("Can not get city rallying target, canceling process",4)
 	  Login_UpdateLastRallyFAILED()
 	  ClickCityScreen()
 	  Return
@@ -814,7 +814,7 @@ Func Rally()
 	  SendMouseClick($RallySetButton[0],$RallySetButton[1])
 	  Sleep(500)
    Else
-	  LogMessage("Can not rally find set button for rallying target, canceling process")
+	  LogMessage("Can not rally find set button for rallying target, canceling process",4)
 	  Login_UpdateLastRallyFAILED()
 	  ClickCityScreen()
 	  Return
@@ -835,7 +835,7 @@ Func Rally()
    SendMouseClick($CityMenu[0],$CityMenu[1])
    Sleep(1000)
 
-   LogMessage("Ending Rally process")
+   LogMessage("Rally set",2)
 
 EndFunc
 
@@ -1007,7 +1007,10 @@ Func OpenGOW($attempts)
 
    ;Make sure the VB is open
    WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+   WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   Sleep(500)
 
+   LogMessage("Attempting to open GOW",1)
    ;Check if we have an Icon, if not try exiting GOW or using the home button for Android
    If Not PollForColor( $GOWIcon[0],$GOWIcon[1], $GOWColor, 5000) Then
 	  LogMessage("***  We dont have the Icon trying to reset")
@@ -1070,6 +1073,10 @@ Func OpenGOW($attempts)
 		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
 		 Sleep(3000)
 
+		 If($attempts > 100) Then
+			LogMessage("----- Can not get a Gow Icon so quitting after 100 attempts -----",5)
+			quit()
+		 EndIf
 		 OpenGOW($attempts+1)
 	  Else
 
@@ -1080,7 +1087,7 @@ Func OpenGOW($attempts)
 		 Logout()
 		 Sleep(2000)
 		 If($attempts > 2) Then
-			LogMessage("----- Attempted to logout and back in twice. Quitting -----")
+			LogMessage("----- Attempted to logout and back in twice. Quitting -----",5)
 			quit()
 		 EndIf
 		 OpenGOW(1)
@@ -1125,7 +1132,7 @@ Func CheckForPinPrompt()
    If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,5000) Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 
-		 LogMessage("PIN is needed")
+		 LogMessage("PIN is needed",2)
 		 Sleep(500)
 		 SendMouseClick($FirstPinBox[0],$FirstPinBox[1])
 		 For $i = 0 to UBound($pinArray)-1
@@ -1160,13 +1167,13 @@ Func CheckIfBuidlingFromTimers()
 
    Local $iconX = $TimerIcon[0]
    If (CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor) or CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor2)) Then
-	  LogMessage("We are already Building based on the First timer")
+	  LogMessage("We are already Building based on the First timer",2)
 	  return true
    EndIf
 
    $iconX = $TimerIcon[0] + ($TimerOffsetX)
    If (CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor) or CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor2)) Then
-	  LogMessage("We are already Building based on the Second timer")
+	  LogMessage("We are already Building based on the Second timer",2)
 	  return true
    EndIf
 
@@ -1493,7 +1500,8 @@ Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout)
    EndIf
 EndFunc
 
-Func LogMessage($message)
+;5 = critical, 4 = error, 3 = warning, 2 = information, 1 = debug
+Func LogMessage($message, $severity = 1)
 
    FileWriteLine( $LogFileName,$message)
 
@@ -1502,15 +1510,14 @@ Func LogMessage($message)
 	  $loginID = "NULL"
    EndIf
 
-   ;FileWriteLine( $LogFileName,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values (" & $MachineID & ",0," & $loginID & ",'" & $message & "')")
-
    If StringInStr ($message,"'") Then
 	  $message = StringReplace($message,"'","")
    Endif
 
-   ;Read from the specific File for this login
+   FileWriteLine( $LogFileName,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity &"," & $loginID & ",'" & $message & "')" )
+
    _SqlConnect()
-   _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "',0," & $loginID & ",'" & $message & "')" )
+   _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity & "," & $loginID & ",'" & $message & "')" )
    _SQL_Close()
 
 EndFunc

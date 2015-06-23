@@ -23,10 +23,7 @@ Local $badBuildings[1] = [-1]
 
 For $k = 1 to 100000 ;go through them all lots
 
-   WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
-   WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
-
-   Sleep(1000)
+   Sleep(500)
 
    LogMessage("Logging IN New User -  "  &  _Now())
 
@@ -35,24 +32,24 @@ For $k = 1 to 100000 ;go through them all lots
 
    ;Read the Login File
    If Not Login_Load() Then
-	  LogMessage("-----Login Load Failed-----")
-	  LogMessage("-----Sleeping 3 minutes-----")
+	  LogMessage("-----Login Load Failed-----",5)
+	  LogMessage("-----Sleeping 3 minutes-----",5)
 	  Sleep(180000)
 	  ContinueLoop
    EndIf
-   LogMessage("Logging in for " & Login_Email())
+   LogMessage("Logging in for " & Login_Email(),2)
 
    ;Login
    If Not Login(Login_Email(),Login_Pwd()) Then
-	  LogMessage("Login Attempt Failed - 1")
+	  LogMessage("Login Attempt Failed",5)
 	  CloseGOW()
-	  LogMessage("-----Sleeping 3 minutes-----")
+	  LogMessage("-----Sleeping 3 minutes-----",5)
 	  Sleep(180000)
 	  ContinueLoop
    EndIf
 
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Check for city Failed - 2")
+	  LogMessage("Check for city Failed - 2",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
@@ -75,32 +72,30 @@ For $k = 1 to 100000 ;go through them all lots
 
    CollectSecretGift()
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Collect Secret Gift Failed - 3")
+	  LogMessage("Collect Secret Gift Failed - 3",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
    Helps()
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Helps Failed - 4")
+	  LogMessage("Helps Failed - 4",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
-
-   RedeemCode()
 
    CollectAthenaGift()
 
    Gifts()
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Collect Gifts Failed - 5")
+	  LogMessage("Collect Gifts Failed - 5",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
    Shield(1)
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Shield Failed - 6")
+	  LogMessage("Shield Failed - 6",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
@@ -124,7 +119,7 @@ For $k = 1 to 100000 ;go through them all lots
 
    Rally()
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Rally Failed- 6")
+	  LogMessage("Rally Failed- 6",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
@@ -143,7 +138,7 @@ For $k = 1 to 100000 ;go through them all lots
 			If CheckForColor($StrongHoldUpgrade[0],$StrongHoldUpgrade[1],$StrongholdUpgradeArrowColor) Then
 			   $built = UpgradeBuilding($StrongHoldUpgrade[0],$StrongHoldUpgrade[1],-1)
 			   Local $newSHLevel = Login_StrongHoldLevel() + 1
-			   LogMessage("Stronghold Upgraded to : " & $newSHLevel)
+			   LogMessage("Stronghold Upgraded to : " & $newSHLevel,2)
 			   Login_StrongHoldLevel_Set($newSHLevel)
 			   Login_LastUpgradeBuilding_Set(-1)  ;reset the building to start at the first farms
 			   Login_LastUpgrade_Set(_Now())
@@ -166,7 +161,7 @@ For $k = 1 to 100000 ;go through them all lots
 			$buildingNum = Login_LastUpgradeBuilding() + $buildingLoop + 1
 
 			If ($buildingNum = $buildingCount) AND (Login_HasGoldMine() = 1) Then
-			   LogMessage("City has gold mine, skipping trying to upgrade it.")
+			   LogMessage("City has gold mine, skipping trying to upgrade it.",2)
 			   ContinueLoop
 			EndIf
 
@@ -287,14 +282,14 @@ For $k = 1 to 100000 ;go through them all lots
 			EndIf
 
 			If Not CheckForCityScreen(0) Then
-			   LogMessage("Looks like something very bad happened.  We don't have a city screen when trying to upgrade building.")
+			   LogMessage("Looks like something very bad happened.  We don't have a city screen when trying to upgrade building.",5)
 			   ExitLoop
 			EndIf
 		 Next
 
 		 ;Should we upgrade the stronghold if nothing was built
 		 If $built = 1 Then
-			LogMessage("Maybe should upgrade this SH. Got through all the buildings without upgrading")
+			LogMessage("Maybe should upgrade this SH. Got through all the buildings without upgrading",2)
 			Login_WriteResourcesNeeded()
 		 Else
 			Login_WriteResourcesNotNeeded()
@@ -304,27 +299,27 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Upgrade Failed - 7")
+	  LogMessage("Upgrade Failed - 7",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
    Bank($scrolled,$previousBuildingType)
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Bank Failed - 8")
+	  LogMessage("Bank Failed - 8",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
    CollectQuests()
    If Not CheckForCityScreen(0) Then
-	  LogMessage("Collect Quests Failed - 5")
+	  LogMessage("Collect Quests Failed - 5",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
    ;Logout
-   LogMessage("Attempting Logout from Main Loop")
+   LogMessage("Logging out",2)
    Logout()
    Sleep(3000)
 
@@ -335,7 +330,7 @@ For $k = 1 to 100000 ;go through them all lots
 
    ;Check if the android home button is on the right or the bottom, bottom means we are out side means close out and then open and try logout
    If CheckForColor( $AndroidHomeButton[0],$AndroidHomeButton[1], $Black) Then
-	  LogMessage("Calling CloseGOW, from main loop becuase it still looks like we are in it")
+	  LogMessage("Calling CloseGOW, from main loop becuase it still looks like we are in it",5)
 	  CloseGOW()
    EndIf
 Next
