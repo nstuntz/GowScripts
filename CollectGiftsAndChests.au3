@@ -61,7 +61,7 @@ Gifts()
 Chests()
 
 ;Logout
-Logout()
+;Logout()
 Sleep(5000)
 
 MsgBox(0,"Success","Finished")
