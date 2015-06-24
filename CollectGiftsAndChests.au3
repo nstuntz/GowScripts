@@ -52,13 +52,18 @@ OpenGOW(0)
 ;Login
 Login($loginEmail,$loginPWD)
 
+Local $haveAChest = True
+
 If Not CheckForCityScreen(0) Then
    MsgBox(0,"Paused","Something went wrong....  Don't have a login")
 EndIf
 
-Gifts()
+;Gifts()
 
-Chests()
+;Loop to get all chests
+While ($haveAChest)
+   $haveAChest = Chests()
+WEnd
 
 ;Logout
 ;Logout()
