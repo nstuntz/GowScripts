@@ -437,7 +437,7 @@ Func Chests()
 	  ;If we can get or clear a gift, do it and keep looping
 	  If PollForColor($FirstItem[0], $FirstItem[1],$GreenCollect,4000) Then
 		 SendMouseClick($FirstItem[0],$FirstItem[1])
-		 If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,6000) Then
+		 If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,7000) Then
 			Send("{ESC}")
 			$openedChests +=1
 		 EndIf
@@ -445,7 +445,7 @@ Func Chests()
 		 If CheckForColor($SecondItem[0], $SecondItem[1],$GreenCollect) Then
 			SendMouseClick($SecondItem[0],$SecondItem[1])
 
-			If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,6000) Then
+			If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,7000) Then
 			   Send("{ESC}")
 			   $openedChests +=1
 			EndIf

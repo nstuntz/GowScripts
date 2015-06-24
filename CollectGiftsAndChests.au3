@@ -45,13 +45,18 @@ While (_DateDiff('n',_NowCalc(),$StartTime) > 0)
    MouseMove($LoginFailureButton[0],$LoginFailureButton[1])
    Sleep(1000)
 WEnd
-Local $startRunTime = _Now()
+Local $startRunTime = _NowCalc()
 
 ;Open GOW
 OpenGOW(0)
 
 ;Login
-Login($loginEmail,$loginPWD)
+if Not Login($loginEmail,$loginPWD) Then
+   MsgBox(0,"Paused","Something went wrong....  Login Failed")
+   Exit
+EndIf
+
+
 
 Local $openedChests = 0
 
