@@ -45,6 +45,7 @@ While (_DateDiff('n',_NowCalc(),$StartTime) > 0)
    MouseMove($LoginFailureButton[0],$LoginFailureButton[1])
    Sleep(1000)
 WEnd
+Local $startRunTime = _Now()
 
 ;Open GOW
 OpenGOW(0)
@@ -68,9 +69,9 @@ Until ($openedChests = 0)
 
 ;Logout
 ;Logout()
-Sleep(5000)
+;Sleep(5000)
 
-MsgBox(0,"Success","Total Chests opened: " & $totalChests)
+MsgBox(0,"Success","Total Chests opened: " & $totalChests & " -- Time = " & _DateDiff('n',$startRunTime,_NowCalc()))
 
 ;END IT ALL
 Exit

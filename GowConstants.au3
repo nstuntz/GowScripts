@@ -35,6 +35,8 @@ Global Const $MyItemsMenu = [590,350]
 Global Const $TreasuresMenu = [650,200]
 Global Const $FirstItem = [780,250]
 Global Const $SecondItem = [940,250]
+Global Const $ChestOpenBeige = [636,306]
+Global Const $ChestOpenBeigeColor = 11576456
 
 
 ;Quit Game Dialog
