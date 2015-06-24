@@ -115,29 +115,23 @@ EndFunc
 
 Func Login($email, $pwd)
 
-   If Not CheckForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor) Then
-	  Sleep(1000) ;wait 1 more seconds
+   If Not PollForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor,3000) Then
+	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
-	  ;Check the color again
-	  If Not CheckForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor) Then
-		 LogMessage("No UsernameText box Checking if we are already logged in.")
-
-		 ;Check if you are already logged in Use the last attempt, don't do it lots
-		 If CheckForCityScreen(4) Then
-			LogMessage("Ok, we are already logged in so just keep going")
-			Sleep(4000)
-			ClickGoldButton()
-			If Not CheckForCityScreen(0) Then
-			   LogMessage("NO city screen after login, in login function")
-			   return False
-			EndIf
-
-			return True
-		 Else
-			LogMessage("No UsernameText box and not logged in so login failed.")
-			Return False
+	  ;Check if you are already logged in Use the last attempt, don't do it lots
+	  If CheckForCityScreen(4) Then
+		 LogMessage("Ok, we are already logged in so just keep going")
+		 Sleep(4000)
+		 ClickGoldButton()
+		 If Not CheckForCityScreen(0) Then
+			LogMessage("NO city screen after login, in login function")
+			return False
 		 EndIf
 
+		 return True
+	  Else
+		 LogMessage("No UsernameText box and not logged in so login failed.")
+		 Return False
 	  EndIf
    EndIf
 
@@ -165,14 +159,24 @@ Func Login($email, $pwd)
 
    ;Check that the login button is there
    If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,5000) Then
-	  return False
+	  LogMessage("Login Failed.  Login button isn't the right color",5 )
+	  Return False
    EndIf
 
    ;Login Button
    SendMouseClick($LoginButton[0],$LoginButton[1])
 
+   ;Check if there was a login failure
+   If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
+	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
+	  Return False
+   EndIf
+
    ;Now check for a Pin
-   CheckForPinPrompt()
+   If Not CheckForPinPrompt() Then
+	  Return False
+   EndIf
+
 
    ;Now exit the gold buy button
    Local $ClickedGoldScreen = False
@@ -431,12 +435,13 @@ Func Chests()
 	  ;If we can get or clear a gift, do it and keep looping
 	  If PollForColor($FirstItem[0], $FirstItem[1],$GreenCollect,4000) Then
 		 SendMouseClick($FirstItem[0],$FirstItem[1])
-		 Sleep(3000)
+		 Sleep(2000)
 		 Send("{ESC}")
 	  Else
 		 If CheckForColor($SecondItem[0], $SecondItem[1],$GreenCollect) Then
 			SendMouseClick($SecondItem[0],$SecondItem[1])
 			Sleep(2000)
+			Send("{ESC}")
 		 Else
 			$HaveChest = False
 		 EndIf
@@ -864,7 +869,7 @@ EndFunc
 Func CollectAllQuestsFromScreen()
 
    If Not CheckForColor($QuestsCollect[0],$QuestsCollect[1],$Blue) Then
-	  MsgBox(0,"Paused","Looks like No VIP on, please put on at least a couple of hours, and start the first chance so a quest shows, then return here")
+	  ;MsgBox(0,"Paused","Looks like No VIP on, please put on at least a couple of hours, and start the first chance so a quest shows, then return here")
    EndIf
 
    Local $HaveChances = True
@@ -901,7 +906,7 @@ Func CollectAllQuestsFromScreen()
 			Sleep(500)
 			$HaveQuests = True
 		 Else
-			MsgBox(0,"Paused","No Chance button.  No clue where we are.")
+			;MsgBox(0,"Paused","No Chance button.  No clue where we are.")
 			$HaveChances = False;
 		 EndIf
 	  EndIf
@@ -1134,20 +1139,27 @@ Func CheckForPinPrompt()
 
 		 LogMessage("PIN is needed",2)
 		 Sleep(500)
+
+		 If UBound($pinArray) < 4 Then
+			LogMessage("PIN is needed, and not supplied.  Failed to login.",5)
+			Return False
+		 EndIf
+
 		 SendMouseClick($FirstPinBox[0],$FirstPinBox[1])
 		 For $i = 0 to UBound($pinArray)-1
 			Send(Chr($pinArray[$i]))
 			Sleep(1000)
 		 Next
+		 Return True
 	  Else
-
 		 LogMessage("Pin Spot1 passed, spot 2 did not.")
 		 LogMessage("Pin Spot2 is - " & PixelGetColor($SecondPinBox[0],$SecondPinBox[1]))
+		 Return True ;Don't know why we are here but don't fail out
 	  EndIf
-   Else
-
-	  ;LogMessage("Pin Spot1 is - " & PixelGetColor($FirstPinBox[0],$FirstPinBox[1]))
    EndIf
+
+   Return True
+
 EndFunc
 
 ;Check for session timeout and if so click ok
@@ -1513,8 +1525,6 @@ Func LogMessage($message, $severity = 1)
    If StringInStr ($message,"'") Then
 	  $message = StringReplace($message,"'","")
    Endif
-
-   FileWriteLine( $LogFileName,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity &"," & $loginID & ",'" & $message & "')" )
 
    _SqlConnect()
    _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity & "," & $loginID & ",'" & $message & "')" )

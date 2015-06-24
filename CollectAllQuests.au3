@@ -3,8 +3,10 @@
 #include <Date.au3>
 #include <Array.au3>
 
-Global $loginEmail = "gowgunt.ar@gmail.com" ;"tanielamelia@gmail.com"
-Global $loginPWD = "gowguntar";"danmelia"
+Local $width = 250
+Local $height = 130
+Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
+Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
 HotKeySet("{F9}","HotKeyPressed")

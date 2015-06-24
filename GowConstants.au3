@@ -19,6 +19,7 @@ Global Const $UserNameTextBoxColor = 16317688
 Global Const $PasswordTextBox = [775,550]
 ;Global Const $LoginButton = [885,550]
 Global Const $LoginButton = [855,550]
+Global Const $LoginFailureButton = [670,495]
 Global Const $FirstPinBox = [575,550]
 Global Const $SecondPinBox = [575,450]
 Global Const $PinBoxColor = 16317688

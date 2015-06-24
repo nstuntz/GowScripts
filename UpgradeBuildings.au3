@@ -43,6 +43,17 @@ For $k = 1 to 100000 ;go through them all lots
    If Not Login(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed",5)
 	  CloseGOW()
+
+	  ;Set the last run so this city doesn't keep getting processed
+	  Login_Write()
+
+	  ;Log out.
+	  Send("{ESC}")
+	  Sleep(1000)
+	  If CheckForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1], $YesQuitWhite) Then
+		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
+	  EndIf
+
 	  LogMessage("-----Sleeping 3 minutes-----",5)
 	  Sleep(180000)
 	  ContinueLoop
