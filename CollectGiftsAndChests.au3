@@ -52,24 +52,25 @@ OpenGOW(0)
 ;Login
 Login($loginEmail,$loginPWD)
 
-Local $haveAChest = True
+Local $openedChests = 0
 
 If Not CheckForCityScreen(0) Then
    MsgBox(0,"Paused","Something went wrong....  Don't have a login")
 EndIf
 
 ;Gifts()
-
+Local $totalChests = 0
 ;Loop to get all chests
-While ($haveAChest)
-   $haveAChest = Chests()
-WEnd
+Do
+   $openedChests = Chests()
+   $totalChests += $openedChests
+Until ($openedChests = 0)
 
 ;Logout
 ;Logout()
 Sleep(5000)
 
-MsgBox(0,"Success","Finished")
+MsgBox(0,"Success","Total Chests opened: " & $totalChests)
 
 ;END IT ALL
 Exit

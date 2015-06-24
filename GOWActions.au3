@@ -421,7 +421,7 @@ EndFunc
 
 Func Chests()
 
-   Local $foundOne = False
+   Local $openedChests = 0
 
    SendMouseClick($ItemsMenu[0], $ItemsMenu[1])
    Sleep(2000)
@@ -439,13 +439,13 @@ Func Chests()
 		 SendMouseClick($FirstItem[0],$FirstItem[1])
 		 Sleep(2000)
 		 Send("{ESC}")
-		 $foundOne = True
+		 $openedChests +=1
 	  Else
 		 If CheckForColor($SecondItem[0], $SecondItem[1],$GreenCollect) Then
 			SendMouseClick($SecondItem[0],$SecondItem[1])
 			Sleep(2000)
 			Send("{ESC}")
-			$foundOne = True
+			$openedChests +=1
 		 Else
 			$HaveChest = False
 		 EndIf
@@ -455,7 +455,7 @@ Func Chests()
    ;City Menu
    ClickCityScreen()
 
-   Return $foundOne
+   Return $openedChests
 
 EndFunc
 
