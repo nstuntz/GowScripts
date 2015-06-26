@@ -1451,6 +1451,43 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 	  LogMessage("Image Saved - Name = " & $imageName)
 	  LogMessage("Image Saved - Status = " & $oStatusCode)
 	  LogMessage("Image Saved - Response = " & $oReceived)
+   Else
+	  ;Save to the new server too
+	  SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
+   EndIf
+
+
+EndFunc
+
+
+Func SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
+
+   Local $URL = "http://www.gowminion.com/api/Upload"
+
+   $sBoundary = "mymultipartboundary"
+
+   $sPD = '--' & $sBoundary & @CRLF & _
+		   'Content-Type: application/json; charset=UTF-8' & @CRLF & @CRLF & _
+		   '{ "text": "9"}' & @CRLF & _
+		   '--' & $sBoundary & @CRLF & _
+		   'Content-Type: image/jpeg' & @CRLF & _
+		   'Content-Disposition: form-data; name="file"; filename="' & $imageName & '_' & Login_CityID() & '.jpg"' & @CRLF & _
+		   'Content-Transfer-Encoding: binary' & @CRLF & @CRLF & _
+		   $sFileRead & @CRLF & '--' & $sBoundary & '--' & @CRLF
+
+   $oHTTP = ObjCreate("winhttp.winhttprequest.5.1")
+   $oHTTP.Open("POST", $URL, False)
+   $oHTTP.SetRequestHeader("Content-Type", 'multipart/form-data; boundary="' & $sBoundary & '"')
+   $oHTTP.SetRequestHeader("From", 'GowScript')
+   $oHTTP.SetRequestHeader("CityID", Login_CityID())
+   $oHTTP.Send(StringToBinary($sPD))
+   $oReceived = $oHTTP.ResponseText
+   $oStatusCode = $oHTTP.Status
+
+   If $oReceived <> """Success""" Then
+	  LogMessage("Image Saved - Name = " & $imageName)
+	  LogMessage("Image Saved - Status = " & $oStatusCode)
+	  LogMessage("Image Saved - Response = " & $oReceived)
    EndIf
 
 EndFunc
