@@ -39,10 +39,12 @@ Local $_TentY = 0
 Local $_LastRally = _Now()
 Local $_LastBank = _Now()
 Local $_LastUpgrade = _Now()
+Local $_LastTreasury = _Now()
 Local $_ProductionPerHour = 0
 Local $_LastAthenaGift = _Now()
 Local $_StrongHoldLevel = 0
 Local $_TreasuryLevel = 0
+Local $_TreasuryCollect = 0
 Local $_Shield = 0
 Local $_LastShield = _Now()
 Local $_LastRun = 0
@@ -56,7 +58,6 @@ Local $_SilverBank = 1
 Local $_RssMarches = 1
 Local $_SilveMarches = 1
 Local $_HasGoldMine = 0
-Local $_TreasuryDue = _Now()
 Local $_TimezoneOffsetMin = -240
 
 ; create connection to MSSQL
@@ -132,7 +133,8 @@ Func Load_City($loginID)
 							  "[ProductionPerHour],[LastAthenaGift],[StrongHoldLevel],[TreasuryLevel],[Shield]," & _
 							  "Convert(varchar(20),LastShield,120) as LastShieldConvert,Convert(varchar(20),LastUpgradeBuilding,120) as LastUpgradeBuildingConvert,CollectAthenaGift,RedeemCode,Upgrade, " & _
 							  "RSSBankNum,SilverBankNum,RssMarches,SilverMarches,HasGoldMine," & _
-							  "Convert(varchar(20),TreasuryDue,120) as TreasuryDueConvert,DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
+							  "[Treasury],Convert(varchar(20),LastTreasury,120) as LastTreasuryConvert," & _
+							  "DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("Load_City (CityInfo) -- " & _SQL_GetErrMsg())
@@ -165,8 +167,9 @@ Func Load_City($loginID)
    $_RssMarches = $aData[1][23]
    $_SilveMarches = $aData[1][24]
    $_HasGoldMine = $aData[1][25]
-   $_TreasuryDue = $aData[1][26]
-   $_TimezoneOffsetMin = $aData[1][27]
+   $_TreasuryCollect = $aData[1][26]
+   $_LastTreasury = $aData[1][27]
+   $_TimezoneOffsetMin = $aData[1][28]
 
 
    ;Convert dates to UTC
@@ -174,7 +177,7 @@ Func Load_City($loginID)
    $_LastRally = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastRally)
    $_LastBank = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastBank)
    $_LastUpgrade = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastUpgrade)
-   $_TreasuryDue = _DateAdd('n',-1*$_TimezoneOffsetMin,$_TreasuryDue)
+   $_LastTreasury = _DateAdd('n',-1*$_TimezoneOffsetMin,$_LastTreasury)
 
 
    return True
@@ -278,6 +281,13 @@ Func Login_UpdateLastBank()
 EndFunc
 
 
+Func Login_UpdateLastTreasury()
+   _SqlConnect()
+   _SQL_Execute(-1,"Update CityInfo Set LastTreasury = GetDate() Where CityID = " & Login_CityID())
+   _SQL_Close()
+EndFunc
+
+
 Func Login_SetInProcess($Email, $Machine)
    _SqlConnect()
    _SQL_Execute(-1,"Update Login Set InProcess = " & $Machine & " Where username = '" & $Email & "'")
@@ -365,6 +375,12 @@ EndFunc
 Func Login_Rally()
 	return $_Rally
 EndFunc
+Func Login_Shield()
+	return $_Shield
+EndFunc
+Func Login_Treasury()
+	return $_TreasuryCollect
+EndFunc
 Func Login_Tent()
 	return $_Tent
 EndFunc
@@ -418,11 +434,11 @@ EndFunc
 Func Login_TreasuryLevel()
 	return $_TreasuryLevel
 EndFunc
-Func Login_Shield()
-	return $_Shield
-EndFunc
 Func Login_LastShield()
 	return $_LastShield
+EndFunc
+Func Login_LastTreasury()
+	return $_LastTreasury
 EndFunc
 Func Login_LastRun()
 	return $_LastRun

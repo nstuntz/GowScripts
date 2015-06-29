@@ -111,6 +111,13 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
+   Treasury()
+   If Not CheckForCityScreen(0) Then
+	  LogMessage("Treasury Failed - 7",5)
+	  CloseGOW()
+	  ContinueLoop
+   EndIf
+
    ;If it is purple speed it
    If CheckForColor($BuildingUpgradeHelpButton[0],$BuildingUpgradeHelpButton[1],$Purple) Then
 	  SendMouseClick($BuildingUpgradeHelpButton[0],$BuildingUpgradeHelpButton[1])

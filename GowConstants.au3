@@ -272,6 +272,17 @@ Global Const $GiftButton[] = [644,210]
 Global Const $GiftGetClearButton[] = [665,185] ; [608,208]
 Global Const $GiftGetClearButtonRed = 3672064
 
+;Treasury Collection
+Global Const $TreasuryLocation[] = [750,580]
+Global Const $Treasury7[] = [660,375]
+Global Const $Treasury14[] = [760,375]
+Global Const $Treasury30[] = [845,375]
+Global Const $TreasuryBack[] = [444,681]
+Global Const $TreasuryCollectButton[] = [840,520]
+Global Const $TreasuryCollectColor = 11033608
+Global Const $TreasuryDepositButton[] = [890,180]
+Global Const $TreasuryRunningCheck[] = [877,191]
+
 ;Image Positions
 Global Const $RssImage[] = [470,185,505,655]
 Global Const $CityImage[] = [409,128,1169,727]

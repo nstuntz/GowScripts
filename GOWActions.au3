@@ -261,6 +261,8 @@ Func CollectQuests()
    SendMouseClick($QuestsDaily[0],$QuestsDaily[1])
    Sleep(2000)
 
+
+
    If Not CheckForColor($QuestsCollect[0],$QuestsCollect[1],$NoQuestsColor) Then
 	  SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
 	  Sleep(2000)
@@ -268,17 +270,38 @@ Func CollectQuests()
 	  Sleep(2000)
    Endif
 
-   ;Collect the Aliance Quest
+   ;Added to loop on clicking Collect as long as the button is blue. Daily Quests
+   While 1=1
+		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000)) Then
+			SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
+		 Else
+			ExitLoop;
+		 EndIf
+
+   WEnd
+
+   ;Collect the Alliance Quest
    SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
    Sleep(2000)
    SendMouseClick($QuestsAliaance[0],$QuestsAliaance[1])
    Sleep(2000)
+
    If Not CheckForColor($QuestsCollect[0],$QuestsCollect[1],$NoQuestsColor) Then
 	  SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
 	  Sleep(2000)
 	  SendMouseClick($QuestsStart[0],$QuestsStart[1])
 	  Sleep(2000)
    Endif
+
+   ;Added to loop on clicking Collect as long as the button is blue. Alliance Quests
+   While 1=1
+		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000)) Then
+			SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
+		 Else
+			ExitLoop;
+		 EndIf
+
+   WEnd
 
    ;Return to City Screen
    ClickCityScreen()
@@ -540,6 +563,87 @@ Func Shield($attempt)
    EndIf
 
    ;City Menu
+   ClickCityScreen()
+
+EndFunc
+
+;This will attempt to collect and restart treasury if login says to.
+Func Treasury()
+   ;Check to see if the city is set to Rally
+   If Login_Treasury() = 0 Then
+	  LogMessage("City not set to collect Treasury")
+	  Return
+   EndIf
+
+   LogMessage("City set to collect Treasury")
+
+   ;Check to see if we should check the treasury
+   Local $minonTreasury = 43200 ;30 days. We only invest for 30d for now
+   If ((($minonTreasury - (_DateDiff('n',Login_LastTreasury(),GetNowUTCCalc()))) < 0) OR (Login_LastTreasury() = 0)) Then
+	  ;It has been more than 30 days since last treasury collection. Or they have never collected.
+	  LogMessage("Attempting to collect Treasury or make deposit")
+	  ;Click on the treasury
+	  SendMouseClick($TreasuryLocation[0],$TreasuryLocation[1])
+	  Sleep(2000)
+
+	  ;If last login is 0 (null in db) then check 7 and 14 as well.
+	  If(Login_LastTreasury() = 0) Then
+		 ;Check Treasury Level 7
+		 Local $collected = 0
+		 SendMouseClick($Treasury7[0],$Treasury7[1])
+		 If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
+			SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
+			Sleep(2000)
+			$collected = 1
+			LogMessage("Treasury 7d Collected")
+		 Else
+			;if we went it but did not collect we have to go back out again
+			SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
+			Sleep(2000)
+		 EndIf
+
+		 ;we did not collect the 7d one, so try a 14d
+		 If ($collected = 0) Then
+			SendMouseClick($Treasury14[0],$Treasury14[1])
+			If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
+			   SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
+			   Sleep(2000)
+			   LogMessage("Treasury 14d Collected")
+			Else
+			   ;if we went it but did not collect we have to go back out again
+			   SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
+			   Sleep(2000)
+			EndIf
+		 EndIf
+
+	  EndIf
+
+	  SendMouseClick($Treasury30[0],$Treasury30[1])
+	  ;Check to see if I can collect
+	  If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
+		 SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
+		 Sleep(2000)
+		 SendMouseClick($Treasury30[0],$Treasury30[1])
+		 Sleep(2000)
+		 LogMessage("Treasury Collected")
+	  EndIf
+
+	  ;Check to see if we can make a deposit
+	  If PollForColor($TreasuryDepositButton[0],$TreasuryDepositButton[1],$Blue, 2000) Then
+		 MouseClickDrag("left",834,386,834,330,20)
+		 SendMouseClick($TreasuryDepositButton[0],$TreasuryDepositButton[1])
+
+		 ;Check to see if the black bar is there before setting LastTreasury
+		 If PollForColor($TreasuryRunningCheck[0],$TreasuryRunningCheck[1],$Black,3000) Then
+			LogMessage("Treasury Deposit Made")
+			Login_UpdateLastTreasury()
+		 EndIf
+		 ;If it doesn't appear to be accruing, then leave the LastTreasury date so it tries again next login.
+		 ;There doesnt seem like a lot of potential to not work, if it looks like it is failing we can trying to invest again.
+	  EndIf
+
+   EndIf
+
    ClickCityScreen()
 
 EndFunc
