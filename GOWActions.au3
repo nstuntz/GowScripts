@@ -443,6 +443,8 @@ Func CollectAllTokens()
 			SendMouseClick($SecondToken[0],$SecondToken[1])
 			Sleep(500)
 			$haveToken = True
+		 Else
+			$haveToken = False
 		 EndIf
 	  EndIf
    Until (Not $haveToken)
