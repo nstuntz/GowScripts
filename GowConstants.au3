@@ -33,11 +33,15 @@ Global $MapMenuColor = 9471048 ;winter2014=4744320; fall2014 = 7888928 ; - Old M
 Global Const $ItemsMenu = [1150,480]
 Global Const $MyItemsMenu = [590,350]
 Global Const $TreasuresMenu = [650,200]
+Global Const $ResoucesMenu = [655,535]
 Global Const $FirstItem = [780,250]
 Global Const $SecondItem = [940,250]
 Global Const $ChestOpenBeige = [660,260]
 Global Const $ChestOpenBeigeColor = 11576456
 
+;Resources Menu
+Global Const $FirstToken = [825,220]
+Global Const $SecondToken = [990,220]
 
 ;Quit Game Dialog
 Global Const $QuitGameDialogYesButton = [837,381]

@@ -413,6 +413,47 @@ Func CollectAllCityQuests()
 
 EndFunc
 
+
+Func CollectAllTokens()
+
+   LogMessage("Collecting All Tokens",2)
+   ;Open Items screen
+   SendMouseClick($ItemsMenu[0],$ItemsMenu[1])
+   Sleep(2000)
+
+   ;Open My Items
+   SendMouseClick($MyItemsMenu[0],$MyItemsMenu[1])
+   Sleep(2000)
+
+   ;Open Resouces
+   SendMouseClick($ResoucesMenu[0],$ResoucesMenu[1])
+   Sleep(2000)
+
+   Local $haveToken = False
+   Do
+
+	  If PollForColor($FirstToken[0],$FirstToken[1], $GreenCollect, 5000) Then
+		 ;Click it
+		 SendMouseClick($FirstToken[0],$FirstToken[1])
+		 Sleep(500)
+		 $haveToken = True
+	  Else
+		If PollForColor($SecondToken[0],$SecondToken[1], $GreenCollect, 5000) Then
+			;Click it
+			SendMouseClick($SecondToken[0],$SecondToken[1])
+			Sleep(500)
+			$haveToken = True
+		 EndIf
+	  EndIf
+   Until (Not $haveToken)
+
+   LogMessage("Done collecting all tokens",2)
+
+   ClickCityScreen()
+
+EndFunc
+
+
 Func Gifts()
 
    If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor) Then

@@ -19,6 +19,9 @@ WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
 ;Dependant on window at 401x77
 WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
+
+LogMessage("Starting All Tokens",2)
+
 ;Open GOW
 OpenGOW(0)
 
@@ -27,10 +30,10 @@ Login($loginEmail,$loginPWD)
 
 Login_SetInProcess($loginEmail,$MachineID)
 
-CollectAllQuestsWithChances(1,1)
-
-CollectAllCityQuests()
+CollectAllTokens()
 
 Login_SetInProcess($loginEmail,0)
 
-MsgBox(0,"Success","Finished")
+LogMessage("Ending All Tokens",2)
+
+MsgBox(0,"Finished","Finished")
