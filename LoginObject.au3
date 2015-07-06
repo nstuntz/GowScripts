@@ -59,6 +59,9 @@ Local $_RssMarches = 1
 Local $_SilveMarches = 1
 Local $_HasGoldMine = 0
 Local $_TimezoneOffsetMin = -240
+Local $_LoginDelayMin = 180
+Local $_LoginAttempts = 0
+Local $_LoginActive = 0
 
 ; create connection to MSSQL
 Func _SqlConnect() ; connects to the database specified
@@ -128,13 +131,15 @@ Func Load_City($loginID)
    $rssType = $aData[1][8]
    $_AllianceID = $aData[1][9]
 
-   $iRval = _SQL_GetTable2D(-1,"SELECT [CityID],[Bank],[Rally],[Tent],[RallyX],[RallyY],[TentX],[TentY],Convert(varchar(20),LastRally,120) as LastRallyConvert," & _
+   $iRval = _SQL_GetTable2D(-1,"SELECT ci.[CityID],[Bank],[Rally],[Tent],[RallyX],[RallyY],[TentX],[TentY],Convert(varchar(20),LastRally,120) as LastRallyConvert," & _
 							  "Convert(varchar(20),LastBank,120) as LastBankConvert,Convert(varchar(20),LastUpgrade,120) as LastUpgradeConvert," & _
 							  "[ProductionPerHour],[LastAthenaGift],[StrongHoldLevel],[TreasuryLevel],[Shield]," & _
 							  "Convert(varchar(20),LastShield,120) as LastShieldConvert,Convert(varchar(20),LastUpgradeBuilding,120) as LastUpgradeBuildingConvert,CollectAthenaGift,RedeemCode,Upgrade, " & _
 							  "RSSBankNum,SilverBankNum,RssMarches,SilverMarches,HasGoldMine," & _
 							  "[Treasury],Convert(varchar(20),LastTreasury,120) as LastTreasuryConvert," & _
-							  "DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin FROM CityInfo where CityID=" & $_CityID,$aData,$iRows,$iColumns)
+							  "DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, [LoginDelayMin], [LoginAttempts] FROM CityInfo ci " & _
+							  "inner join City c on ci.CityID = c.CityID " & _
+							  "inner join Login l on c.LoginID = l.LoginID where ci.CityID=" & $_CityID,$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("Load_City (CityInfo) -- " & _SQL_GetErrMsg())
@@ -170,6 +175,8 @@ Func Load_City($loginID)
    $_TreasuryCollect = $aData[1][26]
    $_LastTreasury = $aData[1][27]
    $_TimezoneOffsetMin = $aData[1][28]
+   $_LoginDelayMin = $aData[1][29]
+   $_LoginAttempts = $aData[1][30]
 
 
    ;Convert dates to UTC
@@ -188,7 +195,7 @@ Func GetOldestActiveLogin()
    Local $iRows
    Local $iColumns
 
-   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin2 '" & $MachineID & "'",$aData,$iRows,$iColumns)
+   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin3 '" & $MachineID & "'",$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("GetOldestLogin2 -- " & _SQL_GetErrMsg())
@@ -287,6 +294,17 @@ Func Login_UpdateLastTreasury()
    _SQL_Close()
 EndFunc
 
+Func Login_UpdateLoginAttempts($Attempts)
+   _SqlConnect()
+   _SQL_Execute(-1,"Update Login Set LoginAttempts = " & $Attempts & " Where LoginID = " & Login_LoginID())
+   _SQL_Close()
+EndFunc
+
+Func Login_UpdateLoginActive($Active)
+   _SqlConnect()
+   _SQL_Execute(-1,"Update Login Set Active = " & $Active & " Where LoginID = " & Login_LoginID())
+   _SQL_Close()
+EndFunc
 
 Func Login_SetInProcess($Email, $Machine)
    _SqlConnect()
@@ -469,6 +487,13 @@ Func Login_TimezoneOffsetMin()
    return $_TimezoneOffsetMin
 EndFunc
 
+Func Login_LoginDelay()
+	return $_LoginDelayMin
+ EndFunc
+
+Func Login_LoginAttempts()
+	return $_LoginAttempts
+EndFunc
 
 
 

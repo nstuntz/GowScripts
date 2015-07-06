@@ -115,6 +115,12 @@ EndFunc
 
 Func Login($email, $pwd)
 
+   If(Login_LoginAttempts() >=5) Then
+	  LogMessage("We have attempted to login 5 times and failed. Setting " & Login_CityName() & " to inactive.",5)
+	  Login_UpdateLoginActive(0);
+	  return false;
+   EndIf
+
    If Not PollForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor,3000) Then
 	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
@@ -160,6 +166,7 @@ Func Login($email, $pwd)
    ;Check that the login button is there
    If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,5000) Then
 	  LogMessage("Login Failed.  Login button isn't the right color",5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
    EndIf
 
@@ -169,11 +176,15 @@ Func Login($email, $pwd)
    ;Check if there was a login failure
    If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
 	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
    EndIf
 
    ;Now check for a Pin
    If Not CheckForPinPrompt() Then
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
    EndIf
 
@@ -186,6 +197,7 @@ Func Login($email, $pwd)
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
+		 Login_UpdateLoginAttempts(0)
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
 		 $MapMenuColor  = PixelGetColor($CityMenu[0],$CityMenu[1])
 		 LogMessage("New City Color = " & $MapMenuColor,5  )
@@ -201,6 +213,8 @@ Func Login($email, $pwd)
    ;If we didn't get the fity screen bailout
    If Not CheckForCityScreen(0) Then
 	  LogMessage("NO city screen after login, in login function",5 )
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  return False
    EndIf
 
@@ -547,7 +561,7 @@ Func Shield($attempt)
    SaveShieldTimeImage()
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
+   If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (Login_LoginDelay()*1.2) Then
 	  LogMessage("No Need to Shield, Minutes left = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),2)
 
 	  ;Back out
@@ -614,17 +628,17 @@ EndFunc
 Func Treasury()
    ;Check to see if the city is set to Rally
    If Login_Treasury() = 0 Then
-	  LogMessage("City not set to collect Treasury")
+	  LogMessage("City not set to collect Treasury",1)
 	  Return
    EndIf
 
-   LogMessage("City set to collect Treasury")
+   LogMessage("City set to collect Treasury",1)
 
    ;Check to see if we should check the treasury
    Local $minonTreasury = 43200 ;30 days. We only invest for 30d for now
    If ((($minonTreasury - (_DateDiff('n',Login_LastTreasury(),GetNowUTCCalc()))) < 0) OR (Login_LastTreasury() = 0)) Then
 	  ;It has been more than 30 days since last treasury collection. Or they have never collected.
-	  LogMessage("Attempting to collect Treasury or make deposit")
+	  LogMessage("Attempting to collect Treasury or make deposit",1)
 	  ;Click on the treasury
 	  SendMouseClick($TreasuryLocation[0],$TreasuryLocation[1])
 	  Sleep(2000)
@@ -638,7 +652,7 @@ Func Treasury()
 			SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
 			Sleep(2000)
 			$collected = 1
-			LogMessage("Treasury 7d Collected")
+			LogMessage("Treasury 7d Collected",2)
 		 Else
 			;if we went it but did not collect we have to go back out again
 			SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
@@ -651,7 +665,7 @@ Func Treasury()
 			If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
 			   SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
 			   Sleep(2000)
-			   LogMessage("Treasury 14d Collected")
+			   LogMessage("Treasury 14d Collected",2)
 			Else
 			   ;if we went it but did not collect we have to go back out again
 			   SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
@@ -668,7 +682,7 @@ Func Treasury()
 		 Sleep(2000)
 		 SendMouseClick($Treasury30[0],$Treasury30[1])
 		 Sleep(2000)
-		 LogMessage("Treasury Collected")
+		 LogMessage("Treasury Collected",1)
 	  EndIf
 
 	  ;Check to see if we can make a deposit
@@ -678,7 +692,7 @@ Func Treasury()
 
 		 ;Check to see if the black bar is there before setting LastTreasury
 		 If PollForColor($TreasuryRunningCheck[0],$TreasuryRunningCheck[1],$Black,3000) Then
-			LogMessage("Treasury Deposit Made")
+			LogMessage("Treasury Deposit Made",2)
 			Login_UpdateLastTreasury()
 		 EndIf
 		 ;If it doesn't appear to be accruing, then leave the LastTreasury date so it tries again next login.
@@ -844,7 +858,7 @@ Func Rally()
 
    ;Check if we need to rally
    Local $minonRally = 480 ;1440= 24Hr ,  4320 = 3 day
-   If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (_DateDiff('n',Login_LastRun(),GetNowUTCCalc())*1.2) Then
+   If ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))) > (Login_LoginDelay()*1.2) Then
 	  LogMessage("No Need to Rally, Minutes left = " & ($minonRally - (_DateDiff('n',Login_LastRally(),GetNowUTCCalc()))),2)
 	  Return
    EndIf
