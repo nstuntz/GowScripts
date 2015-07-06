@@ -45,7 +45,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  CloseGOW()
 
 	  ;Set the last run so this city doesn't keep getting processed
-	  Login_Write()
+	 ;Login_Write()
 
 	  ;Log out.
 	  Send("{ESC}")
