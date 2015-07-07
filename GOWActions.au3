@@ -166,6 +166,7 @@ Func Login($email, $pwd)
    ;Check that the login button is there
    If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,5000) Then
 	  LogMessage("Login Failed.  Login button isn't the right color",5 )
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
    EndIf
@@ -197,7 +198,6 @@ Func Login($email, $pwd)
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
-		 Login_UpdateLoginAttempts(0)
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
 		 $MapMenuColor  = PixelGetColor($CityMenu[0],$CityMenu[1])
 		 LogMessage("New City Color = " & $MapMenuColor,5  )
@@ -218,6 +218,7 @@ Func Login($email, $pwd)
 	  return False
    EndIf
 
+   Login_UpdateLoginAttempts(0)
    return True
 EndFunc
 
