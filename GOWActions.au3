@@ -218,6 +218,7 @@ Func Login($email, $pwd)
 	  return False
    EndIf
 
+   LogMessage("Resetting Login Attempts to 0",1 )
    Login_UpdateLoginAttempts(0)
    return True
 EndFunc

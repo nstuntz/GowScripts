@@ -46,6 +46,8 @@ For $k = 1 to 100000 ;go through them all lots
 
 	  ;Set the last run so this city doesn't keep getting processed
 	 ;Login_Write()
+	  ;Updated logic to set InProcess to 0 and not update LastRun. The real fix to what Than did the line above. GS -07062015
+	  Login_ResetInProcess()
 
 	  ;Log out.
 	  Send("{ESC}")

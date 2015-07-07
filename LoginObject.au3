@@ -312,6 +312,12 @@ Func Login_SetInProcess($Email, $Machine)
    _SQL_Close()
 EndFunc
 
+Func Login_ResetInProcess()
+   _SqlConnect()
+   _SQL_Execute(-1,"Update Login Set InProcess=0 Where LoginID = " & Login_LoginID())
+   _SQL_Close()
+EndFunc
+
 
 Func Login_Write()
    ;Read from the specific File for this login
