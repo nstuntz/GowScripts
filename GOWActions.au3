@@ -225,25 +225,14 @@ EndFunc
 
 Func CollectAthenaGift()
 
-   ;If Login_CollectAthenaGift() = 0 Then
-   ;  Return
-   ;EndIf
-
    If CheckForColor( $AthenaGift[0],$AthenaGift[1], $NoAthenaGiftColor) Then
 	  Return
    EndIf
 
    ;Check if this is bouncing
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
-   Sleep(400)
-   Local $secondColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
-   Sleep(400)
-   Local $thirdColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
 
-   If $firstColor = $secondColor AND  $firstColor =  $thirdColor Then
-	  LogMessage("$firstColor=" & $firstColor)
-	  LogMessage("$secondColor=" & $secondColor)
-	  LogMessage("$thirdColor=" & $thirdColor)
+   If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000) Then
 	  LogMessage("We have an Athena Gift but it is not ready to collect",2)
 	  Return
    EndIf
@@ -1718,6 +1707,28 @@ Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout)
 	  return True
    Else
 	  LogMessage("Polling At (" & $x & "," & $y & ") OR (" & $x2 & "," & $y2 & ") Failed: " & $pixelColor)
+	  return False
+   EndIf
+EndFunc
+
+Func PollForNOTColor($x,$y,$color,$timeout)
+   Local $colorAt = 0
+   Local $pixelColor = 0
+   Local $waited = 0
+
+   While $waited < $timeout
+	  $pixelColor = PixelGetColor($x,$y)
+	  If $pixelColor = $color Then
+		 Sleep(250)
+		 $waited = $waited + 250
+	  Else
+		 ExitLoop
+	  EndIf
+   WEnd
+   If $pixelColor <>  $color Then
+	  Sleep(250)
+	  return True
+   Else
 	  return False
    EndIf
 EndFunc

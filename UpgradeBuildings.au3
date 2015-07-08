@@ -25,6 +25,7 @@ For $k = 1 to 100000 ;go through them all lots
 
    Sleep(500)
 
+   LogMessage("Script Version -  "  &  $VersionNumber)
    LogMessage("Logging IN New User -  "  &  _Now())
 
    ;Open GOW
@@ -33,8 +34,8 @@ For $k = 1 to 100000 ;go through them all lots
    ;Read the Login File
    If Not Login_Load() Then
 	  LogMessage("-----Login Load Failed-----",5)
-	  LogMessage("-----Sleeping 3 minutes-----",5)
-	  Sleep(180000)
+	  LogMessage("-----Sleeping 1 minutes-----",5)
+	  Sleep(60000)
 	  ContinueLoop
    EndIf
    LogMessage("Logging in for " & Login_Email(),2)
@@ -56,8 +57,8 @@ For $k = 1 to 100000 ;go through them all lots
 		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
 	  EndIf
 
-	  LogMessage("-----Sleeping 3 minutes-----",5)
-	  Sleep(180000)
+	  LogMessage("-----Sleeping 30 seconds-----",5)
+	  Sleep(30000)
 	  ContinueLoop
    EndIf
 

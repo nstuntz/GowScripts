@@ -1,5 +1,7 @@
 #include-once
 
+Global Const $VersionNumber = 7.7.2015.01
+
 Global Const $GOWVBHostWindow[] = [401,77]
 ;Global Const $GOWVBHostWindow[] = [431,77]
 Global Const $GOWIcon[] = [815,330]
