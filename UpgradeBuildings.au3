@@ -341,8 +341,9 @@ For $k = 1 to 100000 ;go through them all lots
 		 EndIf
 	  EndIf
 
-   Login_WritePerformanceLog(TimerDiff($timerUpgrade), "Upgrade")
+
    EndIf
+   Login_WritePerformanceLog(TimerDiff($timerUpgrade), "Upgrade")
 
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Upgrade Failed - 7",5)
