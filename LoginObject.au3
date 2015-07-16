@@ -214,6 +214,12 @@ Func GetOldestActiveLogin()
    return True
 EndFunc
 
+Func Login_WritePerformanceLog($ElapsedTime, $ScriptFunction)
+   _SqlConnect()
+   _SQL_Execute(-1,"Exec InsertPerformanceLog '" & $MachineID & "', " & $ElapsedTime & ", '" & $ScriptFunction & "', '" & Login_Email() & "'" ) ; & Login_CityID())
+   _SQL_Close()
+EndFunc
+
 Func Login_WriteShield()
    ;Read from the specific File for this login
    _SqlConnect()

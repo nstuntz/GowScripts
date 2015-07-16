@@ -40,11 +40,13 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
    LogMessage("Logging in for " & Login_Email(),2)
 
+   Local $timerLogin = TimerInit()
    ;Login
    If Not Login(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed",5)
 	  CloseGOW()
 
+	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  ;Set the last run so this city doesn't keep getting processed
 	 ;Login_Write()
 	  ;Updated logic to set InProcess to 0 and not update LastRun. The real fix to what Than did the line above. GS -07062015
@@ -65,9 +67,11 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Check for city Failed - 2",5)
 	  CloseGOW()
+	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  ContinueLoop
    EndIf
 
+   Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
    ;Save the image resources
    SaveRSSImage()
 
@@ -84,21 +88,30 @@ For $k = 1 to 100000 ;go through them all lots
 	  $built = 1
    EndIf
 
+
+   Local $timerSecretGift = TimerInit()
    CollectSecretGift()
+   Login_WritePerformanceLog(TimerDiff($timerSecretGift), "Collect Secret Gift")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Secret Gift Failed - 3",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
+   Local $timerHelps = TimerInit()
    Helps()
+   Login_WritePerformanceLog(TimerDiff($timerHelps), "Helps")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Helps Failed - 4",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
+   Local $timerAthenaGift = TimerInit()
    CollectAthenaGift()
+   Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
 
    Gifts()
    If Not CheckForCityScreen(0) Then
@@ -107,14 +120,20 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
+   Local $timerShield = TimerInit()
    Shield(1)
+   Login_WritePerformanceLog(TimerDiff($timerShield), "Shield")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Shield Failed - 6",5)
 	  CloseGOW()
 	  ContinueLoop
    EndIf
 
+   Local $timerTreasury = TimerInit()
    Treasury()
+   Login_WritePerformanceLog(TimerDiff($timerTreasury), "Treasury")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Treasury Failed - 7",5)
 	  CloseGOW()
@@ -138,7 +157,10 @@ For $k = 1 to 100000 ;go through them all lots
    Local $scrolled = 0
    Local $previousBuildingType = 0
 
+   Local $timerRally = TimerInit()
    Rally()
+   Login_WritePerformanceLog(TimerDiff($timerRally), "Rally")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Rally Failed- 6",5)
 	  CloseGOW()
@@ -146,7 +168,7 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
 ;;;;;;;;;;;;;;;;;;;;;;;Building Upgrade portion went here;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+   Local $timerUpgrade = TimerInit()
    If Login_Upgrade() = 1  Then
 
 	  ;Try to do the SH upgrade if we can
@@ -165,7 +187,9 @@ For $k = 1 to 100000 ;go through them all lots
 			   Login_LastUpgrade_Set(_Now())
 
 			   If Login_StrongHoldLevel() = 7 OR Login_StrongHoldLevel() = 10 OR Login_StrongHoldLevel() = 12 OR Login_StrongHoldLevel() = 13 Then
+				  Local $timerCollectAllCityQuests = TimerInit()
 				  CollectAllCityQuests()
+				  Login_WritePerformanceLog(TimerDiff($timerCollectAllCityQuests), "Collect All City Quests")
 			   EndIf
 
 			EndIf
@@ -317,6 +341,7 @@ For $k = 1 to 100000 ;go through them all lots
 		 EndIf
 	  EndIf
 
+   Login_WritePerformanceLog(TimerDiff($timerUpgrade), "Upgrade")
    EndIf
 
    If Not CheckForCityScreen(0) Then
