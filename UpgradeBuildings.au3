@@ -351,7 +351,10 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
+   Local $timerBank = TimerInit()
    Bank($scrolled,$previousBuildingType)
+   Login_WritePerformanceLog(TimerDiff($timerBank), "Bank")
+
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Bank Failed - 8",5)
 	  CloseGOW()

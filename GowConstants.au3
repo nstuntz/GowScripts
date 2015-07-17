@@ -261,8 +261,16 @@ Global Const $GoldExitButton3 = [523,168]
 ;Global Const $GoldBuyButton = [1140,340]
 ;Global Const $GoldBuyButton2 = [1140,540]
 
-Global Const $GoldBuyButton = [1145,340]
-Global Const $GoldBuyButton2 = [1145,540]
+;Global Const $GoldBuyButton = [1145,340]
+;Global Const $GoldBuyButton2 = [1145,540]
+
+Global Const $GoldSearchLeft = 1085
+Global Const $GoldSearchTop = 520
+Global Const $GoldSearchBottom = 530
+Global Const $GoldSearchRight = 1130
+
+Global Const $GoldBuyButton = [1135,340]
+Global Const $GoldBuyButton2 = [1135,540]
 Global Const $BuyGoldColor = 11033608
 Global Const $GetGoldButton = 4196352
 ;Global Const $GetGoldButton = 3672064

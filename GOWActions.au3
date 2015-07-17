@@ -228,6 +228,10 @@ Func CollectAthenaGift()
    If CheckForColor( $AthenaGift[0],$AthenaGift[1], $NoAthenaGiftColor) Then
 	  Return
    EndIf
+   sleep(250)
+   If CheckForColor( $AthenaGift[0],$AthenaGift[1], $NoAthenaGiftColor) Then
+	  Return
+   EndIf
 
    ;Check if this is bouncing
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
@@ -368,11 +372,10 @@ Func Helps()
 
    If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor) Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
-	  Sleep(2000)
-	  ;Help All
-	  SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
-	  Sleep(2000)
-
+	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,2000)) Then
+		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
+		 Sleep(500)
+	  EndIf
 	  ;City Menu
 	  ClickCityScreen()
    EndIf
@@ -1424,14 +1427,27 @@ EndFunc
 
 Func ClickGoldButton()
 
-   If PollForColorTwoPlaces($GoldBuyButton[0],$GoldBuyButton[1],$GoldBuyButton2[0],$GoldBuyButton2[1], $BuyGoldColor, 30000) Then
+   ;Sleep until the gold screen has come up
+   Sleep(5000)
+
+   ;Do a pixel search so that we find the gold button every? time.
+   If (PixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchBottom,$GoldSearchRight, $BuyGoldColor)) = 1 Then
+	  Sleep(20000)
+	  LogMessage("*** Never got the gold button")
+	  return False
+   Else
 	  Send("{ESC}")
 	  Sleep(2000)
 	  return True
-   Else
-	  LogMessage("*** Never got the gold button")
-	  return False
-   EndIf
+   endif
+;   If PollForColorTwoPlaces($GoldBuyButton[0],$GoldBuyButton[1],$GoldBuyButton2[0],$GoldBuyButton2[1], $BuyGoldColor, 30000) Then
+;	  Send("{ESC}")
+;	  Sleep(2000)
+;	  return True
+ ;  Else
+	;  LogMessage("*** Never got the gold button")
+;	  return False
+;   EndIf
 
 #comments-start
    If Not CheckForColor($GoldExitButton1[0],$GoldExitButton1[1],$GetGoldButton) Then
