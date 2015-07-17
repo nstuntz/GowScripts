@@ -115,7 +115,7 @@ EndFunc
 
 Func Login($email, $pwd)
 
-   If(Login_LoginAttempts() >=5) Then
+   If(Login_LoginAttempts() >= 5) Then
 	  LogMessage("We have attempted to login 5 times and failed. Setting " & Login_CityName() & " to inactive.",5)
 	  Login_UpdateLoginActive(0);
 	  return false;
@@ -1428,7 +1428,7 @@ EndFunc
 Func ClickGoldButton()
 
    ;Sleep until the gold screen has come up
-   Sleep(5000)
+   Sleep(8000)
 
    ;Do a pixel search so that we find the gold button every? time.
    If (PixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchBottom,$GoldSearchRight, $BuyGoldColor)) = 1 Then
