@@ -1428,7 +1428,7 @@ EndFunc
 Func ClickGoldButton()
 
    ;Sleep until the gold screen has come up
-   Sleep(8000)
+   Sleep(10000)
 
    ;Do a pixel search so that we find the gold button every? time.
    If (PixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchBottom,$GoldSearchRight, $BuyGoldColor)) = 1 Then
