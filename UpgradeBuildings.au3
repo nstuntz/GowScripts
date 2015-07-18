@@ -88,6 +88,9 @@ For $k = 1 to 100000 ;go through them all lots
 	  $built = 1
    EndIf
 
+   Local $timerAthenaGift = TimerInit()
+   CollectAthenaGift()
+   Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
 
    Local $timerSecretGift = TimerInit()
    CollectSecretGift()
@@ -108,10 +111,6 @@ For $k = 1 to 100000 ;go through them all lots
 	  CloseGOW()
 	  ContinueLoop
    EndIf
-
-   Local $timerAthenaGift = TimerInit()
-   CollectAthenaGift()
-   Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
 
    Gifts()
    If Not CheckForCityScreen(0) Then

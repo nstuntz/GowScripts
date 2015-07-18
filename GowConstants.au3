@@ -1,6 +1,7 @@
 #include-once
 
-Global Const $VersionNumber = "7.17.2015.03"
+;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
+Global Const $VersionNumber = "7.17.2015.04"
 
 Global Const $GOWVBHostWindow[] = [401,77]
 ;Global Const $GOWVBHostWindow[] = [431,77]
@@ -266,8 +267,8 @@ Global Const $GoldExitButton3 = [523,168]
 
 Global Const $GoldSearchLeft = 1085
 Global Const $GoldSearchTop = 520
-Global Const $GoldSearchBottom = 530
-Global Const $GoldSearchRight = 1130
+Global Const $GoldSearchBottom = 525
+Global Const $GoldSearchRight = 1170
 
 Global Const $GoldBuyButton = [1135,340]
 Global Const $GoldBuyButton2 = [1135,540]
@@ -308,3 +309,8 @@ Global Const $ShieldTime[] = [500,235,570,625]
 Global Const $ShieldCount[] = [910,590,1045,700]
 Global Const $RssProduction[] = [1111,1111,1111,1111]
 Global Const $SilverProduction[] = [1111,1111,1111,1111]
+
+;Convert to Dark Energy buttons
+Global Const $InitialConvert[] = [1000,525]
+Global Const $ConvertConfirm[] = [725,525]
+Global Const $ConvertAccept[] = [800,525]

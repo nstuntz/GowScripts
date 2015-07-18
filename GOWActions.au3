@@ -267,6 +267,9 @@ Func CollectQuests()
    ;Collect the Daily Quest
    SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
    Sleep(2000)
+
+   ConvertToDarkEnergy()
+
    SendMouseClick($QuestsDaily[0],$QuestsDaily[1])
    Sleep(2000)
 
@@ -838,6 +841,23 @@ Func SendRSS($type)
 
 EndFunc
 
+Func ConvertToDarkEnergy()
+
+
+   If(PollForColor($InitialConvert[0], $InitialConvert[1],$blue, 2000)) Then
+	  LogMessage("We have the convert to dark energy popup", 1)
+	  ; we have the convert button
+	  SendMouseClick($InitialConvert[0], $InitialConvert[1])
+	  If(PollForColor($ConvertConfirm[0], $ConvertConfirm[1],$blue,3000)) Then
+		 SendMouseClick($ConvertConfirm[0], $ConvertConfirm[1])
+		 If(PollForColor($ConvertAccept[0], $ConvertAccept[1],$blue,3000)) Then
+			SendMouseClick($ConvertAccept[0], $ConvertAccept[1])
+		 EndIf
+	  EndIf
+	  Sleep(2000)
+   EndIf
+
+EndFunc
 
 Func Rally()
 
@@ -884,6 +904,10 @@ Func Rally()
 
    ;Check for Rally to cancel
    SendMouseClick($MoreMenu[0],$MoreMenu[1])
+
+   ;Added to handle the convert to dark energy on 7/17 - GS
+   ConvertToDarkEnergy()
+
    If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000) Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
@@ -1089,6 +1113,8 @@ Func Logout()
 
    ;More panel
    SendMouseClick($MoreMenu[0],$MoreMenu[1])
+
+ConvertToDarkEnergy()
 
    ;Accounts
    If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 5000) Then
@@ -1431,7 +1457,9 @@ Func ClickGoldButton()
    Sleep(10000)
 
    ;Do a pixel search so that we find the gold button every? time.
-   If (PixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchBottom,$GoldSearchRight, $BuyGoldColor)) = 1 Then
+   PixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor)
+   ;LogMessage("Pixel Search Result: " & @error)
+   If (@error = 1) Then
 	  Sleep(20000)
 	  LogMessage("*** Never got the gold button")
 	  return False
