@@ -184,6 +184,8 @@ For $k = 1 to 100000 ;go through them all lots
 			   Login_StrongHoldLevel_Set($newSHLevel)
 			   Login_LastUpgradeBuilding_Set(-1)  ;reset the building to start at the first farms
 			   Login_LastUpgrade_Set(_Now())
+			   Login_WriteResourcesNotNeeded()
+			   Login_UpgradeWrite()
 
 			   If Login_StrongHoldLevel() = 7 OR Login_StrongHoldLevel() = 10 OR Login_StrongHoldLevel() = 12 OR Login_StrongHoldLevel() = 13 Then
 				  Local $timerCollectAllCityQuests = TimerInit()
@@ -311,6 +313,7 @@ For $k = 1 to 100000 ;go through them all lots
 			   ;We just built this one
 			   Login_LastUpgradeBuilding_Set($buildingNum)
 			   Login_LastUpgrade_Set(_Now())
+			   Login_UpgradeWrite()
 
 			   ;If this was a SH5 or lower that was probably a free upgrade so try it out
 			   If Login_StrongHoldLevel() < 6 Then

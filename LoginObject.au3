@@ -339,6 +339,14 @@ Func Login_Write()
 EndFunc
 
 
+Func Login_UpgradeWrite()
+   ;Read from the specific File for this login
+   _SqlConnect()
+   _SQL_Execute(-1,"Update CityInfo Set LastUpgrade='" & Login_LastUpgrade() & "', LastUpgradeBuilding=" & Login_LastUpgradeBuilding() & ", StrongHoldLevel=" & Login_StrongHoldLevel() & " Where CityID = " & Login_CityID())
+   _SQL_Close()
+EndFunc
+
+
 Func Login_Write_Old()
    ;Read from the specific File for this login
    local $loginFile = "logins/" & $_userName & ".txt"

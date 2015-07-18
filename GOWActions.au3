@@ -106,7 +106,8 @@ Func UpgradeBuilding($x,$y,$buildingNumber)
 	  ;We dont' know what color this is because of the transparencey.  So probably any SH under 5 should try the next one or something
 	  SendMouseClick($BuildingUpgradeHelpButton[0],$BuildingUpgradeHelpButton[1])
 	  Sleep(3000)
-	  LogMessage("Built Building Number = " & $buildingNumber & " at " & $x & "," & $y)
+	  LogMessage("Built Building Number = " & $buildingNumber & " at " & $x & "," & $y,1)
+	  LogMessage("Building Upgrade started.",2)
 	  return $BuildingReturn
    EndIf
 
