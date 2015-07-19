@@ -79,7 +79,10 @@ For $k = 1 to 100000 ;go through them all lots
    SaveCityImage()
    SaveGoldImage()
    SaveHeroImage()
-   SaveTreasuryImage()
+   ;Only get Treasury image if the SH can use it
+   If Login_StrongHoldLevel() > 14 Then
+	  SaveTreasuryImage()
+   EndIf
 
    local $built = 0
 
