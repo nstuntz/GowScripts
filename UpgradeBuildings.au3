@@ -34,6 +34,7 @@ For $k = 1 to 100000 ;go through them all lots
    ;Read the Login File
    If Not Login_Load() Then
 	  LogMessage("-----Login Load Failed-----",5)
+	  CloseGOW()
 	  LogMessage("-----Sleeping 1 minutes-----",5)
 	  Sleep(60000)
 	  ContinueLoop
@@ -48,7 +49,7 @@ For $k = 1 to 100000 ;go through them all lots
 
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  ;Set the last run so this city doesn't keep getting processed
-	 ;Login_Write()
+	  ;Login_Write()
 	  ;Updated logic to set InProcess to 0 and not update LastRun. The real fix to what Than did the line above. GS -07062015
 	  Login_ResetInProcess()
 
@@ -59,6 +60,8 @@ For $k = 1 to 100000 ;go through them all lots
 		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
 	  EndIf
 
+	  CloseGOW()
+
 	  LogMessage("-----Sleeping 30 seconds-----",5)
 	  Sleep(30000)
 	  ContinueLoop
@@ -66,8 +69,8 @@ For $k = 1 to 100000 ;go through them all lots
 
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Check for city Failed - 2",5)
-	  CloseGOW()
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
+	  CloseGOW()
 	  ContinueLoop
    EndIf
 

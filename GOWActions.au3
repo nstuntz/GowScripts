@@ -1297,7 +1297,7 @@ EndFunc
 Func CloseGOW()
 
    If CheckForSessionTimeout() Then
-	  LogMessage("Writing Login from CloseGOW function")
+	  LogMessage("Writing Login from CloseGOW function because of session timeout",1)
 	  Login_Write()
    Else
 
@@ -1315,7 +1315,7 @@ Func CloseGOW()
 			Sleep(1000)
 		 EndIf
 	  Else
-		 LogMessage("----- Looks like we arent in GOW -----")
+		 LogMessage("----- Looks like we arent in GOW -----",1)
 	  EndIf
    EndIf
 
@@ -1359,7 +1359,7 @@ Func CheckForSessionTimeout()
    If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And  CheckForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$Blue)  Then
 	  SendMouseClick($SessionTimeoutButton[0],$SessionTimeoutButton[1])
 
-	  LogMessage("Have Session Timeout")
+	  LogMessage("Have Session Timeout",1)
 	  Return True
    EndIf
 
