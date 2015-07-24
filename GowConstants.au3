@@ -1,9 +1,14 @@
 #include-once
 
 ;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
+;7.22.2015.04 - Updated to include startup script variables
 Global Const $VersionNumber = "7.17.2015.04"
 
 Global Const $GOWVBHostWindow[] = [401,77]
+;StartupScript
+Global Const $VBWindow[] = [100,5]
+Global Const $VBStartArrow[] =[225,80]
+Global Const $VBStartArrowColor = 7656765
 ;Global Const $GOWVBHostWindow[] = [431,77]
 Global Const $GOWIcon[] = [815,330]
 Global Const $GOWColor = 14727280
