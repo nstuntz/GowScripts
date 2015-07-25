@@ -33,6 +33,14 @@ CollectAllCityQuests()
 
 CollectAllTokens()
 
+Local $totalChests = 0
+;Loop to get all chests
+Do
+   $openedChests = Chests()
+   $totalChests += $openedChests
+Until ($openedChests = 0)
+
+
 Login_SetInProcess($loginEmail,0)
 
 MsgBox(0,"Success","Finished")
