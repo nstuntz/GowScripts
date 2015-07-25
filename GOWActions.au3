@@ -1072,6 +1072,8 @@ Func CollectAllQuestsFromScreen()
 	  While $HaveQuests
 		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000)) Then
 			SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
+			Sleep(250)
+
 		 Else
 			$HaveQuests = False
 		 EndIf
@@ -1085,7 +1087,7 @@ Func CollectAllQuestsFromScreen()
 
 		 If CheckForColor($QuestChanceUseButton[0],$QuestChanceUseButton[1],$GreenCollect) Then
 			SendMouseClick($QuestChanceUseButton[0],$QuestChanceUseButton[1])
-			Sleep(500)
+			Sleep(1000)
 			$HaveQuests = True
 		 Else
 			Send("{ESC}")
