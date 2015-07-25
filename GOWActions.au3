@@ -238,7 +238,7 @@ Func CollectAthenaGift()
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
 
    If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000) Then
-	  LogMessage("We have an Athena Gift but it is not ready to collect",2)
+	  LogMessage("We have an Athena Gift but it is not ready to collect",1)
 	  Return
    EndIf
 
@@ -549,7 +549,7 @@ Func Shield($attempt)
 	  return True
    EndIf
 
-   LogMessage("Checking Shield.  Attempt " & $attempt,2)
+   LogMessage("Checking Shield.",2)
 
    ;Boosts menu
    SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
@@ -576,7 +576,8 @@ Func Shield($attempt)
 	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),GetNowUTCCalc()))
    EndIf
 
-   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),2)
+   LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1)
+   LogMessage("Attempting to reshield")
 
    ;Get Shield button button
    SendMouseClick($ShieldButton[0],$ShieldButton[1])
@@ -935,7 +936,8 @@ Func Rally()
    If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000) Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
 	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000) Then
-		 LogMessage("No World screen to search for rallying target, canceling process",4)
+		 LogMessage("Rally Failed.",4)
+		 LogMessage("No World screen to search for rallying target, canceling process",5)
 		 Login_UpdateLastRallyFAILED()
 		 ClickCityScreen()
 		 Return
@@ -1371,13 +1373,13 @@ Func CheckIfBuidlingFromTimers()
 
    Local $iconX = $TimerIcon[0]
    If (CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor) or CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor2)) Then
-	  LogMessage("We are already Building based on the First timer",2)
+	  LogMessage("We are already Building based on the First timer",1)
 	  return true
    EndIf
 
    $iconX = $TimerIcon[0] + ($TimerOffsetX)
    If (CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor) or CheckForColor($iconX, $TimerIcon[1], $TimerIconBuildColor2)) Then
-	  LogMessage("We are already Building based on the Second timer",2)
+	  LogMessage("We are already Building based on the Second timer",1)
 	  return true
    EndIf
 
