@@ -1649,9 +1649,9 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
    $oStatusCode = $oHTTP.Status
 
    If $oReceived <> """Success""" Then
-	  LogMessage("Image Saved - Name = " & $imageName)
-	  LogMessage("Image Saved - Status = " & $oStatusCode)
-	  LogMessage("Image Saved - Response = " & $oReceived)
+	  LogMessage("Image(ets) Saved - Name = " & $imageName,1)
+	  LogMessage("Image(ets) Saved - Status = " & $oStatusCode,1)
+	  LogMessage("Image(ets) Saved - Response = " & $oReceived,1)
    Else
 	  ;Save to the new server too
 	  SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
@@ -1686,9 +1686,9 @@ Func SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
    $oStatusCode = $oHTTP.Status
 
    If $oReceived <> """Success""" Then
-	  LogMessage("Image Saved - Name = " & $imageName)
-	  LogMessage("Image Saved - Status = " & $oStatusCode)
-	  LogMessage("Image Saved - Response = " & $oReceived)
+	  LogMessage("Image Saved - Name = " & $imageName,1)
+	  LogMessage("Image Saved - Status = " & $oStatusCode,1)
+	  LogMessage("Image Saved - Response = " & $oReceived,1)
    EndIf
 
 EndFunc
