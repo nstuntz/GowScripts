@@ -1604,7 +1604,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
    Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
    ;Local $URL = "http://localhost:52417/api/Upload"
-   Local $URL = "http://ets-tfs.cloudapp.net:9090/api/Upload"
+   Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
 
    _ScreenCapture_SetJPGQuality (25)
 
