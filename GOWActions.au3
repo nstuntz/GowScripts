@@ -1604,7 +1604,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
    Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
    ;Local $URL = "http://localhost:52417/api/Upload"
-   Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
+   ;Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
 
    _ScreenCapture_SetJPGQuality (25)
 
@@ -1627,7 +1627,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
    $sFileRead = BinaryToString(FileRead($sFile))
    FileClose($sFile)
-
+#comments-start
    $sBoundary = "mymultipartboundary"
 
    $sPD = '--' & $sBoundary & @CRLF & _
@@ -1653,9 +1653,10 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 	  LogMessage("Image(ets) Saved - Status = " & $oStatusCode,1)
 	  LogMessage("Image(ets) Saved - Response = " & $oReceived,1)
    Else
+   #comments-end
 	  ;Save to the new server too
 	  SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
-   EndIf
+   ;EndIf
 
 
 EndFunc
