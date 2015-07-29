@@ -1602,35 +1602,39 @@ EndFunc
 
 Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
-   Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
-   ;Local $URL = "http://localhost:52417/api/Upload"
-   Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
+	
+#comments-start
+	; This saves to ETS but has issues because of the bad cert on the page - could fix for 10 dollars to get a cert
+	
+	Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
+	;Local $URL = "http://localhost:52417/api/Upload"
+	Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
 
-   _ScreenCapture_SetJPGQuality (25)
+	_ScreenCapture_SetJPGQuality (25)
 
 
-   _GDIPlus_Startup()
-   Local $hHBmp = _ScreenCapture_Capture("", $x1,$y1, $x2,$y2)
-   Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
-   _WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
+	_GDIPlus_Startup()
+	Local $hHBmp = _ScreenCapture_Capture("", $x1,$y1, $x2,$y2)
+	Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
+	_WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
 
-   _GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
+	_GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
 
-   _GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
+	_GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
 
-   ;_GDIPlus_BitmapDispose($hBitmap)
-   _GDIPlus_ImageDispose($hBitmap)
+	;_GDIPlus_BitmapDispose($hBitmap)
+	_GDIPlus_ImageDispose($hBitmap)
 
-   _GDIPlus_Shutdown()
+	_GDIPlus_Shutdown()
 
-   Local $sFile = FileOpen($sFilePath, 16)
+	Local $sFile = FileOpen($sFilePath, 16)
 
-   $sFileRead = BinaryToString(FileRead($sFile))
-   FileClose($sFile)
+	$sFileRead = BinaryToString(FileRead($sFile))
+	FileClose($sFile)
 
-   $sBoundary = "mymultipartboundary"
+	$sBoundary = "mymultipartboundary"
 
-   $sPD = '--' & $sBoundary & @CRLF & _
+	$sPD = '--' & $sBoundary & @CRLF & _
 		   'Content-Type: application/json; charset=UTF-8' & @CRLF & @CRLF & _
 		   '{ "text": "9"}' & @CRLF & _
 		   '--' & $sBoundary & @CRLF & _
@@ -1639,23 +1643,25 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 		   'Content-Transfer-Encoding: binary' & @CRLF & @CRLF & _
 		   $sFileRead & @CRLF & '--' & $sBoundary & '--' & @CRLF
 
-   $oHTTP = ObjCreate("winhttp.winhttprequest.5.1")
-   $oHTTP.Open("POST", $URL, False)
-   $oHTTP.SetRequestHeader("Content-Type", 'multipart/form-data; boundary="' & $sBoundary & '"')
-   $oHTTP.SetRequestHeader("From", 'GowScript')
-   $oHTTP.SetRequestHeader("CityID", Login_CityID())
-   $oHTTP.Send(StringToBinary($sPD))
-   $oReceived = $oHTTP.ResponseText
-   $oStatusCode = $oHTTP.Status
+	$oHTTP = ObjCreate("winhttp.winhttprequest.5.1")
+	$oHTTP.Open("POST", $URL, False)
+	$oHTTP.SetRequestHeader("Content-Type", 'multipart/form-data; boundary="' & $sBoundary & '"')
+	$oHTTP.SetRequestHeader("From", 'GowScript')
+	$oHTTP.SetRequestHeader("CityID", Login_CityID())
+	$oHTTP.Send(StringToBinary($sPD))
+	$oReceived = $oHTTP.ResponseText
+	$oStatusCode = $oHTTP.Status
 
-   If $oReceived <> """Success""" Then
-	  LogMessage("Image(ets) Saved - Name = " & $imageName,1)
-	  LogMessage("Image(ets) Saved - Status = " & $oStatusCode,1)
-	  LogMessage("Image(ets) Saved - Response = " & $oReceived,1)
-   Else
-	  ;Save to the new server too
-	  SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
-   EndIf
+	If $oReceived <> """Success""" Then
+		LogMessage("Image(ets) Saved - Name = " & $imageName,1)
+		LogMessage("Image(ets) Saved - Status = " & $oStatusCode,1)
+		LogMessage("Image(ets) Saved - Response = " & $oReceived,1)
+	EndIf
+   
+#comments-end
+
+	;Save to the new server too
+	SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
 
 
 EndFunc
