@@ -1664,7 +1664,7 @@ EndFunc
 
 Func SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
 
-   Local $URL = "http://www.gowminion.com/api/Upload"
+   Local $URL = "https://www.gowminion.com/api/Upload"
 
    $sBoundary = "mymultipartboundary"
 
