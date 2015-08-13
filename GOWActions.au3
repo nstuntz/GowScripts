@@ -431,15 +431,15 @@ Func CollectAllTokens()
    LogMessage("Collecting All Tokens",2)
    ;Open Items screen
    SendMouseClick($ItemsMenu[0],$ItemsMenu[1])
-   Sleep(2000)
+   Sleep(3000)
 
    ;Open My Items
    SendMouseClick($MyItemsMenu[0],$MyItemsMenu[1])
-   Sleep(2000)
+   Sleep(3000)
 
    ;Open Resouces
    SendMouseClick($ResoucesMenu[0],$ResoucesMenu[1])
-   Sleep(2000)
+   Sleep(3000)
 
    Local $haveToken = False
    Do
