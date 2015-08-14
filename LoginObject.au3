@@ -8,7 +8,7 @@
 Global $gSqlInstance = "ets-tfs.cloudapp.net,51710"
 Global $gSqlDatabase = "GowTest"
 Global $gSqlUser = "GowTest"
-Global $gSqlPassword = "GowTest"
+Global $gSqlPassword = "Th!son3ISok#"
 Global $gSqlAuthMode = False
 
 Local $_userName = ""
