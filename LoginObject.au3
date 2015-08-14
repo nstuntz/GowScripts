@@ -223,10 +223,10 @@ Func GetOldestActiveLogin()
 EndFunc
 
 Func Decrypt($EncryptData)
-   MsgBox(0, "", $EncryptData) ;Results in "This is Plain Text"
+   ;MsgBox(0, "", $EncryptData) ;Results in "This is Plain Text"
    Local $stringDecrypt
    $stringDecrypt = BinaryToString(_Crypt_DecryptData($EncryptData, "April May Blue Red Key for th3 encypt1on", $CALG_RC2))
-   MsgBox(0, "", $stringDecrypt) ;Results in "This is Plain Text"
+   ;MsgBox(0, "", $stringDecrypt) ;Results in "This is Plain Text"
    return $stringDecrypt
 EndFunc
 
