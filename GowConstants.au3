@@ -2,7 +2,8 @@
 
 ;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
 ;7.22.2015.04 - Updated to include startup script variables
-Global Const $VersionNumber = "7.17.2015.04"
+;8.14.2015.01 - Updated to decrypt the password
+Global Const $VersionNumber = "8.14.2015.01"
 
 Global Const $GOWVBHostWindow[] = [401,77]
 ;StartupScript
