@@ -203,7 +203,14 @@ Func GetOldestActiveLogin()
    EndIf
 
    $_userName = $aData[1][0]
-   $_Password = $aData[1][1]
+
+   ;; This will need to call the decrypt function on the data.
+   if( StringLen($aData[1][1]) > 15) Then
+	  $_Password = Decrypt($aData[1][1])
+   Else
+	  $_Password = $aData[1][1]
+   EndIf
+
    $_LastRun = $aData[1][4]
    $_LoginID = $aData[1][3]
    $_PIN = $aData[1][5]
@@ -213,6 +220,14 @@ Func GetOldestActiveLogin()
 
    return True
 EndFunc
+
+Func Decrypt($EncryptData)
+   Local $stringDecrypt
+   $stringDecrypt = BinaryToString(_Crypt_DecryptData($EncryptData, "MyKey", $CALG_RC2))
+   MsgBox(0, "", $stringDecrypt) ;Results in "This is Plain Text"
+   return $stringDecrypt
+EndFunc
+
 
 Func Login_WritePerformanceLog($ElapsedTime, $ScriptFunction)
    _SqlConnect()
