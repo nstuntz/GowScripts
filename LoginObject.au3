@@ -3,6 +3,7 @@
 #include <SQLHelper.au3>
 #include <Date.au3>
 #include <Clipboard.au3>
+#include <Crypt.au3>
 
 
 Global $gSqlInstance = "ets-tfs.cloudapp.net,51710"
@@ -206,7 +207,7 @@ Func GetOldestActiveLogin()
 
    ;; This will need to call the decrypt function on the data.
    if( StringLen($aData[1][1]) > 15) Then
-	  $_Password = Decrypt($aData[1][1])
+	  $_Password = Decrypt("0x" & $aData[1][1])
    Else
 	  $_Password = $aData[1][1]
    EndIf
@@ -222,8 +223,9 @@ Func GetOldestActiveLogin()
 EndFunc
 
 Func Decrypt($EncryptData)
+   MsgBox(0, "", $EncryptData) ;Results in "This is Plain Text"
    Local $stringDecrypt
-   $stringDecrypt = BinaryToString(_Crypt_DecryptData($EncryptData, "MyKey", $CALG_RC2))
+   $stringDecrypt = BinaryToString(_Crypt_DecryptData($EncryptData, "April May Blue Red Key for th3 encypt1on", $CALG_RC2))
    MsgBox(0, "", $stringDecrypt) ;Results in "This is Plain Text"
    return $stringDecrypt
 EndFunc
