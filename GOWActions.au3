@@ -502,11 +502,11 @@ Func Chests()
    Local $openedChests = 0
 
    SendMouseClick($ItemsMenu[0], $ItemsMenu[1])
-   Sleep(2000)
+   Sleep(3000)
    SendMouseClick($MyItemsMenu[0], $MyItemsMenu[1])
-   Sleep(2000)
+   Sleep(3000)
    SendMouseClick($TreasuresMenu[0], $TreasuresMenu[1])
-   Sleep(2000)
+   Sleep(3000)
 
    Local $HaveChest = True
 
