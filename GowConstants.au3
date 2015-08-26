@@ -113,6 +113,11 @@ Global Const $TimerIconBuildColor2 = 5262408 ; 1574920 -with transparency ; 2099
 
 ;Shielding
 Global Const $BoostsIcon = [645,165]
+Global Const $ShieldColor = 8947808
+Global Const $ShieldSearchLeft = 500
+Global Const $ShieldSearchTop = 675
+Global Const $ShieldSearchRight = 1000
+Global Const $ShieldSearchBottom = 675
 Global Const $ShieldButton = [530,460]
 Global Const $ShieldButton8Hr = [640,250]
 Global Const $ShieldButton24Hr = [780,250]
@@ -283,8 +288,10 @@ Global Const $GetGoldButton = 4196352
 ;Global Const $GetGoldButton = 3672064
 
 ;; Than Updated for my machine
-Global Const $AndroidHomeButton  = [1186,560]
-Global Const $AndroidHomeButtonBottom  = [690,711]
+;Global Const $AndroidHomeButton  = [1186,560]
+;Global Const $AndroidHomeButtonBottom  = [690,711]
+Global Const $AndroidHomeButton  = [1190,420]
+Global Const $AndroidHomeButtonBottom  = [807,725]
 
 ;Gift retrieval
 Global Const $GiftBox[] = [1124,390]
