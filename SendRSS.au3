@@ -13,10 +13,10 @@ Global $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
 Global $food =  InputBox("Food", "Food:","0","",$width,$height)
 Global $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 ;Global $RoundTripTimeInMS = 35000
-Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
+Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","430000","",$width,$height)
 
-Global $MarchesAllowed = InputBox("Marches", "Marches:","5","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","3.3","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+Global $MarchesAllowed = InputBox("Marches", "Marches:","6","",$width,$height)
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","6.5","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
@@ -76,7 +76,7 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 
 		 If $marches >= $MarchesAllowed Then
 			if ($RoundTripTimeInMS - ($marches * $SendTimeInMS)) > 0 Then
-			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS *2)) ; times two for the in and out
+			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS * 2)) ; times two for the in and out
 			EndIf
 			$marches = 0
 		 EndIf
@@ -85,6 +85,8 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 	  else
 		 Sleep(2000)
 	  endif
+
+	  LogMessage("Total RSS(" & $RSSId & " - of " & $RssAmount & ")  Sent = " & $RssSent)
    WEnd
 Next
 
