@@ -561,7 +561,8 @@ Func Shield($attempt)
 
    ;MsgBox($MB_SYSTEMMODAL,"","Left: " & $ShieldTime[0]  + $shieldCoord[0] - $ShieldButton[0] & " Top: " & $ShieldTime[1] & " Right: " & $ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0]& " Bottom: " & $ShieldTime[3])
    ;Save Shield Time
-   SaveShieldTimeImage($ShieldTime[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[1],$ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[3])
+   ;SaveShieldTimeImage($ShieldTime[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[1],$ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[3])
+   SaveShieldTimeImage()
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (Login_LoginDelay()*1.2) Then
@@ -1602,8 +1603,12 @@ Func SaveShieldCountImage()
    SaveImage('ShieldCount',$ShieldCount[0],$ShieldCount[1],$ShieldCount[2],$ShieldCount[3])
 EndFunc
 
-Func SaveShieldTimeImage($ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
-   SaveImage('ShieldTime',$ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
+;Func SaveShieldTimeImage($ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
+;   SaveImage('ShieldTime',$ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
+;EndFunc
+
+Func SaveShieldTimeImage()
+   SaveImage('ShieldTime',$ShieldTime[0],$ShieldTime[1],$ShieldTime[2],$ShieldTime[3])
 EndFunc
 
 
