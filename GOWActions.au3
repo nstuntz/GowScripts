@@ -555,8 +555,13 @@ Func Shield($attempt)
    SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
    Sleep(2000)
 
+   ;Get Shield button button
+   ;;we poll here looking for a specific color on a one wide rectangle and click where we find it.
+   Local $shieldCoord = PixelSearch($ShieldSearchLeft,$ShieldSearchTop,$ShieldSearchRight,$ShieldSearchBottom, $ShieldColor)
+
+   ;MsgBox($MB_SYSTEMMODAL,"","Left: " & $ShieldTime[0]  + $shieldCoord[0] - $ShieldButton[0] & " Top: " & $ShieldTime[1] & " Right: " & $ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0]& " Bottom: " & $ShieldTime[3])
    ;Save Shield Time
-   SaveShieldTimeImage()
+   SaveShieldTimeImage($ShieldTime[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[1],$ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[3])
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (Login_LoginDelay()*1.2) Then
@@ -579,8 +584,15 @@ Func Shield($attempt)
    LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1)
    LogMessage("Attempting to reshield")
 
-   ;Get Shield button button
-   SendMouseClick($ShieldButton[0],$ShieldButton[1])
+
+   If (@error ==1) Then
+	  LogMessage("Using default Shield location", 0)
+	  $shieldCoord = $ShieldButton
+   Else
+	  LogMessage("Using offset Shield location", 0)
+   EndIf
+
+   SendMouseClick($shieldCoord[0],$shieldCoord[1])
    Sleep(2000)
 
    ;Drag up so we can see the count for a picture
@@ -602,7 +614,8 @@ Func Shield($attempt)
 
    LogMessage("Verifying Shield")
 
-   If PollForColor($ShieldVerifyMaxLength[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000) Then
+   ;here we need to verify based on the offset where we found it.
+   If PollForColor($ShieldVerifyMaxLength[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000) Then
 	  LogMessage("Shield Verified",2)
 	  Login_WriteShield()
    Else
@@ -743,11 +756,11 @@ Func Bank($scrolled,$previousBuildingType)
    SendMouseClick($MarketLocation[0],$MarketLocation[1])
 
    For $i = 1 to Login_RssMarches() ; Send rss marches
-		 SendRSS(Login_RSSType()-1)
+		 SendRSS(Login_RSSType()-1,Login_RSSType()-1)
    Next
 
    For $i = 1 to Login_SilveMarches() ; Send silver marches
-	  SendRSS($eSilver)
+	  SendRSS($eSilver, Login_RSSType()-1)
    Next
 
    Login_UpdateLastBank()
@@ -757,7 +770,7 @@ Func Bank($scrolled,$previousBuildingType)
 EndFunc
 
 ;Assumes you are in the market place ready to send, and gets back to that point
-Func SendRSS($type)
+Func SendRSS($type, $nonSilverType)
 
 	  Local $helpOffsetX = (Login_RSSBank() - 1) * $HelpNumberOffsetX
 
@@ -777,9 +790,11 @@ Func SendRSS($type)
 
 	  ;Max the food if we can by filling silver marches with it
 
-	  If ($type = $eSilver) AND ((Login_RSSType()-1) = $eFood) Then
-		 LogMessage("Banking - Maxing silver march with food",2)
-		 SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+	  ;Removed the restriction to only add other rss on food.
+	  If ($type = $eSilver) Then
+		 LogMessage("Banking - Maxing silver march with rss",2)
+		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
 	  EndIf
 
 
@@ -1587,8 +1602,8 @@ Func SaveShieldCountImage()
    SaveImage('ShieldCount',$ShieldCount[0],$ShieldCount[1],$ShieldCount[2],$ShieldCount[3])
 EndFunc
 
-Func SaveShieldTimeImage()
-   SaveImage('ShieldTime',$ShieldTime[0],$ShieldTime[1],$ShieldTime[2],$ShieldTime[3])
+Func SaveShieldTimeImage($ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
+   SaveImage('ShieldTime',$ShieldTimeL,$ShieldTimeT,$ShieldTimeR,$ShieldTimeB)
 EndFunc
 
 
