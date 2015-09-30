@@ -167,20 +167,20 @@ Func Login($email, $pwd)
 
    Send($pwd)
 
-   ;Check that the login button is there
-   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
-	  LogMessage("Login Failed.  Login button isn't the right color",5 )
-	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
-	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
-	  Return False
-   EndIf
-
    ;Login Button
    SendMouseClick($LoginButton[0],$LoginButton[1])
 
    ;Check if there was a login failure
    If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
 	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
+	  Return False
+   EndIf
+
+   ;Check that the login button is there
+   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
+	  LogMessage("Login Failed.  Login button isn't the right color",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
