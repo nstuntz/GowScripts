@@ -1307,7 +1307,11 @@ Func OpenGOW($attempts)
 		 OpenGOW($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
-		 If (CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor)) Then
+		 If (CheckForColor(340,700,$black)) Then
+			LogMessage("Looks like we black screened before resizing")
+			WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			OpenGOW($attempts+1)
+		 Else
 			LogMessage("Looks like we are in GoW")
 			Send("ESC")
 			Sleep(2000)
@@ -1317,10 +1321,6 @@ Func OpenGOW($attempts)
 			EndIf
 			Logout()
 			Sleep(2000)
-			OpenGOW($attempts+1)
-		 Else
-			LogMessage("Looks like we black screened before resizing")
-			WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
 			OpenGOW($attempts+1)
 		 EndIf
 	  EndIf
