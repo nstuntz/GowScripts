@@ -16,6 +16,7 @@ Global Const $GoW500by800IconLocation[] = [200,320]
 ;Global Const $GOWIcon[] = [360,180]
 ;Global Const $GOWColor = 529681
 
+
 ;StartupScript
 ;Global Const $VBWindow[] = [100,5]
 ;Global Const $VBStartArrow[] =[225,80]

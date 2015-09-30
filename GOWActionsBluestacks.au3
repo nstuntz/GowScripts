@@ -1325,7 +1325,6 @@ Func OpenGOW($attempts)
 		 EndIf
 	  EndIf
 
-
    EndIf
 
 EndFunc
