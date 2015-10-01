@@ -154,7 +154,7 @@ Func Login($email, $pwd)
 	  Local $emailArray = StringToASCIIArray($email)
 	  For $i = 0 to UBound($emailArray)-1
 		 Send(Chr($emailArray[$i]))
-		 Sleep(300)
+		 Sleep(100)
 	  Next
    Else
 	  Send($email)
@@ -167,6 +167,15 @@ Func Login($email, $pwd)
 
    Send($pwd)
 
+
+   ;Check that the login button is there
+   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
+	  LogMessage("Login Failed.  Login button isn't the right color",5 )
+	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
+	  Return False
+   EndIf
+
    ;Login Button
    SendMouseClick($LoginButton[0],$LoginButton[1])
 
@@ -178,13 +187,6 @@ Func Login($email, $pwd)
 	  Return False
    EndIf
 
-   ;Check that the login button is there
-   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
-	  LogMessage("Login Failed.  Login button isn't the right color",5 )
-	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
-	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
-	  Return False
-   EndIf
 
    ;Now check for a Pin
    If Not CheckForPinPrompt() Then
