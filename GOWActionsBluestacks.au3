@@ -167,7 +167,6 @@ Func Login($email, $pwd)
 
    Send($pwd)
 
-
    ;Check that the login button is there
    If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
 	  LogMessage("Login Failed.  Login button isn't the right color",5 )
@@ -179,17 +178,17 @@ Func Login($email, $pwd)
    ;Login Button
    SendMouseClick($LoginButton[0],$LoginButton[1])
 
-   ;Check if there was a login failure
-   If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
-	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
+
+   ;Now check for a Pin
+   If Not CheckForPinPrompt() Then
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
    EndIf
 
-
-   ;Now check for a Pin
-   If Not CheckForPinPrompt() Then
+   ;Check if there was a login failure
+   If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
+	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
@@ -1363,7 +1362,7 @@ EndFunc
 Func CheckForPinPrompt()
    ;LogMessage("Checking for PIN")
    Local $pinArray = StringToASCIIArray(Login_PIN())
-   If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,5000) Then
+   If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000) Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 
 		 LogMessage("PIN is needed",2)
@@ -1377,7 +1376,7 @@ Func CheckForPinPrompt()
 		 SendMouseClick($FirstPinBox[0],$FirstPinBox[1])
 		 For $i = 0 to UBound($pinArray)-1
 			Send(Chr($pinArray[$i]))
-			Sleep(1000)
+			Sleep(500)
 		 Next
 		 Return True
 	  Else
