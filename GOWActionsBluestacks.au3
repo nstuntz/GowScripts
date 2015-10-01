@@ -279,7 +279,7 @@ Func CollectQuests()
    SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
    Sleep(2000)
 
-   ConvertToDarkEnergy()
+   ;ConvertToDarkEnergy()
 
    SendMouseClick($QuestsDaily[0],$QuestsDaily[1])
    Sleep(2000)
@@ -935,7 +935,7 @@ Func Rally()
    SendMouseClick($MoreMenu[0],$MoreMenu[1])
 
    ;Added to handle the convert to dark energy on 7/17 - GS
-   ConvertToDarkEnergy()
+   ;ConvertToDarkEnergy()
 
    If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000) Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
@@ -1146,7 +1146,7 @@ Func Logout()
    ;More panel
    SendMouseClick($MoreMenu[0],$MoreMenu[1])
 
-ConvertToDarkEnergy()
+   ;ConvertToDarkEnergy()
 
    ;Accounts
    If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 10000) Then
