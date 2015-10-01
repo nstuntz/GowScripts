@@ -801,7 +801,7 @@ Func SendRSS($type, $nonSilverType)
 	  ;Max the food if we can by filling silver marches with it
 
 	  ;Removed the restriction to only add other rss on food.
-	  If ($type = $eSilver) Then
+	  If ($type = $eSilver And $nonSilverType >0) Then
 		 LogMessage("Banking - Maxing silver march with rss",2)
 		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
 		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])

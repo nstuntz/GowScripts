@@ -1,5 +1,6 @@
-#include "GowConstants.au3"
-#include "GowActions.au3"
+
+#include "GowConstantsBluestacks.au3"
+#include "GowActionsBluestacks.au3"
 #include <Date.au3>
 #include <Array.au3>
 Local $width = 250
@@ -13,10 +14,10 @@ Global $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
 Global $food =  InputBox("Food", "Food:","0","",$width,$height)
 Global $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 ;Global $RoundTripTimeInMS = 35000
-Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","430000","",$width,$height)
+Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
 
 Global $MarchesAllowed = InputBox("Marches", "Marches:","6","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","6.5","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","7","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
@@ -31,13 +32,13 @@ Local $RSSRequests = [Number ($stone),Number ($wood),Number ($ore),Number ($food
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+WinActivate ("BlueStacks","")
 Sleep(1000)
-WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
+WinWaitActive ("BlueStacks","")
+Sleep(1000)
+WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
-;Dependant on window at 401x77
-WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
-
+Sleep(1000)
 ;Open GOW
 OpenGOW(0)
 
@@ -56,7 +57,7 @@ SendMouseClick($MarketLocation[0],$MarketLocation[1])
 
 
 MsgBox(0,"Paused","Scroll Market so desired City is the top of the list.")
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+WinActivate ("BlueStacks","")
 Sleep(1000)
 
 ;Click the required text boxes and remove 3M from the amount each time
@@ -71,7 +72,7 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 
    While $RssSent < $RssAmount
 
-	  If (SendRSS($RSSId)) Then
+	  If (SendRSS($RSSId,-1)) Then
 		 $marches = $marches + 1
 
 		 If $marches >= $MarchesAllowed Then
