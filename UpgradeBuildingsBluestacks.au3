@@ -15,12 +15,14 @@ EndIf
 Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
 sleep(5000)
 
-WinActivate ("BlueStacks","")
+;WinMinimizeAll()
+
+;WinActivate ("BlueStacks","")
 Sleep(1000)
-WinWaitActive ("BlueStacks","")
+;WinWaitActive ("BlueStacks","")
 
 ;Dependant on window at 401x77
-WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
 ;THIS REQUIRES Andy to be in portrait mode and Active
 ;Sleep(1000)
@@ -34,8 +36,8 @@ For $k = 1 to 100000 ;go through them all lots
    LogMessage("Script Version -  "  &  $VersionNumber)
    LogMessage("Logging IN New User -  "  &  _Now())
 
-;window moves on closing of GoW
-WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   ;window moves on closing of GoW
+;   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
    ;Open GOW
    OpenGOW(0)

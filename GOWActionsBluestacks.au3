@@ -1237,8 +1237,10 @@ EndFunc
 Func OpenGOW($attempts)
 
    ;Make sure the VB is open
-   WinActivate ("BlueStacks","")
-   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   ;WinActivate ("BlueStacks","")
+   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+
+   WinMinimizeAll()
    Sleep(1000)
 
    LogMessage("Attempting to open GOW",1)
@@ -1284,7 +1286,8 @@ Func OpenGOW($attempts)
 	  EndIf
    EndIf
 
-   ;Click the Icon
+   ;double click the Icon
+   SendMouseClick($GOWIcon[0],$GOWIcon[1])
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
    sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.

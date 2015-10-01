@@ -87,8 +87,9 @@ Global Const $AllianceHelpMenuDragEnd = [850,450]
 Global Const $AllianceHelpsMenu = [930,510]
 Global Const $AllianceHelpHelpAllButton = [550,610]
 
+;NS-1 BS color (560,585 - 10117447)
 Global Const $HelpButton = [560,585]
-Global Const $HelpButtonColor = 14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
+Global Const $HelpButtonColor = 10117447 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
 Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [265,565]
