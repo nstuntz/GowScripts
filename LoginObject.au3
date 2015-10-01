@@ -1,5 +1,5 @@
 ;FORMAT - email|password|resourceType("ore-wood-stone-food-All")|LastBuiltBuilding|SHLevel
-
+#include-once
 #include <SQLHelper.au3>
 #include <Date.au3>
 #include <Clipboard.au3>
@@ -392,6 +392,10 @@ Func Login_PIN()
    return $_PIN
 EndFunc
 
+Func Set_Login_PIN($newPin)
+   $_PIN = $newPin
+EndFunc
+
 ; 1 = stone, 2 = wood, 3 = ore, 4 = food, 5 = all
 Func Login_RSSType()
    return $rssType
@@ -413,7 +417,7 @@ Func Login_LocationX()
 	return $_LocationX
 EndFunc
 Func Login_LocationY()
-	return $LocationY
+	return $_LocationY
 EndFunc
 Func Login_Created()
 	return $_Created
