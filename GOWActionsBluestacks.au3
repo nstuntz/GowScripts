@@ -1152,8 +1152,9 @@ Func Logout()
    If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 10000) Then
 	  SendMouseClick($AccountButton[0],$AccountButton[1])
    Else
-	  LogMessage("Dont have the account button to logout")
-	  Return False
+	  LogMessage("Dont have the account button to logout, clicking there anyway")
+	  ;Return False
+	  SendMouseClick($AccountButton[0],$AccountButton[1])
    EndIf
 
    ;Logout
