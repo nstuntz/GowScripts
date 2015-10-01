@@ -383,7 +383,7 @@ Func RedeemCode()
 EndFunc
 
 Func Helps()
-
+;
    If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor) Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
 	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,5000)) Then
