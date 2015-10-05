@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "9.30.2015.01"
+Global Const $VersionNumber = "10.5.2015.02"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -104,7 +104,7 @@ Global Const $QuestsDaily = [430,340]
 Global Const $QuestsAliaance = [430,460]
 Global Const $QuestsEmpire = [430,220]
 Global Const $QuestsCollect = [560,185]
-Global Const $QuestsStart = [540,240]
+Global Const $QuestsStart = [540,185]
 Global Const $QuestsEmpireCollect = [695,250]
 Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
 Global Const $NoQuestsColor = 2688000
@@ -306,7 +306,7 @@ Global Const $GetGoldButton = 6962190
 ;Global Const $AndroidHomeButton  = [1186,560]
 ;Global Const $AndroidHomeButtonBottom  = [690,711]
 Global Const $AndroidHomeButton  = [1190,420]
-Global Const $AndroidHomeButtonBottom  = [807,725]
+Global Const $AndroidHomeButtonBottom  = [175,785]
 
 ;Gift retrieval
 Global Const $GiftBox[] = [376,728]
@@ -327,10 +327,10 @@ Global Const $TreasuryDepositButton[] = [890,180]
 Global Const $TreasuryRunningCheck[] = [877,191]
 
 ;Image Positions
-Global Const $RssImage[] = [470,185,505,655]
+Global Const $RssImage[] = [158,88,538,114]
 Global Const $CityImage[] = [409,128,1169,727]
 Global Const $GoldImage[] = [410,185,460,295]
-Global Const $HeroImage[] = [410,650,480,725]
+Global Const $HeroImage[] = [111,25,168,95]
 Global Const $TreasuryImage[] = [665,545,785,655]
 
 Global Const $ShieldTime[] = [500,235,570,625]

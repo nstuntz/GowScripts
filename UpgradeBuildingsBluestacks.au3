@@ -87,12 +87,12 @@ For $k = 1 to 100000 ;go through them all lots
 
    Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
    ;Save the image resources
-   ;SaveRSSImage()
+   SaveRSSImage()
 
    ;Save the City Image
    ;SaveCityImage()
    ;SaveGoldImage()
-   ;SaveHeroImage()
+   SaveHeroImage()
    ;Only get Treasury image if the SH can use it
    ;If Login_StrongHoldLevel() > 14 Then
 	;  SaveTreasuryImage()
@@ -129,7 +129,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
-   Gifts()
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Gifts()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Gifts Failed - 5",5)
 	  CloseGOW()
@@ -380,7 +380,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CollectQuests()
+   CollectQuests()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Quests Failed - 5",5)
 	  CloseGOW()

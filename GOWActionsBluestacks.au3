@@ -1673,7 +1673,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
    Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
    _WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
 
-   _GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
+   ;_GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
 
    _GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
 
