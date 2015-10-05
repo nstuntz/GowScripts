@@ -206,6 +206,16 @@ Func Login($email, $pwd)
 	  Sleep(500)
    EndIf
 
+;;;;;Make sure we have accepted the terms and conditions. Poll for 2 seconds
+   If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,2000) Then
+	  SendMouseClick($TermsAndConditionsButton[0],$TermsAndConditionsButton[1])
+	  ;;;If we have the T&C button we then poll for gold screen for 5 seconds to esc out of that
+	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 5000)) Then
+		 Send("{ESC}")
+		 $ClickedGoldScreen = True
+	  EndIf
+	  Sleep(500)
+   EndIf
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
@@ -792,7 +802,6 @@ Func SendRSS($type, $nonSilverType)
 	  ;Poll for first Help button
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 10000) Then
 		 SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
-		 Sleep(4000)
 	  Else
 		 LogMessage("Banking - No help button")
 		 ;City Menu
@@ -800,25 +809,26 @@ Func SendRSS($type, $nonSilverType)
 	  Endif
 
 	  ;Max the food if we can by filling silver marches with it
-
-	  ;Removed the restriction to only add other rss on food.
-	  If ($type = $eSilver And $nonSilverType >0) Then
-		 LogMessage("Banking - Maxing silver march with rss",2)
-		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
-		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
-		 sleep(1500)
+	  Local $colorClick = 197379
+	  If PollForColor($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, 3000) Then
+		 ;SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
+		 ;Removed the restriction to only add other rss on food.
+		 If ($type = $eSilver And $nonSilverType >0) Then
+			LogMessage("Banking - Maxing silver march with rss",2)
+			;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+			SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
+			sleep(1500)
+		 EndIf
+		 SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
+		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+		 If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000) Then
+			SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+		 Endif
 	  EndIf
 
-
-	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
-
-	  Sleep(2000)
-	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
-	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000) Then
-		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
-	  Endif
-
-	  Sleep(1000)
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000) Then
+		 return True
+	  EndIf
 
 	  ;If Not (IsDeclared($DonationConfirmation)) Then
 
@@ -1312,9 +1322,17 @@ Func OpenGOW($attempts)
 		 OpenGOW($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
-		 If (CheckForColor(340,700,$black)) Then
+		 If CheckForSessionTimeout() Then
+			LogMessage("Writing Login from CloseGOW function because of session timeout",1)
+			Login_Write()
+		 ElseIf (CheckForColor(340,700,$black)) Then
 			LogMessage("Looks like we black screened before resizing")
-			WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			OpenGOW($attempts+1)
+		 ElseIf (CheckForColor(340,700,$ExitAppErrorColor)) Then
+			LogMessage("Looks like we need to exit the game.")
+			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])
 			OpenGOW($attempts+1)
 		 Else
 			LogMessage("Looks like we are in GoW")

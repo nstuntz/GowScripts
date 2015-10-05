@@ -50,7 +50,7 @@ Global $MapMenuColor = 2246954 ;winter2014=4744320; fall2014 = 7888928 ; - Old M
 
 ;;;;Connection Code Interupted Bluestacks only. Appears on every login it looks like
 Global Const $ConnectionInteruptButton = [430,260]
-
+Global Const $TermsAndConditionsButton = [250,450]
 ;Items Menu
 Global Const $ItemsMenu = [1150,480]
 Global Const $MyItemsMenu = [590,350]
@@ -99,15 +99,15 @@ Global Const $SecretGift = [165,570]
 Global Const $SecretGiftCollectButton = [411,430]
 
 ;Quests
-Global Const $QuestsMenu = [1145,560]
-Global Const $QuestsDaily = [750,500]
-Global Const $QuestsAliaance = [860,500]
-Global Const $QuestsEmpire = [620,500]
-Global Const $QuestsCollect = [590,250]
-Global Const $QuestsStart = [590,250]
+Global Const $QuestsMenu = [240,725]
+Global Const $QuestsDaily = [430,340]
+Global Const $QuestsAliaance = [430,460]
+Global Const $QuestsEmpire = [430,220]
+Global Const $QuestsCollect = [560,185]
+Global Const $QuestsStart = [540,240]
 Global Const $QuestsEmpireCollect = [695,250]
 Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
-Global Const $NoQuestsColor = 2622464
+Global Const $NoQuestsColor = 2688000
 Global Const $QuestChance = [1000,250]
 Global Const $QuestChanceUseButton = [770,415]
 
@@ -167,7 +167,7 @@ Global Const $MarketLocation = [200,435] ; this is after being zeroed on the scr
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
 Global Const $MaxMarchesExceeded = [400,255]
 
-Global Const $SessionTimeoutButton = [650,480]
+Global Const $SessionTimeoutButton = [410,250]
 
 ;Rallying
 Global Const $HospitalCross = [880,265]
@@ -275,6 +275,7 @@ Global Const $BlueOKButton = 16711
 Global Const $AccountButtonColor = 16777215
 Global Const $GreyedOutButton = 4670530
 Global Const $ShieldCountDownBlue = 1074272
+Global Const $ExitAppErrorColor = 1577765
 
 ;Paused?
 Global $g_bPaused = false

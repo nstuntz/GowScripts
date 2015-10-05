@@ -101,9 +101,9 @@ For $k = 1 to 100000 ;go through them all lots
    local $built = 0
 
    ;Check if we are building
-   If CheckIfBuidlingFromTimers() Then
-	  $built = 1
-   EndIf
+   ;If CheckIfBuidlingFromTimers() Then
+	;  $built = 1
+   ;EndIf
 
    Local $timerAthenaGift = TimerInit()
    CollectAthenaGift()
