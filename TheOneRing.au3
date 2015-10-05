@@ -21,8 +21,8 @@ For $i = 0 to UBound($gitExes)-1
    EndIf
 Next
 
-If WinGetState ("GOw2 [Running] - Oracle VM VirtualBox") < 1 Then
-   MsgBox($MB_SYSTEMMODAL, "", "GOW Virtual Machine isn't running.  Start Virtual box and the Gow2 host first.  Quitting.")
+If WinGetState ("BlueStacks") < 1 Then
+   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start Virtual box and the Gow2 host first.  Quitting.")
    Exit
 EndIf
 
@@ -85,7 +85,7 @@ While 1
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
 	  Sleep(1000)
-	  Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildings.au3")
+	  Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
 	  Sleep(1000)
 
 	  ;Should we restart the master script
