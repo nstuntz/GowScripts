@@ -932,11 +932,11 @@ Func Rally()
    If CheckForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor) Then
 
 	  SendMouseClick($HospitalBuilding[0],$HospitalBuilding[1])
-	  Sleep(1500)
+	  Sleep(1000)
 	  SendMouseClick($HospitalQueueAllButton[0],$HospitalQueueAllButton[1])
-	  Sleep(1500)
+	  Sleep(1000)
 	  SendMouseClick($HospitalHealButton[0],$HospitalHealButton[1])
-	  Sleep(1500)
+	  Sleep(1000)
 
 	  ClickCityScreen()
    EndIf
@@ -954,16 +954,16 @@ Func Rally()
 
    Local $i = 0
    For $i = 0 to 2
-	  If CheckForColor($RallyAttackButton[0]+($RallyAttackButtonOffsetX*$i),$RallyAttackButton[1],$RallyAttachButtonColor) Then
-		 SendMouseClick($RallyCancelButton[0]+($RallyAttackButtonOffsetX*$i),$RallyCancelButton[1])
+	  If CheckForColor($RallyAttackButton[0],$RallyAttackButton[1]+($RallyAttackButtonOffsetY*$i),$RallyAttachButtonColor) Then
+		 SendMouseClick($RallyCancelButton[0],$RallyCancelButton[1]+($RallyAttackButtonOffsetY*$i))
 		 Sleep(1000)
 		 SendMouseClick($RallyCancelConfirmButton[0],$RallyCancelConfirmButton[1])
 		 Sleep(1000)
-		 LogMessage("Rally Canceled.",2)
+		 LogMessage("Rally Cancelled.",2)
 		 ExitLoop
 	  EndIf
    Next
-
+   
    ;We are on the marches screen so click the city menu twice
    SendMouseClick($CityMenu[0],$CityMenu[1])
    Sleep(1000)
@@ -986,41 +986,41 @@ Func Rally()
 	  ;click search button
 	  SendMouseClick($SearchKingdomButton[0],$SearchKingdomButton[1])
 
-	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,5000) Then
+	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000) Then
 		 ;input X
 		 SendMouseClick($SearchKingdomX[0],$SearchKingdomX[1])
 		 Sleep(1000)
 		 Send(Login_RallyX())
-		 Sleep(2000)
+		 Sleep(1000)
 	  EndIf
 
-	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,5000) Then
+	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000) Then
 		 ;input y
 		 SendMouseClick($SearchKingdomY[0],$SearchKingdomY[1])
-		 Sleep(2000)
+		 Sleep(1000)
 		 Send(Login_RallyY())
-		 Sleep(2000)
+		 Sleep(1000)
 	  EndIf
 
 	  SendMouseClick($SearchKingdomGoButton[0],$SearchKingdomGoButton[1])
-	  Sleep(4000)
+	  Sleep(2000)
 
 	  ;Any way to tell here if the screen is loaded?
 
 	  ;Click on the city
 	  SendMouseClick($WorldMapCityButton[0],$WorldMapCityButton[1])
-	  Sleep(1500)
+	  Sleep(1000)
 
-	  ;Check if we got a march
-	  If CheckForColor($MarchCheck[0],$MarchCheck[1],$MarchCheckColor) Then
+	  ;Check if we got an alliance city
+	  If CheckForColor($RallyRssHelpButton[0],$RallyRssHelpButton[1],$Blue) Then
 		 $HaveRallyCity += 1
 	  Else
 		 ;Not sure why this is needed but it seems to be
 		 MouseMove($RallyButton[0],$RallyButton[1])
-		 Sleep(500)
+		 Sleep(250)
 
 		 ;Make sure we got the city
-		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,5000) Then
+		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,1000) Then
 			ExitLoop
 		 Else
 			$HaveRallyCity += 1
@@ -1030,44 +1030,46 @@ Func Rally()
    WEnd
 
    If $HaveRallyCity >= 4  Then
-	  LogMessage("Can not get city rallying target, canceling process",4)
+	  LogMessage("Can not get city rallying target, cancelling process",4)
 	  Login_UpdateLastRallyFAILED()
 	  ClickCityScreen()
 	  Return
    EndIf
 
+	;No poll here since it is in the loop
    SendMouseClick($RallyButton[0],$RallyButton[1])
-   Sleep(1000)
 
    ;Click the 8 Hour check mark
-   SendMouseClick($Rally8HourCheckBox[0],$Rally8HourCheckBox[1])
-   Sleep(1000)
+   If PollForColor($Rally8HourCheckBox[0],$Rally8HourCheckBox[1], $White, 2000) Then
+	SendMouseClick($Rally8HourCheckBox[0],$Rally8HourCheckBox[1])
+   Endif
 
    ;Click the Set button
    If PollForColor($RallySetButton[0],$RallySetButton[1],$Blue,3000) Then
 	  SendMouseClick($RallySetButton[0],$RallySetButton[1])
-	  Sleep(500)
    Else
-	  LogMessage("Can not rally find set button for rallying target, canceling process",4)
+	  LogMessage("Can not rally find set button for rallying target, cancelling process",4)
 	  Login_UpdateLastRallyFAILED()
 	  ClickCityScreen()
 	  Return
    EndIf
 
    ;Click the Queue Max button
-   SendMouseClick($RallyQueueMaxButton[0],$RallyQueueMaxButton[1])
-   Sleep(1000)
+   If PollForColor($RallyQueueMaxButton[0],$RallyQueueMaxButton[1],$Blue,2000) Then
+	SendMouseClick($RallyQueueMaxButton[0],$RallyQueueMaxButton[1])
+   EndIf
 
    ;Click the Send button
-   SendMouseClick($RallySendButton[0],$RallySendButton[1])
-   Sleep(1500)
+   If PollForColor($RallySendButton[0],$RallySendButton[1],$Blue,2000) Then
+	SendMouseClick($RallySendButton[0],$RallySendButton[1])
+   EndIf
 
    ;Update Last Rally
    Login_UpdateLastRally()
 
    ;Click City Screen
    SendMouseClick($CityMenu[0],$CityMenu[1])
-   Sleep(1000)
+   EndIf
 
    LogMessage("Rally set",2)
 
@@ -1303,7 +1305,7 @@ Func OpenGOW($attempts)
    sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.
 
-   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],500,800)
+   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
    ;quit()
 
    If Not PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 35000) Then

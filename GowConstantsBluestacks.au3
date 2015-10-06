@@ -11,6 +11,7 @@ Global Const $VersionNumber = "10.5.2015.02"
 
 Global Const $GOWVBHostWindow[] = [100,0]
 Global Const $GoW500by800IconLocation[] = [200,320]
+Global Const $GOWWindowSize[] = [500,800]
 
 ;;;;;; MOVED TO GowLocalConstantsBluestacks
 ;Global Const $GOWIcon[] = [360,180]
@@ -77,8 +78,8 @@ Global Const $AccountButton = [410,230]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
-Global Const $MarchesButton = [1000,640]; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
-Global Const $MarchesButtonColor = 1050624; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
+Global Const $MarchesButton = [193,515]; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
+Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
 ;Global Const $MarchesButtonColor = 2102272
 ;Helps set
 Global Const $AllianceMenu = [1145,370]
@@ -170,32 +171,35 @@ Global Const $MaxMarchesExceeded = [400,255]
 Global Const $SessionTimeoutButton = [410,250]
 
 ;Rallying
-Global Const $HospitalCross = [880,265]
-Global Const $HospitalCrossColor = 16317688
-Global Const $HospitalBuilding = [930,250]
-Global Const $HospitalQueueAllButton = [1000,555]
-Global Const $HospitalHealButton = [995,295]
+Global Const $HospitalCross = [499,499] ; 499,499 - 10754323
+Global Const $HospitalCrossColor = 10754323
+Global Const $HospitalBuilding = [522,541]
+Global Const $HospitalQueueAllButton = [242,615]; - 16711
+Global Const $HospitalHealButton = [451,606]; - 16711
 ; Rally March screen
-Global Const $RallyAttackButton = [660,530] ;815 ;970
-Global Const $RallyAttackButtonOffsetX = 155
-Global Const $RallyAttachButtonColor = 4211776
-Global Const $RallyCancelButton = [660,670] ;815 ;970
-Global Const $RallyCancelConfirmButton = [720,500]
-;Rally - Actual rally
-Global Const $RallyButton = [820,460] ; Blue
-Global Const $Rally8HourCheckBox = [890,515]
-Global Const $RallySetButton = [950,380]
-Global Const $RallyQueueMaxButton = [700,510]
-Global Const $RallySendButton = [690,377]
-Global Const $SearchKingdomButton = [435,558]
-Global Const $SearchKingdomButtonColor = 4740176
-;Global Const $SearchKingdomButtonColor = 3682344
-Global Const $SearchKingdomX = [636,423]
-Global Const $SearchKingdomY = [636,284]
+Global Const $RallyAttackButton = [261,257] ;261,257 - 4670530   ;815 ;970
+Global Const $RallyAttackButtonOffsetY = 124 ;262,380 - 4670530 ;260,504 - 4670530
+Global Const $RallyAttachButtonColor = 4670530
+Global Const $RallyCancelButton = [150,259] ;150,259 - 16711 ;815 ;970  148,368 - 16711
+Global Const $RallyCancelConfirmButton = [300,291];300,291 - 16711
+;Rally - Search Constants
+Global Const $SearchKingdomButton = [239,49] ;239,49 - 7110014
+Global Const $SearchKingdomButtonColor = 7110014
+Global Const $SearchKingdomX = [346,241] ;346,241 - 16777215
+Global Const $SearchKingdomY = [451,238] ;451,238 - 16777215
 Global Const $SearchKingdomGoButton = [739,377]
-Global Const $MarchCheck = [969,573]
-Global Const $MarchCheckColor = 3088
-Global Const $WorldMapCityButton = [755,435]
+;Global Const $SearchKingdomButtonColor = 16777215 16317688
+;Rally - Actual rally
+Global Const $WorldMapCityButton = [347,373] ;347,373 - 5327170
+Global Const $RallyButton = [318,396] ;318,396 - 16711 ; Blue
+Global Const $RallyRssHelpButton = [349,352]  ;349,352 - 16711
+Global Const $Rally8HourCheckBox = [281,439] ;281,439 - 16777215
+Global Const $RallySetButton = [391,503] ;391,503 - 16711
+Global Const $RallyQueueMaxButton = [286,308] ;286,308 - 16711
+Global Const $RallySendButton = [356,295] ;356,295 - 16711
+; OLD from VB no longer used
+;Global Const $MarchCheck = [969,573] 
+;Global Const $MarchCheckColor = 3088
 
 ;Buildings
 Global Const $BuildingUpgradeButton = [560,275]
@@ -262,7 +266,7 @@ Global Const $StrongHoldUpgradeBeginTeleYesButton = [690,360]
 Global Const $BuildingCheck[] = [900,450]
 
 ;Colors
-Global Const $White = 16317688
+Global Const $White = 16777215 ;16317688
 Global Const $Orange = 11230223
 Global Const $Blue = 16711
 Global Const $GreenCollect = 11264
