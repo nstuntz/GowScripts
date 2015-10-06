@@ -1069,7 +1069,6 @@ Func Rally()
 
    ;Click City Screen
    SendMouseClick($CityMenu[0],$CityMenu[1])
-   EndIf
 
    LogMessage("Rally set",2)
 

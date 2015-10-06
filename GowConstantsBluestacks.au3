@@ -187,7 +187,7 @@ Global Const $SearchKingdomButton = [239,49] ;239,49 - 7110014
 Global Const $SearchKingdomButtonColor = 7110014
 Global Const $SearchKingdomX = [346,241] ;346,241 - 16777215
 Global Const $SearchKingdomY = [451,238] ;451,238 - 16777215
-Global Const $SearchKingdomGoButton = [739,377]
+Global Const $SearchKingdomGoButton = [396,322] ;396,322 - 16711
 ;Global Const $SearchKingdomButtonColor = 16777215 16317688
 ;Rally - Actual rally
 Global Const $WorldMapCityButton = [347,373] ;347,373 - 5327170
