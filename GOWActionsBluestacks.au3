@@ -812,21 +812,22 @@ Func SendRSS($type, $nonSilverType)
 
 	  ;Max the food if we can by filling silver marches with it
 	  Local $colorClick = 197379
-	  If PollForColor($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, 3000) Then
-		 ;SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
-		 ;Removed the restriction to only add other rss on food.
-		 If ($type = $eSilver And $nonSilverType >0) Then
-			LogMessage("Banking - Maxing silver march with rss",2)
-			;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
-			SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
-			sleep(1500)
-		 EndIf
-		 SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
-		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
-		 If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000) Then
-			SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
-		 Endif
+	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000) Then
+		 ;do nothing this is just to wait to see if we can send faster
 	  EndIf
+
+	  ;Removed the restriction to only add other rss on food.
+	  If ($type = $eSilver And $nonSilverType >0) Then
+		 LogMessage("Banking - Maxing silver march with rss",2)
+		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
+		 sleep(1500)
+	  EndIf
+	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
+	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000) Then
+		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+	  Endif
 
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000) Then
 		 return True
@@ -965,7 +966,7 @@ Func Rally()
 		 ExitLoop
 	  EndIf
    Next
-   
+
    ;We are on the marches screen so click the city menu twice
    SendMouseClick($CityMenu[0],$CityMenu[1])
    Sleep(1000)
@@ -1820,7 +1821,7 @@ Func PollForColor($x,$y,$color,$timeout)
 	  Sleep(250)
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & ") Failed: " & $pixelColor)
+	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color & ") Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
@@ -1848,7 +1849,7 @@ Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout)
 	  Sleep(250)
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & ") OR (" & $x2 & "," & $y2 & ") Failed: " & $pixelColor)
+	  LogMessage("Polling At (" & $x & "," & $y & ") OR (" & $x2 & "," & $y2 & " - " & $color & ") Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
@@ -1871,6 +1872,34 @@ Func PollForNOTColor($x,$y,$color,$timeout)
 	  Sleep(250)
 	  return True
    Else
+	  return False
+   EndIf
+EndFunc
+
+
+Func PollForTwoColors($x,$y,$color1,$color2,$timeout)
+   ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
+   Local $colorAt = 0
+   Local $pixelColor = 0
+   Local $waited = 0
+
+   While $waited < $timeout
+	  $pixelColor = PixelGetColor($x,$y)
+	  If $pixelColor <>  $color1 and $pixelColor <>  $color2 Then
+		 ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
+		 ;MouseMove($x,$y)
+		 Sleep(500)
+		 $waited = $waited + 500
+	  Else
+		 ExitLoop
+	  EndIf
+   WEnd
+   If $pixelColor = $color1 or $pixelColor = $color2 Then
+	  ;LogMessage("Polling At (" & $x & "," & $y & ") worked.")
+	  Sleep(250)
+	  return True
+   Else
+	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color1 & " or " & $color2) Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
