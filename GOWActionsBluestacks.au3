@@ -1899,7 +1899,7 @@ Func PollForTwoColors($x,$y,$color1,$color2,$timeout)
 	  Sleep(250)
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color1 & " or " & $color2) Failed: " & $pixelColor)
+	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
