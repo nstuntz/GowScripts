@@ -220,14 +220,16 @@ Func Login($email, $pwd)
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
+		 LogMessage("Old City Color = " & $MapMenuColor,5  )
+		 LogMessage("New Map Color = " & $CityScreenColor,5  )
 		 $MapMenuColor  = PixelGetColor($CityMenu[0],$CityMenu[1])
 		 LogMessage("New City Color = " & $MapMenuColor,5  )
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
-		 Sleep(10000)
+		 Sleep(1000)
 		 $CityScreenColor = PixelGetColor($CityMenu[0],$CityMenu[1])
 		 LogMessage("New Map Color = " & $CityScreenColor ,5 )
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
-		 Sleep(10000)
+		 Sleep(1000)
 	  EndIf
    EndIf
 
