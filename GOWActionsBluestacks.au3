@@ -1062,6 +1062,7 @@ Func Rally()
    ;Click the Send button
    If PollForColor($RallySendButton[0],$RallySendButton[1],$Blue,2000) Then
 	SendMouseClick($RallySendButton[0],$RallySendButton[1])
+	Sleep(1000)
    EndIf
 
    ;Update Last Rally
@@ -1069,7 +1070,7 @@ Func Rally()
 
    ;Click City Screen
    SendMouseClick($CityMenu[0],$CityMenu[1])
-
+   Sleep(1000)
    LogMessage("Rally set",2)
 
 EndFunc

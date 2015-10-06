@@ -174,7 +174,7 @@ For $k = 1 to 100000 ;go through them all lots
    Local $previousBuildingType = 0
 
    Local $timerRally = TimerInit()
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Rally()
+   Rally()
    Login_WritePerformanceLog(TimerDiff($timerRally), "Rally")
 
    If Not CheckForCityScreen(0) Then
