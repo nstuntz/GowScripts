@@ -956,7 +956,7 @@ Func Rally()
    ;Added to handle the convert to dark energy on 7/17 - GS
    ;ConvertToDarkEnergy()
 
-   If PollForTwoColors($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor,$MarchesButtonColorAlt 4000,"$MarchesButtonColor at $MarchesButton") Then
+   If PollForTwoColors($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor,$MarchesButtonColorAlt,4000,"$MarchesButtonColor at $MarchesButton") Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
    EndIf
