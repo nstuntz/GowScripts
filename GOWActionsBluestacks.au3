@@ -1861,7 +1861,7 @@ Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout)
 	  If Not ($pixelColor = $color1 or $pixelColor = $color2 or $pixelColor2 = $color1 or $pixelColor2 = $color2) Then
 
 		 If $waited = 0 Then
-			MouseMove($x,$y)
+			MouseMove($x1,$y1)
 		 EndIf
 
 		 Sleep(250)
