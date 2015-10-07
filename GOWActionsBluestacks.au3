@@ -1803,7 +1803,7 @@ Func PollForColor($x,$y,$color,$timeout, $message = "?")
    If Polling($x,$y,$x,$y,$color,$color,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
@@ -1813,7 +1813,7 @@ Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout, $message = "?")
    If Polling($x,$y,$x2,$y2,$color,$color,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " or" & $x & "," & $y & " - " & $color1 & " Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " or " & $x2 & "," & $y2 & " - " & $color & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
@@ -1822,7 +1822,7 @@ Func PollForTwoColors($x,$y,$color1,$color2,$timeout, $message = "?")
    If Polling($x,$y,$x,$y,$color1,$color2,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
