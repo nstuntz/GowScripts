@@ -198,7 +198,8 @@ Func Login($email, $pwd)
    ;Now exit the gold buy button
    Local $ClickedGoldScreen = False
    $ClickedGoldScreen = ClickGoldButton()
-   Sleep(5000) ;3 seconds because of the quest poping up
+   ;Not sleeping here because of the next two polls
+   ;Sleep(5000) ;3 seconds because of the quest poping up
 
 ;;;;Bluestack connection code interupt. Poll for a few seconds then move on
    If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
@@ -216,6 +217,7 @@ Func Login($email, $pwd)
 	  EndIf
 	  Sleep(500)
    EndIf
+
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
@@ -1529,14 +1531,21 @@ Func ClickGoldButton()
    ;Do a pixel search so that we find the gold button every? time.
    ;PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 30000)
    ;LogMessage("Pixel Search Result: " & @error)
-   If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 30000)) Then
-	  Send("{ESC}")
-	  return True
+   For $i = 0 To 10 Step 1
+      If CheckForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue) Then
+		 SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
+		 Sleep(500)
+	  EndIf
+	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 3000)) Then
+		 Send("{ESC}")
+		 Return True
+	  EndIf
    Else
-	  Sleep(15000)
-	  LogMessage("*** Never got the gold button")
-	  return False
-   endif
+   Next
+
+   Sleep(15000)
+   LogMessage("*** Never got the gold button")
+   Return False
 
 ;   If PollForColorTwoPlaces($GoldBuyButton[0],$GoldBuyButton[1],$GoldBuyButton2[0],$GoldBuyButton2[1], $BuyGoldColor, 30000) Then
 ;	  Send("{ESC}")
