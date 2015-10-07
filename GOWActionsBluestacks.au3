@@ -1550,7 +1550,6 @@ Func ClickGoldButton()
 		 Send("{ESC}")
 		 Return True
 	  EndIf
-   Else
    Next
 
    Sleep(15000)
