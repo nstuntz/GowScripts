@@ -398,7 +398,7 @@ Func Helps()
 ;
    If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor) Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
-	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,5000)) Then
+	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,3000,"$AllianceHelpHelpAllButton")) Then
 		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
 		 Sleep(500)
 	  EndIf
@@ -630,7 +630,7 @@ Func Shield($attempt)
    Sleep(2000)
 
    ;Check for the replace button
-   If PollForColor($ShieldReplaceButton[0],$ShieldReplaceButton[1], $BlueOKButton, 5000) Then
+   If PollForColor($ShieldReplaceButton[0],$ShieldReplaceButton[1], $BlueOKButton, 5000, "$BlueOKButton at $ShieldReplaceButton") Then
 	  SendMouseClick($ShieldReplaceButton[0],$ShieldReplaceButton[1])
 	  Sleep(2000)
    EndIf
@@ -638,7 +638,7 @@ Func Shield($attempt)
    LogMessage("Verifying Shield")
 
    ;here we need to verify based on the offset where we found it.
-   If PollForColor($ShieldVerifyMaxLength[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000) Then
+   If PollForColor($ShieldVerifyMaxLength[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000, "$ShieldCountDownBlue at $ShieldVerifyMaxLength") Then
 	  LogMessage("Shield Verified",2)
 	  Login_WriteShield()
    Else
@@ -950,7 +950,7 @@ Func Rally()
    ;Added to handle the convert to dark energy on 7/17 - GS
    ;ConvertToDarkEnergy()
 
-   If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000) Then
+   If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000,"$MarchesButtonColor") Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
    EndIf
@@ -973,9 +973,9 @@ Func Rally()
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
    ;Check that we have the search button
-   If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000) Then
+   If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000,"$SearchKingdomButtonColor") Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
-	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000) Then
+	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000,"$SearchKingdomButtonColor (second)") Then
 		 LogMessage("Rally Failed.",4)
 		 LogMessage("No World screen to search for rallying target, canceling process",5)
 		 Login_UpdateLastRallyFAILED()
@@ -989,7 +989,7 @@ Func Rally()
 	  ;click search button
 	  SendMouseClick($SearchKingdomButton[0],$SearchKingdomButton[1])
 
-	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000) Then
+	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000 ,"$White kindgom search X") Then
 		 ;input X
 		 SendMouseClick($SearchKingdomX[0],$SearchKingdomX[1])
 		 Sleep(1000)
@@ -997,7 +997,7 @@ Func Rally()
 		 Sleep(1000)
 	  EndIf
 
-	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000) Then
+	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000,"$White kindgom search Y") Then
 		 ;input y
 		 SendMouseClick($SearchKingdomY[0],$SearchKingdomY[1])
 		 Sleep(1000)
@@ -1023,7 +1023,7 @@ Func Rally()
 		 Sleep(250)
 
 		 ;Make sure we got the city
-		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,1000) Then
+		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,1000, "$Blue at $RallyButton") Then
 			ExitLoop
 		 Else
 			$HaveRallyCity += 1
@@ -1043,12 +1043,12 @@ Func Rally()
    SendMouseClick($RallyButton[0],$RallyButton[1])
 
    ;Click the 8 Hour check mark
-   If PollForColor($Rally8HourCheckBox[0],$Rally8HourCheckBox[1], $White, 2000) Then
+   If PollForColor($Rally8HourCheckBox[0],$Rally8HourCheckBox[1], $White, 2000, "$White at $Rally8HourCheckBox") Then
 	SendMouseClick($Rally8HourCheckBox[0],$Rally8HourCheckBox[1])
    Endif
 
    ;Click the Set button
-   If PollForColor($RallySetButton[0],$RallySetButton[1],$Blue,3000) Then
+   If PollForColor($RallySetButton[0],$RallySetButton[1],$Blue,3000, "$Blue at $RallySetButton" ) Then
 	  SendMouseClick($RallySetButton[0],$RallySetButton[1])
    Else
 	  LogMessage("Can not rally find set button for rallying target, cancelling process",4)
@@ -1058,12 +1058,12 @@ Func Rally()
    EndIf
 
    ;Click the Queue Max button
-   If PollForColor($RallyQueueMaxButton[0],$RallyQueueMaxButton[1],$Blue,2000) Then
+   If PollForColor($RallyQueueMaxButton[0],$RallyQueueMaxButton[1],$Blue,2000, "$Blue at $RallyQueueMaxButton" ) Then
 	SendMouseClick($RallyQueueMaxButton[0],$RallyQueueMaxButton[1])
    EndIf
 
    ;Click the Send button
-   If PollForColor($RallySendButton[0],$RallySendButton[1],$Blue,2000) Then
+   If PollForColor($RallySendButton[0],$RallySendButton[1],$Blue,2000, "$Blue at $RallySendButton") Then
 	SendMouseClick($RallySendButton[0],$RallySendButton[1])
 	Sleep(1000)
    EndIf
@@ -1799,60 +1799,34 @@ Func PollForPixelSearch($left, $top,$right, $bottom,$color,$timeout)
 
 EndFunc
 
-Func PollForColor($x,$y,$color,$timeout)
-   ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
-   Local $colorAt = 0
-   Local $pixelColor = 0
-   Local $waited = 0
-
-   While $waited < $timeout
-	  $pixelColor = PixelGetColor($x,$y)
-	  If $pixelColor <>  $color Then
-		 ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
-		 ;MouseMove($x,$y)
-		 Sleep(500)
-		 $waited = $waited + 500
-	  Else
-		 ExitLoop
-	  EndIf
-   WEnd
-   If $pixelColor =  $color Then
-	  ;LogMessage("Polling At (" & $x & "," & $y & ") worked.")
-	  Sleep(250)
+Func PollForColor($x,$y,$color,$timeout, $message = "?")
+   If Polling($x,$y,$x,$y,$color,$color,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color & ") Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
 
-Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout)
-   ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
-   Local $colorAt = 0
-   Local $pixelColor = 0
-   Local $waited = 0
 
-   While $waited < $timeout
-	  $pixelColor = PixelGetColor($x,$y)
-	  $pixelColor2 = PixelGetColor($x2,$y2)
-	  If $pixelColor <> $color AND $pixelColor2 <> $color Then
-		 ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
-		 ;MouseMove($x,$y)
-		 Sleep(500)
-		 $waited = $waited + 500
-	  Else
-		 ExitLoop
-	  EndIf
-   WEnd
-   If $pixelColor = $color OR $pixelColor2 = $color Then
-	  ;LogMessage("Polling At (" & $x & "," & $y & ") worked.")
-	  Sleep(250)
+Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout, $message = "?")
+   If Polling($x,$y,$x2,$y2,$color,$color,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & ") OR (" & $x2 & "," & $y2 & " - " & $color & ") Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " or" & $x & "," & $y & " - " & $color1 & " Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
+
+Func PollForTwoColors($x,$y,$color1,$color2,$timeout, $message = "?")
+   If Polling($x,$y,$x,$y,$color1,$color2,$timeout) Then
+	  return True
+   Else
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
+	  return False
+   EndIf
+EndFunc
+
 
 Func PollForNOTColor($x,$y,$color,$timeout)
    Local $colorAt = 0
@@ -1876,30 +1850,30 @@ Func PollForNOTColor($x,$y,$color,$timeout)
    EndIf
 EndFunc
 
-
-Func PollForTwoColors($x,$y,$color1,$color2,$timeout)
-   ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
+Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout)
    Local $colorAt = 0
    Local $pixelColor = 0
    Local $waited = 0
 
    While $waited < $timeout
-	  $pixelColor = PixelGetColor($x,$y)
-	  If $pixelColor <>  $color1 and $pixelColor <>  $color2 Then
-		 ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
-		 ;MouseMove($x,$y)
-		 Sleep(500)
-		 $waited = $waited + 500
+	  $pixelColor = PixelGetColor($x1,$y1)
+	  $pixelColor2 = PixelGetColor($x2,$y2)
+	  If Not ($pixelColor = $color1 or $pixelColor = $color2 or $pixelColor2 = $color1 or $pixelColor2 = $color2) Then
+
+		 If $waited = 0 Then
+			MouseMove($x,$y)
+		 EndIf
+
+		 Sleep(250)
+		 $waited = $waited + 250
 	  Else
 		 ExitLoop
 	  EndIf
    WEnd
-   If $pixelColor = $color1 or $pixelColor = $color2 Then
-	  ;LogMessage("Polling At (" & $x & "," & $y & ") worked.")
+   If $pixelColor = $color1 or $pixelColor = $color2 or $pixelColor2 = $color1 or $pixelColor2 = $color2 Then
 	  Sleep(250)
 	  return True
    Else
-	  LogMessage("Polling At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
