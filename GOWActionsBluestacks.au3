@@ -248,6 +248,7 @@ EndFunc
 
 Func CollectAthenaGift()
 
+   ;We doing it this way incase of a bouncer, specifically checking twice
    If CheckForColor( $AthenaGift[0],$AthenaGift[1], $NoAthenaGiftColor) Then
 	  Return
    EndIf
@@ -259,7 +260,7 @@ Func CollectAthenaGift()
    ;Check if this is bouncing
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
 
-   If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000,"$firstColor at $AthenaGift") Then
+   If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000) Then
 	  LogMessage("We have an Athena Gift but it is not ready to collect",1)
 	  Return
    EndIf
@@ -268,7 +269,8 @@ Func CollectAthenaGift()
 
    ;Collect the bouncer
    SendMouseClick($AthenaGift[0],$AthenaGift[1])
-   Sleep(4000)
+   ;Just a pause to speed it up
+   PollForColor($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1],$SecretGiftCollectButtonColor,4000,"$SecretGiftCollectButtonColor at $SecretGiftCollectButton")
    SendMouseClick($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1])
    Sleep(3500) ; logner sleet because it pops stuff up
 
@@ -279,7 +281,9 @@ EndFunc
 Func CollectSecretGift()
    ;Collect the bouncer
    SendMouseClick($SecretGift[0],$SecretGift[1])
-   Sleep(4000)
+   ;Just a pause to speed it up
+   PollForColor($SecretGiftCollectButton[0],$SecretGiftCollectButton[1],$SecretGiftCollectButtonColor,4000,"$SecretGiftCollectButtonColor at $SecretGiftCollectButton")
+
    SendMouseClick($SecretGiftCollectButton[0],$SecretGiftCollectButton[1])
    Sleep(3500) ;Longer sleep because it pops up stuff
 
@@ -1597,7 +1601,7 @@ Func CheckForCityScreen($attempts)
 	  Send("{ESC}")
 	  Sleep(1000)
 
-	  If CheckForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1],$YesQuitWhite) Then
+	  If PollForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1],$YesQuitWhite, 500, "$YesQuitWhite at $QuitGameDialogYesButton") Then
 		 ;Say No then try again
 		 SendMouseClick($QuitGameDialogNoButton[0],$QuitGameDialogNoButton[1])
 		 Sleep(1000)
