@@ -1803,7 +1803,7 @@ Func PollForColor($x,$y,$color,$timeout, $message = "?")
    If Polling($x,$y,$x,$y,$color,$color,$timeout) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & " Failed: " & $pixelColor)
+	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " Failed: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
