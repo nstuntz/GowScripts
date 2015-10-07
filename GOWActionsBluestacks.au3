@@ -1800,29 +1800,26 @@ Func PollForPixelSearch($left, $top,$right, $bottom,$color,$timeout)
 EndFunc
 
 Func PollForColor($x,$y,$color,$timeout, $message = "?")
-   If Polling($x,$y,$x,$y,$color,$color,$timeout) Then
+   If Polling($x,$y,$x,$y,$color,$color,$timeout, $message) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
 
 
 Func PollForColorTwoPlaces($x,$y,$x2,$y2,$color,$timeout, $message = "?")
-   If Polling($x,$y,$x2,$y2,$color,$color,$timeout) Then
+   If Polling($x,$y,$x2,$y2,$color,$color,$timeout, $message) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " or " & $x2 & "," & $y2 & " - " & $color & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
 
 Func PollForTwoColors($x,$y,$color1,$color2,$timeout, $message = "?")
-   If Polling($x,$y,$x,$y,$color1,$color2,$timeout) Then
+   If Polling($x,$y,$x,$y,$color1,$color2,$timeout,$message) Then
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x & "," & $y & " - " & $color1 & " or " & $color2 & ") Failed, found color: " & $pixelColor)
 	  return False
    EndIf
 EndFunc
@@ -1850,7 +1847,7 @@ Func PollForNOTColor($x,$y,$color,$timeout)
    EndIf
 EndFunc
 
-Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout)
+Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout, $message)
    Local $colorAt = 0
    Local $pixelColor = 0
    Local $waited = 0
@@ -1874,6 +1871,7 @@ Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout)
 	  Sleep(250)
 	  return True
    Else
+	  LogMessage("Polling for " & $message & " At (" & $x1 & "," & $y1 & " or " & $x2 & "," & $y2 & " - " & $color1 & " or " & $color2 & ") Failed, found color: " & $pixelColor & " and " & $pixelColor2)
 	  return False
    EndIf
 EndFunc
