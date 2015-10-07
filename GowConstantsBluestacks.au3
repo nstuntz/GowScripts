@@ -67,8 +67,8 @@ Global Const $FirstToken = [825,220]
 Global Const $SecondToken = [990,220]
 
 ;Quit Game Dialog
-Global Const $QuitGameDialogYesButton = [837,381]
-Global Const $QuitGameDialogNoButton = [840,510]
+Global Const $QuitGameDialogYesButton = [411,435] ;411,435 - 2631720
+Global Const $QuitGameDialogNoButton = [289,433] ;289,433 - 2631720
 Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
 
 ;More Menu
@@ -95,9 +95,10 @@ Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [265,565]
 Global Const $NoAthenaGiftColor = 5933875
-Global Const $AthenaGiftCollectButton = [411,460]
+Global Const $AthenaGiftCollectButton = [411,460] ;411,460 - 11230223
 Global Const $SecretGift = [165,570]
-Global Const $SecretGiftCollectButton = [411,430]
+Global Const $SecretGiftCollectButton = [411,430] ;411,430 - 11230223
+Global Const $SecretGiftCollectButtonColor = 11230223
 
 ;Quests
 Global Const $QuestsMenu = [240,725]
