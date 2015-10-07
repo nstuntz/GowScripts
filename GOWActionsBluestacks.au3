@@ -956,7 +956,7 @@ Func Rally()
    ;Added to handle the convert to dark energy on 7/17 - GS
    ;ConvertToDarkEnergy()
 
-   If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000,"$MarchesButtonColor at $MarchesButton") Then
+   If PollForTwoColors($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor,$MarchesButtonColorAlt 4000,"$MarchesButtonColor at $MarchesButton") Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
    EndIf
@@ -979,9 +979,9 @@ Func Rally()
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
    ;Check that we have the search button
-   If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
+   If Not PollForTwoColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,$SearchKingdomButtonColorAlt, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
-	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000,"$SearchKingdomButtonColor at $SearchKingdomButton(2)") Then
+	  If Not PollForTwoColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,$SearchKingdomButtonColorAlt,4000,"$SearchKingdomButtonColor at $SearchKingdomButton(2)") Then
 		 LogMessage("Rally Failed.",4)
 		 LogMessage("No World screen to search for rallying target, canceling process",5)
 		 Login_UpdateLastRallyFAILED()
@@ -1001,6 +1001,11 @@ Func Rally()
 		 Sleep(1000)
 		 Send(Login_RallyX())
 		 Sleep(1000)
+	  Else
+
+		 LogMessage("$SearchKingdomX not white")
+		 $HaveRallyCity += 1
+		 ContinueLoop
 	  EndIf
 
 	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000,"$White at $SearchKingdomY") Then
@@ -1009,6 +1014,11 @@ Func Rally()
 		 Sleep(1000)
 		 Send(Login_RallyY())
 		 Sleep(1000)
+	  Else
+
+		 LogMessage("$SearchKingdomY not white")
+		 $HaveRallyCity += 1
+		 ContinueLoop
 	  EndIf
 
 	  SendMouseClick($SearchKingdomGoButton[0],$SearchKingdomGoButton[1])
@@ -1021,7 +1031,7 @@ Func Rally()
 	  Sleep(1000)
 
 	  ;Check if we got an alliance city
-	  If PollForColor($RallyRssHelpButton[0],$RallyRssHelpButton[1],$Blue,1000,"$Blue at $RallyRssHelpButton") Then
+	  If PollForColor($RallyRssHelpButton[0],$RallyRssHelpButton[1],$Blue,1000,"$Blue at $RallyRssHelpButton - should fail") Then
 		 $HaveRallyCity += 1
 	  Else
 		 ;Not sure why this is needed but it seems to be
@@ -1029,7 +1039,7 @@ Func Rally()
 		 Sleep(250)
 
 		 ;Make sure we got the city
-		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,1000, "$Blue at $RallyButton") Then
+		 If PollForColor($RallyButton[0],$RallyButton[1],$Blue,1000, "$Blue at $RallyButton - should fail") Then
 			ExitLoop
 		 Else
 			$HaveRallyCity += 1

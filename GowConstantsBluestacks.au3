@@ -80,7 +80,8 @@ Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
 Global Const $MarchesButton = [193,515]; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
 Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
-;Global Const $MarchesButtonColor = 2102272
+Global Const $MarchesButtonColorAlt = 13159348
+;Global Const $MarchesButtonColor = 2102272 193,515 - 13159348
 ;Helps set
 Global Const $AllianceMenu = [1145,370]
 Global Const $AllianceHelpMenuDragStart = [1000,450]
@@ -179,13 +180,14 @@ Global Const $HospitalQueueAllButton = [242,615]; - 16711
 Global Const $HospitalHealButton = [451,606]; - 16711
 ; Rally March screen
 Global Const $RallyAttackButton = [261,257] ;261,257 - 4670530   ;815 ;970
-Global Const $RallyAttackButtonOffsetY = 124 ;262,380 - 4670530 ;260,504 - 4670530
+Global Const $RallyAttackButtonOffsetY = 124 ;262,380 - 4670530 ;260,504 - 4670530 ; 261,257 - 4670530
 Global Const $RallyAttachButtonColor = 4670530
 Global Const $RallyCancelButton = [150,259] ;150,259 - 16711 ;815 ;970  148,368 - 16711
 Global Const $RallyCancelConfirmButton = [300,291];300,291 - 16711
 ;Rally - Search Constants
-Global Const $SearchKingdomButton = [239,49] ;239,49 - 7110014
+Global Const $SearchKingdomButton = [239,49] ;239,49 - 7110014 ;239,49 - 3753026
 Global Const $SearchKingdomButtonColor = 7110014
+Global Const $SearchKingdomButtonColorAlt = 3753026
 Global Const $SearchKingdomX = [346,241] ;346,241 - 16777215
 Global Const $SearchKingdomY = [451,238] ;451,238 - 16777215
 Global Const $SearchKingdomGoButton = [396,322] ;396,322 - 16711
