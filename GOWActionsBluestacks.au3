@@ -123,7 +123,7 @@ Func Login($email, $pwd)
 	  return false;
    EndIf
 
-   If Not PollForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor,1000) Then
+   If Not PollForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor,1000, "$UserNameTextBoxColor at $UserNameTextBox") Then
 	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
 	  ;Check if you are already logged in Use the last attempt, don't do it lots
@@ -168,7 +168,7 @@ Func Login($email, $pwd)
    Send($pwd)
 
    ;Check that the login button is there
-   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000) Then
+   If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000, "$Blue at $LoginButton") Then
 	  LogMessage("Login Failed.  Login button isn't the right color",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
@@ -187,7 +187,7 @@ Func Login($email, $pwd)
    EndIf
 
    ;Check if there was a login failure
-   If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000) Then
+   If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000, "$Blue at $LoginFailureButton") Then
 	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
@@ -201,13 +201,13 @@ Func Login($email, $pwd)
    Sleep(5000) ;3 seconds because of the quest poping up
 
 ;;;;Bluestack connection code interupt. Poll for a few seconds then move on
-   If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000) Then
+   If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
 	  SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 	  Sleep(500)
    EndIf
 
 ;;;;;Make sure we have accepted the terms and conditions. Poll for 2 seconds
-   If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,2000) Then
+   If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,2000, "$Blue at $TermsAndConditionsButton") Then
 	  SendMouseClick($TermsAndConditionsButton[0],$TermsAndConditionsButton[1])
 	  ;;;If we have the T&C button we then poll for gold screen for 5 seconds to esc out of that
 	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 5000)) Then
@@ -221,7 +221,7 @@ Func Login($email, $pwd)
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
 		 LogMessage("Old City Color = " & $MapMenuColor,5  )
-		 LogMessage("New Map Color = " & $CityScreenColor,5  )
+		 LogMessage("Old Map Color = " & $CityScreenColor,5  )
 		 $MapMenuColor  = PixelGetColor($CityMenu[0],$CityMenu[1])
 		 LogMessage("New City Color = " & $MapMenuColor,5  )
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
@@ -259,7 +259,7 @@ Func CollectAthenaGift()
    ;Check if this is bouncing
    Local $firstColor = PixelGetColor($AthenaGift[0],$AthenaGift[1])
 
-   If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000) Then
+   If Not PollForNOTColor($AthenaGift[0],$AthenaGift[1],$firstColor,5000,"$firstColor at $AthenaGift") Then
 	  LogMessage("We have an Athena Gift but it is not ready to collect",1)
 	  Return
    EndIf
@@ -802,7 +802,7 @@ Func SendRSS($type, $nonSilverType)
 	  EndIf
 
 	  ;Poll for first Help button
-	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 10000) Then
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
 		 SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
 	  Else
 		 LogMessage("Banking - No help button")
@@ -812,7 +812,7 @@ Func SendRSS($type, $nonSilverType)
 
 	  ;Max the food if we can by filling silver marches with it
 	  Local $colorClick = 197379
-	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000) Then
+	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000, "$colorClick or $Black at $HelpRSSMax") Then
 		 ;do nothing this is just to wait to see if we can send faster
 	  EndIf
 
@@ -825,11 +825,11 @@ Func SendRSS($type, $nonSilverType)
 	  EndIf
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
 	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
-	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000) Then
+	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton") Then
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
 	  Endif
 
-	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000) Then
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(2)") Then
 		 return True
 	  EndIf
 
@@ -843,13 +843,13 @@ Func SendRSS($type, $nonSilverType)
 		 ;Sleep(1000)
 	  ;Else
 		 If ($DonationConfirmation = 1) Then
-			If PollForColor($RSSOKButton[0],$RSSOKButton[1], $Blue, 3000) Then
+			If PollForColor($RSSOKButton[0],$RSSOKButton[1], $Blue, 3000, "$Blue at $RSSOKButton") Then
 			   SendMouseClick($RSSOKButton[0],$RSSOKButton[1])
 			EndIf
 			Sleep(1000)
 		 Else
 			;delay until the top help is back
-			If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000) Then
+			If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(3)") Then
 			   ;Do nothing this is
 			Else
 			   ;Should check if the help button didn't really get clicked
@@ -932,7 +932,7 @@ Func Rally()
    EndIf
 
    ;Heal any troops in the hospital
-   If CheckForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor) Then
+   If PollForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor, 1000,"$HospitalCrossColor at $HospitalCross" ) Then
 
 	  SendMouseClick($HospitalBuilding[0],$HospitalBuilding[1])
 	  Sleep(1000)
@@ -950,7 +950,7 @@ Func Rally()
    ;Added to handle the convert to dark energy on 7/17 - GS
    ;ConvertToDarkEnergy()
 
-   If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000,"$MarchesButtonColor") Then
+   If PollForColor($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor, 4000,"$MarchesButtonColor at $MarchesButton") Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
    EndIf
@@ -973,9 +973,9 @@ Func Rally()
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
    ;Check that we have the search button
-   If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000,"$SearchKingdomButtonColor") Then
+   If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
-	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000,"$SearchKingdomButtonColor (second)") Then
+	  If Not PollForColor($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,4000,"$SearchKingdomButtonColor at $SearchKingdomButton(2)") Then
 		 LogMessage("Rally Failed.",4)
 		 LogMessage("No World screen to search for rallying target, canceling process",5)
 		 Login_UpdateLastRallyFAILED()
@@ -989,7 +989,7 @@ Func Rally()
 	  ;click search button
 	  SendMouseClick($SearchKingdomButton[0],$SearchKingdomButton[1])
 
-	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000 ,"$White kindgom search X") Then
+	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000 ,"$White at $SearchKingdomX") Then
 		 ;input X
 		 SendMouseClick($SearchKingdomX[0],$SearchKingdomX[1])
 		 Sleep(1000)
@@ -997,7 +997,7 @@ Func Rally()
 		 Sleep(1000)
 	  EndIf
 
-	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000,"$White kindgom search Y") Then
+	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000,"$White at $SearchKingdomY") Then
 		 ;input y
 		 SendMouseClick($SearchKingdomY[0],$SearchKingdomY[1])
 		 Sleep(1000)
@@ -1015,7 +1015,7 @@ Func Rally()
 	  Sleep(1000)
 
 	  ;Check if we got an alliance city
-	  If CheckForColor($RallyRssHelpButton[0],$RallyRssHelpButton[1],$Blue) Then
+	  If PollForColor($RallyRssHelpButton[0],$RallyRssHelpButton[1],$Blue,1000,"$Blue at $RallyRssHelpButton") Then
 		 $HaveRallyCity += 1
 	  Else
 		 ;Not sure why this is needed but it seems to be
@@ -1164,7 +1164,7 @@ Func Logout()
    ;ConvertToDarkEnergy()
 
    ;Accounts
-   If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 10000) Then
+   If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 5000, "$AccountButtonColor at $AccountButton") Then
 	  SendMouseClick($AccountButton[0],$AccountButton[1])
    Else
 	  LogMessage("Dont have the account button to logout, clicking more again.")
@@ -1175,7 +1175,7 @@ Func Logout()
    EndIf
 
    ;Logout
-   If PollForColor($LogoutButton[0],$LogoutButton[1], $RedNoButton, 8000) Then
+   If PollForColor($LogoutButton[0],$LogoutButton[1], $RedNoButton, 5000, "$RedNoButton at $LogoutButton") Then
 	  SendMouseClick($LogoutButton[0],$LogoutButton[1])
    Else
 	  LogMessage("Dont have the logout button to logout")
@@ -1183,7 +1183,7 @@ Func Logout()
    EndIf
 
    ;Yes Logout
-   If PollForColor($LogoutYesButton[0],$LogoutYesButton[1], $Blue, 5000) Then
+   If PollForColor($LogoutYesButton[0],$LogoutYesButton[1], $Blue, 5000, "$Blue at $LogoutYesButton") Then
 	  SendMouseClick($LogoutYesButton[0],$LogoutYesButton[1])
    Else
 	  LogMessage("Dont have the account yes logout button")
@@ -1313,7 +1313,7 @@ Func OpenGOW($attempts)
    WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
    ;quit()
 
-   If Not PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 35000) Then
+   If Not PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 35000, "$GreyedOutButton at $LoginButton") Then
 
 
 	  LogMessage("Did not see login page")
@@ -1345,7 +1345,7 @@ Func OpenGOW($attempts)
 			LogMessage("Looks like we are in GoW")
 			Send("ESC")
 			Sleep(2000)
-			If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000) Then
+			If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
 			   SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 			   Sleep(500)
 			EndIf
@@ -1391,7 +1391,7 @@ EndFunc
 Func CheckForPinPrompt()
    ;LogMessage("Checking for PIN")
    Local $pinArray = StringToASCIIArray(Login_PIN())
-   If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000) Then
+   If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000, "$PinBoxColor at $FirstPinBox") Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 
 		 LogMessage("PIN is needed",2)
@@ -1421,9 +1421,8 @@ EndFunc
 
 ;Check for session timeout and if so click ok
 Func CheckForSessionTimeout()
-   If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And  CheckForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$Blue)  Then
+   If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And PollForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$Blue,500, "$Blue at $SessionTimeoutButton")  Then
 	  SendMouseClick($SessionTimeoutButton[0],$SessionTimeoutButton[1])
-
 	  LogMessage("Have Session Timeout",1)
 	  Return True
    EndIf
