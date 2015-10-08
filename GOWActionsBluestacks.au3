@@ -938,7 +938,7 @@ Func Rally()
    EndIf
 
    ;Heal any troops in the hospital
-   If PollForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor, 1000,"$HospitalCrossColor at $HospitalCross" ) Then
+   If PollForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor,$HospitalCrossColorAlt, 1000,"$HospitalCrossColor at $HospitalCross" ) Then
 
 	  SendMouseClick($HospitalBuilding[0],$HospitalBuilding[1])
 	  Sleep(1000)

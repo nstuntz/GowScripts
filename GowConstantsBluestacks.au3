@@ -173,8 +173,9 @@ Global Const $MaxMarchesExceeded = [400,255]
 Global Const $SessionTimeoutButton = [410,250]
 
 ;Rallying
-Global Const $HospitalCross = [499,499] ; 499,499 - 10754323
+Global Const $HospitalCross = [499,499] ; 499,499 - 10754323 499,499 - 8197136
 Global Const $HospitalCrossColor = 10754323
+Global Const $HospitalCrossColorAlt = 8197136
 Global Const $HospitalBuilding = [522,541]
 Global Const $HospitalQueueAllButton = [242,615]; - 16711
 Global Const $HospitalHealButton = [451,606]; - 16711
