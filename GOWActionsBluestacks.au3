@@ -1784,7 +1784,7 @@ Func CheckForColor($x,$y,$color1, $color2 = -1)
    ;Local $pixelFound = PixelSearch($x-2,$y-2,$x+2,$y+2,$color)
    Local $pixelColor = PixelGetColor($x,$y)
 
-   If $pixelColor = $color Then
+   If $pixelColor = $color1 Then
 	  Return True
    EndIf
 
