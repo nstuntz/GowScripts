@@ -498,7 +498,7 @@ EndFunc
 
 Func Gifts()
 
-   If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
+   If CheckForTwoColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
 	  ;Alliance menu
 	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
 	  Sleep(3000)
@@ -938,7 +938,7 @@ Func Rally()
    EndIf
 
    ;Heal any troops in the hospital
-   If PollForColor($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor,$HospitalCrossColorAlt, 1000,"$HospitalCrossColor at $HospitalCross" ) Then
+   If PollForTwoColors($HospitalCross[0],$HospitalCross[1],$HospitalCrossColor,$HospitalCrossColorAlt, 1000,"$HospitalCrossColor at $HospitalCross" ) Then
 
 	  SendMouseClick($HospitalBuilding[0],$HospitalBuilding[1])
 	  Sleep(1000)
@@ -1794,7 +1794,7 @@ Func CheckForColor($x,$y,$color)
 EndFunc
 
 
-Func CheckForColor($x,$y,$color1, $color2)
+Func CheckForTwoColor($x,$y,$color1, $color2)
    If CheckForColor($x,$y,$color1) Then
 	  Return True
    EndIf
