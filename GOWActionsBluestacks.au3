@@ -1543,7 +1543,7 @@ Func ClickGoldButton()
    For $i = 0 To 10 Step 1
       If CheckForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue) Then
 		 SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
-		 Sleep(500)
+		 Sleep(1000)
 	  EndIf
 	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 3000)) Then
 		 Send("{ESC}")
@@ -1815,6 +1815,7 @@ Func PollForPixelSearch($left, $top,$right, $bottom,$color,$timeout)
 		 $waited = $waited + 1000
 	  Else
 		 LogMessage("Pixel Search found")
+		 Sleep(250)
 		 return True
 	  EndIf
    WEnd
