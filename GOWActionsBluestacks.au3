@@ -498,7 +498,7 @@ EndFunc
 
 Func Gifts()
 
-   If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor) Then
+   If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
 	  ;Alliance menu
 	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
 	  Sleep(3000)
@@ -1787,11 +1787,23 @@ Func CheckForColor($x,$y,$color)
    If $pixelColor <>  $color Then
 	  ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
 	  ;MouseMove($x,$y)
-	  Sleep(500)
+	  Sleep(250)
 	  return False
    EndIf
    return True
 EndFunc
+
+
+Func CheckForColor($x,$y,$color1, $color2)
+   If CheckForColor($x,$y,$color1) Then
+	  Return True
+   EndIf
+   If CheckForColor($x,$y,$color2) Then
+	  Return True
+   EndIf
+   Return False
+EndFunc
+
 
 Func PollForPixelSearch($left, $top,$right, $bottom,$color,$timeout)
    ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
