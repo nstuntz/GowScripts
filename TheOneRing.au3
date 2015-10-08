@@ -1,8 +1,8 @@
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
 #include <File.au3>
-#include "GowConstants.au3"
-#include "GowActions.au3"
+#include "GowConstantsBluestacks.au3"
+#include "GowActionsBluestacks.au3"
 
 HotKeySet("{F10}","HotKeyPressed")
 
