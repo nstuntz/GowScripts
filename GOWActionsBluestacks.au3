@@ -401,8 +401,7 @@ Func RedeemCode()
 EndFunc
 
 Func Helps()
-;
-   If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor) Then
+   If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor, $HelpButtonColorAlt) Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
 	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,3000,"$AllianceHelpHelpAllButton")) Then
 		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
@@ -498,7 +497,7 @@ EndFunc
 
 Func Gifts()
 
-   If CheckForTwoColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
+   If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
 	  ;Alliance menu
 	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
 	  Sleep(3000)
@@ -1781,29 +1780,21 @@ Func SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
 
 EndFunc
 
-Func CheckForColor($x,$y,$color)
+Func CheckForColor($x,$y,$color1, $color2 = -1)
    ;Local $pixelFound = PixelSearch($x-2,$y-2,$x+2,$y+2,$color)
    Local $pixelColor = PixelGetColor($x,$y)
-   If $pixelColor <>  $color Then
-	  ;LogMessage("Color is wrong. At (" & $x & "," & $y & ") expected " & $color & " --- Got " &  $pixelColor)
-	  ;MouseMove($x,$y)
-	  Sleep(250)
-	  return False
-   EndIf
-   return True
-EndFunc
 
-
-Func CheckForTwoColor($x,$y,$color1, $color2)
-   If CheckForColor($x,$y,$color1) Then
+   If $pixelColor = $color Then
 	  Return True
    EndIf
-   If CheckForColor($x,$y,$color2) Then
+
+   If $pixelColor = $color2 Then
 	  Return True
    EndIf
+   ;Sleep here to clean up
+   Sleep(250)
    Return False
 EndFunc
-
 
 Func PollForPixelSearch($left, $top,$right, $bottom,$color,$timeout)
    ;LogMessage("Polling At (" & $x & "," & $y & ") expecting " & $color)
