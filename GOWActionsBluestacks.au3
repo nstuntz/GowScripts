@@ -199,16 +199,16 @@ Func Login($email, $pwd)
    Local $ClickedGoldScreen = False
    $ClickedGoldScreen = ClickGoldButton()
    ;Not sleeping here because of the next two polls
-   ;Sleep(5000) ;3 seconds because of the quest poping up
+   Sleep(1000) ;3 seconds because of the quest poping up
 
 ;;;;Bluestack connection code interupt. Poll for a few seconds then move on
-   If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
+   If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,1500, "$Blue at $ConnectionInteruptButton") Then
 	  SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 	  Sleep(500)
    EndIf
 
 ;;;;;Make sure we have accepted the terms and conditions. Poll for 2 seconds
-   If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,2000, "$Blue at $TermsAndConditionsButton") Then
+   If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,1500, "$Blue at $TermsAndConditionsButton") Then
 	  SendMouseClick($TermsAndConditionsButton[0],$TermsAndConditionsButton[1])
 	  ;;;If we have the T&C button we then poll for gold screen for 5 seconds to esc out of that
 	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 5000)) Then
@@ -1540,11 +1540,12 @@ Func ClickGoldButton()
    ;Do a pixel search so that we find the gold button every? time.
    ;PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 30000)
    ;LogMessage("Pixel Search Result: " & @error)
-   For $i = 0 To 10 Step 1
+   For $i = 0 To 8 Step 1
       If CheckForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue) Then
 		 SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 		 Sleep(1000)
 	  EndIf
+	  Sleep(500)
 	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 3000)) Then
 		 Send("{ESC}")
 		 Return True
