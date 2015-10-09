@@ -1850,6 +1850,13 @@ Func PollForTwoColors($x,$y,$color1,$color2,$timeout, $message = "?")
    EndIf
 EndFunc
 
+Func PollForColors($x,$y,$colors,$timeout,$message = "?")
+   If Polling($x,$y,$x,$y,$colors,$timeout,$message) Then
+	  return True
+   Else
+	  return False
+   EndIf
+EndFunc
 
 Func PollForNOTColor($x,$y,$color,$timeout)
    Local $colorAt = 0
@@ -1873,15 +1880,14 @@ Func PollForNOTColor($x,$y,$color,$timeout)
    EndIf
 EndFunc
 
-Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout, $message)
-   Local $colorAt = 0
+Func Polling($x1,$y1,$x2,$y2,$colors,$timeout, $message)
    Local $pixelColor = 0
    Local $waited = 0
 
    While $waited < $timeout
 	  $pixelColor = PixelGetColor($x1,$y1)
 	  $pixelColor2 = PixelGetColor($x2,$y2)
-	  If Not ($pixelColor = $color1 or $pixelColor = $color2 or $pixelColor2 = $color1 or $pixelColor2 = $color2) Then
+	  If Not (_ArraySearch($colors,$pixelColor) > -1 or _ArraySearch($colors,$pixelColor2) > -1) Then
 
 		 If $waited = 0 Then
 			MouseMove($x1,$y1)
@@ -1893,13 +1899,26 @@ Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout, $message)
 		 ExitLoop
 	  EndIf
    WEnd
-   If $pixelColor = $color1 or $pixelColor = $color2 or $pixelColor2 = $color1 or $pixelColor2 = $color2 Then
+   If (_ArraySearch($colors,$pixelColor) > -1 or _ArraySearch($colors,$pixelColor2) > -1) Then
 	  Sleep(250)
 	  return True
    Else
-	  LogMessage("Polling for " & $message & " At (" & $x1 & "," & $y1 & " or " & $x2 & "," & $y2 & " - " & $color1 & " or " & $color2 & ") Failed, found color: " & $pixelColor & " and " & $pixelColor2)
+	  LogMessage("Polling for " & $message & " At (" & $x1 & "," & $y1 & " or " & $x2 & "," & $y2 & " - " & _ArrayToString($colors) & ") Failed, found color: " & $pixelColor & " and " & $pixelColor2)
 	  return False
    EndIf
+EndFunc
+
+Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout, $message)
+	If ($color1 = $color2) Then
+		Local $colors1[1]
+	   $colors1[0] = $color1
+		Return Polling($x1,$y1,$x2,$y2,$colors1,$timeout, $message)
+	Else
+	   Local $colors[2]
+	   $colors[0] = $color1
+	   $colors[1] = $color2
+	   Return Polling($x1,$y1,$x2,$y2,$colors,$timeout, $message)
+	Endif
 EndFunc
 
 ;5 = critical, 4 = error, 3 = warning, 2 = information, 1 = debug
