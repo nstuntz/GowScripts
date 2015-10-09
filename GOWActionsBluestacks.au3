@@ -1880,7 +1880,7 @@ Func PollForNOTColor($x,$y,$color,$timeout)
    EndIf
 EndFunc
 
-Func Polling($x1,$y1,$x2,$y2,$colors,$timeout, $message)
+Func PollingArray($x1,$y1,$x2,$y2,$colors,$timeout, $message)
    Local $pixelColor = 0
    Local $waited = 0
 
@@ -1912,12 +1912,12 @@ Func Polling($x1,$y1,$x2,$y2,$color1,$color2,$timeout, $message)
 	If ($color1 = $color2) Then
 		Local $colors1[1]
 	   $colors1[0] = $color1
-		Return Polling($x1,$y1,$x2,$y2,$colors1,$timeout, $message)
+		Return PollingArray($x1,$y1,$x2,$y2,$colors1,$timeout, $message)
 	Else
 	   Local $colors[2]
 	   $colors[0] = $color1
 	   $colors[1] = $color2
-	   Return Polling($x1,$y1,$x2,$y2,$colors,$timeout, $message)
+	   Return PollingArray($x1,$y1,$x2,$y2,$colors,$timeout, $message)
 	Endif
 EndFunc
 
