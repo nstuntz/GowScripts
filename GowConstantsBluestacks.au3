@@ -282,6 +282,7 @@ Global Const $BuildingBeige = 10521720
 Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16711
 Global Const $AccountButtonColor = 16777215
+Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618]
 Global Const $GreyedOutButton = 4670530
 Global Const $ShieldCountDownBlue = 1074272
 Global Const $ExitAppErrorColor = 1577765

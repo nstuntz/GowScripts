@@ -1179,7 +1179,7 @@ Func Logout()
    ;ConvertToDarkEnergy()
 
    ;Accounts
-   If PollForColor($AccountButton[0],$AccountButton[1], $AccountButtonColor, 5000, "$AccountButtonColor at $AccountButton") Then
+   If PollForColors($AccountButton[0],$AccountButton[1], $AccountButtonColors, 5000, "$AccountButtonColors at $AccountButton") Then
 	  SendMouseClick($AccountButton[0],$AccountButton[1])
    Else
 	  LogMessage("Dont have the account button to logout, clicking more again.")
