@@ -1851,7 +1851,7 @@ Func PollForTwoColors($x,$y,$color1,$color2,$timeout, $message = "?")
 EndFunc
 
 Func PollForColors($x,$y,$colors,$timeout,$message = "?")
-   If Polling($x,$y,$x,$y,$colors,$timeout,$message) Then
+   If PollingArray($x,$y,$x,$y,$colors,$timeout,$message) Then
 	  return True
    Else
 	  return False
