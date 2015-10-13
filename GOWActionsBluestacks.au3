@@ -664,6 +664,17 @@ Func Shield($attempt)
 
 EndFunc
 
+Func CheckShieldColor()
+   ;Boosts menu
+   SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
+   Sleep(2000)
+
+   ;;
+   LogMessage("$ShieldColor at $ShieldButton: " & PixelGetColor($ShieldButton[0],$ShieldButton[1]))
+
+   ClickCityScreen()
+EndFunc
+
 ;This will attempt to collect and restart treasury if login says to.
 Func Treasury()
    ;Check to see if the city is set to Rally
@@ -1687,7 +1698,7 @@ Func SaveSilverProductionImage()
    SaveImage('SilverProduction',$SilverProduction[0],$SilverProduction[1],$SilverProduction[2],$SilverProduction[3])
 EndFunc
 
-Func SaveImage($imageName,$x1,$y1,$x2,$y2)
+Func SaveImage($imageName,$left,$top,$right,$bottom)
 
    Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
    ;Local $URL = "http://localhost:52417/api/Upload"
@@ -1697,7 +1708,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
 
 
    _GDIPlus_Startup()
-   Local $hHBmp = _ScreenCapture_Capture("", $x1,$y1, $x2,$y2)
+   Local $hHBmp = _ScreenCapture_Capture("", $left,$top,$right,$bottom)
    Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
    _WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
 
@@ -1742,7 +1753,7 @@ Func SaveImage($imageName,$x1,$y1,$x2,$y2)
    Else
    #comments-end
 	  ;Save to the new server too
-	  SaveImageMinion($imageName,$sFileRead,$x1,$y1,$x2,$y2)
+	  SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
    ;EndIf
 
 

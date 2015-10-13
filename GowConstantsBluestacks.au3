@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.7.2015.01"
+Global Const $VersionNumber = "10.12.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -130,18 +130,18 @@ Global Const $TimerIconBuildColor  = 5786696 ; 1575944 -with transparency ; 2099
 Global Const $TimerIconBuildColor2 = 5262408 ; 1574920 -with transparency ; 2099208 - before transparency
 
 ;Shielding
-Global Const $BoostsIcon = [645,165]
-Global Const $ShieldColor = 8947808
-Global Const $ShieldSearchLeft = 500
-Global Const $ShieldSearchTop = 675
-Global Const $ShieldSearchRight = 1000
-Global Const $ShieldSearchBottom = 675
-Global Const $ShieldButton = [530,460]
-Global Const $ShieldButton8Hr = [640,250]
-Global Const $ShieldButton24Hr = [780,250]
-Global Const $ShieldButton3Day = [960,250]
-Global Const $ShieldReplaceButton = [700,360]
-Global Const $ShieldVerifyMaxLength = [560,250]
+Global Const $BoostsIcon = [565,245]
+Global Const $ShieldColor = 16514042
+Global Const $ShieldSearchLeft = 155
+Global Const $ShieldSearchTop = 130
+Global Const $ShieldSearchRight = 155
+Global Const $ShieldSearchBottom = 310
+Global Const $ShieldButton = [155,135]
+Global Const $ShieldButton8Hr = [520,250]
+Global Const $ShieldButton24Hr = [520,400]
+Global Const $ShieldButton3Day = [520,535]
+Global Const $ShieldReplaceButton = [490,280]
+Global Const $ShieldVerifyMaxLength = [485,160]
 
 ;Banking
 Global Const $HelpTopMember = [560,230] ; Blue Color
@@ -339,13 +339,13 @@ Global Const $TreasuryRunningCheck[] = [877,191]
 
 ;Image Positions
 Global Const $RssImage[] = [158,88,538,114]
-Global Const $CityImage[] = [409,128,1169,727]
-Global Const $GoldImage[] = [410,185,460,295]
+Global Const $CityImage[] = [110,115,590,645]
+Global Const $GoldImage[] = [450,30,590,70]
 Global Const $HeroImage[] = [111,25,168,95]
-Global Const $TreasuryImage[] = [665,545,785,655]
+Global Const $TreasuryImage[] = [140,260,215,600]
 
-Global Const $ShieldTime[] = [500,235,570,625]
-Global Const $ShieldCount[] = [910,590,1045,700]
+Global Const $ShieldTime[] = [190,148,495,170]
+Global Const $ShieldCount[] = [125,495,1045,700]
 Global Const $RssProduction[] = [1111,1111,1111,1111]
 Global Const $SilverProduction[] = [1111,1111,1111,1111]
 

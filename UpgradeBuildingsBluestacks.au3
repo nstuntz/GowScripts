@@ -90,8 +90,8 @@ For $k = 1 to 100000 ;go through them all lots
    SaveRSSImage()
 
    ;Save the City Image
-   ;SaveCityImage()
-   ;SaveGoldImage()
+   SaveCityImage()
+   SaveGoldImage()
    SaveHeroImage()
    ;Only get Treasury image if the SH can use it
    ;If Login_StrongHoldLevel() > 14 Then
@@ -137,6 +137,7 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
    Local $timerShield = TimerInit()
+   CheckShieldColor()
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Shield(1)
    Login_WritePerformanceLog(TimerDiff($timerShield), "Shield")
 
