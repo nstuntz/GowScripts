@@ -137,8 +137,8 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
    Local $timerShield = TimerInit()
-   CheckShieldColor()
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Shield(1)
+   ;CheckShieldColor()
+   ;;Shield(1)
    Login_WritePerformanceLog(TimerDiff($timerShield), "Shield")
 
    If Not CheckForCityScreen(0) Then

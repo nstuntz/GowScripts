@@ -133,6 +133,7 @@ Global Const $TimerIconBuildColor2 = 5262408 ; 1574920 -with transparency ; 2099
 ;Shielding
 Global Const $BoostsIcon = [565,245]
 Global Const $ShieldColor = 16514042
+Global Const $ShieldColorAly = 16250870
 Global Const $ShieldSearchLeft = 155
 Global Const $ShieldSearchTop = 130
 Global Const $ShieldSearchRight = 155
@@ -143,6 +144,8 @@ Global Const $ShieldButton24Hr = [520,400]
 Global Const $ShieldButton3Day = [520,535]
 Global Const $ShieldReplaceButton = [490,280]
 Global Const $ShieldVerifyMaxLength = [485,160]
+Global Const $ShieldCountDownBlue = 1797223
+Global Const $ShieldCountDownBlueAlt = 6002065
 
 ;Banking
 Global Const $HelpTopMember = [560,230] ; Blue Color
@@ -285,7 +288,6 @@ Global Const $BlueOKButton = 16711
 Global Const $AccountButtonColor = 16777215
 Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618,14935011]
 Global Const $GreyedOutButton = 4670530
-Global Const $ShieldCountDownBlue = 1074272
 Global Const $ExitAppErrorColor = 1577765
 
 ;Paused?

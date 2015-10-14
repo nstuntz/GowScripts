@@ -585,6 +585,9 @@ Func Shield($attempt)
    ;Get Shield button button
    ;;we poll here looking for a specific color on a one wide rectangle and click where we find it.
    Local $shieldCoord = PixelSearch($ShieldSearchLeft,$ShieldSearchTop,$ShieldSearchRight,$ShieldSearchBottom, $ShieldColor)
+   if(@error = 1) Then
+	  $shieldCoord = PixelSearch($ShieldSearchLeft,$ShieldSearchTop,$ShieldSearchRight,$ShieldSearchBottom, $ShieldColorAlt)
+   endif
 
    ;MsgBox($MB_SYSTEMMODAL,"","Left: " & $ShieldTime[0]  + $shieldCoord[0] - $ShieldButton[0] & " Top: " & $ShieldTime[1] & " Right: " & $ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0]& " Bottom: " & $ShieldTime[3])
    ;Save Shield Time
@@ -613,7 +616,7 @@ Func Shield($attempt)
    LogMessage("Attempting to reshield")
 
 
-   If (@error ==1) Then
+   If (@error = 1) Then
 	  LogMessage("Using default Shield location", 0)
 	  $shieldCoord = $ShieldButton
    Else
@@ -624,8 +627,8 @@ Func Shield($attempt)
    Sleep(2000)
 
    ;Drag up so we can see the count for a picture
-   MouseClickDrag("left",888,460,842,460,20)
-   Sleep(500)
+   ;MouseClickDrag("left",888,460,842,460,20)
+   ;Sleep(500)
 
    ;Store the count image
    SaveShieldCountImage()
@@ -643,7 +646,7 @@ Func Shield($attempt)
    LogMessage("Verifying Shield")
 
    ;here we need to verify based on the offset where we found it.
-   If PollForColor($ShieldVerifyMaxLength[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldVerifyMaxLength[1], $ShieldCountDownBlue, 5000, "$ShieldCountDownBlue at $ShieldVerifyMaxLength") Then
+   If PollForTwoColors($ShieldVerifyMaxLength[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldVerifyMaxLength[1] + $shieldCoord[1] - $ShieldButton[1], $ShieldCountDownBlue, $ShieldCountDownBlueAlt, 5000, "$ShieldCountDownBlue and $ShieldCountDownBlueAlt at $ShieldVerifyMaxLength") Then
 	  LogMessage("Shield Verified",2)
 	  Login_WriteShield()
    Else
