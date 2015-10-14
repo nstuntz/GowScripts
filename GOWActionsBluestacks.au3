@@ -401,7 +401,7 @@ Func RedeemCode()
 EndFunc
 
 Func Helps()
-   If CheckForColor($HelpButton[0], $HelpButton[1],$HelpButtonColor, $HelpButtonColorAlt) Then
+   If PollForTwoColors($HelpButton[0], $HelpButton[1],$HelpButtonColor, $HelpButtonColorAlt, 500, "$HelpButtonColor at $HelpButton") Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
 	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,3000,"$AllianceHelpHelpAllButton")) Then
 		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
@@ -497,7 +497,7 @@ EndFunc
 
 Func Gifts()
 
-   If CheckForColor($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt) Then
+   If PollForTwoColors($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt, 500, "$GiftBoxColor at $GiftBox") Then
 	  ;Alliance menu
 	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
 	  Sleep(3000)
@@ -976,7 +976,7 @@ Func Rally()
 
    Local $i = 0
    For $i = 0 to 2
-	  If CheckForColor($RallyAttackButton[0],$RallyAttackButton[1]+($RallyAttackButtonOffsetY*$i),$RallyAttachButtonColor) Then
+	  If PollForColor($RallyAttackButton[0],$RallyAttackButton[1]+($RallyAttackButtonOffsetY*$i),$RallyAttachButtonColor, 500, "$RallyAttachButtonColor at $RallyAttackButton") Then
 		 SendMouseClick($RallyCancelButton[0],$RallyCancelButton[1]+($RallyAttackButtonOffsetY*$i))
 		 Sleep(1000)
 		 SendMouseClick($RallyCancelConfirmButton[0],$RallyCancelConfirmButton[1])
@@ -1391,14 +1391,14 @@ EndFunc
 Func CloseGOW()
 
    If CheckForSessionTimeout() Then
-	  LogMessage("Writing Login from CloseGOW function because of session timeout",1)
+	  LogMessage("Writing Login from CloseGOW function because of session time out",1)
 	  Login_Write()
    Else
 
 	  ;Check if we have GOW open
 	  If CheckForColor($AndroidHomeButton[0],$AndroidHomeButton[1],$Black) Then
 
-		 ;Attempt Logoug
+		 ;Attempt Logout
 		 Logout()
 
 		 ;If that didn't work quit
@@ -1411,6 +1411,9 @@ Func CloseGOW()
 	  Else
 		 LogMessage("----- Looks like we arent in GOW -----",1)
 	  EndIf
+	  
+	  ;Make sure we release this city
+	  Login_Write()
    EndIf
 
    ;sleep 5 seconds to get everything cleaned up
