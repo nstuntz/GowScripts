@@ -1215,7 +1215,7 @@ Func Logout()
 	  LogMessage("Dont have the account yes logout button")
 	  Return False
    EndIf
-   Sleep(500)
+   Sleep(1000)
 
 EndFunc
 
@@ -1349,20 +1349,20 @@ Func OpenGOW($attempts)
 	  ;We black screened and went back to launcher after we moved the window
 	  Local $winSize = WinGetClientSize("BlueStacks")
 
-	  If($winSize[0] > 500) Then
+	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
 		 OpenGOW($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
 		 If CheckForSessionTimeout() Then
-			LogMessage("Writing Login from CloseGOW function because of session timeout",1)
+			LogMessage("Writing Login from OpenGOW function because of session timeout",1)
 			Login_Write()
-		 ElseIf (CheckForColor(340,700,$black)) Then
+		 ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$black)) Then
 			LogMessage("Looks like we black screened before resizing")
 			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
 			OpenGOW($attempts+1)
-		 ElseIf (CheckForColor(340,700,$ExitAppErrorColor)) Then
+		 ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$ExitAppErrorColor)) Then
 			LogMessage("Looks like we need to exit the game.")
 			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
 			SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])

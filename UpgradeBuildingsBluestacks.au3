@@ -399,8 +399,12 @@ For $k = 1 to 100000 ;go through them all lots
    ;Paranoia to make sure we are closed out
 
    ;Check if the android home button is on the right or the bottom, bottom means we are out side means close out and then open and try logout
-   If CheckForColor( $AndroidHomeButton[0],$AndroidHomeButton[1], $Black) Then
-	  LogMessage("Calling CloseGOW, from main loop becuase it still looks like we are in it",5)
+	;If CheckForColor( $AndroidHomeButton[0],$AndroidHomeButton[1], $Black) Then
+
+	;Checking the size of the window
+	Local $winSize = WinGetClientSize("BlueStacks")
+	If($winSize[0] <= $GOWWindowSize[0]) Then
+	  LogMessage("Calling CloseGOW, from main loop because it still looks like we are in it",5)
 	  CloseGOW()
    EndIf
 Next

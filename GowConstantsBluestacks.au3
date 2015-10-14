@@ -12,6 +12,7 @@ Global Const $VersionNumber = "10.12.2015.01"
 Global Const $GOWVBHostWindow[] = [100,0]
 Global Const $GoW500by800IconLocation[] = [200,320]
 Global Const $GOWWindowSize[] = [500,800]
+Global Const $GOWRandomSpotForBlankScreenCheck = [340,700]
 
 ;;;;;; MOVED TO GowLocalConstantsBluestacks
 ;Global Const $GOWIcon[] = [360,180]
@@ -282,7 +283,7 @@ Global Const $BuildingBeige = 10521720
 Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16711
 Global Const $AccountButtonColor = 16777215
-Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618]
+Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618,14935011]
 Global Const $GreyedOutButton = 4670530
 Global Const $ShieldCountDownBlue = 1074272
 Global Const $ExitAppErrorColor = 1577765
