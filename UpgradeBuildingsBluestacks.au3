@@ -129,7 +129,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Gifts()
+   Gifts()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Gifts Failed - 5",5)
 	  CloseGOW()
