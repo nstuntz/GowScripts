@@ -983,6 +983,8 @@ Func Rally()
 		 Sleep(1000)
 		 LogMessage("Rally Cancelled.",2)
 		 ExitLoop
+	  Else
+		 LogMessage("No Rally  to Cancel.",2)
 	  EndIf
    Next
 
@@ -1094,7 +1096,7 @@ Func Rally()
    ;Click the Send button
    If PollForColor($RallySendButton[0],$RallySendButton[1],$Blue,2000, "$Blue at $RallySendButton") Then
 	SendMouseClick($RallySendButton[0],$RallySendButton[1])
-	Sleep(1000)
+	Sleep(2000)
    EndIf
 
    ;Update Last Rally
@@ -1102,7 +1104,7 @@ Func Rally()
 
    ;Click City Screen
    SendMouseClick($CityMenu[0],$CityMenu[1])
-   Sleep(1000)
+   Sleep(2000)
    LogMessage("Rally set",2)
 
 EndFunc
@@ -1411,7 +1413,7 @@ Func CloseGOW()
 	  Else
 		 LogMessage("----- Looks like we arent in GOW -----",1)
 	  EndIf
-	  
+
 	  ;Make sure we release this city
 	  Login_Write()
    EndIf
