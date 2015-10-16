@@ -994,7 +994,7 @@ Func Rally()
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
    ;Check that we have the search button
-   If Not PollForTwoColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,$SearchKingdomButtonColorAlt, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
+   If Not PollForColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColors, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
 	  If Not PollForTwoColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColor,$SearchKingdomButtonColorAlt,4000,"$SearchKingdomButtonColor at $SearchKingdomButton(2)") Then
 		 LogMessage("Rally Failed.",4)
