@@ -990,7 +990,7 @@ Func Rally()
 
    ;We are on the marches screen so click the city menu twice
    SendMouseClick($CityMenu[0],$CityMenu[1])
-   Sleep(1000)
+   Sleep(2000)
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
    ;Check that we have the search button
