@@ -54,18 +54,18 @@ Global $MapMenuColor = 2246954 ;winter2014=4744320; fall2014 = 7888928 ; - Old M
 Global Const $ConnectionInteruptButton = [430,260]
 Global Const $TermsAndConditionsButton = [250,450]
 ;Items Menu
-Global Const $ItemsMenu = [1150,480]
-Global Const $MyItemsMenu = [590,350]
-Global Const $TreasuresMenu = [650,200]
-Global Const $ResoucesMenu = [655,535]
-Global Const $FirstItem = [780,250]
-Global Const $SecondItem = [940,250]
-Global Const $ChestOpenBeige = [660,260]
-Global Const $ChestOpenBeigeColor = 11576456
+Global Const $ItemsMenu = [328,733] ; 328,733 - 9662011
+Global Const $MyItemsMenu = [408,191]
+Global Const $TreasuresMenu = [533,253] ; 533,253 - 2888465
+Global Const $ResoucesMenu = [265,250] ; 265,250 - 14934240
+Global Const $FirstItem = [541,372] ; 541,372 - 11264
+Global Const $SecondItem = [546,509] ; 546,509 - 11264
+Global Const $ChestOpenBeige = [516,262] ; 516,262 - 11510152
+Global Const $ChestOpenBeigeColor = 11510152
 
 ;Resources Menu
-Global Const $FirstToken = [825,220]
-Global Const $SecondToken = [990,220]
+Global Const $FirstToken = [541,372] ; 541,372 - 11264
+Global Const $SecondToken = [546,509] ; 546,509 - 11264
 
 ;Quit Game Dialog
 Global Const $QuitGameDialogYesButton = [411,435] ;411,435 - 2631720
@@ -84,10 +84,10 @@ Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row
 Global Const $MarchesButtonColorAlt = 13159348
 ;Global Const $MarchesButtonColor = 2102272 193,515 - 13159348
 ;Helps set
-Global Const $AllianceMenu = [1145,370]
-Global Const $AllianceHelpMenuDragStart = [1000,450]
-Global Const $AllianceHelpMenuDragEnd = [850,450]
-Global Const $AllianceHelpsMenu = [930,510]
+Global Const $AllianceMenu = [400,730]
+;Global Const $AllianceHelpMenuDragStart = [1000,450]
+;Global Const $AllianceHelpMenuDragEnd = [850,450]
+;Global Const $AllianceHelpsMenu = [930,510]
 Global Const $AllianceHelpHelpAllButton = [550,610]
 
 ;NS-1 BS color (560,585 - 10117447)
@@ -110,7 +110,7 @@ Global Const $QuestsAliaance = [430,460]
 Global Const $QuestsEmpire = [430,220]
 Global Const $QuestsCollect = [560,185]
 Global Const $QuestsStart = [540,185]
-Global Const $QuestsEmpireCollect = [695,250]
+Global Const $QuestsEmpireCollect = [558,286] ; 558,286 - 11264
 Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
 Global Const $NoQuestsColor = 2688000
 Global Const $QuestChance = [1000,250]
