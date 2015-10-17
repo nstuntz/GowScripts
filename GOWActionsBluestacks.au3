@@ -584,15 +584,19 @@ Func Shield($attempt)
 
    ;Get Shield button button
    ;;we poll here looking for a specific color on a one wide rectangle and click where we find it.
+   Local $shieldError = 0
    Local $shieldCoord = PixelSearch($ShieldSearchLeft,$ShieldSearchTop,$ShieldSearchRight,$ShieldSearchBottom, $ShieldColor)
-   if(@error = 1) Then
+   $shieldError = @error
+   if($shieldError = 1) Then
 	  $shieldCoord = PixelSearch($ShieldSearchLeft,$ShieldSearchTop,$ShieldSearchRight,$ShieldSearchBottom, $ShieldColorAlt)
+	  $shieldError = @error
    endif
 
    ;MsgBox($MB_SYSTEMMODAL,"","Left: " & $ShieldTime[0]  + $shieldCoord[0] - $ShieldButton[0] & " Top: " & $ShieldTime[1] & " Right: " & $ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0]& " Bottom: " & $ShieldTime[3])
    ;Save Shield Time
    ;SaveShieldTimeImage($ShieldTime[0] + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[1],$ShieldTime[2]  + $shieldCoord[0] - $ShieldButton[0],$ShieldTime[3])
    SaveShieldTimeImage()
+   LogMessage("$ShieldColor at $ShieldButton: " & PixelGetColor($ShieldButton[0],$ShieldButton[1]))
 
    Local $minonShield = 4320 ;1440= 24Hr ,  4320 = 3 day
    If ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) > (Login_LoginDelay()*1.2) Then
@@ -615,8 +619,8 @@ Func Shield($attempt)
    LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1)
    LogMessage("Attempting to reshield")
 
-
-   If (@error = 1) Then
+;MsgBox($MB_SYSTEMMODAL,"",
+   If ($shieldError = 1) Then
 	  LogMessage("Using default Shield location", 0)
 	  $shieldCoord = $ShieldButton
    Else
