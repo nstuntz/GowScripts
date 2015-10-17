@@ -20,7 +20,7 @@ Local $SHLevel = 6
 Local $amountsToSend[] = [0,0,0,0,0] ;[food,wood,stone,ore,silver]
 local $delimiter = "|"
 
-
+;Test
 Local $_CityID = 0
 Local $_LoginID = 0
 Local $_CityName = ""
