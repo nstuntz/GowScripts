@@ -748,7 +748,7 @@ Func Treasury()
 
 	  ;Check to see if we can make a deposit
 	  If PollForColor($TreasuryDepositButton[0],$TreasuryDepositButton[1],$Blue, 2000) Then
-		 MouseClickDrag("left",834,386,834,330,20)
+		 MouseClickDrag("left",$TreasuryDragCoords[0],$TreasuryDragCoords[1],$TreasuryDragCoords[2],$TreasuryDragCoords[3],20)
 		 SendMouseClick($TreasuryDepositButton[0],$TreasuryDepositButton[1])
 
 		 ;Check to see if the black bar is there before setting LastTreasury

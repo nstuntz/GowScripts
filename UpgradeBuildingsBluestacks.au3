@@ -148,7 +148,7 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
    Local $timerTreasury = TimerInit()
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Treasury()
+   Treasury()
    Login_WritePerformanceLog(TimerDiff($timerTreasury), "Treasury")
 
    If Not CheckForCityScreen(0) Then

@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.18.2015.01"
+Global Const $VersionNumber = "10.18.2015.02"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -332,15 +332,16 @@ Global Const $GiftGetClearButton[] = [550,265] ; [608,208] - 550,265 - 3737603
 Global Const $GiftGetClearButtonRed = 3737603
 
 ;Treasury Collection
-Global Const $TreasuryLocation[] = [750,580]
-Global Const $Treasury7[] = [660,375]
-Global Const $Treasury14[] = [760,375]
-Global Const $Treasury30[] = [845,375]
-Global Const $TreasuryBack[] = [444,681]
-Global Const $TreasuryCollectButton[] = [840,520]
-Global Const $TreasuryCollectColor = 11033608
-Global Const $TreasuryDepositButton[] = [890,180]
-Global Const $TreasuryRunningCheck[] = [877,191]
+Global Const $TreasuryLocation[] = [191,359] ; 191,359 - 8411962
+Global Const $Treasury7[] = [460,256] ; 460,256 - 10719353
+Global Const $Treasury14[] = [430,345] ; 430,345 - 10587767
+Global Const $Treasury30[] = [463,446] ; 463,446 - 10653304
+Global Const $TreasuryBack[] = [146,51] ; 146,51 - 9800838
+Global Const $TreasuryCollectButton[] = [449,454] ; 449,454 - 11230223
+Global Const $TreasuryCollectColor = 11230223 ; OLD=11033608 ; This is Orange color
+Global Const $TreasuryDepositButton[] = [522,497] ; 522,497 - 16711
+Global Const $TreasuryRunningCheck[] = [468,471] ; 468,471 - 0
+Global Const $TreasuryDragCoords[] = [158,442,402,443] ; 158,442 to 402,443 - 3551013
 
 ;Image Positions
 Global Const $RssImage[] = [158,88,538,114]
