@@ -997,6 +997,7 @@ Func Rally()
    Sleep(2000)
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
+#comments-start
    ;Make sure we are on the world screen
    If Not CheckForWorldScreen(0) Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
@@ -1006,8 +1007,8 @@ Func Rally()
 
    EndIf
 
+#comments-end
 
-#comments-start
    ;Not needed since we are sure we are on the world screen
    ;Check that we have the search button
    If Not PollForColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColors, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
@@ -1020,7 +1021,6 @@ Func Rally()
 		 Return
 	  EndIf
    EndIf
-#comments-end
 
    Local $HaveRallyCity = 0
    While $HaveRallyCity < 4
@@ -1688,7 +1688,8 @@ Func CheckForWorldScreen($attempts)
 		 Return False
 	  EndIf
 
-	  LogMessage("NO Map screen. Attempt=" & $attempts)
+	  LogMessage("NO Map screen. Attempt=" & $attempts & " Color found - " & PixelGetColor($CityMenu[0],$CityMenu[1]) & " not " & $CityScreenColor )
+	  ;LogMessage("NO Map screen. Attempt=" & $attempts)
 	  Send("{ESC}")
 	  Sleep(1000)
 
