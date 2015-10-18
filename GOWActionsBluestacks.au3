@@ -997,6 +997,18 @@ Func Rally()
    Sleep(2000)
    SendMouseClick($CityMenu[0],$CityMenu[1])
 
+   ;Make sure we are on the world screen
+   If Not CheckForWorldScreen(0) Then
+	  SendMouseClick($CityMenu[0],$CityMenu[1])
+	  Sleep(2000)
+
+   Else
+
+   EndIf
+
+
+#comments-start
+   ;Not needed since we are sure we are on the world screen
    ;Check that we have the search button
    If Not PollForColors($SearchKingdomButton[0],$SearchKingdomButton[1],$SearchKingdomButtonColors, 4000,"$SearchKingdomButtonColor at $SearchKingdomButton") Then
 	  SendMouseClick($CityMenu[0],$CityMenu[1])
@@ -1008,6 +1020,7 @@ Func Rally()
 		 Return
 	  EndIf
    EndIf
+#comments-end
 
    Local $HaveRallyCity = 0
    While $HaveRallyCity < 4
@@ -1021,8 +1034,6 @@ Func Rally()
 		 Send(Login_RallyX())
 		 Sleep(1000)
 	  Else
-
-		 LogMessage("$SearchKingdomX not white")
 		 $HaveRallyCity += 1
 		 ContinueLoop
 	  EndIf
@@ -1034,8 +1045,6 @@ Func Rally()
 		 Send(Login_RallyY())
 		 Sleep(1000)
 	  Else
-
-		 LogMessage("$SearchKingdomY not white")
 		 $HaveRallyCity += 1
 		 ContinueLoop
 	  EndIf
@@ -1642,7 +1651,7 @@ Func CheckForCityScreen($attempts)
 	  Send("{ESC}")
 	  Sleep(1000)
 
-	  If PollForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1],$YesQuitWhite, 500, "$YesQuitWhite at $QuitGameDialogYesButton") Then
+	  If PollForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1],$YesQuitWhite, 500, "$YesQuitWhite at $QuitGameDialogYesButton in Check for City Screen") Then
 		 ;Say No then try again
 		 SendMouseClick($QuitGameDialogNoButton[0],$QuitGameDialogNoButton[1])
 		 Sleep(1000)
@@ -1658,6 +1667,53 @@ Func CheckForCityScreen($attempts)
 	  ;Fourth atempt we don't know where we are, and couldn't get a city screen
 	  If $attempts < 4 Then
 		 Return CheckForCityScreen($attempts+1)
+	  Else
+		 ;All done here
+		 Return False
+	  EndIf
+
+   EndIf
+
+EndFunc
+
+
+Func CheckForWorldScreen($attempts)
+
+   ;Check for the gold button
+   Local $HasGoldButton = CheckForColor($GoldExitButton[0],$GoldExitButton[1],$GetGoldButton)
+   ;Check for the map menu item
+   Local $HasCityButton = CheckForColor($CityMenu[0],$CityMenu[1],$CityScreenColor)
+
+   If $HasGoldButton AND $HasCityButton Then
+	  ;LogMessage("Got City screen. Attempt=" & $attempts)
+	  return True
+   Else
+
+	  ;Fourth atempt we don't know where we are, and couldn't get a city screen
+	  If $attempts > 4 Then
+		 Return False
+	  EndIf
+
+	  LogMessage("NO Map screen. Attempt=" & $attempts)
+	  Send("{ESC}")
+	  Sleep(1000)
+
+	  If PollForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1],$YesQuitWhite, 500, "$YesQuitWhite at $QuitGameDialogYesButton in Check for World Screen") Then
+		 ;Say No then try again
+		 SendMouseClick($QuitGameDialogNoButton[0],$QuitGameDialogNoButton[1])
+		 Sleep(1000)
+		 Return CheckForWorldScreen($attempts+1)
+	  EndIf
+
+	  ;If we are on the map click into the city
+	  If CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
+		 SendMouseClick($CityMenu[0],$CityMenu[1])
+		 Sleep(1000)
+	  EndIf
+
+	  ;Fourth atempt we don't know where we are, and couldn't get a city screen
+	  If $attempts < 4 Then
+		 Return CheckForWorldScreen($attempts+1)
 	  Else
 		 ;All done here
 		 Return False
