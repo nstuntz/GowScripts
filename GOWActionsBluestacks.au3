@@ -207,6 +207,8 @@ Func Login($email, $pwd)
 	  Sleep(500)
    EndIf
 
+#comments-start
+;Removing this since it isn't needed any more
 ;;;;;Make sure we have accepted the terms and conditions. Poll for 2 seconds
    If PollForColor($TermsAndConditionsButton[0],$TermsAndConditionsButton[1],$Blue,1500, "$Blue at $TermsAndConditionsButton") Then
 	  SendMouseClick($TermsAndConditionsButton[0],$TermsAndConditionsButton[1])
@@ -217,6 +219,7 @@ Func Login($email, $pwd)
 	  EndIf
 	  Sleep(500)
    EndIf
+#comments-end
 
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
