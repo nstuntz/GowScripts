@@ -1676,15 +1676,9 @@ Func CheckForCityScreen($attempts)
 
 EndFunc
 
-
 Func CheckForWorldScreen($attempts)
 
-   ;Check for the gold button
-   Local $HasGoldButton = CheckForColor($GoldExitButton[0],$GoldExitButton[1],$GetGoldButton)
-   ;Check for the map menu item
-   Local $HasCityButton = CheckForColor($CityMenu[0],$CityMenu[1],$CityScreenColor)
-
-   If $HasGoldButton AND $HasCityButton Then
+   If CheckForColor($CityMenu[0],$CityMenu[1],$CityScreenColor) Then
 	  ;LogMessage("Got City screen. Attempt=" & $attempts)
 	  return True
    Else
@@ -1705,7 +1699,7 @@ Func CheckForWorldScreen($attempts)
 		 Return CheckForWorldScreen($attempts+1)
 	  EndIf
 
-	  ;If we are on the map click into the city
+	  ;If we are on the City click into the city
 	  If CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
 		 SendMouseClick($CityMenu[0],$CityMenu[1])
 		 Sleep(1000)
@@ -1731,7 +1725,6 @@ Func SaveRSSImage()
    SaveImage('RSSImage',$RssImage[0],$RssImage[1],$RssImage[2],$RssImage[3])
 EndFunc
 
-
 Func SaveGoldImage()
    SaveImage('GoldImage',$GoldImage[0],$GoldImage[1],$GoldImage[2],$GoldImage[3])
 EndFunc
@@ -1743,7 +1736,6 @@ EndFunc
 Func SaveTreasuryImage()
    SaveImage('TreasuryImage',$TreasuryImage[0],$TreasuryImage[1],$TreasuryImage[2],$TreasuryImage[3])
 EndFunc
-
 
 Func SaveShieldCountImage()
    SaveImage('ShieldCount',$ShieldCount[0],$ShieldCount[1],$ShieldCount[2],$ShieldCount[3])
