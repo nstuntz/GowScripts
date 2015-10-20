@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.20.2015.01"
+Global Const $VersionNumber = "10.20.2015.02"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -326,7 +326,7 @@ Global Const $AndroidHomeButtonBottom  = [175,785]
 ;Gift retrieval
 Global Const $GiftBox[] = [374,715]; 374,715 - 2786836
 Global Const $GiftBoxColor = 2786836
-Global Const $GiftBoxColorAlt = 1111; 1907226 - this is the no gift color
+Global Const $GiftBoxColorAlt = 1331471; 1907226 - this is the no gift color
 
 Global Const $GiftButton[] = [542,237]
 Global Const $GiftGetClearButton[] = [550,265] ; [608,208] - 550,265 - 3737603
