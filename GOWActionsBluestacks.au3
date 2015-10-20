@@ -1030,7 +1030,7 @@ Func Rally()
 	  ;click search button
 	  SendMouseClick($SearchKingdomButton[0],$SearchKingdomButton[1])
 
-	  If PollForColor($SearchKingdomX[0],$SearchKingdomX[1],$White,3000 ,"$White at $SearchKingdomX") Then
+	  If PollForColors($SearchKingdomX[0],$SearchKingdomX[1],$WhiteArray,3000 ,"$WhiteArray at $SearchKingdomX") Then
 		 ;input X
 		 SendMouseClick($SearchKingdomX[0],$SearchKingdomX[1])
 		 Sleep(1000)
@@ -1041,7 +1041,7 @@ Func Rally()
 		 ContinueLoop
 	  EndIf
 
-	  If PollForColor($SearchKingdomY[0],$SearchKingdomY[1],$White,3000,"$White at $SearchKingdomY") Then
+	  If PollForColors($SearchKingdomY[0],$SearchKingdomY[1],$WhiteArray,3000,"$WhiteArray at $SearchKingdomY") Then
 		 ;input y
 		 SendMouseClick($SearchKingdomY[0],$SearchKingdomY[1])
 		 Sleep(1000)

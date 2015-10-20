@@ -277,6 +277,7 @@ Global Const $BuildingCheck[] = [900,450]
 
 ;Colors
 Global Const $White = 16777215 ;16317688
+Global Const $WhiteArray = [16777215,15527148]
 Global Const $Orange = 11230223
 Global Const $Blue = 16711
 Global Const $GreenCollect = 11264
