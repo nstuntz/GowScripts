@@ -316,7 +316,7 @@ Func CollectQuests()
 
    ;Added to loop on clicking Collect as long as the button is blue. Daily Quests
    While 1=1
-		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000)) Then
+		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000, "$Blue at $QuestsCollect")) Then
 			SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
 		 Else
 			ExitLoop;

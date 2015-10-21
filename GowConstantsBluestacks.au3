@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.20.2015.02"
+Global Const $VersionNumber = "10.21.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -55,7 +55,7 @@ Global $SleepOnLogout = 0
 Global Const $ConnectionInteruptButton = [430,260]
 Global Const $TermsAndConditionsButton = [250,450]
 ;Items Menu
-Global Const $ItemsMenu = [328,733] ; 328,733 - 9662011
+Global Const $ItemsMenu = [328,710]
 Global Const $MyItemsMenu = [408,191]
 Global Const $TreasuresMenu = [533,253] ; 533,253 - 2888465
 Global Const $ResoucesMenu = [265,250] ; 265,250 - 14934240
@@ -85,7 +85,7 @@ Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row
 Global Const $MarchesButtonColorAlt = 13159348
 ;Global Const $MarchesButtonColor = 2102272 193,515 - 13159348
 ;Helps set
-Global Const $AllianceMenu = [400,730]
+Global Const $AllianceMenu = [400,710]
 ;Global Const $AllianceHelpMenuDragStart = [1000,450]
 ;Global Const $AllianceHelpMenuDragEnd = [850,450]
 ;Global Const $AllianceHelpsMenu = [930,510]
@@ -105,11 +105,11 @@ Global Const $SecretGiftCollectButton = [411,430] ;411,430 - 11230223
 Global Const $SecretGiftCollectButtonColor = 11230223
 
 ;Quests
-Global Const $QuestsMenu = [240,725]
+Global Const $QuestsMenu = [240,710]
 Global Const $QuestsDaily = [430,340]
 Global Const $QuestsAliaance = [430,460]
 Global Const $QuestsEmpire = [430,220]
-Global Const $QuestsCollect = [560,185]
+Global Const $QuestsCollect = [555,181]
 Global Const $QuestsStart = [540,185]
 Global Const $QuestsEmpireCollect = [558,286] ; 558,286 - 11264
 Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
