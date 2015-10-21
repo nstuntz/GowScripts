@@ -49,6 +49,7 @@ Global Const $PinBoxColor = 16777215
 Global Const $CityMenu = [165,725]
 Global $CityScreenColor = 4993559 ;winter2014=1053712 ; Fall2014= 1050624 ; - Old standard one - 1051656     7377064
 Global $MapMenuColor = 2246954 ;winter2014=4744320; fall2014 = 7888928 ; - Old Map Color 9471048   5788760
+Global $SleepOnLogout = 0
 
 ;;;;Connection Code Interupted Bluestacks only. Appears on every login it looks like
 Global Const $ConnectionInteruptButton = [430,260]
@@ -133,7 +134,7 @@ Global Const $TimerIconBuildColor2 = 5262408 ; 1574920 -with transparency ; 2099
 ;Shielding
 Global Const $BoostsIcon = [565,245]
 Global Const $ShieldColor = 16514042
-Global Const $ShieldColorAlt = 16250870
+Global Const $ShieldColorAlt = 15658214
 Global Const $ShieldSearchLeft = 155
 Global Const $ShieldSearchTop = 130
 Global Const $ShieldSearchRight = 155
