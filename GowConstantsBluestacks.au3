@@ -330,7 +330,7 @@ Global Const $GiftBoxColor = 2786836
 Global Const $GiftBoxColorAlt = 1331471; 1907226 - this is the no gift color
 
 Global Const $GiftButton[] = [542,237]
-Global Const $GiftGetClearButton[] = [550,265] ; [608,208] - 550,265 - 3737603
+Global Const $GiftGetClearButton[] = [550,256] ; [608,208] - 550,265 - 3737603
 Global Const $GiftGetClearButtonRed = 3737603
 
 ;Treasury Collection
