@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.21.2015.02"
+Global Const $VersionNumber = "10.28.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -109,7 +109,7 @@ Global Const $QuestsMenu = [240,710]
 Global Const $QuestsDaily = [430,340]
 Global Const $QuestsAliaance = [430,460]
 Global Const $QuestsEmpire = [430,220]
-Global Const $QuestsCollect = [555,181]
+Global Const $QuestsCollect = [555,192]
 Global Const $QuestsStart = [540,185]
 Global Const $QuestsEmpireCollect = [558,286] ; 558,286 - 11264
 Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
