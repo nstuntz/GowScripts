@@ -279,6 +279,7 @@ Func CollectAthenaGift()
    SendMouseClick($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1])
    Sleep(3500) ; logner sleet because it pops stuff up
 
+   CollectAthenaGift()
    Login_AthenaGiftCollected()
 
 EndFunc
