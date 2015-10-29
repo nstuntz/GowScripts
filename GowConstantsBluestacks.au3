@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "10.28.2015.01"
+Global Const $VersionNumber = "10.29.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -77,7 +77,7 @@ Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
 Global Const $MoreMenu = [555,710]
 Global Const $RedeemButton = [952,642]
 Global Const $AccountButton = [410,230]
-Global Const $AccountButton2 = [410,157]
+Global Const $AccountButton2 = [410,160]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
