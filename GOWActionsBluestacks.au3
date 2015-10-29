@@ -981,6 +981,9 @@ Func Rally()
    If PollForTwoColors($MarchesButton[0],$MarchesButton[1],$MarchesButtonColor,$MarchesButtonColorAlt,4000,"$MarchesButtonColor at $MarchesButton") Then
 	  SendMouseClick($MarchesButton[0],$MarchesButton[1])
 	  Sleep(1000)
+   ElseIf PollForTwoColors($MarchesButton2[0],$MarchesButton2[1],$MarchesButtonColor,$MarchesButtonColorAlt,4000,"$MarchesButtonColor at $MarchesButton") Then
+	  SendMouseClick($MarchesButton2[0],$MarchesButton2[1])
+	  Sleep(1000)
    EndIf
 
    Local $i = 0
