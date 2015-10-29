@@ -1215,12 +1215,17 @@ Func Logout()
    ;Accounts
    If PollForColors($AccountButton[0],$AccountButton[1], $AccountButtonColors, 5000, "$AccountButtonColors at $AccountButton") Then
 	  SendMouseClick($AccountButton[0],$AccountButton[1])
+   ElseIf PollForColors($AccountButton2[0],$AccountButton2[1], $AccountButtonColors, 1000, "$AccountButtonColors at $AccountButton2") Then
+	  SendMouseClick($AccountButton2[0],$AccountButton2[1])
    Else
 	  LogMessage("Dont have the account button to logout, clicking more again.")
 	  SendMouseClick($MoreMenu[0],$MoreMenu[1])
-	  Sleep(3000)
-	  ;Return False
-	  SendMouseClick($AccountButton[0],$AccountButton[1])
+	  If PollForColors($AccountButton2[0],$AccountButton2[1], $AccountButtonColors, 5000, "$AccountButtonColors at $AccountButton2") Then
+		 SendMouseClick($AccountButton2[0],$AccountButton2[1])
+	  Else
+		 ;Return False
+		 SendMouseClick($AccountButton[0],$AccountButton[1])
+	  EndIf
    EndIf
 
    ;Logout

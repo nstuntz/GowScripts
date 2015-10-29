@@ -77,6 +77,7 @@ Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
 Global Const $MoreMenu = [555,710]
 Global Const $RedeemButton = [952,642]
 Global Const $AccountButton = [410,230]
+Global Const $AccountButton2 = [410,157]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
