@@ -1,5 +1,6 @@
-#include "GowConstants.au3"
-#include "GowActions.au3"
+
+#include "../GowConstantsBluestacks.au3"
+#include "../GowActionsBluestacks.au3"
 #include <Date.au3>
 #include <Array.au3>
 
@@ -17,12 +18,12 @@ If FileExists($LogFileName) = 1 Then
    FileDelete($LogFileName)
 EndIf
 
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
-Sleep(1000)
-WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
+;WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+;Sleep(1000)
+;WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
 
 ;Dependant on window at 401x77
-WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+;WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
 Local $StartTime = '2015/06/24 05:30:00'
 
@@ -35,26 +36,26 @@ Local $StartTime = '2015/06/24 05:30:00'
 
 ;Logout
 ;Logout()
-;Sleep(5000)
+Sleep(5000)
 
-While (_DateDiff('n',_NowCalc(),$StartTime) > 0)
-   Sleep(300000) ; Sleep 5 minutes
+;While (_DateDiff('n',_NowCalc(),$StartTime) > 0)
+;   Sleep(300000) ; Sleep 5 minutes
 
-   MouseMove($LoginButton[0],$LoginButton[1])
-   Sleep(1000)
-   MouseMove($LoginFailureButton[0],$LoginFailureButton[1])
-   Sleep(1000)
-WEnd
+;   MouseMove($LoginButton[0],$LoginButton[1])
+;   Sleep(1000)
+;   MouseMove($LoginFailureButton[0],$LoginFailureButton[1])
+;   Sleep(1000)
+;WEnd
 Local $startRunTime = _NowCalc()
 
 ;Open GOW
-OpenGOW(0)
+;OpenGOW(0)
 
 ;Login
-if Not Login($loginEmail,$loginPWD) Then
-   MsgBox(0,"Paused","Something went wrong....  Login Failed")
-   Exit
-EndIf
+;if Not Login($loginEmail,$loginPWD) Then
+;   MsgBox(0,"Paused","Something went wrong....  Login Failed")
+;   Exit
+;EndIf
 
 
 

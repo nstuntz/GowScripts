@@ -544,9 +544,9 @@ Func Chests()
    While $HaveChest
 
 	  ;If we can get or clear a gift, do it and keep looping
-	  If PollForColor($FirstItem[0], $FirstItem[1],$GreenCollect,4000) Then
+	  If PollForColor($FirstItem[0], $FirstItem[1],$GreenCollect,10000) Then
 		 SendMouseClick($FirstItem[0],$FirstItem[1])
-		 If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,7000) Then
+		 If PollForTwoColors($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,$ChestOpenBeigeColorAlt,7000) Then
 			Send("{ESC}")
 			$openedChests +=1
 		 EndIf
@@ -554,7 +554,7 @@ Func Chests()
 		 If CheckForColor($SecondItem[0], $SecondItem[1],$GreenCollect) Then
 			SendMouseClick($SecondItem[0],$SecondItem[1])
 
-			If PollForColor($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,7000) Then
+			If PollForTwoColors($ChestOpenBeige[0], $ChestOpenBeige[1],$ChestOpenBeigeColor,$ChestOpenBeigeColorAlt,7000) Then
 			   Send("{ESC}")
 			   $openedChests +=1
 			EndIf
@@ -832,6 +832,10 @@ Func SendRSS($type, $nonSilverType)
 	  ;Poll for first Help button
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
 		 SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
+	  ElseIf PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton - If need be") Then
+		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+		 return True
 	  Else
 		 LogMessage("Banking - No help button")
 		 ;City Menu

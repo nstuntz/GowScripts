@@ -61,8 +61,9 @@ Global Const $TreasuresMenu = [533,253] ; 533,253 - 2888465
 Global Const $ResoucesMenu = [265,250] ; 265,250 - 14934240
 Global Const $FirstItem = [541,372] ; 541,372 - 11264
 Global Const $SecondItem = [546,509] ; 546,509 - 11264
-Global Const $ChestOpenBeige = [516,262] ; 516,262 - 11510152
+Global Const $ChestOpenBeige = [516,262] ; 516,262 - 11510152 ; 516,262 - 11575689
 Global Const $ChestOpenBeigeColor = 11510152
+Global Const $ChestOpenBeigeColorAlt = 11575689
 
 ;Resources Menu
 Global Const $FirstToken = [541,372] ; 541,372 - 11264

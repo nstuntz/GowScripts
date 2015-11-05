@@ -1,6 +1,6 @@
 
-#include "GowConstantsBluestacks.au3"
-#include "GowActionsBluestacks.au3"
+#include "../GowConstantsBluestacks.au3"
+#include "../GowActionsBluestacks.au3"
 #include <Date.au3>
 #include <Array.au3>
 Local $width = 250
@@ -14,10 +14,10 @@ Global $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
 Global $food =  InputBox("Food", "Food:","0","",$width,$height)
 Global $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 ;Global $RoundTripTimeInMS = 35000
-Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","35000","",$width,$height)
+Global $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","40000","",$width,$height)
 
 Global $MarchesAllowed = InputBox("Marches", "Marches:","6","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","7","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","7.9","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
 Global $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
@@ -93,7 +93,7 @@ Next
 
 
 ;Logout
-Logout()
+;Logout()
 Sleep(5000)
 
 ;Paranoia to make sure we are closed out
