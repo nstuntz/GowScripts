@@ -34,6 +34,7 @@ While 1
    ;Check every 4 hours for new scripts
    If (_DateDiff('h',$oneRingLastRun,_NowCalc())) > 4 Then
 	  GetLatestScripts()
+	  $oneRingLastRun = _NowCalc()
    EndIf
 
    ;Check that BS is running every 10 minutes
