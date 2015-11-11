@@ -539,10 +539,32 @@ EndFunc
 
 
 
+;Other DB Functions
+Func IsMachineActive()
+   Local $aData
+   Local $iRows
+   Local $iColumns
+   Local $iRval
 
+   $iRval = _SQL_GetTable2D(-1,"select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LogDate,120) as LogDateConvert from MachineLoginTracker where MachineID = '" & @ComputerName  & "'",$aData,$iRows,$iColumns)
 
+   If $iRval = $SQL_ERROR Then
+	  LogMessage("ERROR IsMachineActive Error -- " & _SQL_GetErrMsg(),5)
+	  return False
+   EndIf
 
+   Local $_TimezoneOffsetMin =  $aData[1][0]
+   Local $logDate = $aData[1][1]
 
+   ;Convert dates to UTC
+   Local $logDateLocal = _DateAdd('n',-1*$_TimezoneOffsetMin,$logDate)
+
+   If (_DateDiff('n',$logDateLocal,GetNowUTCCalc())) > 20 Then
+	  Return False
+   EndIf
+
+   Return True
+EndFunc
 
 
 

@@ -21,13 +21,32 @@ For $i = 0 to UBound($gitExes)-1
    EndIf
 Next
 
-If WinGetState ("BlueStacks") < 1 Then
-   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start BlueStacks first.  Quitting.")
-   Exit
-EndIf
+;If WinGetState ("BlueStacks") < 1 Then
+;   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start BlueStacks first.  Quitting.")
+;   Exit
+;EndIf
 
+;Set the start date to 6 hours ago so it gets the latest scripts when it starts
+Local $oneRingLastRun = _DateAdd('h',6,_NowCalc())
 
 While 1
+
+   ;Check every 4 hours for new scripts
+   If (_DateDiff('h',$oneRingLastRun,_NowCalc())) > 4 Then
+	  GetLatestScripts()
+   EndIf
+
+   ;Check that BS is running every 10 minutes
+   If IsMachineActive() Then
+	  RestartBS()
+   EndIf
+
+   ;Check every 10 min
+   Sleep(1000*60*10)
+WEnd
+
+Func GetLatestScripts()
+
    ;Make array of files and dates
    Local $aFileList = _FileListToArray(@ScriptDir, "*")
 
@@ -67,7 +86,6 @@ While 1
 	  Next
    Next
 
-
    If $fileChanged OR $FirstTime Then
 
 	  $FirstTime = False
@@ -95,7 +113,27 @@ While 1
 	  EndIf
    EndIf
 
-   ;Check every 4 hours
-   Sleep(1000*60*60*4)
-WEnd
+EndFunc
 
+
+Func RestartBS()
+
+   ;If they are kill all autoit except this one
+   Local $aProcessList = ProcessList()
+   For $i = 1 To $aProcessList[0][0]
+	  If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
+		 ProcessClose( $aProcessList[$i][1] )
+	  EndIf
+   Next
+
+   ;Shrink everything
+   WinMinimizeAll()
+   Sleep(1000)
+
+   ;double click the Icon
+   SendMouseClick($GOWIcon[0],$GOWIcon[1])
+   SendMouseClick($GOWIcon[0],$GOWIcon[1])
+
+   ;Sleep 2 minutes for BS to restart
+   Sleep(120000)
+EndFunc
