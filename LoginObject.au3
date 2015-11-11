@@ -548,11 +548,14 @@ Func IsMachineActive()
 
    Local $sqlText = "select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LogDate,120) as LogDateConvert from MachineLoginTracker where MachineID = '" & $MachineID  & "'"
 
-   LogMessage("IsMachineActive SQL -- " & $sqlText,5)
+   ;Open the connection up
+   _SqlConnect()
+
    $iRval = _SQL_GetTable2D(-1,$sqlText,$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("ERROR IsMachineActive Error -- " & _SQL_GetErrMsg(),5)
+	  _SQL_Close()
 	  return False
    EndIf
 
@@ -562,8 +565,8 @@ Func IsMachineActive()
    ;Convert dates to UTC
    Local $logDateLocal = _DateAdd('n',-1*$_TimezoneOffsetMin,$logDate)
 
-	  LogMessage("IsMachineActive Last Date -- " & $logDateLocal ,5)
-	  LogMessage("IsMachineActive Now Date -- " & GetNowUTCCalc() ,5)
+   ;Tear the  connection down
+   _SQL_Close()
 
    If (_DateDiff('n',$logDateLocal,GetNowUTCCalc())) > 20 Then
 	  Return False
