@@ -33,14 +33,14 @@ While 1
 
    ;Check every 4 hours for new scripts
    If (_DateDiff('h',$oneRingLastRun,_NowCalc())) > 4 Then
-	  MsgBox($MB_SYSTEMMODAL, "", "Getting Latest")
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Getting Latest")
 	  GetLatestScripts()
 	  $oneRingLastRun = _NowCalc()
    EndIf
 
    ;Check that BS is running every 10 minutes
    If IsMachineActive() Then
-	  MsgBox($MB_SYSTEMMODAL, "", "Restarting BS")
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Restarting BS")
 	  RestartBS()
    EndIf
 
