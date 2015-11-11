@@ -22,7 +22,7 @@ For $i = 0 to UBound($gitExes)-1
 Next
 
 If WinGetState ("BlueStacks") < 1 Then
-   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start Virtual box and the Gow2 host first.  Quitting.")
+   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start BlueStacks first.  Quitting.")
    Exit
 EndIf
 
