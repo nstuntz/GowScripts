@@ -68,8 +68,6 @@ Func GetLatestScripts()
    Run(@ComSpec & " /c """ & $GitPath & """ pull")
 
    Sleep(10000)
-   ;Should type credentials here
-   ;Get window
    ;Type user
    Send('gowscripts' & @CRLF)
    Sleep(500)
