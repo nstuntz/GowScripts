@@ -559,6 +559,9 @@ Func IsMachineActive()
    ;Convert dates to UTC
    Local $logDateLocal = _DateAdd('n',-1*$_TimezoneOffsetMin,$logDate)
 
+	  LogMessage("IsMachineActive Last Date -- " & $logDateLocal ,5)
+	  LogMessage("IsMachineActive Now Date -- " & GetNowUTCCalc() ,5)
+
    If (_DateDiff('n',$logDateLocal,GetNowUTCCalc())) > 20 Then
 	  Return False
    EndIf
