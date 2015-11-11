@@ -67,7 +67,7 @@ Func GetLatestScripts()
    ;Sync Git
    Run(@ComSpec & " /c """ & $GitPath & """ pull")
 
-   Sleep(10000)
+   Sleep(2000)
    ;Type user
    Send('gowscripts' & @CRLF)
    Sleep(500)
@@ -75,7 +75,7 @@ Func GetLatestScripts()
    Send('gowscripts12' & @CRLF)
    Sleep(500)
 
-   Sleep(10000)
+   Sleep(4000)
    ;Check if any files are updated
    Local $UpdatedFileList = _FileListToArrayRec (@ScriptDir, "*.au3")
    Local $fileChanged = False
