@@ -501,7 +501,9 @@ EndFunc
 
 Func Gifts()
 
-   If PollForTwoColors($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt, 500, "$GiftBoxColor at $GiftBox") Then
+
+   If PollForColors($GiftBox[0], $GiftBox[1],$GiftBoxColorArray, 500, "$GiftBoxColor at $GiftBox") Then
+   ;OLD - If PollForTwoColors($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt, 500, "$GiftBoxColor at $GiftBox") Then
 	  ;Alliance menu
 	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
 	  Sleep(3000)
