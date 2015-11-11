@@ -67,6 +67,15 @@ Func GetLatestScripts()
    ;Sync Git
    RunWait(@ComSpec & " /c """ & $GitPath & """ pull")
 
+   ;Should type credentials here
+   ;Get window
+   ;Type user
+   ;Send('gowminion' & @CRLF)
+   ;Sleep(500)
+   ;Type pwd
+   ;Send('gowminion12' & @CRLF)
+   ;Sleep(500)
+
    ;Check if any files are updated
    Local $UpdatedFileList = _FileListToArrayRec (@ScriptDir, "*.au3")
    Local $fileChanged = False
@@ -111,7 +120,9 @@ Func GetLatestScripts()
 
 	  ;Should we restart the master script
 	  If ($MyDate <> FileGetTime(@ScriptName,0,1)) Then
+		 LogMessage("Restarting OneRing because it is old -  " & @ComputerName,5)
 		 Run(@AutoItExe & " /AutoIt3ExecuteScript  TheOneRing.au3")
+		 Sleep(500)
 		 ProcessClose(@AutoItPID)
 	  EndIf
    EndIf
