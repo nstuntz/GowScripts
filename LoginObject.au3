@@ -546,7 +546,10 @@ Func IsMachineActive()
    Local $iColumns
    Local $iRval
 
-   $iRval = _SQL_GetTable2D(-1,"select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LogDate,120) as LogDateConvert from MachineLoginTracker where MachineID = '" & @ComputerName  & "'",$aData,$iRows,$iColumns)
+   Local $sqlText = "select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LogDate,120) as LogDateConvert from MachineLoginTracker where MachineID = '" & @ComputerName  & "'"
+
+   LogMessage("IsMachineActive SQL -- " & $sqlText,5)
+   $iRval = _SQL_GetTable2D(-1,$sqlText,$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
 	  LogMessage("ERROR IsMachineActive Error -- " & _SQL_GetErrMsg(),5)
