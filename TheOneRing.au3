@@ -65,17 +65,19 @@ Func GetLatestScripts()
    Next
 
    ;Sync Git
-   RunWait(@ComSpec & " /c """ & $GitPath & """ pull")
+   Run(@ComSpec & " /c """ & $GitPath & """ pull")
 
+   Sleep(10000)
    ;Should type credentials here
    ;Get window
    ;Type user
-   ;Send('gowminion' & @CRLF)
-   ;Sleep(500)
+   Send('gowscripts' & @CRLF)
+   Sleep(500)
    ;Type pwd
-   ;Send('gowminion12' & @CRLF)
-   ;Sleep(500)
+   Send('gowscripts12' & @CRLF)
+   Sleep(500)
 
+   Sleep(10000)
    ;Check if any files are updated
    Local $UpdatedFileList = _FileListToArrayRec (@ScriptDir, "*.au3")
    Local $fileChanged = False
