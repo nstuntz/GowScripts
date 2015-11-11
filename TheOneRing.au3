@@ -39,7 +39,7 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   If IsMachineActive() Then
+   If NOT IsMachineActive() Then
 	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
 	  RestartBS()
    EndIf

@@ -562,17 +562,13 @@ Func IsMachineActive()
    Local $_TimezoneOffsetMin =  $aData[1][0]
    Local $logDate = $aData[1][1]
 
-	  LogMessage("IsMachineActive $logDate -  " & $logDate,5)
-
    ;Convert dates to UTC
    Local $logDateLocal = _DateAdd('n',-1*$_TimezoneOffsetMin,$logDate)
 
    ;Tear the  connection down
    _SQL_Close()
-	  LogMessage("IsMachineActive $logDateLocal -  " & $logDateLocal,5)
 
    If (_DateDiff('n',$logDateLocal,GetNowUTCCalc())) > 20 Then
-	  LogMessage("IsMachineActive Should restart Bluestacks -  " & @ComputerName,5)
 	  Return False
    EndIf
 
