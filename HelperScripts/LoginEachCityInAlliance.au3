@@ -49,7 +49,7 @@ For $i = 1 to $iRows step 1
    ;Open GOW
    OpenGOW(0)
 
-   Login($userName,$password) Then
+   Login($userName,$password)
 
    MsgBox($MB_SYSTEMMODAL, "", "Move City" )
 
