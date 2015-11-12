@@ -41,7 +41,7 @@ For $i = 1 to $iRows step 1
    local $loginID = $aData[$i][2]
 
    _SqlConnect()
-   _SQL_Execute(-1,"Update Login Set InProcess='" & @ComputerName "' Where LoginID = " & $loginID)
+   _SQL_Execute(-1,"Update Login Set InProcess='" & @ComputerName & "' Where LoginID = " & $loginID)
    _SQL_Close()
 
    MsgBox($MB_SYSTEMMODAL, "", $userName & " - " & $password )
