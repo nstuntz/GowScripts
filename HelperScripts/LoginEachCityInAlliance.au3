@@ -18,7 +18,7 @@ Local $iColumns
 Local $iRval
 
 local $tag =  InputBox("Alliance", "Alliance:","aoC","",$width,$height)
-Local $sqlText = "select username, password, loginid from cityview where alliance='" & $tag & "'"
+Local $sqlText = "select username, password, loginid from cityview where alliance='" & $tag & "' and loginid>39"
 _SqlConnect()
 
 $iRval = _SQL_GetTable2D(-1,$sqlText,$aData,$iRows,$iColumns)
@@ -44,7 +44,7 @@ For $i = 1 to $iRows step 1
    _SQL_Execute(-1,"Update Login Set InProcess='" & @ComputerName & "' Where LoginID = " & $loginID)
    _SQL_Close()
 
-   MsgBox($MB_SYSTEMMODAL, "", $userName & " - " & $password )
+   ;MsgBox($MB_SYSTEMMODAL, "", $userName & " - " & $password )
 
    ;Open GOW
    OpenGOW(0)
