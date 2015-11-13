@@ -66,8 +66,8 @@ Global Const $ChestOpenBeigeColor = 11510152
 Global Const $ChestOpenBeigeColorAlt = 11575689
 
 ;Resources Menu
-Global Const $FirstToken = [541,372] ; 541,372 - 11264
-Global Const $SecondToken = [546,509] ; 546,509 - 11264
+Global Const $FirstToken = [518,532] ; 541,372 - 11264  518,532 - 11264
+Global Const $SecondToken = [537,629] ; 546,509 - 11264 537,629 - 11264
 
 ;Quit Game Dialog
 Global Const $QuitGameDialogYesButton = [411,435] ;411,435 - 2631720
@@ -115,10 +115,10 @@ Global Const $QuestsEmpire = [430,220]
 Global Const $QuestsCollect = [555,192]
 Global Const $QuestsStart = [540,185]
 Global Const $QuestsEmpireCollect = [558,286] ; 558,286 - 11264
-Global Const $QuestsHeroLeveledUpOkButton = [1020,620]
+Global Const $QuestsHeroLeveledUpOkButton = [262,589] ; 262,589 - 16711
 Global Const $NoQuestsColor = 2688000
-Global Const $QuestChance = [1000,250]
-Global Const $QuestChanceUseButton = [770,415]
+Global Const $QuestChance = [485,614 ]; 485,614 - 11230223
+Global Const $QuestChanceUseButton = [351,340] ;  - 11264
 
 ;Log File Name
 Global Const $LogFileName = "Log.txt"

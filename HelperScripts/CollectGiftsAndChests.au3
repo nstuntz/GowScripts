@@ -18,18 +18,17 @@ If FileExists($LogFileName) = 1 Then
    FileDelete($LogFileName)
 EndIf
 
-;WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
-;Sleep(1000)
-;WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
-
-;Dependant on window at 401x77
-;WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+WinActivate ("BlueStacks","")
+Sleep(1000)
+WinWaitActive ("BlueStacks","")
+Sleep(1000)
+WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
 Local $StartTime = '2015/06/24 05:30:00'
 
 
 ;Open GOW
-;OpenGOW(0)
+OpenGOW(0)
 
 ;Login
 ;Login($loginEmail,$loginPWD)
@@ -52,12 +51,10 @@ Local $startRunTime = _NowCalc()
 ;OpenGOW(0)
 
 ;Login
-;if Not Login($loginEmail,$loginPWD) Then
-;   MsgBox(0,"Paused","Something went wrong....  Login Failed")
-;   Exit
-;EndIf
-
-
+if Not Login($loginEmail,$loginPWD) Then
+   MsgBox(0,"Paused","Something went wrong....  Login Failed")
+   Exit
+EndIf
 
 Local $openedChests = 0
 

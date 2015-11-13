@@ -1,5 +1,6 @@
-#include "GowConstants.au3"
-#include "GowActions.au3"
+
+#include "../GowConstantsBluestacks.au3"
+#include "../GowActionsBluestacks.au3"
 #include <Date.au3>
 #include <Array.au3>
 
@@ -8,17 +9,16 @@ Local $height = 130
 Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
+
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+WinActivate ("BlueStacks","")
 Sleep(1000)
-WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
-
-;Dependant on window at 401x77
-WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
-
+WinWaitActive ("BlueStacks","")
+Sleep(1000)
+WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
 LogMessage("Starting All Tokens",2)
 

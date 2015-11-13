@@ -1,5 +1,6 @@
-#include "GowConstants.au3"
-#include "GowActions.au3"
+
+#include "../GowConstantsBluestacks.au3"
+#include "../GowActionsBluestacks.au3"
 #include <Date.au3>
 #include <Array.au3>
 
@@ -12,12 +13,12 @@ Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
-Sleep(1000)
-WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
 
-;Dependant on window at 401x77
-WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+WinActivate ("BlueStacks","")
+Sleep(1000)
+WinWaitActive ("BlueStacks","")
+Sleep(1000)
+WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
 ;Open GOW
 OpenGOW(0)
