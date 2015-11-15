@@ -67,7 +67,7 @@ Func GetLatestScripts()
    ;Sync Git
    Run(@ComSpec & " /c """ & $GitPath & """ pull")
 
-   Sleep(2000)
+   Sleep(4000)
    ;Type user
    Send('gowscripts' & @CRLF)
    Sleep(500)
@@ -148,6 +148,6 @@ Func RestartBS()
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
 
-   ;Sleep 2 minutes for BS to restart
-   Sleep(120000)
+   ;Sleep 4 minutes for BS to restart
+   Sleep(240000)
 EndFunc
