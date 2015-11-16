@@ -405,7 +405,7 @@ Func RedeemCode()
 EndFunc
 
 Func Helps()
-   If PollForTwoColors($HelpButton[0], $HelpButton[1],$HelpButtonColor, $HelpButtonColorAlt, 500, "$HelpButtonColor at $HelpButton") Then
+   If PollForColors($HelpButton[0], $HelpButton[1],$HelpButtonColorArray, 500, "$HelpButtonColor at $HelpButton") Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
 	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$Orange,3000,"$AllianceHelpHelpAllButton")) Then
 		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])

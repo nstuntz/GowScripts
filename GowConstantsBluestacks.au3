@@ -98,6 +98,7 @@ Global Const $AllianceHelpHelpAllButton = [550,610]
 Global Const $HelpButton = [560,585] ; 560,585 - 14726291
 Global Const $HelpButtonColor = 10117447
 Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
+Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506]
 Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [265,565]
@@ -332,7 +333,7 @@ Global Const $GiftBox[] = [374,715]; 374,715 - 2786836 374,715 - 1332751
 Global Const $GiftBoxColor = 2786836
 Global Const $GiftBoxColorAlt = 1331471; 1907226 - this is the no gift color
 Global Const $GiftBoxColorAlt2 = 1332751;
-Global Const $GiftBoxColorArray[] = [2786836,1331471,1332751]
+Global Const $GiftBoxColorArray[] = [2786836,1331471,1332751,2854416]
 
 Global Const $GiftButton[] = [542,237]
 Global Const $GiftGetClearButton[] = [550,256] ; [608,208] - 550,265 - 3737603
