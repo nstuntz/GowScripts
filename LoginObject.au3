@@ -546,7 +546,7 @@ Func IsMachineActive()
    Local $iColumns
    Local $iRval
 
-   Local $sqlText = "select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LogDate,120) as LogDateConvert from MachineLoginTracker where MachineID = '" & $MachineID  & "'"
+   Local $sqlText = "select DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, Convert(varchar(20),LoginDate,120) as LoginDateConvert from MachineLoginTracker where MachineID = '" & $MachineID  & "'"
 
    ;Open the connection up
    _SqlConnect()
