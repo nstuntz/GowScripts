@@ -133,6 +133,22 @@ EndFunc
 Func RestartBS()
 
    ;If they are kill all autoit except this one
+   Local $aProcessList = ProcessList("autoit3.exe")
+   For $i = 1 To $aProcessList[0][0]
+	  If (@AutoItPID <> $aProcessList[$i][1] )Then
+		 ProcessClose (  $aProcessList[$i][1] )
+	  EndIf
+   Next
+
+   Sleep(1000)
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  TV_Popup_Remover.au3")
+   Sleep(1000)
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
+   Sleep(1000)
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+   Sleep(1000)
+
+   ;If they are kill all autoit except this one
    Local $aProcessList = ProcessList()
    For $i = 1 To $aProcessList[0][0]
 	  If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
@@ -142,7 +158,7 @@ Func RestartBS()
 
    ;Shrink everything
    WinMinimizeAll()
-   Sleep(1000)
+   Sleep(30000)
 
    ;double click the Icon
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
