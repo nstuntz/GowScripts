@@ -1373,18 +1373,44 @@ Func OpenGOW($attempts)
    sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.
 
+   If WinGetState ( "BlueStacks") = 0 Then
+	  LogMessage("No bluestacks window to move.  Attempting to reopen Bluestacks.")
+	  OpenGOW($attempts+1)
+   EndIf
+
+
    WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
    ;quit()
 
-   If Not PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 35000, "$GreyedOutButton at $LoginButton") Then
+   Local $GOWOpen = False
+   Local $1 = 0
+   Local $winSize
 
+   ;This shoudl check for the login screeen for 35 seconds and restart if it quits out before that by checking every 5 seconds for changed window size
+   For $1 = 0 to 6 Step 1
+
+	  ;Check for 5 seconds for the login button
+	  If PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 5000, "$GreyedOutButton at $LoginButton") Then
+		 ExitLoop
+	  EndIf
+	  $winSize = WinGetClientSize("BlueStacks")
+	  ;Check if the window reset to the launcher
+	  If($winSize[0] > $GOWWindowSize[0]) Then
+		 ;Here we have the wide window so try opening again.
+		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
+		 OpenGOW($attempts+1)
+	  EndIf
+   Next
+
+
+   If Not PollForColor($LoginButton[0],$LoginButton[1], $GreyedOutButton, 5000, "$GreyedOutButton at $LoginButton") Then
 
 	  LogMessage("Did not see login page")
 	  ;Here we dont have a logout button. There are 3 scenarios
 	  ;We black screened before the screen size changed. So move and resize the window and openGoW Again
 
 	  ;We black screened and went back to launcher after we moved the window
-	  Local $winSize = WinGetClientSize("BlueStacks")
+	  $winSize = WinGetClientSize("BlueStacks")
 
 	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
