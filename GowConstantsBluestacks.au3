@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "11.12.2015.01"
+Global Const $VersionNumber = "11.18.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -98,7 +98,7 @@ Global Const $AllianceHelpHelpAllButton = [550,610]
 Global Const $HelpButton = [560,585] ; 560,585 - 14726291
 Global Const $HelpButtonColor = 10117447
 Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
-Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837]
+Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298]
 Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [265,565]
