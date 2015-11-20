@@ -98,7 +98,7 @@ Global Const $AllianceHelpHelpAllButton = [550,610]
 Global Const $HelpButton = [560,585] ; 560,585 - 14726291
 Global Const $HelpButtonColor = 10117447
 Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
-Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506]
+Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837]
 Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [265,565]
