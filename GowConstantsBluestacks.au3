@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "11.18.2015.01"
+Global Const $VersionNumber = "11.28.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -151,6 +151,7 @@ Global Const $ShieldReplaceButton = [490,280]
 Global Const $ShieldVerifyMaxLength = [485,162]
 Global Const $ShieldCountDownBlue = 1337186
 Global Const $ShieldCountDownBlueAlt = 6002065
+Global Const $ShieldNotEnoughGoldButton = [300,270]
 
 ;Banking
 Global Const $HelpTopMember = [560,230] ; Blue Color
@@ -359,7 +360,7 @@ Global Const $HeroImage[] = [111,25,168,95]
 Global Const $TreasuryImage[] = [135,270,245,390]
 
 Global Const $ShieldTime[] = [190,148,495,170]
-Global Const $ShieldCount[] = [125,495,1045,700]
+Global Const $ShieldCount[] = [125,495,575,610]
 Global Const $RssProduction[] = [1111,1111,1111,1111]
 Global Const $SilverProduction[] = [1111,1111,1111,1111]
 

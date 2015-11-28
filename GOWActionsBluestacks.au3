@@ -10,6 +10,8 @@
 #include <GUIConstantsEx.au3>
 #include <GDIPlus.au3>
 #include <ScreenCapture.au3>
+#include <Inet.au3>
+#include "Email.au3"
 
 Global $isLoggedOut = 0
 Global $isSessionTimeout = False
@@ -653,6 +655,16 @@ Func Shield($attempt)
 	  Sleep(2000)
    EndIf
 
+   ; after we have done or not done replace. If they dont have shields/or gold:
+   IF PollForColor($ShieldNotEnoughGoldButton[0],$ShieldNotEnoughGoldButton[1],$RedNoButton, 3000, "$RedNoButton at $ShieldNotEnoughGoldButton") Then
+	  SendMouseClick($ShieldNotEnoughGoldButton[0],$ShieldNotEnoughGoldButton[1])
+
+	  SendEmail(Login_UserEmail(), "Not enough gold to shield in city: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "It appears that your city does not have any 3d shields or enough gold to buy one. Shielding has been turned off for that city, please turn it back on once there are shields or enough gold.", "Thanks, GoW Minion")
+	  LogMessage("Not enough gold.  CITY MAY BE UNSHIELDED. Shielding has been turned OFF",4)
+	  Login_UpdateShield(0)
+   EndIf
+
+
    LogMessage("Verifying Shield")
 
    ;here we need to verify based on the offset where we found it.
@@ -669,13 +681,42 @@ Func Shield($attempt)
 		 Shield($attempt+1)
 	  Else
 		 $SleepOnLogout = 1
-		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED",4)
+
+		 SendEmail(Login_UserEmail(), "Failed to set shield on: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "Your city has failed to reshield 5 times. We are looking into why, please reshield your city manually to keep it safe.", "Thanks, GoW Minion")
+		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED.",4)
 	  EndIf
    EndIf
 
    ;City Menu
    ClickCityScreen()
 
+EndFunc
+
+Func SendEmail($messageTo, $subject, $messageLine1, $messageLine2, $messageLine3)
+   ;_INetMail ( $messageTo, $subject, $message)
+   ;MsgBox($MB_SYSTEMMODAL, 'E-Mail has been opened', 'The E-Mail has been opened and process identifier for the E-Mail client is' & _INetMail ( $messageTo, $subject, $message))
+
+   $SmtpServer = "smtp.gmail.com"
+   $FromName = "GoW Minion"
+   $FromAddress = "support@gowminion.com"
+   $ToAddress = $messageTo
+   $Subject = $subject
+   $Body = $messageLine1 & @CRLF & $messageLine2 & @CRLF & $messageLine3
+   $AttachFiles = ""
+   $CcAddress = ""
+   $BccAddress = ""
+   $Importance="Normal"
+   $Username = "gameofwarminion@gmail.com"                ; username for the account used from where the mail gets sent - REQUIRED
+   $Password = "gowminion!2"                ; password for the account used from where the mail gets sent - REQUIRED
+   $IPPort=465                     ; GMAIL port used for sending the mail
+   $ssl=1
+   Global $oMyRet[2]
+   Global $oMyError = ObjEvent("AutoIt.Error", "MyErrFunc")
+   ;$Response = _INetSmtpMailCom($s_SmtpServer, $s_FromName, $s_FromAddress, $s_ToAddress, $s_Subject = "", $as_Body = "", $s_AttachFiles = "", $s_CcAddress = "", $s_BccAddress = "", $s_Importance="Normal", $Username, $Password, $IPPort, $ssl)
+   $rc = _INetSmtpMailCom($SmtpServer, $FromName, $FromAddress, $ToAddress, $Subject, $Body, $AttachFiles, $CcAddress, $BccAddress, $Importance, $Username, $Password, $IPPort, $ssl)
+   If @error Then
+	   MsgBox(0, "Error sending message", "Error code:" & @error & "  Description:" & $rc)
+   EndIf
 EndFunc
 
 Func CheckShieldColor()

@@ -63,6 +63,7 @@ Local $_TimezoneOffsetMin = -240
 Local $_LoginDelayMin = 180
 Local $_LoginAttempts = 0
 Local $_LoginActive = 0
+Local $_UserEmail = 0
 
 ; create connection to MSSQL
 Func _SqlConnect() ; connects to the database specified
@@ -138,8 +139,9 @@ Func Load_City($loginID)
 							  "Convert(varchar(20),LastShield,120) as LastShieldConvert,Convert(varchar(20),LastUpgradeBuilding,120) as LastUpgradeBuildingConvert,CollectAthenaGift,RedeemCode,Upgrade, " & _
 							  "RSSBankNum,SilverBankNum,RssMarches,SilverMarches,HasGoldMine," & _
 							  "[Treasury],Convert(varchar(20),LastTreasury,120) as LastTreasuryConvert," & _
-							  "DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, [LoginDelayMin], [LoginAttempts] FROM CityInfo ci " & _
+							  "DATEPART(TZ, SYSDATETIMEOFFSET()) as TimeZoneOffsetMin, [LoginDelayMin], [LoginAttempts], uc.Email FROM CityInfo ci " & _
 							  "inner join City c on ci.CityID = c.CityID " & _
+							  "inner join UserCity uc on uc.CityID = c.CityID " & _
 							  "inner join Login l on c.LoginID = l.LoginID where ci.CityID=" & $_CityID,$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
@@ -178,6 +180,7 @@ Func Load_City($loginID)
    $_TimezoneOffsetMin = $aData[1][28]
    $_LoginDelayMin = $aData[1][29]
    $_LoginAttempts = $aData[1][30]
+   $_UserEmail = $aData[1][31]
 
 
    ;Convert dates to UTC
@@ -310,6 +313,11 @@ Func Login_UpdateLastBank()
    _SQL_Close()
 EndFunc
 
+Func Login_UpdateShield($Shield)
+   _SqlConnect()
+   _SQL_Execute(-1,"Update CityInfo Set Shield = " & $Shield & " Where CityID = " & Login_CityID())
+   _SQL_Close()
+EndFunc
 
 Func Login_UpdateLastTreasury()
    _SqlConnect()
@@ -383,6 +391,11 @@ EndFunc
 
 Func Login_Email()
    return $_userName
+EndFunc
+
+Func Login_UserEmail()
+   return $_UserEmail
+   ;return "grayson@stuntz.org"
 EndFunc
 
 Func Login_Pwd()
