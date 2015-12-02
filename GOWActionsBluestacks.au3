@@ -624,6 +624,7 @@ Func Shield($attempt)
 	  LogMessage("_DateDiff = " & _DateDiff('n',Login_LastShield(),GetNowUTCCalc()))
    EndIf
 
+
    LogMessage("Shielding, Minutes wasted = " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1)
    LogMessage("Attempting to reshield")
 
@@ -652,7 +653,7 @@ Func Shield($attempt)
    ;Check for the replace button
    If PollForColor($ShieldReplaceButton[0],$ShieldReplaceButton[1], $BlueOKButton, 5000, "$BlueOKButton at $ShieldReplaceButton") Then
 	  SendMouseClick($ShieldReplaceButton[0],$ShieldReplaceButton[1])
-	  Sleep(2000)
+	  Sleep(3500)
    EndIf
 
    ; after we have done or not done replace. If they dont have shields/or gold:
@@ -682,8 +683,8 @@ Func Shield($attempt)
 	  Else
 		 $SleepOnLogout = 1
 
-		 SendEmail(Login_UserEmail(), "Failed to set shield on: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "Your city has failed to reshield 5 times. We are looking into why, please reshield your city manually to keep it safe.", "Thanks, GoW Minion")
-		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED.",4)
+		 SendEmail(Login_UserEmail(), "Failed to set shield on: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "Your city has failed to reshield 5 times. There are " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1) & " minutes left on the current shield. Our minions will try again shortly. We are looking into why, please reshield your city manually to keep it safe.", "Thanks, GoW Minion")
+		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED. Shield expires in " & ($minonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1) & " minutes. Our minions will try and reshield again shortly.",4)
 	  EndIf
    EndIf
 
