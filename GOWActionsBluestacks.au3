@@ -167,7 +167,16 @@ Func Login($email, $pwd)
    SendMouseClick($PasswordTextBox[0],$PasswordTextBox[1])
    Sleep(2000)
 
-   Send($pwd)
+   Local $pwdArray = StringToASCIIArray($pwd)
+	  For $i = 0 to UBound($pwdArray)-1
+		 if(Chr($pwdArray[$i]) = "!") Then
+			Send("{!}")
+		 Else
+			Send(Chr($pwdArray[$i]))
+		 EndIf
+		 Sleep(100)
+	  Next
+   ;Send($pwd)
 
    ;Check that the login button is there
    If Not PollForColor($LoginButton[0],$LoginButton[1],$Blue,3000, "$Blue at $LoginButton") Then
