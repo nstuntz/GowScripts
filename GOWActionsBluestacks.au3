@@ -171,6 +171,16 @@ Func Login($email, $pwd)
 	  For $i = 0 to UBound($pwdArray)-1
 		 if(Chr($pwdArray[$i]) = "!") Then
 			Send("{!}")
+		 ElseIf (Chr($pwdArray[$i]) = "+") Then
+			Send("{+}")
+		 ElseIf (Chr($pwdArray[$i]) = "#") Then
+			Send("{#}")
+		 ElseIf (Chr($pwdArray[$i]) = "^") Then
+			Send("{^}")
+		 ElseIf (Chr($pwdArray[$i]) = "{") Then
+			Send("{{}")
+		 ElseIf (Chr($pwdArray[$i]) = "}") Then
+			Send("{}}")
 		 Else
 			Send(Chr($pwdArray[$i]))
 		 EndIf

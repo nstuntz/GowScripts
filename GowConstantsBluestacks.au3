@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "11.28.2015.01"
+Global Const $VersionNumber = "12.6.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -314,7 +314,7 @@ Global Const $GoldExitButton3 = [523,168]
 
 Global Const $GoldSearchLeft = 266
 Global Const $GoldSearchTop = 600
-Global Const $GoldSearchBottom = 700
+Global Const $GoldSearchBottom = 800
 Global Const $GoldSearchRight = 270
 
 Global Const $GoldBuyButton = [1135,340]
