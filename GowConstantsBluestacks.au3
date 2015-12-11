@@ -101,8 +101,9 @@ Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168
 Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298]
 Global Const $NOHelpColor = 12663823
 ;Boucers
-Global Const $AthenaGift = [265,565]
-Global Const $NoAthenaGiftColor = 5933875
+Global Const $AthenaGift = [165,502] ; Old = [265,565]
+Global Const $NoAthenaGiftColor = 5866031 ; old = 5933875
+
 Global Const $AthenaGiftCollectButton = [411,460] ;411,460 - 11230223
 Global Const $SecretGift = [165,570]
 Global Const $SecretGiftCollectButton = [411,430] ;411,430 - 11230223
