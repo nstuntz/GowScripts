@@ -176,7 +176,7 @@ Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
 								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [520,580] ; Blue
+Global Const $RSSHelpButton = [410,575] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
 Global Const $MarketLocation = [200,435] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
