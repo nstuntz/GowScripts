@@ -1430,6 +1430,7 @@ Func OpenGOW($attempts)
 
    ;double click the Icon
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
+   sleep(100)
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
    sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.
