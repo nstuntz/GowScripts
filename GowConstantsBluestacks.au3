@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "11.28.2015.01"
+Global Const $VersionNumber = "12.21.2015.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -98,11 +98,12 @@ Global Const $AllianceHelpHelpAllButton = [550,610]
 Global Const $HelpButton = [560,585] ; 560,585 - 14726291
 Global Const $HelpButtonColor = 10117447
 Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
-Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298]
+Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298,14203814]
 Global Const $NOHelpColor = 12663823
 ;Boucers
-Global Const $AthenaGift = [265,565]
-Global Const $NoAthenaGiftColor = 5933875
+Global Const $AthenaGift = [165,495] ; Old = [265,565]
+Global Const $NoAthenaGiftColor = 13092798 ; old = 5933875
+
 Global Const $AthenaGiftCollectButton = [411,460] ;411,460 - 11230223
 Global Const $SecretGift = [165,570]
 Global Const $SecretGiftCollectButton = [411,430] ;411,430 - 11230223
@@ -175,7 +176,7 @@ Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
 								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [520,580] ; Blue
+Global Const $RSSHelpButton = [410,575] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
 Global Const $MarketLocation = [200,435] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
@@ -314,7 +315,7 @@ Global Const $GoldExitButton3 = [523,168]
 
 Global Const $GoldSearchLeft = 266
 Global Const $GoldSearchTop = 600
-Global Const $GoldSearchBottom = 700
+Global Const $GoldSearchBottom = 800
 Global Const $GoldSearchRight = 270
 
 Global Const $GoldBuyButton = [1135,340]

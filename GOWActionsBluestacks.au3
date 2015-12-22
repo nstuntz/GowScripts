@@ -169,8 +169,18 @@ Func Login($email, $pwd)
 
    Local $pwdArray = StringToASCIIArray($pwd)
 	  For $i = 0 to UBound($pwdArray)-1
-		 if((Chr($pwdArray[$i]) = "!") OR (Chr($pwdArray[$i]) = "+") OR (Chr($pwdArray[$i]) = "#") OR (Chr($pwdArray[$i]) = "^") OR (Chr($pwdArray[$i]) = "{") OR (Chr($pwdArray[$i]) = "}"))Then
-			Send("{"&$pwdArray[$i]&"}")
+		 if(Chr($pwdArray[$i]) = "!") Then
+			Send("{!}")
+		 ElseIf (Chr($pwdArray[$i]) = "+") Then
+			Send("{+}")
+		 ElseIf (Chr($pwdArray[$i]) = "#") Then
+			Send("{#}")
+		 ElseIf (Chr($pwdArray[$i]) = "^") Then
+			Send("{^}")
+		 ElseIf (Chr($pwdArray[$i]) = "{") Then
+			Send("{{}")
+		 ElseIf (Chr($pwdArray[$i]) = "}") Then
+			Send("{}}")
 		 Else
 			Send(Chr($pwdArray[$i]))
 		 EndIf
@@ -1424,6 +1434,7 @@ Func OpenGOW($attempts)
 
    ;double click the Icon
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
+   sleep(100)
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
    sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.
