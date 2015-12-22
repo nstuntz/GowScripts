@@ -151,16 +151,26 @@ Func Login($email, $pwd)
    SendMouseClick($UserNameTextBox[0],$UserNameTextBox[1])
    sleep(1000)
 
-   If StringLen($email) > 15 Then
-
-	  Local $emailArray = StringToASCIIArray($email)
-	  For $i = 0 to UBound($emailArray)-1
+   Local $emailArray = StringToASCIIArray($email)
+   For $i = 0 to UBound($emailArray)-1
+	  if(Chr($emailArray[$i]) = "!") Then
+		 Send("{!}")
+	  ElseIf (Chr($emailArray[$i]) = "+") Then
+		 Send("{+}")
+	  ElseIf (Chr($emailArray[$i]) = "#") Then
+		 Send("{#}")
+	  ElseIf (Chr($emailArray[$i]) = "^") Then
+		 Send("{^}")
+	  ElseIf (Chr($emailArray[$i]) = "{") Then
+		 Send("{{}")
+	  ElseIf (Chr($emailArray[$i]) = "}") Then
+		 Send("{}}")
+	  Else
 		 Send(Chr($emailArray[$i]))
-		 Sleep(100)
-	  Next
-   Else
-	  Send($email)
-   EndIf
+	  EndIf
+	  Sleep(100)
+   Next
+
    Sleep(2000)
 
    ;Password
