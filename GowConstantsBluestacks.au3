@@ -156,7 +156,7 @@ Global Const $ShieldNotEnoughGoldButton = [300,270]
 
 ;Banking
 Global Const $HelpTopMember = [560,230] ; Blue Color
-Global Const $HelpNumberOffsetX = 60
+Global Const $HelpNumberOffsetX = 58
 Global Const $HelpSecondMember = [590,310] ; Blue Color
 Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 								   [623,245], _ ;Wood

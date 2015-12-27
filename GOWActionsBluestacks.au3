@@ -904,7 +904,7 @@ Func SendRSS($type, $nonSilverType)
 
 	  ;Poll for first Help button
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
-		 SendMouseClick($HelpTopMember[0] + $helpOffsetX,$HelpTopMember[1])
+		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1+ $helpOffsetX)
 	  ElseIf PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton - If need be") Then
 		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
@@ -926,9 +926,10 @@ Func SendRSS($type, $nonSilverType)
 		 LogMessage("Banking - Maxing silver march with rss",2)
 		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
 		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
-		 sleep(1500)
+		 Sleep(500)
 	  EndIf
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
+	  ;move the mouse then check and click
 	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton") Then
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
@@ -979,8 +980,8 @@ Func SendRSS($type, $nonSilverType)
 		 return true
 	  Else
 		 ;Couldnt find either button after 4 seconds. Probably on the rally screen
-		 LogMessage("Seems like we are not in the marketplace anymore. Hitting ESC")
-		 Send("{ESC}")
+		 LogMessage("Seems like we are not in the marketplace anymore. Hitting ESC - nope")
+		 ;Send("{ESC}")
 		 Sleep(500)
 		 If Not (CheckForColor($HelpTopMember[0],$HelpTopMember[1],$Blue) OR CheckForColor($RSSHelpButton[0],$RSSHelpButton[1],$Blue)) Then
 			Return false
