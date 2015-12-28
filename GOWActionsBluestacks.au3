@@ -904,7 +904,7 @@ Func SendRSS($type, $nonSilverType)
 
 	  ;Poll for first Help button
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
-		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1+ $helpOffsetX)
+		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1] + $helpOffsetX)
 	  ElseIf PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton - If need be") Then
 		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
@@ -966,6 +966,91 @@ Func SendRSS($type, $nonSilverType)
 			Endif
 		 Endif
 	  ;Endif
+
+	  ;Check for max send
+	  If CheckForColor($MaxMarchesExceeded[0],$MaxMarchesExceeded[1],$Blue) Then
+		 SendMouseClick($MaxMarchesExceeded[0],$MaxMarchesExceeded[1])
+		 return false
+	  Endif
+
+	  ;Check for Rally screen - Could do this using the check sum for Alliance War at the top of the screen
+	  ;If neither the done button is there or the top help is there check for rally screen
+	  ;If Not (CheckForColor($HelpTopMember[0],$HelpTopMember[1],$Blue) OR CheckForColor($RSSHelpButton[0],$RSSHelpButton[1],$Blue)) Then
+	  IF (PollForColorTwoPlaces($HelpTopMember[0],$HelpTopMember[1],$RSSHelpButton[0],$RSSHelpButton[1],$Blue, 4000, "Polling for $Blue in both helps places")) Then
+		 return true
+	  Else
+		 ;Couldnt find either button after 4 seconds. Probably on the rally screen
+		 LogMessage("Seems like we are not in the marketplace anymore. Hitting ESC - nope")
+		 ;Send("{ESC}")
+		 Sleep(500)
+		 If Not (CheckForColor($HelpTopMember[0],$HelpTopMember[1],$Blue) OR CheckForColor($RSSHelpButton[0],$RSSHelpButton[1],$Blue)) Then
+			Return false
+		 EndIf
+	  EndIf
+
+
+	  return true
+
+EndFunc
+
+
+;Assumes you are in the market place ready to send, and gets back to that point
+Func SendRSS_TryTwo($type, $nonSilverType)
+
+	  Local $helpOffsetX = (Login_RSSBank() - 1) * $HelpNumberOffsetX
+
+	  If ($type = $eSilver) Then
+		 $helpOffsetX = (Login_SilverBank() - 1) * $HelpNumberOffsetX
+	  EndIf
+
+	  ;Poll for first Help button
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
+		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1] + $helpOffsetX)
+	  ElseIf PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton - If need be") Then
+		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+		 return True
+	  Else
+		 LogMessage("Banking - No help button")
+		 ;City Menu
+		 return false
+	  Endif
+
+	  ;Max the food if we can by filling silver marches with it
+	  Local $colorClick = 197379
+	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000, "$colorClick or $Black at $HelpRSSMax") Then
+		 ;do nothing this is just to wait to see if we can send faster
+	  EndIf
+
+	  ;Removed the restriction to only add other rss on food.
+	  If ($type = $eSilver And $nonSilverType >0) Then
+		 LogMessage("Banking - Maxing silver march with rss",2)
+		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
+		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
+		 Sleep(500)
+	  EndIf
+	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
+	  ;move the mouse then check and click
+	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+	  If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton") Then
+		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+	  Endif
+
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(2)") Then
+		 return True
+	  EndIf
+
+
+		 ;delay until the top help is back
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(3)") Then
+		 ;Do nothing this is
+	  Else
+		 ;Should check if the help button didn't really get clicked
+		 If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 3000) Then
+			SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+			Sleep(1000)
+		 EndIf
+	  Endif
 
 	  ;Check for max send
 	  If CheckForColor($MaxMarchesExceeded[0],$MaxMarchesExceeded[1],$Blue) Then
