@@ -1,11 +1,14 @@
 
 #include "../GowConstantsBluestacks.au3"
 #include "../GowActionsBluestacks.au3"
+#include "../LoginObject.au3"
 #include <Date.au3>
 #include <Array.au3>
 
 Local $width = 250
 Local $height = 130
+
+Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
 Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
@@ -18,13 +21,19 @@ WinActivate ("BlueStacks","")
 Sleep(1000)
 WinWaitActive ("BlueStacks","")
 Sleep(1000)
-WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
+Sleep(1000)
 
+
+If $AlreadyLoggedIn = 0 Then
 ;Open GOW
-OpenGOW(0)
+   OpenGOW(0)
 
-;Login
-Login($loginEmail,$loginPWD)
+   ;Login
+   Login($loginEmail,$loginPWD)
+Else
+   MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
+EndIf
 
 Login_SetInProcess($loginEmail,$MachineID)
 

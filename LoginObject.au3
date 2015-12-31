@@ -339,13 +339,13 @@ EndFunc
 
 Func Login_SetInProcess($Email, $Machine)
    _SqlConnect()
-   _SQL_Execute(-1,"Update Login Set InProcess = " & $Machine & " Where username = '" & $Email & "'")
+   _SQL_Execute(-1,"Update Login Set InProcess = '" & $Machine & "' Where username = '" & $Email & "'")
    _SQL_Close()
 EndFunc
 
 Func Login_ResetInProcess()
    _SqlConnect()
-   _SQL_Execute(-1,"Update Login Set InProcess=0 Where LoginID = " & Login_LoginID())
+   _SQL_Execute(-1,"Update Login Set InProcess='0' Where LoginID = " & Login_LoginID())
    _SQL_Close()
 EndFunc
 

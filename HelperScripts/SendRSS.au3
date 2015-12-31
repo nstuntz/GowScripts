@@ -7,6 +7,7 @@ Local $width = 250
 Local $height = 130
 
 Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
+Local $sendOffset = InputBox("Send Offset", "Send Offset:","1","",$width,$height)
 Local $loginEmail = ""
 Local $loginPWD = ""
 
@@ -39,7 +40,7 @@ WinActivate ("BlueStacks","")
 Sleep(1000)
 WinWaitActive ("BlueStacks","")
 Sleep(1000)
-WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
 Sleep(1000)
 
 If $AlreadyLoggedIn = 0 Then
@@ -53,14 +54,21 @@ If $AlreadyLoggedIn = 0 Then
 	  MsgBox(0,"Paused","Something went wrong....  Don't have a login")
    EndIf
 Else
-	  MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
+   MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
    ;MouseClickDrag("left",650,600,905,290,20)
    ;Sleep(500)
 EndIf
 
+If $sendOffset < 1 or $sendOffset > 6 Then
+   MsgBox(0,"Paused","Setting $sendOffset = 1 since it was < 1 or > 6")
+   $sendOffset = 1
+EndIf
+
+Login_RSSBank() = $sendOffset-1
+Login_SilverBank() = $sendOffset-1
+
 ;Click Market Place
 SendMouseClick($MarketLocation[0],$MarketLocation[1])
-
 
 MsgBox(0,"Paused","Scroll Market so desired City is the top of the list.")
 WinActivate ("BlueStacks","")

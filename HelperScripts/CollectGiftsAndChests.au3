@@ -1,11 +1,13 @@
-
 #include "../GowConstantsBluestacks.au3"
 #include "../GowActionsBluestacks.au3"
+#include "../LoginObject.au3"
 #include <Date.au3>
 #include <Array.au3>
 
 Local $width = 250
 Local $height = 130
+
+Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
 Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
@@ -14,55 +16,32 @@ HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 
 
-If FileExists($LogFileName) = 1 Then
-   FileDelete($LogFileName)
-EndIf
-
 WinActivate ("BlueStacks","")
 Sleep(1000)
 WinWaitActive ("BlueStacks","")
 Sleep(1000)
-WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
+Sleep(1000)
 
-Local $StartTime = '2015/06/24 05:30:00'
 
-
+If $AlreadyLoggedIn = 0 Then
 ;Open GOW
-OpenGOW(0)
+   OpenGOW(0)
 
-;Login
-;Login($loginEmail,$loginPWD)
-
-;Logout
-;Logout()
-Sleep(5000)
-
-;While (_DateDiff('n',_NowCalc(),$StartTime) > 0)
-;   Sleep(300000) ; Sleep 5 minutes
-
-;   MouseMove($LoginButton[0],$LoginButton[1])
-;   Sleep(1000)
-;   MouseMove($LoginFailureButton[0],$LoginFailureButton[1])
-;   Sleep(1000)
-;WEnd
+   ;Login
+   Login($loginEmail,$loginPWD)
+Else
+   MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
+EndIf
 Local $startRunTime = _NowCalc()
 
-;Open GOW
-;OpenGOW(0)
 
-;Login
-if Not Login($loginEmail,$loginPWD) Then
-   MsgBox(0,"Paused","Something went wrong....  Login Failed")
-   Exit
-EndIf
+Login_SetInProcess($loginEmail,$MachineID)
 
 Local $openedChests = 0
 
-If Not CheckForCityScreen(0) Then
-   MsgBox(0,"Paused","Something went wrong....  Don't have a login")
-EndIf
-
 ;Gifts()
+
 Local $totalChests = 0
 ;Loop to get all chests
 Do
@@ -70,9 +49,8 @@ Do
    $totalChests += $openedChests
 Until ($openedChests = 0)
 
-;Logout
-;Logout()
-;Sleep(5000)
+
+Login_SetInProcess($loginEmail,0)
 
 MsgBox(0,"Success","Total Chests opened: " & $totalChests & " -- Time = " & _DateDiff('n',$startRunTime,_NowCalc()))
 

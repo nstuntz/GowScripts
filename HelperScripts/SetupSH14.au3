@@ -1,10 +1,13 @@
-#include "GowConstants.au3"
-#include "GowActions.au3"
+#include "../GowConstantsBluestacks.au3"
+#include "../GowActionsBluestacks.au3"
+#include "../LoginObject.au3"
 #include <Date.au3>
 #include <Array.au3>
 
 Local $width = 250
 Local $height = 130
+
+Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
 Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
@@ -12,18 +15,26 @@ Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 HotKeySet("{F9}","HotKeyPressed")
 HotKeySet("{F8}","HotKeyPressed")
 
-WinActivate ("GOw2 [Running] - Oracle VM VirtualBox","")
+
+WinActivate ("BlueStacks","")
 Sleep(1000)
-WinWaitActive ("GOw2 [Running] - Oracle VM VirtualBox","")
+WinWaitActive ("BlueStacks","")
+Sleep(1000)
+   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],$GOWWindowSize[0],$GOWWindowSize[1])
+Sleep(1000)
 
-;Dependant on window at 401x77
-WinMove("GOw2 [Running] - Oracle VM VirtualBox","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
+If $AlreadyLoggedIn = 0 Then
 ;Open GOW
-OpenGOW(0)
+   OpenGOW(0)
 
-;Login
-Login($loginEmail,$loginPWD)
+   ;Login
+   Login($loginEmail,$loginPWD)
+Else
+   MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
+   ;MouseClickDrag("left",650,600,905,290,20)
+   ;Sleep(500)
+EndIf
 
 Login_SetInProcess($loginEmail,$MachineID)
 
