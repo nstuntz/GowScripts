@@ -7,8 +7,8 @@
 Local $width = 250
 Local $height = 130
 
-Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
-Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
+Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","1","",$width,$height)
+Local $loginEmail = InputBox("Username", "UserName:","gameofwargorth@gmail.com","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
@@ -36,6 +36,8 @@ Else
    ;Sleep(500)
 EndIf
 
+Local $startRunTime = _NowCalc()
+
 Login_SetInProcess($loginEmail,$MachineID)
 
 CollectAllQuestsWithChances(1,1)
@@ -54,4 +56,5 @@ Until ($openedChests = 0)
 
 Login_SetInProcess($loginEmail,0)
 
-MsgBox(0,"Success","Finished")
+
+MsgBox(0,"Success","Total Chests opened: " & $totalChests & " -- Time = " & _DateDiff('n',$startRunTime,_NowCalc()))
