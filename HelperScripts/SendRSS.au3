@@ -7,24 +7,25 @@ Local $width = 250
 Local $height = 130
 
 Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
-Local $sendOffset = InputBox("Send Offset", "Send Offset:","1","",$width,$height)
+;Local $sendOffset = InputBox("Send Offset", "Send Offset:","1","",$width,$height)
 Local $loginEmail = ""
 Local $loginPWD = ""
 
+$loginEmail = InputBox("Username", "UserName:","md.defence8333@gmail.com","",$width,$height)
+
 If $AlreadyLoggedIn = 0 Then
-   $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
    $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 EndIf
 
 Local $stone =  InputBox("Stone", "Stone:","0","",$width,$height)
 Local $wood =  InputBox("Wood", "Wood:","0","",$width,$height)
 Local $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
-Local $food =  InputBox("Food", "Food:","0","",$width,$height)
+Local $food =  InputBox("Food", "Food:","5000","",$width,$height)
 Local $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 Local $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","37000","",$width,$height)
 
 Local $MarchesAllowed = InputBox("Marches", "Marches:","6","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","7.9","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","5.9","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
 
@@ -59,13 +60,12 @@ Else
    ;Sleep(500)
 EndIf
 
-If $sendOffset < 1 or $sendOffset > 6 Then
-   MsgBox(0,"Paused","Setting $sendOffset = 1 since it was < 1 or > 6")
-   $sendOffset = 1
-EndIf
+;If $sendOffset < 1 or $sendOffset > 6 Then
+;   MsgBox(0,"Paused","Setting $sendOffset = 1 since it was < 1 or > 6")
+;   $sendOffset = 1
+;EndIf
 
-Login_RSSBank() = $sendOffset-1
-Login_SilverBank() = $sendOffset-1
+Login_SetInProcess($loginEmail,$MachineID)
 
 ;Click Market Place
 SendMouseClick($MarketLocation[0],$MarketLocation[1])

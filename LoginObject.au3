@@ -549,6 +549,10 @@ Func Login_LoginAttempts()
 	return $_LoginAttempts
 EndFunc
 
+Func Login_SetBanks($rSSBank, $silverBank)
+   $_RSSBank = $rSSBank
+   $_SilverBank = $silverBank
+EndFunc
 
 
 
