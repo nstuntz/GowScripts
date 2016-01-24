@@ -152,7 +152,7 @@ Global Const $ShieldReplaceButton = [490,280]
 Global Const $ShieldVerifyMaxLength = [485,162]
 Global Const $ShieldCountDownBlue = 1337186
 Global Const $ShieldCountDownBlueAlt = 6002065
-Global Const $ShieldNotEnoughGoldButton = [300,270]
+Global Const $ShieldNotEnoughGoldButton = [300,265]
 
 ;Banking
 Global Const $HelpTopMember = [560,230] ; Blue Color
