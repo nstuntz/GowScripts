@@ -1637,7 +1637,9 @@ Func CloseGOW()
 	  EndIf
 
 	  ;Make sure we release this city
-	  Login_Write()
+	  ;Login_Write()
+	  ;Making this not set the last login because we didn't always get all through it
+	  Login_ResetInProcess()
    EndIf
 
    ;sleep 5 seconds to get everything cleaned up
