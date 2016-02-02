@@ -128,6 +128,10 @@ Func Login($email, $pwd)
    If Not PollForColor( $UserNameTextBox[0],$UserNameTextBox[1], $UserNameTextBoxColor,1000, "$UserNameTextBoxColor at $UserNameTextBox") Then
 	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
+
+	  ;Checking for PinPrompt
+
+
 	  ;Check if you are already logged in Use the last attempt, don't do it lots
 	  If CheckForCityScreen(4) Then
 		 LogMessage("Ok, we are already logged in so just keep going")
@@ -211,7 +215,7 @@ Func Login($email, $pwd)
 
 
    ;Now check for a Pin
-   If Not CheckForPinPrompt() Then
+   If Not CheckForPinPrompt(StringToASCIIArray(Login_PIN())) Then
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
@@ -1582,20 +1586,14 @@ Func OpenGOW($attempts)
 		 OpenGOW($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
-		 If CheckForSessionTimeout() Then
-			LogMessage("Writing Login from OpenGOW function because of session timeout",1)
-			Login_Write()
-		 ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$black)) Then
-			LogMessage("Looks like we black screened before resizing")
-			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
-			OpenGOW($attempts+1)
-		 ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$ExitAppErrorColor)) Then
-			LogMessage("Looks like we need to exit the game.")
-			;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
-			SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])
-			OpenGOW($attempts+1)
-		 Else
-			LogMessage("Looks like we are in GoW")
+
+		 If (CheckForColor($EmailPinCodeButton[0],$EmailPinCodeButton[1],$blue)) Then
+			LogMessage("Looks like we are expecting a PIN")
+
+			   ;Check for PIN Prompt using the stored PIN. Enter it and then sleep a bit and ESC the gold screen and logout.
+			CheckForPinPrompt(StringToASCIIArray($storedPIN))
+			Sleep(15000)
+
 			Send("ESC")
 			Sleep(2000)
 			If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
@@ -1605,6 +1603,31 @@ Func OpenGOW($attempts)
 			Logout()
 			Sleep(2000)
 			OpenGOW($attempts+1)
+		 Else
+			If CheckForSessionTimeout() Then
+			   LogMessage("Writing Login from OpenGOW function because of session timeout",1)
+			   Login_Write()
+			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$black)) Then
+			   LogMessage("Looks like we black screened before resizing")
+			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			   OpenGOW($attempts+1)
+			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$ExitAppErrorColor)) Then
+			   LogMessage("Looks like we need to exit the game.")
+			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
+			   SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])
+			   OpenGOW($attempts+1)
+			Else
+			   LogMessage("Looks like we are in GoW")
+			   Send("ESC")
+			   Sleep(2000)
+			   If PollForColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000, "$Blue at $ConnectionInteruptButton") Then
+				  SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
+				  Sleep(500)
+			   EndIf
+			   Logout()
+			   Sleep(2000)
+			   OpenGOW($attempts+1)
+			EndIf
 		 EndIf
 	  EndIf
 
@@ -1646,9 +1669,9 @@ Func CloseGOW()
    Sleep(5000)
 EndFunc
 
-Func CheckForPinPrompt()
+Func CheckForPinPrompt($pinArray)
    ;LogMessage("Checking for PIN")
-   Local $pinArray = StringToASCIIArray(Login_PIN())
+   ;Local $pinArray = StringToASCIIArray(Login_PIN())
    If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000, "$PinBoxColor at $FirstPinBox") Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 

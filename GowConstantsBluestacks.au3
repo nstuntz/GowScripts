@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "12.27.2015.01"
+Global Const $VersionNumber = "2.1.2016.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -45,11 +45,15 @@ Global Const $FirstPinBox = [230,150]
 Global Const $SecondPinBox = [315,150]
 Global Const $PinBoxColor = 16777215
 
+Global Const $EmailPinCodeButton = [540,260]
+
 ;Menus
 Global Const $CityMenu = [165,725]
 Global $CityScreenColor = 4993559 ;winter2014=1053712 ; Fall2014= 1050624 ; - Old standard one - 1051656     7377064
 Global $MapMenuColor = 2246954 ;winter2014=4744320; fall2014 = 7888928 ; - Old Map Color 9471048   5788760
 Global $SleepOnLogout = 0
+
+Global $storedPIN = ""
 
 ;;;;Connection Code Interupted Bluestacks only. Appears on every login it looks like
 Global Const $ConnectionInteruptButton = [430,260]
