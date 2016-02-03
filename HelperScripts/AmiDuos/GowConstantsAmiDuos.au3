@@ -11,7 +11,7 @@ Global Const $VersionNumber = "2.1.2016.01"
 
 Global Const $GOWVBHostWindow[] = [100,0]
 Global Const $GoW500by800IconLocation[] = [200,320]
-Global Const $GOWWindowSize[] = [500,800]
+Global Const $GOWWindowSize[] = [300,700]
 Global Const $GOWRandomSpotForBlankScreenCheck = [340,700]
 
 ;;;;;; MOVED TO GowLocalConstantsBluestacks
@@ -159,8 +159,8 @@ Global Const $ShieldCountDownBlueAlt = 6002065
 Global Const $ShieldNotEnoughGoldButton = [300,265]
 
 ;Banking
-Global Const $HelpTopMember = [560,230] ; Blue Color
-Global Const $HelpNumberOffsetX = 58
+Global Const $HelpTopMember = [690,270] ; Blue Color
+Global Const $HelpNumberOffsetX = 60
 Global Const $HelpSecondMember = [590,310] ; Blue Color
 Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 								   [623,245], _ ;Wood
@@ -173,16 +173,16 @@ Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 ;								   [770,342], _ ;Food
 ;								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
-Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
-								   [415,216], _ ;Wood
-								   [415,269], _ ;Ore
-								   [415,322], _ ;Food
-								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
+Global Const $HelpRSSMax[][] = [[509,209], _ ;Stone
+								   [509,277], _ ;Wood
+								   [509,342], _ ;Ore
+								   [509,407], _ ;Food
+								   [509,474]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
-Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [410,575] ; Blue
+Global Const $DoneAmountEntryButton = [700,790] ; Blue color
+Global Const $RSSHelpButton = [645,645] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
-Global Const $MarketLocation = [200,435] ; this is after being zeroed on the screen
+Global Const $MarketLocation = [275,475] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
 Global Const $MaxMarchesExceeded = [400,255]
 

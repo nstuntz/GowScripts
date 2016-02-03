@@ -1,8 +1,8 @@
 #include-once
-#include "GowConstantsBluestacks.au3"
-#include "GowLocalConstantsBluestacks.au3"
-#include "MachineConfig.au3"
-#include "LoginObject.au3"
+#include "GowConstantsAmiDuos.au3"
+;#include "GowLocalConstantsBluestacks.au3"
+;#include "MachineConfig.au3"
+;#include "LoginObject.au3"
 #include <MsgBoxConstants.au3>
 #include <FileConstants.au3>
 #include <File.au3>
@@ -11,7 +11,7 @@
 #include <GDIPlus.au3>
 #include <ScreenCapture.au3>
 #include <Inet.au3>
-#include "Email.au3"
+;#include "Email.au3"
 
 Global $isLoggedOut = 0
 Global $isSessionTimeout = False
@@ -902,15 +902,32 @@ EndFunc
 ;Assumes you are in the market place ready to send, and gets back to that point
 Func SendRSS($type, $nonSilverType)
 
-	  Local $helpOffsetX = (Login_RSSBank() - 1) * $HelpNumberOffsetX
+; New Logic:
+;	CLick on helptopmember. Then click on Rss
+;	Loop until TopHelpMember is blue again
+;		Check both locations to see if it is rally screen (Fringe Case)
+;		Poll for 1 second on bottom help.
+;		Click on bottom help
+;		Check Max marches exceeded
+;		Poll for 2 seconds on TopHelp
+;			if found break loop return True
+;			else continue
+;
+;
+;
+;
 
-	  If ($type = $eSilver) Then
-		 $helpOffsetX = (Login_SilverBank() - 1) * $HelpNumberOffsetX
-	  EndIf
+
+
+;Local $helpOffsetX = (Login_RSSBank() - 1) * $HelpNumberOffsetX
+
+	  ;If ($type = $eSilver) Then
+	;	 $helpOffsetX = (Login_SilverBank() - 1) * $HelpNumberOffsetX
+	  ;EndIf
 
 	  ;Poll for first Help button
 	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
-		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1] + $helpOffsetX)
+		 SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1]); + $helpOffsetX)
 	  ElseIf PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 4000, "$Blue at $RSSHelpButton - If need be") Then
 		 MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
@@ -922,7 +939,7 @@ Func SendRSS($type, $nonSilverType)
 	  Endif
 
 	  ;Max the food if we can by filling silver marches with it
-	  Local $colorClick = 197379
+	  Local $colorClick = 65793
 	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000, "$colorClick or $Black at $HelpRSSMax") Then
 		 ;do nothing this is just to wait to see if we can send faster
 	  EndIf
@@ -954,23 +971,23 @@ Func SendRSS($type, $nonSilverType)
 
 		 ;Sleep(1000)
 	  ;Else
-		 If ($DonationConfirmation = 1) Then
-			If PollForColor($RSSOKButton[0],$RSSOKButton[1], $Blue, 3000, "$Blue at $RSSOKButton") Then
-			   SendMouseClick($RSSOKButton[0],$RSSOKButton[1])
-			EndIf
-			Sleep(1000)
-		 Else
-			;delay until the top help is back
-			If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(3)") Then
-			   ;Do nothing this is
-			Else
-			   ;Should check if the help button didn't really get clicked
-			   If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 3000) Then
-				  SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
-				  Sleep(1000)
-			   EndIf
-			Endif
-		 Endif
+;		 If ($DonationConfirmation = 1) Then
+;			If PollForColor($RSSOKButton[0],$RSSOKButton[1], $Blue, 3000, "$Blue at $RSSOKButton") Then
+;			   SendMouseClick($RSSOKButton[0],$RSSOKButton[1])
+;			EndIf
+;			Sleep(1000)
+;		 Else
+;			;delay until the top help is back
+;			If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(3)") Then
+;			   ;Do nothing this is
+;			Else
+;			   ;Should check if the help button didn't really get clicked
+;			   If PollForColor($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 3000) Then
+;				  SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
+;				  Sleep(1000)
+;			   EndIf
+;			Endif
+;		 Endif
 	  ;Endif
 
 	  ;Check for max send
@@ -2233,7 +2250,7 @@ Func LogMessage($message, $severity = 1)
 
    FileWriteLine( $LogFileName,$message)
 
-   Local $loginID = Login_LoginID()
+   Local $loginID = 0 ;Login_LoginID()
    If $loginID = 0 Then
 	  $loginID = "NULL"
    EndIf
@@ -2242,9 +2259,9 @@ Func LogMessage($message, $severity = 1)
 	  $message = StringReplace($message,"'","")
    Endif
 
-   _SqlConnect()
-   _SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity & "," & $loginID & ",'" & $message & "')" )
-   _SQL_Close()
+   ;_SqlConnect()
+   ;_SQL_Execute(-1,"Insert Into Log ([MachineID],[Severity],[LoginID],[Message]) Values ('" & $MachineID & "'," & $severity & "," & $loginID & ",'" & $message & "')" )
+   ;_SQL_Close()
 
 EndFunc
 

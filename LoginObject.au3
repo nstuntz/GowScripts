@@ -402,6 +402,7 @@ Func Login_Pwd()
    return $_Password
 EndFunc
 Func Login_PIN()
+   $storedPIN = $_PIN
    return $_PIN
 EndFunc
 
