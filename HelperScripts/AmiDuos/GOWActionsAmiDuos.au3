@@ -31,6 +31,9 @@ Func SendRSS($type, $nonSilverType)
 ;			else continue
    If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
 	  SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1])
+   Else
+	  return false
+   EndIf
    local $count = 0
    While 1
 	  ;Loop clicking on max rss and bottom help until you see the top button again
@@ -46,16 +49,16 @@ Func SendRSS($type, $nonSilverType)
 		 Sleep(500)
 	  EndIf
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
-	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 
-	  If PollForSend($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 1000, "$Blue at $RSSHelpButton") Then
+	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
+	  If PollForSend($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 2000) Then
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
 	  Endif
 
 	  ;Check for max send
 	  If CheckForColor($MaxMarchesExceeded[0],$MaxMarchesExceeded[1],$Blue) Then
+		 LogMessage("Trying to click send")
 		 SendMouseClick($MaxMarchesExceeded[0],$MaxMarchesExceeded[1])
-		 return false
 	  Endif
 
 	  ;MouseMove($HelpTopMember[0],$HelpTopMember[1])
@@ -80,13 +83,13 @@ Func SendRSS($type, $nonSilverType)
 
 EndFunc
 
-Func PollingForSend($x1,$x2,$colors,$timeout)
+Func PollForSend($x1,$y1,$colors,$timeout)
    Local $pixelColor = 0
    Local $waited = 0
 
    While $waited < $timeout
 	  $pixelColor = PixelGetColor($x1,$y1)
-	  If Not (_ArraySearch($colors,$pixelColor) > -1) Then
+	  If Not($pixelColor = $colors) Then
 		 Sleep(250)
 		 $waited = $waited + 250
 	  Else

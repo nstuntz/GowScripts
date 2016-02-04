@@ -184,7 +184,7 @@ Global Const $RSSHelpButton = [645,645] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
 Global Const $MarketLocation = [275,475] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
-Global Const $MaxMarchesExceeded = [400,255]
+Global Const $MaxMarchesExceeded = [530,300]
 
 Global Const $SessionTimeoutButton = [410,250]
 
