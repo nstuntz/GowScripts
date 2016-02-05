@@ -86,7 +86,7 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 
    While $RssSent < $RssAmount
 
-	  If (SendRSS($RSSId,-1)) Then
+	  If (SendRSS($RSSId,-1,$sendOffset)) Then
 		 $marches = $marches + 1
 
 		 If $marches >= $MarchesAllowed Then

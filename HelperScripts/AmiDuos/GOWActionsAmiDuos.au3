@@ -17,7 +17,7 @@ Global $isLoggedOut = 0
 Global $isSessionTimeout = False
 
 ;Assumes you are in the market place ready to send, and gets back to that point
-Func SendRSS($type, $nonSilverType)
+Func SendRSS($type, $nonSilverType, $offset)
 
 ; New Logic:
 ;	CLick on helptopmember. Then click on Rss
@@ -30,7 +30,7 @@ Func SendRSS($type, $nonSilverType)
 ;			if found break loop return True
 ;			else continue
    If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
-	  SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1])
+	  SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1] + ($offset - 1) * $HelpNumberOffsetX)
    Else
 	  return false
    EndIf
