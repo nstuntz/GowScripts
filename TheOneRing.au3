@@ -11,6 +11,7 @@ Sleep(15000) ; 15 seconds
 
 ;Find Git
 Local $FirstTime = True
+Local $BSRestarts = 0
 Local $GitPath
 Local $MyDate = ""
 Local $gitExes = _FileListToArrayRec(@LocalAppDataDir, "Git.exe",$FLTAR_FILES ,$FLTAR_RECUR ,$FLTAR_NOSORT ,$FLTAR_FULLPATH)
@@ -42,6 +43,13 @@ While 1
    If NOT IsMachineActive() Then
 	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
 	  RestartBS()
+   EndIf
+
+   If $BSRestarts > 4 Then
+	  LogMessage("Restarting Whole Machine -  " & @ComputerName,5)
+	  Sleep(1000)
+	  Shutdown(6)
+	  Exit
    EndIf
 
    ;Check every 10 min
@@ -131,6 +139,8 @@ EndFunc
 
 
 Func RestartBS()
+
+   $BSRestarts = $BSRestarts + 1
 
    ;If they are kill all autoit except this one
    Local $aProcessList = ProcessList("autoit3.exe")
