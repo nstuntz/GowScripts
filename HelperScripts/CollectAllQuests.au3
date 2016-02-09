@@ -9,7 +9,7 @@ Local $width = 250
 Local $height = 130
 
 Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","0","",$width,$height)
-Local $loginEmail = InputBox("Username", "UserName:","","",$width,$height)
+Local $loginEmail = InputBox("Username", "UserName:","co.bratiles@gmail.com","",$width,$height)
 Local $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 
 ;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
@@ -35,12 +35,16 @@ Else
    MsgBox(0,"Paused","$AlreadyLoggedIn = " & $AlreadyLoggedIn)
 EndIf
 
+
+Local $startRunTime = _NowCalc()
+Local $count = 0
+
 Login_SetInProcess($loginEmail,$MachineID)
 
-CollectAllQuestsWithChances(1,1)
+$count = CollectAllQuestsWithChances(1,1)
 
-CollectAllCityQuests()
+;CollectAllCityQuests()
 
 Login_SetInProcess($loginEmail,0)
 
-MsgBox(0,"Success","Finished")
+MsgBox(0,"Success","Finished. Chances = " & $count & " -- Time = " & _DateDiff('n',$startRunTime,_NowCalc()))

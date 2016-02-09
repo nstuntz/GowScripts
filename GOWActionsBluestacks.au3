@@ -1311,13 +1311,14 @@ EndFunc
 
 Func CollectAllQuestsWithChances($Daily, $Alliance)
 
+   Local $ChancesCount = 0
    ;Start on the city Screen
    If $Daily Then
 	  SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
 	  Sleep(2000)
 	  SendMouseClick($QuestsDaily[0],$QuestsDaily[1])
 	  Sleep(2000)
-	  CollectAllQuestsFromScreen()
+	  $ChancesCount += CollectAllQuestsFromScreen()
    EndIf
 
    If $Alliance Then
@@ -1325,8 +1326,10 @@ Func CollectAllQuestsWithChances($Daily, $Alliance)
 	  Sleep(2000)
 	  SendMouseClick($QuestsAliaance[0],$QuestsAliaance[1])
 	  Sleep(2000)
-	  CollectAllQuestsFromScreen()
+	  $ChancesCount += CollectAllQuestsFromScreen()
    EndIf
+
+   Return $ChancesCount
 
 EndFunc
 
@@ -1338,8 +1341,10 @@ Func CollectAllQuestsFromScreen()
 
    Local $HaveChances = True
    Local $HaveQuests = True
+   Local $ChancesCount = 0
 
    While ($HaveChances)
+	  $ChancesCount += 1
 
 	  While $HaveQuests
 		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000)) Then
@@ -1377,7 +1382,7 @@ Func CollectAllQuestsFromScreen()
 		 EndIf
 	  EndIf
    Wend
-
+   return $ChancesCount
 EndFunc
 
 
