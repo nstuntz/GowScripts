@@ -345,7 +345,7 @@ EndFunc
 
 Func Login_ResetInProcess()
    _SqlConnect()
-   _SQL_Execute(-1,"Update Login Set InProcess='0' Where LoginID = " & Login_LoginID() & " and MachineID = '" & $MachineID & "'")
+   _SQL_Execute(-1,"Update Login Set InProcess='0' Where LoginID = " & Login_LoginID() & " and InProcess = '" & $MachineID & "'")
    _SQL_Close()
 EndFunc
 
