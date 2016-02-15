@@ -135,13 +135,6 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
-   Gifts()
-   If Not CheckForCityScreen(0) Then
-	  LogMessage("Collect Gifts Failed - 5",5)
-	  CloseGOW()
-	  ContinueLoop
-   EndIf
-
    Local $timerShield = TimerInit()
    ;CheckShieldColor()
    Shield(1)
@@ -394,6 +387,13 @@ For $k = 1 to 100000 ;go through them all lots
 	  ContinueLoop
    EndIf
 
+
+   Gifts()
+   If Not CheckForCityScreen(0) Then
+	  LogMessage("Collect Gifts Failed - 5",5)
+	  CloseGOW()
+	  ContinueLoop
+   EndIf
    ;Logout
    LogMessage("Logging out",2)
    Logout()
