@@ -17,8 +17,9 @@ Local $MyDate = ""
 Local $gitExes = _FileListToArrayRec(@LocalAppDataDir, "Git.exe",$FLTAR_FILES ,$FLTAR_RECUR ,$FLTAR_NOSORT ,$FLTAR_FULLPATH)
 
 For $i = 0 to UBound($gitExes)-1
-   If (StringInStr (  $gitExes[$i], "Bin\Git.exe")) Then
-	  $GitPath = $gitExes[$i] ; MsgBox($MB_SYSTEMMODAL, "", "Found it: " &  )
+   If (StringInStr (  $gitExes[$i], "cmd\Git.exe")) Then
+	  $GitPath = $gitExes[$i]
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Found it: " &  $GitPath)
    EndIf
 Next
 
@@ -45,12 +46,7 @@ While 1
 	  RestartBS()
    EndIf
 
-   If $BSRestarts > 4 Then
-	  LogMessage("Restarting Whole Machine -  " & @ComputerName,5)
-	  Sleep(1000)
-	  Shutdown(6)
-	  Exit
-   EndIf
+
 
    ;Check every 10 min
    Sleep(1000*60*10)
@@ -77,10 +73,12 @@ Func GetLatestScripts()
 
    Sleep(4000)
    ;Type user
-   Send('gowscripts' & @CRLF)
+   Send('gowscripts')
+   Send("{ENTER}")
    Sleep(500)
    ;Type pwd
-   Send('gowscripts12' & @CRLF)
+   Send('gowscripts12')
+   Send("{ENTER}")
    Sleep(500)
 
    Sleep(4000)
@@ -117,7 +115,7 @@ Func GetLatestScripts()
 			ProcessClose (  $aProcessList[$i][1] )
 		 EndIf
 	  Next
-
+;MsgBox($MB_SYSTEMMODAL, "", "Starting scripts - Get Latest Scripts")
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  TV_Popup_Remover.au3")
 	  Sleep(1000)
@@ -142,6 +140,14 @@ Func RestartBS()
 
    $BSRestarts = $BSRestarts + 1
 
+   If $BSRestarts > 4 Then
+	  LogMessage("Restarting Whole Machine -  " & @ComputerName,5)
+	  Sleep(1000)
+	  Shutdown(6)
+	  Exit
+   EndIf
+
+;MsgBox($MB_SYSTEMMODAL, "", "Starting scripts - Restart BS")
    ;If they are kill all autoit except this one
    Local $aProcessList = ProcessList("autoit3.exe")
    For $i = 1 To $aProcessList[0][0]
@@ -154,8 +160,6 @@ Func RestartBS()
    Run(@AutoItExe & " /AutoIt3ExecuteScript  TV_Popup_Remover.au3")
    Sleep(1000)
    Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
-   Sleep(1000)
-   Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
    Sleep(1000)
 
    ;If they are kill all autoit except this one
@@ -176,4 +180,7 @@ Func RestartBS()
 
    ;Sleep 4 minutes for BS to restart
    Sleep(240000)
+
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+   Sleep(1000)
 EndFunc
