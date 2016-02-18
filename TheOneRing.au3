@@ -179,7 +179,7 @@ Func RestartBS()
    SendMouseClick($GOWIcon[0],$GOWIcon[1])
 
    ;Sleep 4 minutes for BS to restart
-   Sleep(240000)
+   Sleep(120000)
 
    Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
    Sleep(1000)
