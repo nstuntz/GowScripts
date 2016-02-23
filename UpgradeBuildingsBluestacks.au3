@@ -31,9 +31,9 @@ Local $badBuildings[1] = [-1]
 
 For $k = 1 to 100000 ;go through them all lots
 
-   ;Sleep for 3 minutes because we think that we need another city to pick up the one we just did.
+   ;Sleep for 5 minutes because we think that we need another city to pick up the one we just did.
    if($SleepOnLogout = 1) Then
-	  Sleep(180000)
+	  Sleep(300000)
 	  $SleepOnLogout = 0
    EndIf
 
