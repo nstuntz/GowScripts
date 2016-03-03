@@ -199,10 +199,10 @@ Func GetOldestActiveLogin()
    Local $iRows
    Local $iColumns
 
-   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLogin3 '" & $MachineID & "'",$aData,$iRows,$iColumns)
+   Local $iRval = _SQL_GetTable2D(-1,"Exec GetOldestLoginMS '" & $MachineID & "'",$aData,$iRows,$iColumns)
 
    If $iRval = $SQL_ERROR Then
-	  LogMessage("GetOldestLogin2 -- " & _SQL_GetErrMsg())
+	  ;LogMessage("GetOldestLogin2 -- " & _SQL_GetErrMsg())
 	  return False
    EndIf
 
