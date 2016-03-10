@@ -24,6 +24,8 @@ Global Const $LoginButtonInitalColor = 5723995
 Global Const $LoginButtonReadyColor = 4162975
 Global Const $LoginFailureButton = [392,259]
 Global Const $LoginButtonFailueColor = 4162975
+Global Const $DeviceLockedLogoutButton = [500,325]
+Global Const $DeviceLockedLogoutButtonColor = 14816813
 
 Global Const $FirstPinBox = [230,150]
 Global Const $SecondPinBox = [315,150]
@@ -70,9 +72,9 @@ Global Const $NoSecretGiftCollectButton = [350,450] ;411,430 - 11230223
 Global Const $SecretGiftCollectButtonColor = 14319616
 
 ;Image Positions [left, top, right, bottom]
-Global Const $RssImage[] = [180,70,588,95]
+Global Const $RssImage[] = [200,70,560,95]
 Global Const $CityImage[] = [110,95,590,645]
-Global Const $GoldImage[] = [455,30,580,58]
+Global Const $GoldImage[] = [455,40,560,58]
 Global Const $HeroImage[] = [111,25,178,95]
 
 ;Quests
@@ -119,6 +121,21 @@ Global Const $MaxMarchesExceeded = [400,255]
 Global Const $MaxMarchesExceededColor = 4162976
 
 
+;Boucers
+Global Const $AthenaGift = [155,515] ; Old = [265,565]
+Global Const $NoAthenaGiftColor = 8811851 ; old = 5933875
+Global Const $AthenaGiftCollectButton = [350,525] ;411,460 - 11230223
+
+;Gift retrieval
+Global Const $GiftBox[] = [367,720]; 374,715 - 2786836 374,715 - 1332751
+Global Const $GiftBoxColorArray[] = [867850]
+
+Global Const $GiftButton[] = [542,237]
+Global Const $GiftGetClearButton[] = [535,290] ; [608,208] - 550,265 - 3737603
+Global Const $GiftGetClearButtonBlue = 4097181
+Global Const $GiftGetClearButtonRed = 14553641
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;NOT USED YET
 ;Items Menu
 Global Const $ItemsMenu = [328,710]
@@ -155,11 +172,7 @@ Global Const $AllianceMenu = [400,710]
 
 ;NS-1 BS color (560,585 - 10117447)
 
-;Boucers
-Global Const $AthenaGift = [165,495] ; Old = [265,565]
-Global Const $NoAthenaGiftColor = 13092798 ; old = 5933875
 
-Global Const $AthenaGiftCollectButton = [411,460] ;411,460 - 11230223
 
 ;Log File Name
 Global Const $LogFileName = "Log.txt"
@@ -273,16 +286,7 @@ Global $g_bPaused = false
 Global Const $AndroidHomeButton  = [1190,420]
 Global Const $AndroidHomeButtonBottom  = [175,785]
 
-;Gift retrieval
-Global Const $GiftBox[] = [374,715]; 374,715 - 2786836 374,715 - 1332751
-Global Const $GiftBoxColor = 2786836
-Global Const $GiftBoxColorAlt = 1331471; 1907226 - this is the no gift color
-Global Const $GiftBoxColorAlt2 = 1332751;
-Global Const $GiftBoxColorArray[] = [2786836,1331471,1332751,2854416]
 
-Global Const $GiftButton[] = [542,237]
-Global Const $GiftGetClearButton[] = [550,256] ; [608,208] - 550,265 - 3737603
-Global Const $GiftGetClearButtonRed = 3737603
 
 ;Treasury Collection
 Global Const $TreasuryLocation[] = [191,359] ; 191,359 - 8411962

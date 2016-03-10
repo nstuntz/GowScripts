@@ -121,13 +121,13 @@ Func GetLatestScripts()
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
 	  Sleep(1000)
-	  Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MSMasterScriptBluestacks.au3")
 	  Sleep(1000)
 
 	  ;Should we restart the master script
 	  If ($MyDate <> FileGetTime(@ScriptName,0,1)) Then
 		 LogMessage("Restarting OneRing because it is old -  " & @ComputerName,5)
-		 Run(@AutoItExe & " /AutoIt3ExecuteScript  TheOneRing.au3")
+		 Run(@AutoItExe & " /AutoIt3ExecuteScript  MSTheOneRing.au3")
 		 Sleep(500)
 		 ProcessClose(@AutoItPID)
 	  EndIf
@@ -181,6 +181,6 @@ Func RestartBS()
    ;Sleep 4 minutes for BS to restart
    Sleep(120000)
 
-   Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  MSMasterScriptBluestacks.au3")
    Sleep(1000)
 EndFunc

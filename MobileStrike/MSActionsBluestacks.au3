@@ -128,6 +128,15 @@ Func Login($email, $pwd)
 	  Return False
    EndIf
 
+   ;Check if the city is locked to a device
+   If PollForColor($DeviceLockedLogoutButton[0],$DeviceLockedLogoutButton[1],$DeviceLockedLogoutButtonColor,3000, "$DeviceLockedLogoutButtonColor at $DeviceLockedLogoutButton") Then
+	  LogMessage("Login Failed. City is locked to a device. Making city inactive.",5 )
+	  Login_UpdateLoginActive(0);
+	  SendMouseClick($DeviceLockedLogoutButton[0],$DeviceLockedLogoutButton[1])
+	  ;;LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+	  ;;Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
+	  Return False
+   EndIf
 
    ;Now exit the gold buy button
    Local $ClickedGoldScreen = False
@@ -289,6 +298,22 @@ Func CollectQuests()
    ClickCityScreen()
 EndFunc
 
+Func Helps()
+   If PollForColors($HelpButton[0], $HelpButton[1],$HelpButtonColorArray, 1000, "$HelpButtonColor at $HelpButton") Then
+	  SendMouseClick($HelpButton[0], $HelpButton[1])
+	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$AllianceHelpHelpAllButtonColor,3000,"$AllianceHelpHelpAllButtonColor")) Then
+		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
+		 Sleep(500)
+	  EndIf
+	  ;City Menu
+	  ClickCityScreen()
+   EndIf
+EndFunc
+
+
+
+
+
 Func RedeemCode()
 
    Return
@@ -339,18 +364,6 @@ Func RedeemCode()
 
    ;Return to City Screen
    ClickCityScreen()
-EndFunc
-
-Func Helps()
-   If PollForColors($HelpButton[0], $HelpButton[1],$HelpButtonColorArray, 1000, "$HelpButtonColor at $HelpButton") Then
-	  SendMouseClick($HelpButton[0], $HelpButton[1])
-	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$AllianceHelpHelpAllButtonColor,3000,"$AllianceHelpHelpAllButtonColor")) Then
-		 SendMouseClick($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1])
-		 Sleep(500)
-	  EndIf
-	  ;City Menu
-	  ClickCityScreen()
-   EndIf
 EndFunc
 
 Func CollectAllCityQuests()
@@ -438,12 +451,14 @@ EndFunc
 
 Func Gifts()
 
+   ;click into the alliance menu then check for gifts
+   SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
+   Sleep(3000)
 
    If PollForColors($GiftBox[0], $GiftBox[1],$GiftBoxColorArray, 500, "$GiftBoxColor at $GiftBox") Then
    ;OLD - If PollForTwoColors($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt, 500, "$GiftBoxColor at $GiftBox") Then
 	  ;Alliance menu
-	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
-	  Sleep(3000)
+
 
 	  ;Get Gifts button
 	  SendMouseClick($GiftButton[0],$GiftButton[1])
@@ -454,7 +469,7 @@ Func Gifts()
 	  While $HaveGift
 
 		 ;If we can get or clear a gift, do it and keep looping
-		 If CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$BlueOKButton)  Or CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$GiftGetClearButtonRed) Then
+		 If CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$GiftGetClearButtonBlue)  Or CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$GiftGetClearButtonRed) Then
 			SendMouseClick($GiftGetClearButton[0],$GiftGetClearButton[1])
 			Sleep(2000)
 		 Else
@@ -462,9 +477,12 @@ Func Gifts()
 		 EndIf
 	  WEnd
 
-	  ;City Menu
-	  ClickCityScreen()
+
    EndIf
+
+   ;since we always goi into the alliance menu, always go back out
+   ;City Menu
+   ClickCityScreen()
 EndFunc
 
 Func Chests()

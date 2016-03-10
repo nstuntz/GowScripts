@@ -62,7 +62,7 @@ For $k = 1 to 100000 ;go through them all lots
    ;Login
    If Not Login(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed",5)
-	  CloseGOW()
+	  ;CloseGOW()
 
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  ;Set the last run so this city doesn't keep getting processed
@@ -112,7 +112,7 @@ For $k = 1 to 100000 ;go through them all lots
    ;EndIf
 
    ;Local $timerAthenaGift = TimerInit()
-   ;CollectAthenaGift()
+   CollectAthenaGift()
    ;Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
 
    ;Local $timerSecretGift = TimerInit()
@@ -174,7 +174,7 @@ For $k = 1 to 100000 ;go through them all lots
    EndIf
 
 
-   ;Gifts()
+   Gifts()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Gifts Failed - 5",5)
 	  CloseGOW()
