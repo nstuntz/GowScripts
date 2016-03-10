@@ -12,6 +12,7 @@
 #include <ScreenCapture.au3>
 #include <Inet.au3>
 #include "Email.au3"
+#include "FilePIN.au3"
 
 Global $isLoggedOut = 0
 Global $isSessionTimeout = False
@@ -1604,7 +1605,8 @@ Func OpenGOW($attempts)
 			LogMessage("Looks like we are expecting a PIN")
 
 			   ;Check for PIN Prompt using the stored PIN. Enter it and then sleep a bit and ESC the gold screen and logout.
-			CheckForPinPrompt(StringToASCIIArray($storedPIN))
+			;MsgBox(0,"Success","File PIN:" & $filePIN& " Array of it:" & StringToASCIIArray(String($filePIN)))
+			CheckForPinPrompt(StringToASCIIArray(String($filePIN)))
 			Sleep(15000)
 
 			Send("ESC")

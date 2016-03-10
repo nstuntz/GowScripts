@@ -402,6 +402,15 @@ Func Login_Pwd()
    return $_Password
 EndFunc
 Func Login_PIN()
+
+   Local $PINFileName = "FilePIN.au3"
+   If FileExists($PINFileName) = 1 Then
+	  FileDelete($PINFileName)
+   EndIf
+
+   FileWriteLine($PINFileName,"#include-once")
+   FileWriteLine($PINFileName,'Global $filePIN = "' & $_PIN & '"')
+
    $storedPIN = $_PIN
    return $_PIN
 EndFunc
