@@ -541,12 +541,13 @@ EndFunc
 
 Func Gifts()
 
-
+   ;click into alliance tab to force gifts to appear
+   SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
+   Sleep(3000)
    If PollForColors($GiftBox[0], $GiftBox[1],$GiftBoxColorArray, 500, "$GiftBoxColor at $GiftBox") Then
    ;OLD - If PollForTwoColors($GiftBox[0], $GiftBox[1],$GiftBoxColor, $GiftBoxColorAlt, 500, "$GiftBoxColor at $GiftBox") Then
 	  ;Alliance menu
-	  SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
-	  Sleep(3000)
+
 
 	  ;Get Gifts button
 	  SendMouseClick($GiftButton[0],$GiftButton[1])
@@ -565,9 +566,11 @@ Func Gifts()
 		 EndIf
 	  WEnd
 
-	  ;City Menu
-	  ClickCityScreen()
    EndIf
+
+   ;Since we always go into alliance menu, always come out.
+   ;City Menu
+   ClickCityScreen()
 EndFunc
 
 Func Chests()
