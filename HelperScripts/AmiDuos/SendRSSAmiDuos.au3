@@ -23,8 +23,8 @@ Local $food =  InputBox("Food", "Food:","0","",$width,$height)
 Local $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
 Local $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","37000","",$width,$height)
 
-Local $MarchesAllowed = InputBox("Marches", "Marches:","6","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","7.9","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+Local $MarchesAllowed = InputBox("Marches", "Marches:","8","",$width,$height)
+Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","11.8","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
 Local $Tries = 1
 
 

@@ -194,6 +194,13 @@ Func Load_City($loginID)
    return True
 EndFunc
 
+Func ProactiveRestart()
+   _SqlConnect()
+   Local $iRval = _SQL_Execute(-1,"Exec ShouldRestartMachine '" & $MachineID & "'")
+
+   Return $iRval
+EndFunc
+
 Func GetOldestActiveLogin()
    Local $aData
    Local $iRows

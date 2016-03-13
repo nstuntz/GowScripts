@@ -146,6 +146,14 @@ Func RestartBS()
 	  Shutdown(6)
 	  Exit
    EndIf
+;MsgBox($MB_SYSTEMMODAL, "", "Should Restart Machine:" & ProactiveRestart())
+
+ If (ProactiveRestart() = 1) Then
+	  LogMessage("Proactive Restarting Whole Machine -  " & @ComputerName,5)
+	  Sleep(1000)
+	  Shutdown(6)
+	  Exit
+   EndIf
 
 ;MsgBox($MB_SYSTEMMODAL, "", "Starting scripts - Restart BS")
    ;If they are kill all autoit except this one
@@ -163,12 +171,13 @@ Func RestartBS()
    Sleep(1000)
 
    ;If they are kill all autoit except this one
-   Local $aProcessList = ProcessList()
-   For $i = 1 To $aProcessList[0][0]
-	  If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
-		 ProcessClose( $aProcessList[$i][1] )
-	  EndIf
-   Next
+   ;Local $aProcessList = ProcessList()
+   ;For $i = 1 To $aProcessList[0][0]
+	;  If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
+	;	 ProcessClose( $aProcessList[$i][1] )
+	;  EndIf
+   ;Next
+   Run("C:\Program Files (x86)\BlueStacks\HD-Quit.exe")
 
    ;Shrink everything
    WinMinimizeAll()

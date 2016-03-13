@@ -497,6 +497,16 @@ Func CollectAllCityQuests()
 
 EndFunc
 
+Func CheckIfBuilding()
+   If  PollForColorTwoPlaces($BuildingIcon[0],$BuildingIcon[1],$BuildingIcon2[0],$BuildingIcon2[1],$BuildingIconColor,2000, "Polling for $BuildingIconColor at $BuildingIcon and $BuildingIcon2") Then
+	  ;Set NeedRSS to 1
+	  Login_WriteResourcesNeeded()
+   Else
+	  ;Set NeedRss to 0
+	  Login_WriteResourcesNotNeeded()
+   EndIf
+
+EndFunc
 
 Func CollectAllTokens()
 
