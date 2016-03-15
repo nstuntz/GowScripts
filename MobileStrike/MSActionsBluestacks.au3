@@ -1547,7 +1547,7 @@ EndFunc
 
 ;Check for session timeout and if so click ok
 Func CheckForSessionTimeout()
-   If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And PollForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$Blue,500, "$Blue at $SessionTimeoutButton")  Then
+   If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And PollForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$SessionTimeoutButtonColor,500, "$Blue at $SessionTimeoutButton")  Then
 	  SendMouseClick($SessionTimeoutButton[0],$SessionTimeoutButton[1])
 	  LogMessage("Have Session Timeout",1)
 	  $SleepOnLogout = 1

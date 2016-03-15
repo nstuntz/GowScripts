@@ -1,8 +1,8 @@
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
 #include <File.au3>
-#include "GowConstantsBluestacks.au3"
-#include "GowActionsBluestacks.au3"
+#include "MSConstantsBluestacks.au3"
+#include "MSActionsBluestacks.au3"
 
 HotKeySet("{F10}","HotKeyPressed")
 
@@ -117,9 +117,9 @@ Func GetLatestScripts()
 	  Next
 ;MsgBox($MB_SYSTEMMODAL, "", "Starting scripts - Get Latest Scripts")
 	  Sleep(1000)
-	  Run(@AutoItExe & " /AutoIt3ExecuteScript  TV_Popup_Remover.au3")
+	  Run(@AutoItExe & " /AutoIt3ExecuteScript  ../TV_Popup_Remover.au3")
 	  Sleep(1000)
-	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
+	  Run(@AutoItExe & " /AutoIt3ExecuteScript  ../MousePosition.au3")
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MSMasterScriptBluestacks.au3")
 	  Sleep(1000)
@@ -157,18 +157,20 @@ Func RestartBS()
    Next
 
    Sleep(1000)
-   Run(@AutoItExe & " /AutoIt3ExecuteScript  TV_Popup_Remover.au3")
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  ../TV_Popup_Remover.au3")
    Sleep(1000)
-   Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  ../MousePosition.au3")
    Sleep(1000)
 
    ;If they are kill all autoit except this one
-   Local $aProcessList = ProcessList()
-   For $i = 1 To $aProcessList[0][0]
-	  If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
-		 ProcessClose( $aProcessList[$i][1] )
-	  EndIf
-   Next
+;   Local $aProcessList = ProcessList()
+;   For $i = 1 To $aProcessList[0][0]
+	  ;If(StringLeft($aProcessList[$i][0],3) = "HD-" )Then
+;		 ProcessClose( $aProcessList[$i][1] )
+;	  EndIf
+;   Next
+   Run("C:\Program Files (x86)\BlueStacks\HD-Quit.exe")
+
 
    ;Shrink everything
    WinMinimizeAll()

@@ -122,8 +122,8 @@ Global Const $MaxMarchesExceededColor = 4162976
 
 
 ;Boucers
-Global Const $AthenaGift = [155,515] ; Old = [265,565]
-Global Const $NoAthenaGiftColor = 8811851 ; old = 5933875
+Global Const $AthenaGift = [150,510] ; Old = [265,565]
+Global Const $NoAthenaGiftColor = 7757784 ; old = 5933875
 Global Const $AthenaGiftCollectButton = [350,525] ;411,460 - 11230223
 
 ;Gift retrieval
@@ -210,6 +210,7 @@ Global Const $ShieldNotEnoughGoldButton = [300,265]
 
 
 Global Const $SessionTimeoutButton = [410,250]
+Global Const $SessionTimeoutButtonColor = 4162976
 
 ;Rallying
 Global Const $HospitalCross = [499,499] ; 499,499 - 10754323 499,499 - 8197136
