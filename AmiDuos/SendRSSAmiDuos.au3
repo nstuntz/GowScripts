@@ -3,6 +3,8 @@
 #include "GowActionsAmiDuos.au3"
 #include <Date.au3>
 #include <Array.au3>
+#include "../Email.au3"
+#include "../MachineConfig.au3"
 Local $width = 250
 Local $height = 130
 
@@ -73,6 +75,7 @@ SendMouseClick($MarketLocation[0],$MarketLocation[1])
 MsgBox(0,"Paused","Scroll Market so desired City is the top of the list.")
 WinActivate ("DuOS","")
 Sleep(1000)
+SendEmail("grayson@stuntz.org; than@stuntz.org; nyu@me.com", $MachineID & " just started", "Sending " &$stone &" stone. " &$wood& " wood." &$ore& " ore." &$food& " food." &$silver& " silver. Round Trip: " &$RoundTripTimeInMS& ". Marches: " &$MarchesAllowed&". March Size: " &$RSSAmountPerSend)
 
 ;Click the required text boxes and remove 3M from the amount each time
 Local $Send = True
@@ -117,11 +120,39 @@ If CheckForColor( $AndroidHomeButton[0],$AndroidHomeButton[1], $Black) Then
    MsgBox(0,"Paused","Something went wrong....  Should be logged out but doesn't look like it")
 EndIf
 
+SendEmail("grayson@stuntz.org; than@stuntz.org; nyu@me.com", $MachineID & " finished", "Sent " &$stone &" stone. " &$wood& " wood." &$ore& " ore." &$food& " food." &$silver& " silver. Round Trip: " &$RoundTripTimeInMS& ". Marches: " &$MarchesAllowed&". March Size: " &$RSSAmountPerSend)
 
 MsgBox(0,"Success","Finished")
 
 ;END IT ALL
 Exit
+
+Func SendEmail($messageTo, $subject, $messageLine1, $messageLine2, $messageLine3)
+   ;_INetMail ( $messageTo, $subject, $message)
+   ;MsgBox($MB_SYSTEMMODAL, 'E-Mail has been opened', 'The E-Mail has been opened and process identifier for the E-Mail client is' & _INetMail ( $messageTo, $subject, $message))
+
+   $SmtpServer = "smtp.gmail.com"
+   $FromName = "GoW Minion"
+   $FromAddress = "support@gowminion.com"
+   $ToAddress = $messageTo
+   $Subject = $subject
+   $Body = $messageLine1 & @CRLF & $messageLine2 & @CRLF & $messageLine3
+   $AttachFiles = ""
+   $CcAddress = ""
+   $BccAddress = ""
+   $Importance="Normal"
+   $Username = "gameofwarminion@gmail.com"                ; username for the account used from where the mail gets sent - REQUIRED
+   $Password = "gowminion!2"                ; password for the account used from where the mail gets sent - REQUIRED
+   $IPPort=465                     ; GMAIL port used for sending the mail
+   $ssl=1
+   Global $oMyRet[2]
+   Global $oMyError = ObjEvent("AutoIt.Error", "MyErrFunc")
+   ;$Response = _INetSmtpMailCom($s_SmtpServer, $s_FromName, $s_FromAddress, $s_ToAddress, $s_Subject = "", $as_Body = "", $s_AttachFiles = "", $s_CcAddress = "", $s_BccAddress = "", $s_Importance="Normal", $Username, $Password, $IPPort, $ssl)
+   $rc = _INetSmtpMailCom($SmtpServer, $FromName, $FromAddress, $ToAddress, $Subject, $Body, $AttachFiles, $CcAddress, $BccAddress, $Importance, $Username, $Password, $IPPort, $ssl)
+   If @error Then
+	   MsgBox(0, "Error sending message", "Error code:" & @error & "  Description:" & $rc)
+   EndIf
+EndFunc
 
 #comments-start one
 
