@@ -3,7 +3,6 @@
 #include "GowActionsAmiDuos.au3"
 #include <Date.au3>
 #include <Array.au3>
-#include "../Email.au3"
 #include "../MachineConfig.au3"
 Local $width = 250
 Local $height = 130
