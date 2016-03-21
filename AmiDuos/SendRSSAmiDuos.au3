@@ -4,6 +4,7 @@
 #include <Date.au3>
 #include <Array.au3>
 #include "../MachineConfig.au3"
+#include "../Email.au3"
 Local $width = 250
 Local $height = 130
 
@@ -126,7 +127,7 @@ MsgBox(0,"Success","Finished")
 ;END IT ALL
 Exit
 
-Func SendEmail($messageTo, $subject, $messageLine1, $messageLine2, $messageLine3)
+Func SendEmail($messageTo, $subject, $messageLine1)
    ;_INetMail ( $messageTo, $subject, $message)
    ;MsgBox($MB_SYSTEMMODAL, 'E-Mail has been opened', 'The E-Mail has been opened and process identifier for the E-Mail client is' & _INetMail ( $messageTo, $subject, $message))
 
@@ -135,7 +136,7 @@ Func SendEmail($messageTo, $subject, $messageLine1, $messageLine2, $messageLine3
    $FromAddress = "support@gowminion.com"
    $ToAddress = $messageTo
    $Subject = $subject
-   $Body = $messageLine1 & @CRLF & $messageLine2 & @CRLF & $messageLine3
+   $Body = $messageLine1
    $AttachFiles = ""
    $CcAddress = ""
    $BccAddress = ""
