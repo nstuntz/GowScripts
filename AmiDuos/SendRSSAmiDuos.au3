@@ -1,4 +1,4 @@
-
+#include <GUIConstantsEx.au3>
 #include "GowConstantsAmiDuos.au3"
 #include "GowActionsAmiDuos.au3"
 #include <Date.au3>
@@ -7,6 +7,8 @@
 #include "../Email.au3"
 Local $width = 250
 Local $height = 130
+
+Global $greyHelpCount = 0
 
 Local $AlreadyLoggedIn = InputBox("Logged In", "Currently Open and Logged In (1/0):","1","",$width,$height)
 Local $sendOffset = InputBox("Send Offset", "Send Offset:","1","",$width,$height)
@@ -18,15 +20,17 @@ If $AlreadyLoggedIn = 0 Then
    $loginPWD =  InputBox("Password", "Password:","","",$width,$height)
 EndIf
 
-Local $stone =  InputBox("Stone", "Stone:","0","",$width,$height)
-Local $wood =  InputBox("Wood", "Wood:","0","",$width,$height)
-Local $ore =  InputBox("Ore", "Ore:","0","",$width,$height)
-Local $food =  InputBox("Food", "Food:","0","",$width,$height)
-Local $silver =  InputBox("Silver", "Silver:","0","",$width,$height)
-Local $RoundTripTimeInMS =  InputBox("Round Trip Time", "Round Trip Time(ms):","37000","",$width,$height)
+Local $stone =  0
+Local $wood = 0
+Local $ore =   0
+Local $food =   0
+Local $silver =   0
+Local $MarchesAllowed = 6
+Local $RoundTripTimeInMS =   35 * 1000
+Local $RSSAmountPerSend = "5.9"
 
-Local $MarchesAllowed = InputBox("Marches", "Marches:","8","",$width,$height)
-Local $RSSAmountPerSend = InputBox("Amount Sent", "Amount Sent(m):","11.8","",$width,$height) ;this is in millions since the send string is millions and the requested is in millions
+OpenSendWindow($stone,$wood,$ore,$food,$silver, $RoundTripTimeInMS, $MarchesAllowed, $RSSAmountPerSend)
+
 Local $Tries = 1
 
 
@@ -99,13 +103,21 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 			$marches = 0
 		 EndIf
 
+		 $greyHelpCount = 0
 		 $RssSent = $RssSent + $RSSAmountPerSend
 	  else
+		 IF ($greyHelpCount >=5) Then
+			$greyHelpCount = 0
+			;$RssSent = $RssSent + 50000000
+			LogMessage("Done sending " & $RSSId)
+			ExitLoop
+		 EndIf
 		 Sleep(2000)
 	  endif
 
 	  LogMessage("Total RSS(" & $RSSId & " - of " & $RssAmount & ")  Sent = " & $RssSent)
    WEnd
+
 Next
 
 
@@ -152,6 +164,110 @@ Func SendEmail($messageTo, $subject, $messageLine1)
    If @error Then
 	   MsgBox(0, "Error sending message", "Error code:" & @error & "  Description:" & $rc)
    EndIf
+EndFunc
+
+
+Func OpenSendWindow(ByRef $stone,ByRef $wood,ByRef $ore,ByRef $food,ByRef $silver, ByRef $RoundTripTimeInMS, ByRef $MarchesAllowed, ByRef $RSSAmountPerSend)
+   Local $taxRate = .08
+
+   $MarchesAllowed = 6
+   $RoundTripTimeInMS = 35 * 1000
+   $RSSAmountPerSend = "5.9"
+
+   $hGUI = GUICreate("Send Amounts", 450, 300) ; will create a dialog box that when displayed is centered
+   Opt("GUICoordMode", 2)
+   Local $iWidthCell = 100
+
+   GUIStartGroup()
+   GUICtrlCreateLabel("Send Type:", 10, 10, $iWidthCell)
+   Local $idRadioNet = GUICtrlCreateRadio("Net", 0, -1)
+   Local $idRadioGross = GUICtrlCreateRadio("Gross", 0, -1)
+   GUICtrlSetState($idRadioNet, $GUI_CHECKED)
+
+   GUICtrlCreateLabel("Tax Rate:", -3*$iWidthCell, 0, $iWidthCell)
+   Local $taxRateUI = GUICtrlCreateInput("8", 0, -1)
+
+   GUIStartGroup()
+   GUICtrlCreateLabel("Send Per:", -2*$iWidthCell, 0, $iWidthCell)
+   Local $idRadio59 = GUICtrlCreateRadio("5.932518", 0, -1)
+   Local $idRadio56 = GUICtrlCreateRadio("5.626005", 0, -1)
+   Local $idRadio79 = GUICtrlCreateRadio("7.965", 0, -1)
+
+   Local $idRadio119 = GUICtrlCreateRadio("11.9", -3*$iWidthCell, 0)
+   Local $idRadioCustom = GUICtrlCreateRadio("", 0, -1)
+   Local $customSend = GUICtrlCreateInput("", 0, -1)
+   GUIStartGroup()
+
+   GUICtrlCreateLabel("Marches:", -4*$iWidthCell,0)
+   Local $marchesInput = GUICtrlCreateInput("5", 0, -1)
+
+   GUICtrlCreateLabel("Round trip(Sec):", -2*$iWidthCell,0)
+   Local $roundTripInput = GUICtrlCreateInput("30", 0, -1)
+
+   GUICtrlCreateLabel("Stone:", -2*$iWidthCell,0)
+   Local $stoneInput = GUICtrlCreateInput("0", 0, -1)
+
+   GUICtrlCreateLabel("Wood:",-2*$iWidthCell, 0)
+   Local $woodInput = GUICtrlCreateInput("0", 0, -1)
+
+   GUICtrlCreateLabel("Ore:",  -2*$iWidthCell, 0)
+   Local $oreInput = GUICtrlCreateInput("0", 0, -1)
+
+   GUICtrlCreateLabel("Food:", -2*$iWidthCell, 0)
+   Local $foodInput = GUICtrlCreateInput("0", 0, -1)
+
+   GUICtrlCreateLabel("Silver:", -2*$iWidthCell,0)
+   Local $silverInput = GUICtrlCreateInput("0", 0, -1)
+
+   Local $idBtn = GUICtrlCreateButton("Ok", -2*$iWidthCell, 1)
+
+   GUISetState(@SW_SHOW) ; will display an  dialog box
+
+   Local $idMsg
+   ; Loop until the user exits.
+   While 1
+	  $idMsg = GUIGetMsg()
+	  Select
+		 Case $idMsg = $GUI_EVENT_CLOSE
+			 Exit
+		  Case  $idMsg = $idBtn
+
+			$stone =   GUICtrlRead($stoneInput)
+			$wood =  GUICtrlRead($woodInput)
+			$ore =   GUICtrlRead($oreInput)
+			$food =   GUICtrlRead($foodInput)
+			$silver =   GUICtrlRead($silverInput)
+
+			$MarchesAllowed =  GUICtrlRead($marchesInput)
+			$RoundTripTimeInMS =   GUICtrlRead($roundTripInput) * 1000
+			$RSSAmountPerSend = GUICtrlRead($customSend)
+
+			if (BitAND(GUICtrlRead($idRadio56), $GUI_CHECKED) = $GUI_CHECKED) Then
+			   $RSSAmountPerSend = "5.626005"
+			ElseIf (BitAND(GUICtrlRead($idRadio59), $GUI_CHECKED) = $GUI_CHECKED) Then
+			   $RSSAmountPerSend = "5.932518"
+			ElseIf (BitAND(GUICtrlRead($idRadio79), $GUI_CHECKED) = $GUI_CHECKED) Then
+			   $RSSAmountPerSend = "7.965"
+			ElseIf (BitAND(GUICtrlRead($idRadio119), $GUI_CHECKED) = $GUI_CHECKED) Then
+			   $RSSAmountPerSend = "11.9"
+			EndIf
+
+			If (BitAND(GUICtrlRead($idRadioGross), $GUI_CHECKED) = $GUI_CHECKED) Then
+			   $taxRate = GUICtrlRead($taxRateUI)
+			   $stone = Round ($stone*(1-($taxRate/100)),1)
+			   $wood = Round ($wood*(1-($taxRate/100)),1)
+			   $ore = Round ($ore*(1-($taxRate/100)),1)
+			   $food = Round ($food*(1-($taxRate/100)),1)
+			   $silver = Round ($silver*(1-($taxRate/100)),1)
+			EndIf
+
+			ExitLoop
+	  EndSelect
+   WEnd
+
+   ; Delete the previous GUI and all controls.
+   GUIDelete($hGUI)
+
 EndFunc
 
 #comments-start one

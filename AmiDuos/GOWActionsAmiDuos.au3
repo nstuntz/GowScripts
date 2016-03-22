@@ -37,6 +37,12 @@ Func SendRSS($type, $nonSilverType, $offset)
    local $count = 0
    While 1
 	  ;Loop clicking on max rss and bottom help until you see the top button again
+	  IF ($greyHelpCount >=5) Then
+		 ;$RssSent = $RssSent + 50000000
+		 LogMessage("Done sending " & $RSSId)
+		 ExitLoop
+	  EndIf
+
 	  $count = $count + 1
 	  Local $colorClick = 65793
 	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000, "$colorClick or $Black at $HelpRSSMax") Then
@@ -53,7 +59,14 @@ Func SendRSS($type, $nonSilverType, $offset)
 	  MouseMove($RSSHelpButton[0],$RSSHelpButton[1])
 	  If PollForSend($RSSHelpButton[0],$RSSHelpButton[1], $Blue, 2000) Then
 		 SendMouseClick($RSSHelpButton[0],$RSSHelpButton[1])
-	  Endif
+	  Else
+		 ;here check for grey color and add count
+		  If CheckForColor($RSSHelpButton[0],$RSSHelpButton[1], $GreyedOutButton) Then
+			;Add to grey count
+			$greyHelpCount = $greyHelpCount + 1
+			LogMessage("Saw Grey help button")
+		 EndIf
+	  EndIf
 
 	  ;Check for max send
 	  If CheckForColor($MaxMarchesExceeded[0],$MaxMarchesExceeded[1],$Blue) Then
