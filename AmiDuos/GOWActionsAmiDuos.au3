@@ -45,7 +45,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 
 	  $count = $count + 1
 	  Local $colorClick = 65793
-	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 2000, "$colorClick or $Black at $HelpRSSMax") Then
+	  If PollForTwoColors($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $colorClick, $Black, 5000, "$colorClick or $Black at $HelpRSSMax") Then
 		 ;do nothing this is just to wait to see if we can send faster
 	  EndIf
 	  If ($type = $eSilver And $nonSilverType >0) Then
