@@ -183,7 +183,7 @@ Func OpenSendWindow(ByRef $stone,ByRef $wood,ByRef $ore,ByRef $food,ByRef $silve
    GUICtrlCreateLabel("Send Type:", 10, 10, $iWidthCell)
    Local $idRadioNet = GUICtrlCreateRadio("Net", 0, -1)
    Local $idRadioGross = GUICtrlCreateRadio("Gross", 0, -1)
-   GUICtrlSetState($idRadioNet, $GUI_CHECKED)
+   GUICtrlSetState($idRadioGross, $GUI_CHECKED)
 
    GUICtrlCreateLabel("Tax Rate:", -3*$iWidthCell, 0, $iWidthCell)
    Local $taxRateUI = GUICtrlCreateInput("8", 0, -1)
@@ -197,6 +197,7 @@ Func OpenSendWindow(ByRef $stone,ByRef $wood,ByRef $ore,ByRef $food,ByRef $silve
    Local $idRadio119 = GUICtrlCreateRadio("11.9", -3*$iWidthCell, 0)
    Local $idRadioCustom = GUICtrlCreateRadio("", 0, -1)
    Local $customSend = GUICtrlCreateInput("", 0, -1)
+   GUICtrlSetState($idRadioCustom, $GUI_CHECKED)
    GUIStartGroup()
 
    GUICtrlCreateLabel("Marches:", -4*$iWidthCell,0)
