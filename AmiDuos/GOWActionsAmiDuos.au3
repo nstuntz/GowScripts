@@ -40,7 +40,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 	  IF ($greyHelpCount >=5) Then
 		 ;$RssSent = $RssSent + 50000000
 		 LogMessage("Done sending, in SendRSS, RSSID -  " & $RSSId)
-		 ExitLoop
+		 Return false
 	  EndIf
 
 	  $count = $count + 1
