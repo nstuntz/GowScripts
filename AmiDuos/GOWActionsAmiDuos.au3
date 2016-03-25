@@ -70,8 +70,10 @@ Func SendRSS($type, $nonSilverType, $offset)
 
 	  ;Check for max send
 	  If CheckForColor($MaxMarchesExceeded[0],$MaxMarchesExceeded[1],$Blue) Then
-		 LogMessage("Trying to click send")
+		 LogMessage("Max marches exceeded")
 		 SendMouseClick($MaxMarchesExceeded[0],$MaxMarchesExceeded[1])
+		 Sleep(2000)
+		 Send("{ESC}")
 	  Endif
 
 	  ;MouseMove($HelpTopMember[0],$HelpTopMember[1])

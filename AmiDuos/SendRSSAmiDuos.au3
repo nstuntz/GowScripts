@@ -34,7 +34,7 @@ OpenSendWindow($stone,$wood,$ore,$food,$silver, $RoundTripTimeInMS, $MarchesAllo
 Local $Tries = 1
 
 
-Local $SendTimeInMS = 3500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
+Local $SendTimeInMS = 4500 ; it takes 3.5 seconds to send each march so we will remove that from the delay
 Local $RSSRequests = [Number ($stone),Number ($wood),Number ($ore),Number ($food),Number ($silver)] ; stone, wood, ore, food,  silver (in millions)
 
 
@@ -98,7 +98,7 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 
 		 If $marches >= $MarchesAllowed Then
 			if ($RoundTripTimeInMS - ($marches * $SendTimeInMS)) > 0 Then
-			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS * 2)) ; times two for the in and out
+			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS)) ; times two for the in and out
 			EndIf
 			$marches = 0
 		 EndIf
