@@ -58,7 +58,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 	  ;If this is blue(for stone the upgrade button)
 	  If CheckForColor($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $Blue) Then
 		LogMessage("Looks like we are still seeing the upgradebutton")
-		ContinueLoop
+		return false 
 	  EndIf
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
 
