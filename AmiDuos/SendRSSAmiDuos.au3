@@ -80,25 +80,26 @@ MsgBox(0,"Paused","Scroll Market so desired City is the top of the list.")
 WinActivate ("DuOS","")
 Sleep(1000)
 SendEmail("grayson@stuntz.org; than@stuntz.org; nyu@me.com", $MachineID & " just started", "Sending " &$stone &" stone. " &$wood& " wood." &$ore& " ore." &$food& " food." &$silver& " silver. Round Trip: " &$RoundTripTimeInMS& ". Marches: " &$MarchesAllowed&". March Size: " &$RSSAmountPerSend)
+LogMEssage("Sending " &$stone &" stone. " &$wood& " wood." &$ore& " ore." &$food& " food." &$silver& " silver. Round Trip: " &$RoundTripTimeInMS& ". Marches: " &$MarchesAllowed&". March Size: " &$RSSAmountPerSend)
 
 ;Click the required text boxes and remove 3M from the amount each time
 Local $Send = True
 Local $marches = 0
 Local $RSSSent = 0 ; food, wood, stone, ore, silver
-Local $RssAmount
+Local $RssAmount = 0
 
 For $RSSId = 0 to UBound($RSSRequests)-1
    $RssAmount = $RSSRequests[$RSSId]
    $RSSSent = 0
-
-   While $RssSent < $RssAmount
-
+   
+   While ($RssSent < $RssAmount)
+   
 	  If (SendRSS($RSSId,-1,$sendOffset)) Then
 		 $marches = $marches + 1
 
 		 If $marches >= $MarchesAllowed Then
 			if ($RoundTripTimeInMS - ($marches * $SendTimeInMS)) > 0 Then
-			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS)) ; times two for the in and out
+			   Sleep ($RoundTripTimeInMS - ($marches * $SendTimeInMS))
 			EndIf
 			$marches = 0
 		 EndIf
@@ -106,10 +107,10 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 		 $greyHelpCount = 0
 		 $RssSent = $RssSent + $RSSAmountPerSend
 	  else
-		 IF ($greyHelpCount >=5) Then
+		 If ($greyHelpCount >= 5) Then
 			$greyHelpCount = 0
 			;$RssSent = $RssSent + 50000000
-			LogMessage("Done sending " & $RSSId)
+			LogMessage("Done sending, in master send, RSSID - " & $RSSId)
 			ExitLoop
 		 EndIf
 		 Sleep(2000)

@@ -39,7 +39,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 	  ;Loop clicking on max rss and bottom help until you see the top button again
 	  IF ($greyHelpCount >=5) Then
 		 ;$RssSent = $RssSent + 50000000
-		 LogMessage("Done sending " & $RSSId)
+		 LogMessage("Done sending, in SendRSS, RSSID -  " & $RSSId)
 		 ExitLoop
 	  EndIf
 
@@ -49,10 +49,16 @@ Func SendRSS($type, $nonSilverType, $offset)
 		 ;do nothing this is just to wait to see if we can send faster
 	  EndIf
 	  If ($type = $eSilver And $nonSilverType >0) Then
-		 LogMessage("Banking - Maxing silver march with rss",2)
+		 ;LogMessage("Banking - Maxing silver march with rss",2)
 		 ;SendMouseClick($HelpRSSMax[$eFood][0],$HelpRSSMax[$eFood][1])
 		 SendMouseClick($HelpRSSMax[$nonSilverType][0],$HelpRSSMax[$nonSilverType][1])
 		 Sleep(500)
+	  EndIf
+	  
+	  ;If this is blue(for stone the upgrade button)
+	  If CheckForColor($HelpRSSMax[$type][0],$HelpRSSMax[$type][1], $Blue) Then
+		LogMessage("Looks like we are still seeing the upgradebutton")
+		ContinueLoop
 	  EndIf
 	  SendMouseClick($HelpRSSMax[$type][0],$HelpRSSMax[$type][1])
 
