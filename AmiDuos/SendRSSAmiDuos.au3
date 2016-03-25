@@ -111,6 +111,9 @@ For $RSSId = 0 to UBound($RSSRequests)-1
 			$greyHelpCount = 0
 			;$RssSent = $RssSent + 50000000
 			LogMessage("Done sending, in master send, RSSID - " & $RSSId)
+			;Go back one because we are probably on the sending screen not the help list
+			 Sleep(1000)
+			 Send("{ESC}")
 			ExitLoop
 		 EndIf
 		 Sleep(2000)
