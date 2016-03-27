@@ -284,6 +284,13 @@ Func GetOldestActiveLoginMS()
    return True
 EndFunc
 
+Func GetNextCityType()
+   _SqlConnect()
+   Local $iRval = _SQL_Execute(-1,"Exec GetNextCityType '" & $MachineID & "'")
+
+   Return $iRval
+EndFunc
+
 Func Decrypt($EncryptData)
    ;MsgBox(0, "", $EncryptData) ;Results in "This is Plain Text"
    Local $stringDecrypt

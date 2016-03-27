@@ -175,7 +175,6 @@ Global Const $AllianceMenu = [400,710]
 
 
 ;Log File Name
-Global Const $LogFileName = "Log.txt"
 Global $OpenFailureCount = 0
 
 ;SpeedupNoButton

@@ -1,10 +1,27 @@
 #include <MsgBoxConstants.au3>
+#include "CommonActions.au3"
+#include "LoginObject.au3"
 #include <Array.au3>
 #include <File.au3>
-#include "GowConstantsBluestacks.au3"
-#include "GowActionsBluestacks.au3"
+#include <Date.au3>
+#include "MobileStrike/MSMasterBluestacks.au3"
+#include "GameOfWar/GoWMasterBluestacks.au3"
+#include "Email.au3"
+
+
+Global Const $LogFileName = "Log.txt"
+Global $SleepOnLogout = 0
 
 HotKeySet("{F10}","HotKeyPressed")
+HotKeySet("{F9}","HotKeyPressed")
+HotKeySet("{F8}","HotKeyPressed")
+HotKeySet("{F1}","HotKeyPressed")
+
+
+If FileExists($LogFileName) = 1 Then
+   FileDelete($LogFileName)
+EndIf
+Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
 
 ;Delay the start of doing anything so that this script can start another instance and kill itself if it is updated
 Sleep(15000) ; 15 seconds
@@ -23,13 +40,14 @@ For $i = 0 to UBound($gitExes)-1
    EndIf
 Next
 
-;If WinGetState ("BlueStacks") < 1 Then
-;   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start BlueStacks first.  Quitting.")
-;   Exit
-;EndIf
-
 ;Set the start date to 6 hours ago so it gets the latest scripts when it starts
 Local $oneRingLastRun = _DateAdd('h',-6,_NowCalc())
+;double click the Icon to start BS
+Run("C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe")
+;Sleep 2 minutes for BS to restart
+Sleep(120000)
+Local $BSRestartLastCheck = _NowCalc()
+Local $cityType = 'NONE'
 
 While 1
 
@@ -41,15 +59,37 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   If NOT IsMachineActive() Then
-	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
-	  RestartBS()
+   If (_DateDiff('m',$BSRestartLastCheck,_NowCalc())) > 10 Then
+	  If NOT IsMachineActive() Then
+		 LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
+		 RestartBS()
+		 $BSRestartLastCheck = _NowCalc()
+	  EndIf
    EndIf
 
+   ;If there is a session timeout run the other type of city
+   if($SleepOnLogout =1) Then
+	  If($cityType = 'GoW') Then
+		 $cityType = 'MS'
+	  Else
+		 $cityType = 'GoW'
+	  EndIf
+	  $SleepOnLogout = 0
+   Else
+	  $cityType = GetNextCityType()
+	  $SleepOnLogout = 0
+   EndIf
 
+   If ($cityType = 'GoW') Then
+	  ;Run GoW
+	  MsgBox($MB_SYSTEMMODAL, "", "Running GoW")
+	  RunGoWCity()
+   Else
+	  ;Run Ms
+	  MsgBox($MB_SYSTEMMODAL, "", "Running MS")
+	  RunMSCity()
+   EndIf
 
-   ;Check every 10 min
-   Sleep(1000*60*10)
 WEnd
 
 Func GetLatestScripts()
@@ -121,8 +161,8 @@ Func GetLatestScripts()
 	  Sleep(1000)
 	  Run(@AutoItExe & " /AutoIt3ExecuteScript  MousePosition.au3")
 	  Sleep(1000)
-	  Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
-	  Sleep(1000)
+	  ;Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+	  ;Sleep(1000)
 
 	  ;Should we restart the master script
 	  If ($MyDate <> FileGetTime(@ScriptName,0,1)) Then
@@ -183,13 +223,11 @@ Func RestartBS()
    WinMinimizeAll()
    Sleep(30000)
 
-   ;double click the Icon
-   SendMouseClick($GOWIcon[0],$GOWIcon[1])
-   SendMouseClick($GOWIcon[0],$GOWIcon[1])
+   Run("C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe")
 
    ;Sleep 4 minutes for BS to restart
    Sleep(120000)
 
-   Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
-   Sleep(1000)
+   ;Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+   ;Sleep(1000)
 EndFunc

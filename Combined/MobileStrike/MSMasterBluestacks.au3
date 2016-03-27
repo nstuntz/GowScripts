@@ -4,46 +4,19 @@
 #include <Date.au3>
 #include <Array.au3>
 
-;;Opt("MouseCoordMode", 1) ;1=absolute, 0=relative, 2=client
-HotKeySet("{F9}","HotKeyPressed")
-HotKeySet("{F8}","HotKeyPressed")
-HotKeySet("{F1}","HotKeyPressed")
 
-If FileExists($LogFileName) = 1 Then
-   FileDelete($LogFileName)
-EndIf
-Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
-sleep(5000)
-
-;WinMinimizeAll()
-
-;WinActivate ("BlueStacks","")
-Sleep(1000)
-;WinWaitActive ("BlueStacks","")
-
-;Dependant on window at 401x77
-;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
-
-;THIS REQUIRES Andy to be in portrait mode and Active
-;Sleep(1000)
-;quit()
-Local $badBuildings[1] = [-1]
-
-For $k = 1 to 100000 ;go through them all lots
+Func RunMSCity()
 
    ;Sleep for 5 minutes because we think that we need another city to pick up the one we just did.
-   if($SleepOnLogout = 1) Then
-	  Sleep(300000)
-	  $SleepOnLogout = 0
-   EndIf
+;   if($SleepOnLogout = 1) Then
+;	  Sleep(300000)
+;	  $SleepOnLogout = 0
+;  EndIf
 
    Sleep(500)
 
    LogMessage("Script Version -  "  &  $VersionNumber)
    LogMessage("Logging IN New User -  "  &  _Now())
-
-   ;window moves on closing of GoW
-;   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
    ;Open GOW
    OpenGOW(0)
@@ -54,7 +27,7 @@ For $k = 1 to 100000 ;go through them all lots
 	  CloseGOW()
 	  LogMessage("-----Sleeping 1 minutes-----",5)
 	  Sleep(60000)
-	  ContinueLoop
+	  Return
    EndIf
    LogMessage("Logging in for " & Login_Email(),2)
 
@@ -81,14 +54,14 @@ For $k = 1 to 100000 ;go through them all lots
 
 	  LogMessage("-----Sleeping 30 seconds-----",5)
 	  Sleep(30000)
-	  ContinueLoop
+	  Return
    EndIf
 
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Check for city Failed - 2",5)
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
@@ -106,11 +79,6 @@ For $k = 1 to 100000 ;go through them all lots
 
    local $built = 0
 
-   ;Check if we are building
-   ;If CheckIfBuidlingFromTimers() Then
-	;  $built = 1
-   ;EndIf
-
    ;Local $timerAthenaGift = TimerInit()
    CollectAthenaGift()
    ;Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
@@ -122,7 +90,7 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Secret Gift Failed - 3",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    ;Local $timerHelps = TimerInit()
@@ -132,7 +100,7 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Helps Failed - 4",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    ;Local $timerShield = TimerInit()
@@ -143,7 +111,7 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Shield Failed - 6",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    ;Local $timerTreasury = TimerInit()
@@ -153,7 +121,7 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Treasury Failed - 7",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    ;Local $timerBank = TimerInit()
@@ -163,14 +131,14 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Bank Failed - 8",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
    CollectQuests()
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Quests Failed - 5",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
 
 
@@ -178,7 +146,7 @@ For $k = 1 to 100000 ;go through them all lots
    If Not CheckForCityScreen(0) Then
 	  LogMessage("Collect Gifts Failed - 5",5)
 	  CloseGOW()
-	  ContinueLoop
+	  Return
    EndIf
    ;Logout
    LogMessage("Logging out",2)
@@ -199,10 +167,6 @@ For $k = 1 to 100000 ;go through them all lots
 	  LogMessage("Calling CloseGOW, from main loop because it still looks like we are in it",5)
 	  CloseGOW()
    EndIf
-Next
 
-MsgBox(0,"Success","Finished")
-
-;END IT ALL
-Exit
+EndFunc
 

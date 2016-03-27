@@ -127,7 +127,6 @@ Global Const $QuestChance = [485,614 ]; 485,614 - 11230223
 Global Const $QuestChanceUseButton = [351,340] ;  - 11264
 
 ;Log File Name
-Global Const $LogFileName = "Log.txt"
 Global $OpenFailureCount = 0
 
 ;SpeedupNoButton
