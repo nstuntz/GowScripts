@@ -19,12 +19,12 @@ Func RunMSCity()
    LogMessage("Logging IN New User -  "  &  _Now())
 
    ;Open GOW
-   OpenGOW(0)
+   OpenMS(0)
 
    ;Read the Login File
-   If Not Login_Load() Then
+   If Not Login_LoadMS() Then
 	  LogMessage("-----Login Load Failed-----",5)
-	  CloseGOW()
+	  CloseMS()
 	  LogMessage("-----Sleeping 1 minutes-----",5)
 	  Sleep(60000)
 	  Return
@@ -33,9 +33,9 @@ Func RunMSCity()
 
    Local $timerLogin = TimerInit()
    ;Login
-   If Not Login(Login_Email(),Login_Pwd()) Then
+   If Not LoginMS(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed",5)
-	  ;CloseGOW()
+	  ;CloseMS()
 
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
 	  ;Set the last run so this city doesn't keep getting processed
@@ -50,28 +50,28 @@ Func RunMSCity()
 		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
 	  EndIf
 
-	  CloseGOW()
+	  CloseMS()
 
 	  LogMessage("-----Sleeping 30 seconds-----",5)
 	  Sleep(30000)
 	  Return
    EndIf
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Check for city Failed - 2",5)
 	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
    Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
    ;Save the image resources
-   SaveRSSImage()
+   SaveRSSImageMS()
 
    ;Save the City Image
-   SaveCityImage()
-   SaveGoldImage()
-   SaveHeroImage()
+   SaveCityImageMS()
+   SaveGoldImageMS()
+   SaveHeroImageMS()
    ;Only get Treasury image if the SH can use it
    If Login_StrongHoldLevel() > 14 Then
 	  SaveTreasuryImage()
@@ -80,26 +80,26 @@ Func RunMSCity()
    local $built = 0
 
    ;Local $timerAthenaGift = TimerInit()
-   CollectAthenaGift()
+   CollectAthenaGiftMS()
    ;Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
 
    ;Local $timerSecretGift = TimerInit()
-   CollectSecretGift()
+   CollectSecretGiftMS()
    ;Login_WritePerformanceLog(TimerDiff($timerSecretGift), "Collect Secret Gift")
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Collect Secret Gift Failed - 3",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
    ;Local $timerHelps = TimerInit()
-   Helps()
+   HelpsMS()
    ;Login_WritePerformanceLog(TimerDiff($timerHelps), "Helps")
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Helps Failed - 4",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
@@ -108,9 +108,9 @@ Func RunMSCity()
    ;Shield(1)
    ;Login_WritePerformanceLog(TimerDiff($timerShield), "Shield")
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Shield Failed - 6",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
@@ -118,39 +118,39 @@ Func RunMSCity()
    ;Treasury()
    ;Login_WritePerformanceLog(TimerDiff($timerTreasury), "Treasury")
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Treasury Failed - 7",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
    ;Local $timerBank = TimerInit()
-   Bank()
+   BankMS()
    ;Login_WritePerformanceLog(TimerDiff($timerBank), "Bank")
 
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Bank Failed - 8",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
-   CollectQuests()
-   If Not CheckForCityScreen(0) Then
+   CollectQuestsMS()
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Collect Quests Failed - 5",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
 
 
-   Gifts()
-   If Not CheckForCityScreen(0) Then
+   GiftsMS()
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Collect Gifts Failed - 5",5)
-	  CloseGOW()
+	  CloseMS()
 	  Return
    EndIf
    ;Logout
    LogMessage("Logging out",2)
-   Logout()
+   LogoutMS()
    Sleep(3000)
 
    ;_FileWriteFromArray("logins.txt", $logins)
@@ -165,7 +165,7 @@ Func RunMSCity()
 	Local $winSize = WinGetClientSize("BlueStacks")
 	If($winSize[0] <= $GOWWindowSize[0]) Then
 	  LogMessage("Calling CloseGOW, from main loop because it still looks like we are in it",5)
-	  CloseGOW()
+	  CloseMS()
    EndIf
 
 EndFunc

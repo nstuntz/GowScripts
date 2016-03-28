@@ -1,16 +1,15 @@
 #include <MsgBoxConstants.au3>
 #include "CommonActions.au3"
+#include "CommonConstants.au3"
 #include "LoginObject.au3"
 #include <Array.au3>
 #include <File.au3>
 #include <Date.au3>
 #include "MobileStrike/MSMasterBluestacks.au3"
-#include "GameOfWar/GoWMasterBluestacks.au3"
+;#include "GameOfWar/GoWMasterBluestacks.au3"
 #include "Email.au3"
 
 
-Global Const $LogFileName = "Log.txt"
-Global $SleepOnLogout = 0
 
 HotKeySet("{F10}","HotKeyPressed")
 HotKeySet("{F9}","HotKeyPressed")
@@ -83,7 +82,7 @@ While 1
    If ($cityType = 'GoW') Then
 	  ;Run GoW
 	  MsgBox($MB_SYSTEMMODAL, "", "Running GoW")
-	  RunGoWCity()
+	  ;RunGoWCity()
    Else
 	  ;Run Ms
 	  MsgBox($MB_SYSTEMMODAL, "", "Running MS")

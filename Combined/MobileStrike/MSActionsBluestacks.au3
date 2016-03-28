@@ -16,7 +16,7 @@
 Global $isLoggedOut = 0
 Global $isSessionTimeout = False
 
-Func Login($email, $pwd)
+Func LoginMS($email, $pwd)
 
    If(Login_LoginAttempts() >= 5) Then
 	  LogMessage("We have attempted to login 5 times and failed. Setting " & Login_CityName() & " to inactive.",5)
@@ -32,11 +32,11 @@ Func Login($email, $pwd)
 
 
 	  ;Check if you are already logged in Use the last attempt, don't do it lots
-	  If CheckForCityScreen(4) Then
+	  If CheckForCityScreenMS(4) Then
 		 LogMessage("Ok, we are already logged in so just keep going")
 		 Sleep(4000)
-		 ClickGoldButton()
-		 If Not CheckForCityScreen(0) Then
+		 ClickGoldButtonMS()
+		 If Not CheckForCityScreenMS(0) Then
 			LogMessage("NO city screen after login, in login function")
 			return False
 		 EndIf
@@ -114,7 +114,7 @@ Func Login($email, $pwd)
 
 
    ;Now check for a Pin
-   If Not CheckForPinPrompt(StringToASCIIArray(Login_PIN())) Then
+   If Not CheckForPinPromptMS(StringToASCIIArray(Login_PINMS())) Then
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
@@ -140,7 +140,7 @@ Func Login($email, $pwd)
 
    ;Now exit the gold buy button
    Local $ClickedGoldScreen = False
-   $ClickedGoldScreen = ClickGoldButton()
+   $ClickedGoldScreen = ClickGoldButtonMS()
    ;Not sleeping here because of the next two polls
    Sleep(1000) ;3 seconds because of the quest poping up
 
@@ -182,7 +182,7 @@ Func Login($email, $pwd)
    EndIf
 
    ;If we didn't get the fity screen bailout
-   If Not CheckForCityScreen(0) Then
+   If Not CheckForCityScreenMS(0) Then
 	  LogMessage("NO city screen after login, in login function",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
@@ -194,7 +194,7 @@ Func Login($email, $pwd)
    return True
 EndFunc
 
-Func CollectAthenaGift($count = 0)
+Func CollectAthenaGiftMS($count = 0)
 
    ;Only collect 4 times
    If $count > 4 Then
@@ -227,12 +227,12 @@ Func CollectAthenaGift($count = 0)
    SendMouseClick($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1])
    Sleep(3500) ; longer sleep because it pops stuff up
 
-   CollectAthenaGift($count+1)
+   CollectAthenaGiftMS($count+1)
    Login_AthenaGiftCollected()
 
 EndFunc
 
-Func CollectSecretGift()
+Func CollectSecretGiftMS()
    ;Collect the bouncer
    SendMouseClick($SecretGift[0],$SecretGift[1])
    ;Just a pause to speed it up
@@ -245,7 +245,7 @@ Func CollectSecretGift()
 
 EndFunc
 
-Func CollectQuests()
+Func CollectQuestsMS()
 
    ;Collect the Daily Quest
    SendMouseClick($QuestsMenu[0],$QuestsMenu[1])
@@ -263,7 +263,7 @@ Func CollectQuests()
 
    ;Added to loop on clicking Collect as long as the button is blue. Daily Quests
    While 1=1
-		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$Blue, 3000, "$Blue at $QuestsCollect")) Then
+		 If (PollForColor($QuestsCollect[0],$QuestsCollect[1],$QuestsCollectColor, 3000, "$QuestsCollectColor at $QuestsCollect")) Then
 			SendMouseClick($QuestsCollect[0],$QuestsCollect[1])
 		 Else
 			ExitLoop;
@@ -295,10 +295,10 @@ Func CollectQuests()
    WEnd
 
    ;Return to City Screen
-   ClickCityScreen()
+   ClickCityScreenMS()
 EndFunc
 
-Func Helps()
+Func HelpsMS()
    If PollForColors($HelpButton[0], $HelpButton[1],$HelpButtonColorArray, 1000, "$HelpButtonColor at $HelpButton") Then
 	  SendMouseClick($HelpButton[0], $HelpButton[1])
 	  If(PollForColor($AllianceHelpHelpAllButton[0],$AllianceHelpHelpAllButton[1],$AllianceHelpHelpAllButtonColor,3000,"$AllianceHelpHelpAllButtonColor")) Then
@@ -306,11 +306,11 @@ Func Helps()
 		 Sleep(500)
 	  EndIf
 	  ;City Menu
-	  ClickCityScreen()
+	  ClickCityScreenMS()
    EndIf
 EndFunc
 
-Func Gifts()
+Func GiftsMS()
 
    ;click into the alliance menu then check for gifts
    SendMouseClick($AllianceMenu[0], $AllianceMenu[1])
@@ -343,11 +343,11 @@ Func Gifts()
 
    ;since we always goi into the alliance menu, always go back out
    ;City Menu
-   ClickCityScreen()
+   ClickCityScreenMS()
 EndFunc
 
 ;This needs to be before Upgrades
-Func Bank()
+Func BankMS()
 
    If Login_Bank() = 0 Then
 	  LogMessage("City Set to not bank")
@@ -365,21 +365,21 @@ Func Bank()
    SendMouseClick($MarketLocation[0],$MarketLocation[1])
 
    For $i = 1 to Login_RssMarches() ; Send rss marches
-		 SendRSS(Login_RSSType()-1,Login_RSSType()-1)
+		 SendRSSMS(Login_RSSType()-1,Login_RSSType()-1)
    Next
 
    For $i = 1 to Login_SilveMarches() ; Send silver marches
-	  SendRSS($eSilver, Login_RSSType()-1)
+	  SendRSSMS($eSilver, Login_RSSType()-1)
    Next
 
    Login_UpdateLastBank()
 
    ;City Menu
-   ClickCityScreen()
+   ClickCityScreenMS()
 EndFunc
 
 ;Assumes you are in the market place ready to send, and gets back to that point
-Func SendRSS($type, $nonSilverType)
+Func SendRSSMS($type, $nonSilverType)
 
 	  Local $helpOffsetX = (Login_RSSBank() - 1) * $HelpNumberOffsetX
 
@@ -468,7 +468,7 @@ Func SendRSS($type, $nonSilverType)
 EndFunc
 
 ;Will shield if the login information says to
-Func Shield($attempt)
+Func ShieldMS($attempt)
 
    ;Check if we should shield
    If Login_Shield() <> 1 Then
@@ -568,7 +568,7 @@ Func Shield($attempt)
 		 LogMessage("Shield Not replaced, trying again",3)
 
 		 ;Go back to the City screen to start again
-		 ClickCityScreen()
+		 ClickCityScreenMS()
 
 		 Shield($attempt+1)
 	  Else
@@ -582,11 +582,11 @@ Func Shield($attempt)
    EndIf
 
    ;City Menu
-   ClickCityScreen()
+   ClickCityScreenMS()
 
 EndFunc
 
-Func CheckShieldColor()
+Func CheckShieldColorMS()
    ;Boosts menu
    SendMouseClick($BoostsIcon[0], $BoostsIcon[1])
    Sleep(2000)
@@ -594,95 +594,14 @@ Func CheckShieldColor()
    ;;
    LogMessage("$ShieldColor at $ShieldButton: " & PixelGetColor($ShieldButton[0],$ShieldButton[1]))
 
-   ClickCityScreen()
+   ClickCityScreenMS()
 EndFunc
 
-;This will attempt to collect and restart treasury if login says to.
-Func Treasury()
-   ;Check to see if the city is set to Rally
-   If Login_Treasury() = 0 Then
-	  LogMessage("City not set to collect Treasury",1)
-	  Return
-   EndIf
-
-   LogMessage("City set to collect Treasury",1)
-
-   ;Check to see if we should check the treasury
-   Local $minonTreasury = 43200 ;30 days. We only invest for 30d for now
-   If ((($minonTreasury - (_DateDiff('n',Login_LastTreasury(),GetNowUTCCalc()))) < 0) OR (Login_LastTreasury() = 0)) Then
-	  ;It has been more than 30 days since last treasury collection. Or they have never collected.
-	  LogMessage("Attempting to collect Treasury or make deposit",1)
-	  ;Click on the treasury
-	  SendMouseClick($TreasuryLocation[0],$TreasuryLocation[1])
-	  Sleep(2000)
-
-	  ;If last login is 0 (null in db) then check 7 and 14 as well.
-	  If(Login_LastTreasury() = 0) Then
-		 ;Check Treasury Level 7
-		 Local $collected = 0
-		 SendMouseClick($Treasury7[0],$Treasury7[1])
-		 If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
-			SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
-			Sleep(2000)
-			$collected = 1
-			LogMessage("Treasury 7d Collected",2)
-		 Else
-			;if we went it but did not collect we have to go back out again
-			SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
-			Sleep(2000)
-		 EndIf
-
-		 ;we did not collect the 7d one, so try a 14d
-		 If ($collected = 0) Then
-			SendMouseClick($Treasury14[0],$Treasury14[1])
-			If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
-			   SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
-			   Sleep(2000)
-			   LogMessage("Treasury 14d Collected",2)
-			Else
-			   ;if we went it but did not collect we have to go back out again
-			   SendMouseClick($TreasuryBack[0],$TreasuryBack[1])
-			   Sleep(2000)
-			EndIf
-		 EndIf
-
-	  EndIf
-
-	  SendMouseClick($Treasury30[0],$Treasury30[1])
-	  ;Check to see if I can collect
-	  If PollForColor($TreasuryCollectButton[0],$TreasuryCollectButton[1],$TreasuryCollectColor, 2000) Then
-		 SendMouseClick($TreasuryCollectButton[0],$TreasuryCollectButton[1])
-		 Sleep(2000)
-		 SendMouseClick($Treasury30[0],$Treasury30[1])
-		 Sleep(2000)
-		 LogMessage("Treasury Collected",1)
-	  EndIf
-
-	  ;Check to see if we can make a deposit
-	  If PollForColor($TreasuryDepositButton[0],$TreasuryDepositButton[1],$Blue, 2000) Then
-		 MouseClickDrag("left",$TreasuryDragCoords[0],$TreasuryDragCoords[1],$TreasuryDragCoords[2],$TreasuryDragCoords[3],20)
-		 SendMouseClick($TreasuryDepositButton[0],$TreasuryDepositButton[1])
-
-		 ;Check to see if the black bar is there before setting LastTreasury
-		 If PollForColor($TreasuryRunningCheck[0],$TreasuryRunningCheck[1],$Black,3000) Then
-			LogMessage("Treasury Deposit Made",2)
-			Login_UpdateLastTreasury()
-		 EndIf
-		 ;If it doesn't appear to be accruing, then leave the LastTreasury date so it tries again next login.
-		 ;There doesnt seem like a lot of potential to not work, if it looks like it is failing we can trying to invest again.
-	  EndIf
-
-   EndIf
-
-   ClickCityScreen()
-
-EndFunc
-
-Func Logout()
+Func LogoutMS()
 
    ;Logout Script
-   If Not CheckForCityScreen(0) Then
-	  ClickCityScreen()
+   If Not CheckForCityScreenMS(0) Then
+	  ClickCityScreenMS()
    EndIf
 
    ;More panel
@@ -723,7 +642,7 @@ Func Logout()
 
 EndFunc
 
-Func OpenGOW($attempts)
+Func OpenMS($attempts)
 
    ;Make sure the VB is open
    ;WinActivate ("BlueStacks","")
@@ -784,7 +703,7 @@ Func OpenGOW($attempts)
 
    If WinGetState ( "BlueStacks") = 0 Then
 	  LogMessage("No bluestacks window to move.  Attempting to reopen Bluestacks.")
-	  OpenGOW($attempts+1)
+	  OpenMS($attempts+1)
    EndIf
 
 
@@ -807,7 +726,7 @@ Func OpenGOW($attempts)
 	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
-		 OpenGOW($attempts+1)
+		 OpenMS($attempts+1)
 	  EndIf
    Next
 
@@ -824,7 +743,7 @@ Func OpenGOW($attempts)
 	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
-		 OpenGOW($attempts+1)
+		 OpenMS($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
 
@@ -832,7 +751,7 @@ Func OpenGOW($attempts)
 			LogMessage("Looks like we are expecting a PIN")
 
 			   ;Check for PIN Prompt using the stored PIN. Enter it and then sleep a bit and ESC the gold screen and logout.
-			CheckForPinPrompt(StringToASCIIArray($storedPIN))
+			CheckForPinPromptMS(StringToASCIIArray($storedPIN))
 			Sleep(15000)
 
 			Send("ESC")
@@ -841,9 +760,9 @@ Func OpenGOW($attempts)
 			   SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 			   Sleep(500)
 			EndIf
-			Logout()
+			LogoutMS()
 			Sleep(2000)
-			OpenGOW($attempts+1)
+			OpenMS($attempts+1)
 		 Else
 			If CheckForSessionTimeout() Then
 			   LogMessage("Writing Login from OpenGOW function because of session timeout",1)
@@ -851,12 +770,12 @@ Func OpenGOW($attempts)
 			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$black)) Then
 			   LogMessage("Looks like we black screened before resizing")
 			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
-			   OpenGOW($attempts+1)
+			   OpenMS($attempts+1)
 			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$ExitAppErrorColor)) Then
 			   LogMessage("Looks like we need to exit the game.")
 			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
 			   SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])
-			   OpenGOW($attempts+1)
+			   OpenMS($attempts+1)
 			Else
 			   LogMessage("Looks like we are in GoW")
 			   Send("ESC")
@@ -865,9 +784,9 @@ Func OpenGOW($attempts)
 				  SendMouseClick($ConnectionInteruptButton[0],$ConnectionInteruptButton[1])
 				  Sleep(500)
 			   EndIf
-			   Logout()
+			   LogoutMS()
 			   Sleep(2000)
-			   OpenGOW($attempts+1)
+			   OpenMS($attempts+1)
 			EndIf
 		 EndIf
 	  EndIf
@@ -876,7 +795,7 @@ Func OpenGOW($attempts)
 
 EndFunc
 
-Func CloseGOW()
+Func CloseMS()
 
    If CheckForSessionTimeout() Then
 	  LogMessage("Writing Login from CloseGOW function because of session time out",1)
@@ -887,7 +806,7 @@ Func CloseGOW()
 	  If CheckForColor($AndroidHomeButton[0],$AndroidHomeButton[1],$Black) Then
 
 		 ;Attempt Logout
-		 Logout()
+		 LogoutMS()
 
 		 ;If that didn't work quit
 		 If CheckForColor($AndroidHomeButton[0],$AndroidHomeButton[1],$Black) Then
@@ -910,9 +829,9 @@ Func CloseGOW()
    Sleep(5000)
 EndFunc
 
-Func CheckForPinPrompt($pinArray)
+Func CheckForPinPromptMS($pinArray)
    ;LogMessage("Checking for PIN")
-   ;Local $pinArray = StringToASCIIArray(Login_PIN())
+   ;Local $pinArray = StringToASCIIArray(Login_PINMS())
    If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000, "$PinBoxColor at $FirstPinBox") Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 
@@ -942,7 +861,7 @@ Func CheckForPinPrompt($pinArray)
 EndFunc
 
 ;Check for session timeout and if so click ok
-Func CheckForSessionTimeout()
+Func CheckForSessionTimeoutMS()
    If CheckForColor($CityMenu[0],$CityMenu[1],$Black) And PollForColor($SessionTimeoutButton[0],$SessionTimeoutButton[1],$SessionTimeoutButtonColor,500, "$Blue at $SessionTimeoutButton")  Then
 	  SendMouseClick($SessionTimeoutButton[0],$SessionTimeoutButton[1])
 	  LogMessage("Have Session Timeout",1)
@@ -955,7 +874,7 @@ Func CheckForSessionTimeout()
    Return False
 EndFunc
 
-Func ClickCityScreen()
+Func ClickCityScreenMS()
 
    ;LogMessage("----- Checking for CityScreenColor: " & $CityScreenColor)
    If Not CheckForColor($CityMenu[0],$CityMenu[1],$CityScreenColor) Then
@@ -966,7 +885,7 @@ Func ClickCityScreen()
    EndIf
 EndFunc
 
-Func ClickGoldButton()
+Func ClickGoldButtonMS()
 
    ;Sleep until the gold screen has come up
    ;Sleep(30000)
@@ -995,7 +914,7 @@ Func ClickGoldButton()
 EndFunc
 
 ;This also tries to return to the city screen
-Func CheckForCityScreen($attempts)
+Func CheckForCityScreenMS($attempts)
 
    ;Check for the gold button
    Local $HasGoldButton = CheckForColor($GoldExitButton[0],$GoldExitButton[1],$GetGoldButton)
@@ -1023,7 +942,7 @@ Func CheckForCityScreen($attempts)
 		 ;Say No then try again
 		 SendMouseClick($QuitGameDialogNoButton[0],$QuitGameDialogNoButton[1])
 		 Sleep(1000)
-		 Return CheckForCityScreen($attempts+1)
+		 Return CheckForCityScreenMS($attempts+1)
 	  EndIf
 
 	  ;If we are on the map click into the city
@@ -1034,7 +953,7 @@ Func CheckForCityScreen($attempts)
 
 	  ;Fourth atempt we don't know where we are, and couldn't get a city screen
 	  If $attempts < 4 Then
-		 Return CheckForCityScreen($attempts+1)
+		 Return CheckForCityScreenMS($attempts+1)
 	  Else
 		 ;All done here
 		 Return False
@@ -1044,7 +963,7 @@ Func CheckForCityScreen($attempts)
 
 EndFunc
 
-Func CheckForWorldScreen($attempts)
+Func CheckForWorldScreenMS($attempts)
 
    If CheckForColor($CityMenu[0],$CityMenu[1],$CityScreenColor) Then
 	  ;LogMessage("Got City screen. Attempt=" & $attempts)
@@ -1086,39 +1005,39 @@ Func CheckForWorldScreen($attempts)
 
 EndFunc
 
-Func SaveCityImage()
+Func SaveCityImageMS()
    SaveImage('CityImage',$CityImage[0],$CityImage[1],$CityImage[2],$CityImage[3])
 EndFunc
 
-Func SaveRSSImage()
+Func SaveRSSImageMS()
    SaveImage('RSSImage',$RssImage[0],$RssImage[1],$RssImage[2],$RssImage[3])
 EndFunc
 
-Func SaveGoldImage()
+Func SaveGoldImageMS()
    SaveImage('GoldImage',$GoldImage[0],$GoldImage[1],$GoldImage[2],$GoldImage[3])
 EndFunc
 
-Func SaveHeroImage()
+Func SaveHeroImageMS()
    SaveImage('HeroImage',$HeroImage[0],$HeroImage[1],$HeroImage[2],$HeroImage[3])
 EndFunc
 
-Func SaveTreasuryImage()
+Func SaveTreasuryImageMS()
    SaveImage('TreasuryImage',$TreasuryImage[0],$TreasuryImage[1],$TreasuryImage[2],$TreasuryImage[3])
 EndFunc
 
-Func SaveShieldCountImage()
+Func SaveShieldCountImageMS()
    SaveImage('ShieldCount',$ShieldCount[0],$ShieldCount[1],$ShieldCount[2],$ShieldCount[3])
 EndFunc
 
-Func SaveShieldTimeImage()
+Func SaveShieldTimeImageMS()
    SaveImage('ShieldTime',$ShieldTime[0],$ShieldTime[1],$ShieldTime[2],$ShieldTime[3])
 EndFunc
 
-Func SaveRSSProductionImage()
+Func SaveRSSProductionImageMS()
    SaveImage('RSSProduction',$RssProduction[0],$RssProduction[1],$RssProduction[2],$RssProduction[3])
 EndFunc
 
-Func SaveSilverProductionImage()
+Func SaveSilverProductionImageMS()
    SaveImage('SilverProduction',$SilverProduction[0],$SilverProduction[1],$SilverProduction[2],$SilverProduction[3])
 EndFunc
 

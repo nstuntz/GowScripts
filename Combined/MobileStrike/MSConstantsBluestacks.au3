@@ -1,13 +1,5 @@
 #include-once
 
-;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
-;7.22.2015.04 - Updated to include startup script variables
-;8.14.2015.01 - Updated to decrypt the password
-;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "MS - 3.15.2016.01"
-
-;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
-;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
 
 Global Const $GOWVBHostWindow[] = [100,0]
 Global Const $GoW500by800IconLocation[] = [200,320]
@@ -45,7 +37,6 @@ Global $CityScreenColor = 6729417 ; this goes back into city
 Global $MapMenuColor = 3702948 ; this leaves city
 Global Const $GoldExitButton = [580,45]
 Global Const $GetGoldButton = 16702022
-Global $SleepOnLogout = 0
 
 ;Logout
 Global Const $MoreMenu = [555,710]
@@ -84,6 +75,7 @@ Global Const $QuestsAliaance = [430,460]
 Global Const $QuestsEmpire = [430,220]
 Global Const $QuestsStart = [555,178]
 Global Const $QuestsCollect = [560,180]
+Global Const $QuestsCollectColor = 4162976
 Global Const $NoQuestsColor = 1515301
 
 Global Const $QuestsEmpireCollect = [558,286] ; 558,286 - 11264
