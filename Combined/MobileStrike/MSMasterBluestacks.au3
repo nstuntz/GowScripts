@@ -8,9 +8,9 @@
 Func RunMSCity()
 
    ;Sleep for 5 minutes because we think that we need another city to pick up the one we just did.
-;   if($SleepOnLogout = 1) Then
+;   if($MSSleepOnLogout = 1) Then
 ;	  Sleep(300000)
-;	  $SleepOnLogout = 0
+;	  $MSSleepOnLogout = 0
 ;  EndIf
 
    Sleep(500)
@@ -31,13 +31,13 @@ Func RunMSCity()
    EndIf
    LogMessage("Logging in for " & Login_Email(),2)
 
-   Local $timerLogin = TimerInit()
+   Local $MStimerLogin = TimerInit()
    ;Login
    If Not LoginMS(Login_Email(),Login_Pwd()) Then
 	  LogMessage("Login Attempt Failed",5)
 	  ;CloseMS()
 
-	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
+	  Login_WritePerformanceLog(TimerDiff($MStimerLogin), "Login Failed")
 	  ;Set the last run so this city doesn't keep getting processed
 	  ;Login_Write()
 	  ;Updated logic to set InProcess to 0 and not update LastRun. The real fix to what Than did the line above. GS -07062015
@@ -46,8 +46,8 @@ Func RunMSCity()
 	  ;Log out.
 	  Send("{ESC}")
 	  Sleep(2000)
-	  If CheckForColor($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1], $YesQuitWhite) Then
-		 SendMouseClick($QuitGameDialogYesButton[0],$QuitGameDialogYesButton[1])
+	  If CheckForColor($MSQuitGameDialogYesButton[0],$MSQuitGameDialogYesButton[1], $MSYesQuitWhite) Then
+		 SendMouseClick($MSQuitGameDialogYesButton[0],$MSQuitGameDialogYesButton[1])
 	  EndIf
 
 	  CloseMS()
@@ -59,12 +59,12 @@ Func RunMSCity()
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Check for city Failed - 2",5)
-	  Login_WritePerformanceLog(TimerDiff($timerLogin), "Login Failed")
+	  Login_WritePerformanceLog(TimerDiff($MStimerLogin), "Login Failed")
 	  CloseMS()
 	  Return
    EndIf
 
-   Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
+   Login_WritePerformanceLog(TimerDiff($MStimerLogin), "Login")
    ;Save the image resources
    SaveRSSImageMS()
 
@@ -77,15 +77,15 @@ Func RunMSCity()
 	  SaveTreasuryImage()
    EndIf
 
-   local $built = 0
+   local $MSbuilt = 0
 
-   ;Local $timerAthenaGift = TimerInit()
+   ;Local $MStimerAthenaGift = TimerInit()
    CollectAthenaGiftMS()
-   ;Login_WritePerformanceLog(TimerDiff($timerAthenaGift), "Athena")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerAthenaGift), "Athena")
 
-   ;Local $timerSecretGift = TimerInit()
+   ;Local $MStimerSecretGift = TimerInit()
    CollectSecretGiftMS()
-   ;Login_WritePerformanceLog(TimerDiff($timerSecretGift), "Collect Secret Gift")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerSecretGift), "Collect Secret Gift")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Collect Secret Gift Failed - 3",5)
@@ -93,9 +93,9 @@ Func RunMSCity()
 	  Return
    EndIf
 
-   ;Local $timerHelps = TimerInit()
+   ;Local $MStimerHelps = TimerInit()
    HelpsMS()
-   ;Login_WritePerformanceLog(TimerDiff($timerHelps), "Helps")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerHelps), "Helps")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Helps Failed - 4",5)
@@ -103,10 +103,10 @@ Func RunMSCity()
 	  Return
    EndIf
 
-   ;Local $timerShield = TimerInit()
+   ;Local $MStimerShield = TimerInit()
    ;CheckShieldColor()
    ;Shield(1)
-   ;Login_WritePerformanceLog(TimerDiff($timerShield), "Shield")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerShield), "Shield")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Shield Failed - 6",5)
@@ -114,9 +114,9 @@ Func RunMSCity()
 	  Return
    EndIf
 
-   ;Local $timerTreasury = TimerInit()
+   ;Local $MStimerTreasury = TimerInit()
    ;Treasury()
-   ;Login_WritePerformanceLog(TimerDiff($timerTreasury), "Treasury")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerTreasury), "Treasury")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Treasury Failed - 7",5)
@@ -124,9 +124,9 @@ Func RunMSCity()
 	  Return
    EndIf
 
-   ;Local $timerBank = TimerInit()
+   ;Local $MStimerBank = TimerInit()
    BankMS()
-   ;Login_WritePerformanceLog(TimerDiff($timerBank), "Bank")
+   ;Login_WritePerformanceLog(TimerDiff($MStimerBank), "Bank")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Bank Failed - 8",5)
@@ -153,17 +153,17 @@ Func RunMSCity()
    LogoutMS()
    Sleep(3000)
 
-   ;_FileWriteFromArray("logins.txt", $logins)
+   ;_FileWriteFromArray("logins.txt", $MSlogins)
    Login_Write()
 
    ;Paranoia to make sure we are closed out
 
    ;Check if the android home button is on the right or the bottom, bottom means we are out side means close out and then open and try logout
-	;If CheckForColor( $AndroidHomeButton[0],$AndroidHomeButton[1], $Black) Then
+	;If CheckForColor( $MSAndroidHomeButton[0],$MSAndroidHomeButton[1], $MSBlack) Then
 
 	;Checking the size of the window
-	Local $winSize = WinGetClientSize("BlueStacks")
-	If($winSize[0] <= $GOWWindowSize[0]) Then
+	Local $MSwinSize = WinGetClientSize("BlueStacks")
+	If($MSwinSize[0] <= $MSWindowSize[0]) Then
 	  LogMessage("Calling CloseGOW, from main loop because it still looks like we are in it",5)
 	  CloseMS()
    EndIf

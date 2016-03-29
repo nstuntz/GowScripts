@@ -1,11 +1,5 @@
 #include-once
 
-;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
-;7.22.2015.04 - Updated to include startup script variables
-;8.14.2015.01 - Updated to decrypt the password
-;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "3.13.2016.01"
-
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
 

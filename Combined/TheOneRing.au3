@@ -6,7 +6,7 @@
 #include <File.au3>
 #include <Date.au3>
 #include "MobileStrike/MSMasterBluestacks.au3"
-;#include "GameOfWar/GoWMasterBluestacks.au3"
+#include "GameOfWar/GoWMasterBluestacks.au3"
 #include "Email.au3"
 
 
@@ -81,11 +81,11 @@ While 1
 
    If ($cityType = 'GoW') Then
 	  ;Run GoW
-	  MsgBox($MB_SYSTEMMODAL, "", "Running GoW")
-	  ;RunGoWCity()
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Running GoW")
+	  RunGoWCity()
    Else
 	  ;Run Ms
-	  MsgBox($MB_SYSTEMMODAL, "", "Running MS")
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Running MS")
 	  RunMSCity()
    EndIf
 
