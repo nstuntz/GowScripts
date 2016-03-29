@@ -68,6 +68,8 @@ While 1
 
    ;If there is a session timeout run the other type of city
    if($SleepOnLogout =1) Then
+
+	  MsgBox($MB_SYSTEMMODAL, "", "Session Timeout. Switching from " & $cityType)
 	  If($cityType = 'GoW') Then
 		 $cityType = 'MS'
 	  Else
@@ -86,6 +88,7 @@ While 1
    Else
 	  ;Run Ms
 	  ;MsgBox($MB_SYSTEMMODAL, "", "Running MS")
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $cityType)
 	  RunMSCity()
    EndIf
 

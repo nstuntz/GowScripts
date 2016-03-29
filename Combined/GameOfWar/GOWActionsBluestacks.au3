@@ -215,7 +215,7 @@ Func Login($email, $pwd)
 
 
    ;Now check for a Pin
-   If Not CheckForPinPrompt(StringToASCIIArray(Login_PIN())) Then
+   If Not CheckForPinPrompt(StringToASCIIArray(Login_PINGoW())) Then
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
 	  Return False
@@ -1654,7 +1654,7 @@ EndFunc
 
 Func CheckForPinPrompt($pinArray)
    ;LogMessage("Checking for PIN")
-   ;Local $pinArray = StringToASCIIArray(Login_PIN())
+   ;Local $pinArray = StringToASCIIArray(Login_PINGoW())
    If PollForColor($FirstPinBox[0],$FirstPinBox[1],$PinBoxColor,3000, "$PinBoxColor at $FirstPinBox") Then
 	  If CheckForColor($SecondPinBox[0],$SecondPinBox[1],$PinBoxColor) Then
 

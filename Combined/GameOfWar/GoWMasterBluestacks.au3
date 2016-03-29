@@ -24,7 +24,7 @@ Func RunGoWCity()
    OpenGOW(0)
 
    ;Read the Login File
-   If Not Login_Load() Then
+   If Not Login_LoadGoW() Then
 	  LogMessage("-----Login Load Failed-----",5)
 	  CloseGOW()
 	  LogMessage("-----Sleeping 1 minutes-----",5)

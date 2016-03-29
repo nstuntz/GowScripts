@@ -326,13 +326,20 @@ Func GiftsMS()
 	  Sleep(2000)
 
 	  Local $MSHaveGift = True
-
+	  Local $MSGiftCount = 1
 	  While $MSHaveGift
 
 		 ;If we can get or clear a gift, do it and keep looping
-		 If CheckForColor($MSGiftGetClearButton[0], $MSGiftGetClearButton[1],$MSGiftGetClearButtonBlue)  Or CheckForColor($MSGiftGetClearButton[0], $MSGiftGetClearButton[1],$MSGiftGetClearButtonRed) Then
+		 If PollForTwoColors($MSGiftGetClearButton[0], $MSGiftGetClearButton[1], $MSGiftGetClearButtonBlue, $MSGiftGetClearButtonRed, 3000, "$MSGiftGetClearButtonBlue or $MSGiftGetClearButtonRed at $MSGiftGetClearButton") Then
 			SendMouseClick($MSGiftGetClearButton[0],$MSGiftGetClearButton[1])
-			Sleep(2000)
+		 ;If CheckForColor($MSGiftGetClearButton[0], $MSGiftGetClearButton[1],$MSGiftGetClearButtonBlue)  Or CheckForColor($MSGiftGetClearButton[0], $MSGiftGetClearButton[1],$MSGiftGetClearButtonRed) Then
+			;SendMouseClick($MSGiftGetClearButton[0],$MSGiftGetClearButton[1])
+			;Sleep(2000)
+			$MSGiftCount= $MSGiftCount+1
+			if $MSGiftCount > 100 Then
+			   LogMessage("Hit gift count limit.")
+			   ExitLoop
+			EndIf
 		 Else
 			$MSHaveGift = False
 		 EndIf
@@ -764,7 +771,7 @@ Func OpenMS($MSattempts)
 			Sleep(2000)
 			OpenMS($MSattempts+1)
 		 Else
-			If CheckForSessionTimeout() Then
+			If CheckForSessionTimeoutMS() Then
 			   LogMessage("Writing Login from OpenGOW function because of session timeout",1)
 			   Login_Write()
 			ElseIf (CheckForColor($MSRandomSpotForBlankScreenCheck[0],$MSRandomSpotForBlankScreenCheck[1],$MSblack)) Then
@@ -797,7 +804,7 @@ EndFunc
 
 Func CloseMS()
 
-   If CheckForSessionTimeout() Then
+   If CheckForSessionTimeoutMS() Then
 	  LogMessage("Writing Login from CloseGOW function because of session time out",1)
 	  Login_Write()
    Else
@@ -865,7 +872,8 @@ Func CheckForSessionTimeoutMS()
    If CheckForColor($MSCityMenu[0],$MSCityMenu[1],$MSBlack) And PollForColor($MSSessionTimeoutButton[0],$MSSessionTimeoutButton[1],$MSSessionTimeoutButtonColor,500, "$MSBlue at $MSSessionTimeoutButton")  Then
 	  SendMouseClick($MSSessionTimeoutButton[0],$MSSessionTimeoutButton[1])
 	  LogMessage("Have Session Timeout",1)
-	  $MSSleepOnLogout = 1
+	  WinMinimizeAll()
+	  $SleepOnLogout = 1
 	  ;Sleeps for 1 minutes on session timeout.
 	  Sleep(60000)
 	  Return True
