@@ -564,13 +564,20 @@ Func Gifts()
 	  Sleep(2000)
 
 	  Local $HaveGift = True
-
+	  Local $GiftCount = 1
 	  While $HaveGift
 
 		 ;If we can get or clear a gift, do it and keep looping
-		 If CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$BlueOKButton)  Or CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$GiftGetClearButtonRed) Then
+		 If PollForTwoColors($GiftGetClearButton[0], $GiftGetClearButton[1], $BlueOKButton, $GiftGetClearButtonRed, 3000, "$BlueOKButton or $GiftGetClearButtonRed at $GiftGetClearButton") Then
 			SendMouseClick($GiftGetClearButton[0],$GiftGetClearButton[1])
-			Sleep(2000)
+			;If CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$BlueOKButton)  Or CheckForColor($GiftGetClearButton[0], $GiftGetClearButton[1],$GiftGetClearButtonRed) Then
+			;SendMouseClick($GiftGetClearButton[0],$GiftGetClearButton[1])
+			;Sleep(2000)
+			$GiftCount= $GiftCount+1
+			if $GiftCount > 100 Then
+			   LogMessage("Hit gift count limit.")
+			   ExitLoop
+			EndIf
 		 Else
 			$HaveGift = False
 		 EndIf
