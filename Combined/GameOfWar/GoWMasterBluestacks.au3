@@ -21,7 +21,12 @@ Func RunGoWCity()
 ;   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
    ;Open GOW
-   OpenGOW(0)
+   local $openRet = OpenGOW(0)
+   ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
+   if  ($openRet = -1) Then
+	  LogMessage("Tried to open GoW 5 times without working. Leaving to get a new city type and check restart timers.")
+	  Return
+   EndIf
 
    ;Read the Login File
    If Not Login_LoadGoW() Then
@@ -142,7 +147,7 @@ Func RunGoWCity()
    EndIf
 
    Local $timerBank = TimerInit()
-   Bank($scrolled,$previousBuildingType)
+   Bank()
    Login_WritePerformanceLog(TimerDiff($timerBank), "Bank")
 
    If Not CheckForCityScreen(0) Then

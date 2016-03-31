@@ -336,7 +336,7 @@ Func GiftsMS()
 			;SendMouseClick($MSGiftGetClearButton[0],$MSGiftGetClearButton[1])
 			;Sleep(2000)
 			$MSGiftCount= $MSGiftCount+1
-			if $MSGiftCount > 100 Then
+			if $MSGiftCount > 200 Then
 			   LogMessage("Hit gift count limit.")
 			   ExitLoop
 			EndIf
@@ -558,7 +558,7 @@ Func ShieldMS($MSattempt)
    IF PollForColor($MSShieldNotEnoughGoldButton[0],$MSShieldNotEnoughGoldButton[1],$MSRedNoButton, 3000, "$MSRedNoButton at $MSShieldNotEnoughGoldButton") Then
 	  SendMouseClick($MSShieldNotEnoughGoldButton[0],$MSShieldNotEnoughGoldButton[1])
 
-	  SendEmail(Login_UserEmail(), "Not enough gold to shield in city: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "It appears that your city does not have any 3d shields or enough gold to buy one. Shielding has been turned off for that city, please turn it back on once there are shields or enough gold.", "Thanks, GoW Minion")
+	  SendEmail(Login_UserEmail(), "Not enough gold to shield in city: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "It appears that your city does not have any 3d shields or enough gold to buy one. Shielding has been turned off for that city, please turn it back on once there are shields or enough gold.", "Thanks, MS Minion")
 	  LogMessage("Not enough gold.  CITY MAY BE UNSHIELDED. Shielding has been turned OFF",4)
 	  Login_UpdateShield(0)
    EndIf
@@ -581,7 +581,7 @@ Func ShieldMS($MSattempt)
 	  Else
 		 $MSSleepOnLogout = 1
 		 If(($MSminonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) < 30) Then
-		 SendEmail(Login_UserEmail(), "Failed to set shield on: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "Your city has failed to reshield 5 times. There are " & ($MSminonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) & " minutes left on the current shield. Our minions will try again shortly. We are looking into why, please reshield your city manually to keep it safe.", "Thanks, GoW Minion")
+		 SendEmail(Login_UserEmail(), "Failed to set shield on: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "Your city has failed to reshield 5 times. There are " & ($MSminonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))) & " minutes left on the current shield. Our minions will try again shortly. We are looking into why, please reshield your city manually to keep it safe.", "Thanks, MS Minion")
 		 EndIf
 		 LogMessage("Max shield attempts.  CITY MAY BE UNSHIELDED. Shield expires in " & ($MSminonShield - (_DateDiff('n',Login_LastShield(),GetNowUTCCalc()))),1) & " minutes. Our minions will try and reshield again shortly.",4)
 
@@ -654,17 +654,22 @@ Func OpenMS($MSattempts)
    ;Make sure the VB is open
    ;WinActivate ("BlueStacks","")
    ;WinMove("BlueStacks","",$MSVBHostWindow[0],$MSVBHostWindow[1])
+   ;MsgBox($MB_SYSTEMMODAL, "", $MSattempts > 4)
 
+   if($MSattempts > 4) Then
+	  LogMessage("Tried to open MS 5 times without working. Returning False.")
+	  return -1;
+   EndIf
    WinMinimizeAll()
    Sleep(1000)
 
-   LogMessage("Attempting to open GOW",1)
-   ;Check if we have an Icon, if not try exiting GOW or using the home button for Android
+   LogMessage("Attempting to open MS",1)
+   ;Check if we have an Icon, if not try exiting MS or using the home button for Android
    If Not PollForColor( $MSIcon[0],$MSIcon[1], $MSColor, 5000) Then
 	  LogMessage("***  We dont have the Icon trying to reset")
 	  Local $MSTries = 1
 
-	  ;Check if we have GOW open
+	  ;Check if we have MS open
 	  If CheckForColor($MSAndroidHomeButton[0],$MSAndroidHomeButton[1], $MSBlack) Then
 		 While $MSTries < 5
 			SendMouseClick($MSAndroidHomeButton[0],$MSAndroidHomeButton[1])
@@ -732,7 +737,7 @@ Func OpenMS($MSattempts)
 	  ;Check if the window reset to the launcher
 	  If($MSwinSize[0] > $MSWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
-		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
+		 LogMessage("Looks like we exited out of MS Screen back to Launcher")
 		 OpenMS($MSattempts+1)
 	  EndIf
    Next
@@ -742,17 +747,17 @@ Func OpenMS($MSattempts)
 
 	  LogMessage("Did not see login page")
 	  ;Here we dont have a logout button. There are 3 scenarios
-	  ;We black screened before the screen size changed. So move and resize the window and openGoW Again
+	  ;We black screened before the screen size changed. So move and resize the window and openMS Again
 
 	  ;We black screened and went back to launcher after we moved the window
 	  $MSwinSize = WinGetClientSize("BlueStacks")
 
 	  If($MSwinSize[0] > $MSWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
-		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
+		 LogMessage("Looks like we exited out of MS Screen back to Launcher")
 		 OpenMS($MSattempts+1)
 	  Else
-		 ;here we have the narrow window so check to see if it looks like we are in GoW
+		 ;here we have the narrow window so check to see if it looks like we are in MS
 
 		 If (CheckForColor($MSEmailPinCodeButton[0],$MSEmailPinCodeButton[1],$MSblue)) Then
 			LogMessage("Looks like we are expecting a PIN")
@@ -772,7 +777,7 @@ Func OpenMS($MSattempts)
 			OpenMS($MSattempts+1)
 		 Else
 			If CheckForSessionTimeoutMS() Then
-			   LogMessage("Writing Login from OpenGOW function because of session timeout",1)
+			   LogMessage("Writing Login from OpenMS function because of session timeout",1)
 			   Login_Write()
 			ElseIf (CheckForColor($MSRandomSpotForBlankScreenCheck[0],$MSRandomSpotForBlankScreenCheck[1],$MSblack)) Then
 			   LogMessage("Looks like we black screened before resizing")
@@ -784,7 +789,7 @@ Func OpenMS($MSattempts)
 			   SendMouseClick($MSAndroidHomeButtonBottom[0],$MSAndroidHomeButtonBottom[1])
 			   OpenMS($MSattempts+1)
 			Else
-			   LogMessage("Looks like we are in GoW")
+			   LogMessage("Looks like we are in MS")
 			   Send("ESC")
 			   Sleep(2000)
 			   If PollForColor($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSBlue,3000, "$MSBlue at $MSConnectionInteruptButton") Then
@@ -805,11 +810,11 @@ EndFunc
 Func CloseMS()
 
    If CheckForSessionTimeoutMS() Then
-	  LogMessage("Writing Login from CloseGOW function because of session time out",1)
+	  LogMessage("Writing Login from CloseMS function because of session time out",1)
 	  Login_Write()
    Else
 
-	  ;Check if we have GOW open
+	  ;Check if we have MS open
 	  If CheckForColor($MSAndroidHomeButton[0],$MSAndroidHomeButton[1],$MSBlack) Then
 
 		 ;Attempt Logout
@@ -823,7 +828,7 @@ Func CloseMS()
 			Sleep(1000)
 		 EndIf
 	  Else
-		 LogMessage("----- Looks like we arent in GOW -----",1)
+		 LogMessage("----- Looks like we arent in MS -----",1)
 	  EndIf
 
 	  ;Make sure we release this city

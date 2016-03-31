@@ -22,6 +22,9 @@ If FileExists($LogFileName) = 1 Then
 EndIf
 Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
 
+
+;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $cityType)
+;ProactiveRestart()
 ;Delay the start of doing anything so that this script can start another instance and kill itself if it is updated
 Sleep(15000) ; 15 seconds
 

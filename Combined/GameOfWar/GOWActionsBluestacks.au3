@@ -574,7 +574,7 @@ Func Gifts()
 			;SendMouseClick($GiftGetClearButton[0],$GiftGetClearButton[1])
 			;Sleep(2000)
 			$GiftCount= $GiftCount+1
-			if $GiftCount > 100 Then
+			if $GiftCount > 200 Then
 			   LogMessage("Hit gift count limit.")
 			   ExitLoop
 			EndIf
@@ -846,7 +846,7 @@ Func Treasury()
 EndFunc
 
 ;This needs to be before Upgrades
-Func Bank($scrolled,$previousBuildingType)
+Func Bank()
 
    If Login_Bank() = 0 Then
 	  LogMessage("City Set to not bank")
@@ -1476,6 +1476,11 @@ Func OpenGOW($attempts)
    ;Make sure the VB is open
    ;WinActivate ("BlueStacks","")
    ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
+;MsgBox($MB_SYSTEMMODAL, "", $attempts > 4)
+   if($attempts > 4) Then
+	  LogMessage("Tried to open GoW 5 times without working. Returning False.")
+	  return -1;
+   EndIf
 
    WinMinimizeAll()
    Sleep(1000)
@@ -1622,7 +1627,7 @@ Func OpenGOW($attempts)
 	  EndIf
 
    EndIf
-
+   return true
 EndFunc
 
 Func CloseGOW()

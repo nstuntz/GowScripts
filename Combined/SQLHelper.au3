@@ -1,4 +1,5 @@
 #include-once
+#include <MsgBoxConstants.au3>
 ; #INDEX# ========================================================================
 ; Title .........: _SQL.au3
 ; AutoIt Version : 3.2
@@ -281,6 +282,8 @@ Func _SQL_Execute($hConHandle = -1, $vQuery = "")
 	  LogMessage(_SQL_GetErrMsg())
 	  Return SetError($SQL_ERROR, 0, $SQL_ERROR)
    Else
+
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $hQuery)
 	  Return SetError($SQL_OK, 0, $hQuery)
    EndIf
 EndFunc   ;==>_SQL_Execute

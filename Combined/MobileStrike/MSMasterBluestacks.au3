@@ -19,7 +19,12 @@ Func RunMSCity()
    LogMessage("Logging IN New User -  "  &  _Now())
 
    ;Open GOW
-   OpenMS(0)
+   local $openRet = OpenMS(0)
+   ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
+   if  ($openRet = -1) Then
+	  LogMessage("Tried to open MS 5 times without working. Leaving to get a new city type and check restart timers.")
+	  Return
+   EndIf
 
    ;Read the Login File
    If Not Login_LoadMS() Then

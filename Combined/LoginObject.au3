@@ -92,7 +92,7 @@ Func Login_LoadGoW($_userNameToGet = "")
    ;Read from the specific File for this login
    _SqlConnect()
 
-   If Not GetOldestActiveLogin() then
+   If Not GetOldestActiveLoginGoW() then
 	  LogMessage("Getting Login Failed - " & _SQL_GetErrMsg())
 	  _SQL_Close()
 	  return False
@@ -286,9 +286,12 @@ EndFunc
 
 Func GetNextCityType()
    _SqlConnect()
+   Local $aRow
    Local $iRval = _SQL_Execute(-1,"Exec GetNextCityType '" & $MachineID & "'")
+   ;Now we have the query handle. Use Fetch Data
+   _SQL_FetchData($iRval,$aRow)
 
-   Return $iRval
+   Return $aRow[0]
 EndFunc
 
 Func Decrypt($EncryptData)
