@@ -207,7 +207,7 @@ Func OpenSendWindow(ByRef $stone,ByRef $wood,ByRef $ore,ByRef $food,ByRef $silve
    Local $marchesInput = GUICtrlCreateInput("5", 0, -1)
 
    GUICtrlCreateLabel("Round trip(Sec):", -2*$iWidthCell,0)
-   Local $roundTripInput = GUICtrlCreateInput("30", 0, -1)
+   Local $roundTripInput = GUICtrlCreateInput("20", 0, -1)
 
    GUICtrlCreateLabel("Stone:", -2*$iWidthCell,0)
    Local $stoneInput = GUICtrlCreateInput("0", 0, -1)
