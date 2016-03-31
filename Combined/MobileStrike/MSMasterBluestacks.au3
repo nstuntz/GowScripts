@@ -21,6 +21,7 @@ Func RunMSCity()
    ;Open GOW
    local $openRet = OpenMS(0)
    ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
+   LogMessage("Opening game returned: " & $openRet)
    if  ($openRet = -1) Then
 	  LogMessage("Tried to open MS 5 times without working. Leaving to get a new city type and check restart timers.")
 	  Return

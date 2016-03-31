@@ -22,6 +22,7 @@ Func RunGoWCity()
 
    ;Open GOW
    local $openRetGOW = OpenGOW(0)
+   LogMessage("Opening game returned: " & $openRetGOW)
    if  ($openRetGOW = -1) Then
 	  LogMessage("Tried to open GoW 5 times without working. Leaving to get a new city type and check restart timers.")
 	  Return
