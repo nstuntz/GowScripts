@@ -549,7 +549,7 @@ Func ShieldMS($MSattempt)
    Sleep(2000)
 
    ;Check for the replace button
-   If PollForColor($MSShieldReplaceButton[0],$MSShieldReplaceButton[1], $MSBlueOKButton, 6000, "$MSBlueOKButton at $MSShieldReplaceButton") Then
+   If PollForColor($MSShieldReplaceButton[0],$MSShieldReplaceButton[1], $MSShieldReplaceButtonColor, 6000, "$MSShieldReplaceButtonColor at $MSShieldReplaceButton") Then
 	  SendMouseClick($MSShieldReplaceButton[0],$MSShieldReplaceButton[1])
 	  Sleep(3500)
    EndIf
@@ -663,7 +663,7 @@ Func OpenMS($MSattempts)
    WinMinimizeAll()
    Sleep(1000)
 
-   LogMessage("Attempting to open MS",1)
+   LogMessage("Attempting to open MS: " & $MSattempts,1)
    ;Check if we have an Icon, if not try exiting MS or using the home button for Android
    If Not PollForColor( $MSIcon[0],$MSIcon[1], $MSColor, 5000) Then
 	  LogMessage("***  We dont have the Icon trying to reset")

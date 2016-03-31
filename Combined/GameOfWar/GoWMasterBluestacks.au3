@@ -21,9 +21,8 @@ Func RunGoWCity()
 ;   WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1])
 
    ;Open GOW
-   local $openRet = OpenGOW(0)
-   ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
-   if  ($openRet = -1) Then
+   local $openRetGOW = OpenGOW(0)
+   if  ($openRetGOW = -1) Then
 	  LogMessage("Tried to open GoW 5 times without working. Leaving to get a new city type and check restart timers.")
 	  Return
    EndIf

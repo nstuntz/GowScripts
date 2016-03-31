@@ -67,6 +67,29 @@ Global Const $MSRssImage[] = [200,70,560,95]
 Global Const $MSCityImage[] = [110,95,590,645]
 Global Const $MSGoldImage[] = [455,40,560,58]
 Global Const $MSHeroImage[] = [111,25,178,95]
+Global Const $MSShieldTime[] = [190,150,495,175]
+Global Const $MSShieldCount[] = [130,555,210,595]
+
+;Shielding
+Global Const $MSBoostsIcon = [565,245]
+Global Const $MSShieldColor = 16514042
+Global Const $MSShieldColorAlt = 15658214
+Global Const $MSShieldSearchLeft = 155
+Global Const $MSShieldSearchTop = 120
+Global Const $MSShieldSearchRight = 155
+Global Const $MSShieldSearchBottom = 310
+Global Const $MSShieldButton = [155,135]
+Global Const $MSShieldButton8Hr = [520,250]
+Global Const $MSShieldButton24Hr = [520,400]
+Global Const $MSShieldButton3Day = [520,535]
+
+Global Const $MSShieldReplaceButton = [490,280]
+Global Const $MSShieldReplaceButtonColor = 4162976
+Global Const $MSShieldVerifyMaxLength = [485,165]
+Global Const $MSShieldCountDownBlue = 3241360
+Global Const $MSShieldCountDownBlueAlt = 6002065
+Global Const $MSShieldNotEnoughGoldButton = [300,265]
+
 
 ;Quests
 Global Const $MSQuestsMenu = [240,710]
@@ -127,6 +150,11 @@ Global Const $MSGiftGetClearButton[] = [535,290] ; [608,208] - 550,265 - 3737603
 Global Const $MSGiftGetClearButtonBlue = 4097181
 Global Const $MSGiftGetClearButtonRed = 14553641
 
+;Quit Game Dialog
+Global Const $MSQuitGameDialogYesButton = [411,435] ;411,435 - 2631720
+Global Const $MSQuitGameDialogNoButton = [289,433] ;289,433 - 2631720
+Global Const $MSYesQuitWhite = 2631720 ;13684944 - old quit dialog box
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;NOT USED YET
 ;Items Menu
@@ -144,10 +172,6 @@ Global Const $MSChestOpenBeigeColorAlt = 11575689
 Global Const $MSFirstToken = [518,532] ; 541,372 - 11264  518,532 - 11264
 Global Const $MSSecondToken = [537,629] ; 546,509 - 11264 537,629 - 11264
 
-;Quit Game Dialog
-Global Const $MSQuitGameDialogYesButton = [411,435] ;411,435 - 2631720
-Global Const $MSQuitGameDialogNoButton = [289,433] ;289,433 - 2631720
-Global Const $MSYesQuitWhite = 2631720 ;13684944 - old quit dialog box
 
 ;More Menu
 ;Global Const $MSLogoutButton = [1010,550]
@@ -179,23 +203,7 @@ Global Const $MSTimerMoreIcon = [599,700]
 Global Const $MSTimerIconBuildColor  = 5786696 ; 1575944 -with transparency ; 2099208 - before transparency
 Global Const $MSTimerIconBuildColor2 = 5262408 ; 1574920 -with transparency ; 2099208 - before transparency
 
-;Shielding
-Global Const $MSBoostsIcon = [565,245]
-Global Const $MSShieldColor = 16514042
-Global Const $MSShieldColorAlt = 15658214
-Global Const $MSShieldSearchLeft = 155
-Global Const $MSShieldSearchTop = 130
-Global Const $MSShieldSearchRight = 155
-Global Const $MSShieldSearchBottom = 310
-Global Const $MSShieldButton = [155,135]
-Global Const $MSShieldButton8Hr = [520,250]
-Global Const $MSShieldButton24Hr = [520,400]
-Global Const $MSShieldButton3Day = [520,535]
-Global Const $MSShieldReplaceButton = [490,280]
-Global Const $MSShieldVerifyMaxLength = [485,162]
-Global Const $MSShieldCountDownBlue = 1337186
-Global Const $MSShieldCountDownBlueAlt = 6002065
-Global Const $MSShieldNotEnoughGoldButton = [300,265]
+
 
 
 
@@ -250,7 +258,7 @@ Global Const $MSBuildingBeige = 10521720
 Global Const $MSStrongholdUpgradeArrowColor = 13663240
 Global Const $MSBlueOKButton = 16711
 Global Const $MSGreyedOutButton = 4670530
-Global Const $MSExitAppErrorColor = 1577765
+Global Const $MSExitAppErrorColor = 1385254
 
 ;Paused?
 Global $MSg_bPaused = false
@@ -276,7 +284,7 @@ Global $MSg_bPaused = false
 ;Global Const $MSAndroidHomeButton  = [1186,560]
 ;Global Const $MSAndroidHomeButtonBottom  = [690,711]
 Global Const $MSAndroidHomeButton  = [1190,420]
-Global Const $MSAndroidHomeButtonBottom  = [175,785]
+Global Const $MSAndroidHomeButtonBottom  = [190,780]
 
 
 
@@ -295,8 +303,6 @@ Global Const $MSTreasuryDragCoords[] = [158,442,402,443] ; 158,442 to 402,443 - 
 
 Global Const $MSTreasuryImage[] = [135,270,245,390]
 
-Global Const $MSShieldTime[] = [190,148,495,170]
-Global Const $MSShieldCount[] = [125,535,215,600]
 Global Const $MSRssProduction[] = [1111,1111,1111,1111]
 Global Const $MSSilverProduction[] = [1111,1111,1111,1111]
 

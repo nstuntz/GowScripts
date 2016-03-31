@@ -1485,7 +1485,7 @@ Func OpenGOW($attempts)
    WinMinimizeAll()
    Sleep(1000)
 
-   LogMessage("Attempting to open GOW",1)
+   LogMessage("Attempting to open GOW: " & $attempts,1)
    ;Check if we have an Icon, if not try exiting GOW or using the home button for Android
    If Not PollForColor( $GOWIcon[0],$GOWIcon[1], $GOWColor, 5000) Then
 	  LogMessage("***  We dont have the Icon trying to reset")
@@ -1627,7 +1627,7 @@ Func OpenGOW($attempts)
 	  EndIf
 
    EndIf
-   return true
+
 EndFunc
 
 Func CloseGOW()

@@ -22,7 +22,6 @@ If FileExists($LogFileName) = 1 Then
 EndIf
 Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
 
-
 ;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $cityType)
 ;ProactiveRestart()
 ;Delay the start of doing anything so that this script can start another instance and kill itself if it is updated
@@ -53,6 +52,7 @@ Local $cityType = 'NONE'
 
 While 1
 
+   LogMessage("Starting One Ring Loop")
    ;Check every 4 hours for new scripts
    If (_DateDiff('h',$oneRingLastRun,_NowCalc())) > 4 Then
 	  LogMessage("Getting latest scripts -  " & @ComputerName,5)
@@ -72,7 +72,7 @@ While 1
    ;If there is a session timeout run the other type of city
    if($SleepOnLogout =1) Then
 
-	  MsgBox($MB_SYSTEMMODAL, "", "Session Timeout. Switching from " & $cityType)
+	  ;MsgBox($MB_SYSTEMMODAL, "", "Session Timeout. Switching from " & $cityType)
 	  If($cityType = 'GoW') Then
 		 $cityType = 'MS'
 	  Else
