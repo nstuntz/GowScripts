@@ -68,6 +68,9 @@ Local $_UserEmail = 0
 ; create connection to MSSQL
 Func _SqlConnect() ; connects to the database specified
 
+   ;error handling:
+   _SQL_RegisterErrorHandler("SQLCOMError")
+
    $oADODB = _SQL_Startup()
    If $oADODB = $SQL_ERROR then
 	  LogMessage(_SQL_GetErrMsg())
@@ -87,6 +90,13 @@ Func _SqlConnect() ; connects to the database specified
 
 EndFunc
 
+Func SQLCOMError()
+   ;Unfortunately we cannot log here? since it is SQL function. Pop a MsgBox so we can see that it is working.
+   ;MsgBox($MB_SYSTEMMODAL,"","We have encountered a hard COM fault in the SQL call. This preceeds a restart.")
+   Sleep(1000)
+   Shutdown(6)
+   Exit
+EndFunc
 
 Func Login_LoadGoW($_userNameToGet = "")
    ;Read from the specific File for this login
