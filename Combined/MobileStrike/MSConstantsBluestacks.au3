@@ -151,9 +151,9 @@ Global Const $MSGiftGetClearButtonBlue = 4097181
 Global Const $MSGiftGetClearButtonRed = 14553641
 
 ;Quit Game Dialog
-Global Const $MSQuitGameDialogYesButton = [411,435] ;411,435 - 2631720
-Global Const $MSQuitGameDialogNoButton = [289,433] ;289,433 - 2631720
-Global Const $MSYesQuitWhite = 2631720 ;13684944 - old quit dialog box
+Global Const $MSQuitGameDialogYesButton = [540,428] ;411,435 - 2631720
+Global Const $MSQuitGameDialogNoButton = [500,428] ;289,433 - 2631720
+Global Const $MSYesQuitWhite = 4474438 ;13684944 - old quit dialog box
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;NOT USED YET

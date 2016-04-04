@@ -70,7 +70,7 @@ Global Const $SecondToken = [537,629] ; 546,509 - 11264 537,629 - 11264
 ;Quit Game Dialog
 Global Const $QuitGameDialogYesButton = [540,428] ;411,435 - 2631720
 Global Const $QuitGameDialogNoButton = [500,428] ;289,433 - 2631720
-Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
+Global Const $YesQuitWhite = 4474438 ;13684944 - old quit dialog box
 
 ;More Menu
 Global Const $MoreMenu = [555,710]
