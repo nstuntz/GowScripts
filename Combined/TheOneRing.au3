@@ -61,7 +61,7 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   If (_DateDiff('m',$BSRestartLastCheck,_NowCalc())) > 10 Then
+   If (_DateDiff('n',$BSRestartLastCheck,_NowCalc())) > 10 Then
 	  If NOT IsMachineActive() Then
 		 LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
 		 RestartBS()
