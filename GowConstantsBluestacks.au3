@@ -4,7 +4,7 @@
 ;7.22.2015.04 - Updated to include startup script variables
 ;8.14.2015.01 - Updated to decrypt the password
 ;8.30.2015.01 - Updated to have the new shielding logic
-Global Const $VersionNumber = "3.29.2016.01"
+Global Const $VersionNumber = "4.7.2016.01"
 
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
@@ -86,9 +86,9 @@ Global Const $AccountButton2 = [410,160]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
-Global Const $MarchesButton = [314,491]  ; [193,515]; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
+Global Const $MarchesButton = [193,515] ;[314,491]  ; [193,515]; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
 Global Const $MarchesButton2 = [314,421]
-Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
+Global Const $MarchesButtonColor = 15395813;1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
 Global Const $MarchesButtonColorAlt = 13159348
 ;Global Const $MarchesButtonColor = 2102272 193,515 - 13159348
 ;Helps set
