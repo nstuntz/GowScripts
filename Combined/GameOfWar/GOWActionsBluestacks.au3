@@ -1537,7 +1537,7 @@ Func OpenGOW($attempts)
 
    If WinGetState ( "BlueStacks") = 0 Then
 	  LogMessage("No bluestacks window to move.  Attempting to reopen Bluestacks.")
-	  OpenGOW($attempts+1)
+	  return OpenGOW($attempts+1)
    EndIf
 
 
@@ -1560,7 +1560,7 @@ Func OpenGOW($attempts)
 	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
-		 OpenGOW($attempts+1)
+		 return OpenGOW($attempts+1)
 	  EndIf
    Next
 
@@ -1577,17 +1577,17 @@ Func OpenGOW($attempts)
 	  If($winSize[0] > $GOWWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of GoW Screen back to Launcher")
-		 OpenGOW($attempts+1)
+		 return OpenGOW($attempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in GoW
 
 		 If (CheckForColor($EmailPinCodeButton[0],$EmailPinCodeButton[1],$blue)) Then
-			LogMessage("Looks like we are expecting a PIN")
+			LogMessage("Looks like we are expecting a PIN. We have PIN: " & $filePIN)
 
 			   ;Check for PIN Prompt using the stored PIN. Enter it and then sleep a bit and ESC the gold screen and logout.
 			;MsgBox(0,"Success","File PIN:" & $filePIN& " Array of it:" & StringToASCIIArray(String($filePIN)))
 			CheckForPinPrompt(StringToASCIIArray(String($filePIN)))
-			Sleep(15000)
+			Sleep(25000)
 
 			Send("ESC")
 			Sleep(2000)
@@ -1597,7 +1597,7 @@ Func OpenGOW($attempts)
 			EndIf
 			Logout()
 			Sleep(2000)
-			OpenGOW($attempts+1)
+			return OpenGOW($attempts+1)
 		 Else
 			If CheckForSessionTimeout() Then
 			   LogMessage("Writing Login from OpenGOW function because of session timeout",1)
@@ -1605,12 +1605,12 @@ Func OpenGOW($attempts)
 			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$black)) Then
 			   LogMessage("Looks like we black screened before resizing")
 			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
-			   OpenGOW($attempts+1)
+			   return OpenGOW($attempts+1)
 			ElseIf (CheckForColor($GOWRandomSpotForBlankScreenCheck[0],$GOWRandomSpotForBlankScreenCheck[1],$ExitAppErrorColor)) Then
 			   LogMessage("Looks like we need to exit the game.")
 			   ;WinMove("BlueStacks","",$GOWVBHostWindow[0],$GOWVBHostWindow[1],1152,720)
 			   SendMouseClick($AndroidHomeButtonBottom[0],$AndroidHomeButtonBottom[1])
-			   OpenGOW($attempts+1)
+			   return OpenGOW($attempts+1)
 			Else
 			   LogMessage("Looks like we are in GoW")
 			   Send("ESC")
@@ -1621,7 +1621,7 @@ Func OpenGOW($attempts)
 			   EndIf
 			   Logout()
 			   Sleep(2000)
-			   OpenGOW($attempts+1)
+			   return OpenGOW($attempts+1)
 			EndIf
 		 EndIf
 	  EndIf
@@ -1677,7 +1677,7 @@ Func CheckForPinPrompt($pinArray)
 			LogMessage("PIN is needed, and not supplied.  Failed to login.",5)
 			Return False
 		 EndIf
-
+		 LogMessage("Entering PIN number: " & $pinArray)
 		 SendMouseClick($FirstPinBox[0],$FirstPinBox[1])
 		 For $i = 0 to UBound($pinArray)-1
 			Send(Chr($pinArray[$i]))

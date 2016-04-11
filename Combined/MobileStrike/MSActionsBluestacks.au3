@@ -555,7 +555,7 @@ Func ShieldMS($MSattempt)
    EndIf
 
    ; after we have done or not done replace. If they dont have shields/or gold:
-   IF PollForColor($MSShieldNotEnoughGoldButton[0],$MSShieldNotEnoughGoldButton[1],$MSRedNoButton, 3000, "$MSRedNoButton at $MSShieldNotEnoughGoldButton") Then
+   IF PollForColor($MSShieldNotEnoughGoldButton[0],$MSShieldNotEnoughGoldButton[1],$MSShieldNotEnoughGoldButtonColor, 3000, "$MSRedNoButton at $MSShieldNotEnoughGoldButton") Then
 	  SendMouseClick($MSShieldNotEnoughGoldButton[0],$MSShieldNotEnoughGoldButton[1])
 
 	  SendEmail(Login_UserEmail(), "Not enough gold to shield in city: " & Login_Email(), "Hello " & Login_UserEmail() & ",", "It appears that your city does not have any 3d shields or enough gold to buy one. Shielding has been turned off for that city, please turn it back on once there are shields or enough gold.", "Thanks, MS Minion")
@@ -715,7 +715,7 @@ Func OpenMS($MSattempts)
 
    If WinGetState ( "BlueStacks") = 0 Then
 	  LogMessage("No bluestacks window to move.  Attempting to reopen Bluestacks.")
-	  OpenMS($MSattempts+1)
+	  return OpenMS($MSattempts+1)
    EndIf
 
 
@@ -738,7 +738,7 @@ Func OpenMS($MSattempts)
 	  If($MSwinSize[0] > $MSWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of MS Screen back to Launcher")
-		 OpenMS($MSattempts+1)
+		 return OpenMS($MSattempts+1)
 	  EndIf
    Next
 
@@ -755,7 +755,7 @@ Func OpenMS($MSattempts)
 	  If($MSwinSize[0] > $MSWindowSize[0]) Then
 		 ;Here we have the wide window so try opening again.
 		 LogMessage("Looks like we exited out of MS Screen back to Launcher")
-		 OpenMS($MSattempts+1)
+		 return OpenMS($MSattempts+1)
 	  Else
 		 ;here we have the narrow window so check to see if it looks like we are in MS
 
@@ -774,7 +774,7 @@ Func OpenMS($MSattempts)
 			EndIf
 			LogoutMS()
 			Sleep(2000)
-			OpenMS($MSattempts+1)
+			return OpenMS($MSattempts+1)
 		 Else
 			If CheckForSessionTimeoutMS() Then
 			   LogMessage("Writing Login from OpenMS function because of session timeout",1)
@@ -782,12 +782,12 @@ Func OpenMS($MSattempts)
 			ElseIf (CheckForColor($MSRandomSpotForBlankScreenCheck[0],$MSRandomSpotForBlankScreenCheck[1],$MSblack)) Then
 			   LogMessage("Looks like we black screened before resizing")
 			   ;WinMove("BlueStacks","",$MSVBHostWindow[0],$MSVBHostWindow[1],1152,720)
-			   OpenMS($MSattempts+1)
+			   return OpenMS($MSattempts+1)
 			ElseIf (CheckForColor($MSRandomSpotForBlankScreenCheck[0],$MSRandomSpotForBlankScreenCheck[1],$MSExitAppErrorColor)) Then
 			   LogMessage("Looks like we need to exit the game.")
 			   ;WinMove("BlueStacks","",$MSVBHostWindow[0],$MSVBHostWindow[1],1152,720)
 			   SendMouseClick($MSAndroidHomeButtonBottom[0],$MSAndroidHomeButtonBottom[1])
-			   OpenMS($MSattempts+1)
+			   return OpenMS($MSattempts+1)
 			Else
 			   LogMessage("Looks like we are in MS")
 			   Send("ESC")
@@ -798,7 +798,7 @@ Func OpenMS($MSattempts)
 			   EndIf
 			   LogoutMS()
 			   Sleep(2000)
-			   OpenMS($MSattempts+1)
+			   return OpenMS($MSattempts+1)
 			EndIf
 		 EndIf
 	  EndIf

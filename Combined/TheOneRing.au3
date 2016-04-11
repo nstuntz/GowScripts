@@ -1,29 +1,12 @@
 #include <MsgBoxConstants.au3>
-#include "CommonActions.au3"
-#include "CommonConstants.au3"
-#include "LoginObject.au3"
 #include <Array.au3>
 #include <File.au3>
 #include <Date.au3>
-#include "MobileStrike/MSMasterBluestacks.au3"
-#include "GameOfWar/GoWMasterBluestacks.au3"
-#include "Email.au3"
-
-
+#include "CommonActions.au3"
+#include "CommonConstants.au3"
 
 HotKeySet("{F10}","HotKeyPressed")
-HotKeySet("{F9}","HotKeyPressed")
-HotKeySet("{F8}","HotKeyPressed")
-HotKeySet("{F1}","HotKeyPressed")
 
-
-If FileExists($LogFileName) = 1 Then
-   FileDelete($LogFileName)
-EndIf
-Opt("WinTitleMatchMode", 1) ;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase
-
-;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $cityType)
-;ProactiveRestart()
 ;Delay the start of doing anything so that this script can start another instance and kill itself if it is updated
 Sleep(15000) ; 15 seconds
 
@@ -41,18 +24,16 @@ For $i = 0 to UBound($gitExes)-1
    EndIf
 Next
 
+;If WinGetState ("BlueStacks") < 1 Then
+;   MsgBox($MB_SYSTEMMODAL, "", "BlueStacks isn't running.  Start BlueStacks first.  Quitting.")
+;   Exit
+;EndIf
+
 ;Set the start date to 6 hours ago so it gets the latest scripts when it starts
 Local $oneRingLastRun = _DateAdd('h',-6,_NowCalc())
-;double click the Icon to start BS
-Run("C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe")
-;Sleep 2 minutes for BS to restart
-Sleep(120000)
-Local $BSRestartLastCheck = _NowCalc()
-Local $cityType = 'NONE'
 
 While 1
 
-   LogMessage("Starting One Ring Loop")
    ;Check every 4 hours for new scripts
    If (_DateDiff('h',$oneRingLastRun,_NowCalc())) > 4 Then
 	  LogMessage("Getting latest scripts -  " & @ComputerName,5)
@@ -61,40 +42,21 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   If (_DateDiff('n',$BSRestartLastCheck,_NowCalc())) > 10 Then
-	  If NOT IsMachineActive() Then
-		 LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
-		 RestartBS()
-		 $BSRestartLastCheck = _NowCalc()
-	  EndIf
+   If NOT IsMachineActive() Then
+	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
+	  RestartBS()
    EndIf
 
-   ;If there is a session timeout run the other type of city
-   if($SleepOnLogout =1) Then
-
-	  ;MsgBox($MB_SYSTEMMODAL, "", "Session Timeout. Switching from " & $cityType)
-	  If($cityType = 'GoW') Then
-		 $cityType = 'MS'
-	  Else
-		 $cityType = 'GoW'
-	  EndIf
-	  $SleepOnLogout = 0
-   Else
-	  $cityType = GetNextCityType()
-	  $SleepOnLogout = 0
+   IF $FirstTime Then
+	  LogMessage("First time in OneRing, starting scripts")
+	  RestartBS()
+	  $FirstTime = False
    EndIf
 
-   If ($cityType = 'GoW') Then
-	  ;Run GoW
-	  ;MsgBox($MB_SYSTEMMODAL, "", "Running GoW")
-	  RunGoWCity()
-   Else
-	  ;Run Ms
-	  ;MsgBox($MB_SYSTEMMODAL, "", "Running MS")
-	  ;MsgBox($MB_SYSTEMMODAL, "", "Have City Type " & $cityType)
-	  RunMSCity()
-   EndIf
 
+
+   ;Check every 10 min
+   Sleep(1000*60*10)
 WEnd
 
 Func GetLatestScripts()
@@ -185,7 +147,7 @@ Func RestartBS()
 
    $BSRestarts = $BSRestarts + 1
 
-   If $BSRestarts > 4 Then
+   If $BSRestarts > 5 Then
 	  LogMessage("Restarting Whole Machine -  " & @ComputerName,5)
 	  Sleep(1000)
 	  Shutdown(6)
@@ -233,6 +195,6 @@ Func RestartBS()
    ;Sleep 4 minutes for BS to restart
    Sleep(120000)
 
-   ;Run(@AutoItExe & " /AutoIt3ExecuteScript  UpgradeBuildingsBluestacks.au3")
+   Run(@AutoItExe & " /AutoIt3ExecuteScript  Vilya.au3")
    ;Sleep(1000)
 EndFunc

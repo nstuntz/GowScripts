@@ -109,10 +109,10 @@ Func RunMSCity()
 	  Return
    EndIf
 
-   ;Local $MStimerShield = TimerInit()
+   Local $MStimerShield = TimerInit()
    ;CheckShieldColor()
-   ;Shield(1)
-   ;Login_WritePerformanceLog(TimerDiff($MStimerShield), "Shield")
+   ShieldMS(1)
+   Login_WritePerformanceLog(TimerDiff($MStimerShield), "Shield")
 
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("Shield Failed - 6",5)

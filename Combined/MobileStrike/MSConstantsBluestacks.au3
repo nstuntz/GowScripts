@@ -88,7 +88,8 @@ Global Const $MSShieldReplaceButtonColor = 4162976
 Global Const $MSShieldVerifyMaxLength = [485,165]
 Global Const $MSShieldCountDownBlue = 3241360
 Global Const $MSShieldCountDownBlueAlt = 6002065
-Global Const $MSShieldNotEnoughGoldButton = [300,265]
+Global Const $MSShieldNotEnoughGoldButton = [300,267]
+Global Const $MSShieldNotEnoughGoldButtonColor = 14816813
 
 
 ;Quests
