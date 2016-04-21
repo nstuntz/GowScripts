@@ -43,7 +43,7 @@ Global Const $MSMoreMenu = [555,710]
 ;Global Const $MSRedeemButton = [952,642]
 Global Const $MSAccountButton = [410,230]
 Global Const $MSAccountButtonColor = 16777215
-Global Const $MSAccountButtonColors = [15000778]
+Global Const $MSAccountButtonColors = [15000778,14934985]
 Global Const $MSLogoutButton = [400,605]
 Global Const $MSLogoutButtonColor = 14619434
 Global Const $MSLogoutYesButton = [295,275]
@@ -144,7 +144,7 @@ Global Const $MSAthenaGiftCollectButton = [350,525] ;411,460 - 11230223
 
 ;Gift retrieval
 Global Const $MSGiftBox[] = [367,720]; 374,715 - 2786836 374,715 - 1332751
-Global Const $MSGiftBoxColorArray[] = [867850]
+Global Const $MSGiftBoxColorArray[] = [867850,802314]
 
 Global Const $MSGiftButton[] = [542,237]
 Global Const $MSGiftGetClearButton[] = [535,290] ; [608,208] - 550,265 - 3737603
