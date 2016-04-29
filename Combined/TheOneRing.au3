@@ -47,7 +47,7 @@ While 1
 	  RestartBS()
    EndIf
 
-   IF $FirstTime Then
+   IF $FirstTime = True Then
 	  LogMessage("First time in OneRing, starting scripts")
 	  RestartBS()
 	  $FirstTime = False

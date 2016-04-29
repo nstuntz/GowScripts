@@ -136,15 +136,15 @@ Func RunGoWCity()
 	  Return
    EndIf
 
-   Local $timerRally = TimerInit()
-   Rally()
-   Login_WritePerformanceLog(TimerDiff($timerRally), "Rally")
+   ;Local $timerRally = TimerInit()
+   ;Rally()
+   ;Login_WritePerformanceLog(TimerDiff($timerRally), "Rally")
 
-   If Not CheckForCityScreen(0) Then
-	  LogMessage("Rally Failed- 6",5)
-	  CloseGOW()
-	  Return
-   EndIf
+;   If Not CheckForCityScreen(0) Then
+;	  LogMessage("Rally Failed- 6",5)
+;	  CloseGOW()
+;	  Return
+ ;  EndIf
 
    Local $timerBank = TimerInit()
    Bank()

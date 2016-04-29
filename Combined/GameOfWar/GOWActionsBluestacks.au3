@@ -879,7 +879,7 @@ Func Bank()
 ;	  EndIf
 ;   EndIf
 
-
+   MouseClickDrag("left",120,160,575,320,20)
    ;Click Market Place
    SendMouseClick($MarketLocation[0],$MarketLocation[1])
 
