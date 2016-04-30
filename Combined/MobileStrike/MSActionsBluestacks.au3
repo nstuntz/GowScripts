@@ -368,6 +368,8 @@ Func BankMS()
 
    LogMessage("Banking ",2)
 
+
+   MouseClickDrag("left",120,160,575,320,20)
    ;Click Market Place
    SendMouseClick($MSMarketLocation[0],$MSMarketLocation[1])
 
