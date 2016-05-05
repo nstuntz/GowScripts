@@ -131,7 +131,7 @@ Global Const $MSRSSHelpButtonColor = 4162718
 
 Global Const $MSRSSOKButton = [480,260]
 Global Const $MSRSSOKButtonColor = 4162976
-Global Const $MSMarketLocation = [200,310] ; this is after being zeroed on the screen
+Global Const $MSMarketLocation = [385,395];[200,310] - with scroll ; this is after being zeroed on the screen
 Global Enum $MSeStone,$MSeWood,$MSeOre,$MSeFood,$MSeSilver
 Global Const $MSMaxMarchesExceeded = [400,255]
 Global Const $MSMaxMarchesExceededColor = 4162976

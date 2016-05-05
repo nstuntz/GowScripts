@@ -72,6 +72,11 @@ Func RunGoWCity()
    EndIf
 
    Login_WritePerformanceLog(TimerDiff($timerLogin), "Login")
+
+   ;Scroll before the pictures.
+
+   MouseClickDrag("left",120,220,575,380,20)
+
    ;Save the image resources
    SaveRSSImage()
 

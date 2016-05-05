@@ -175,7 +175,7 @@ Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
 Global Const $RSSHelpButton = [410,575] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
-Global Const $MarketLocation = [155,445] ; this is after being zeroed on the screen
+Global Const $MarketLocation = [185,385] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
 Global Const $MaxMarchesExceeded = [400,255]
 
