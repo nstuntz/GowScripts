@@ -11,7 +11,9 @@ HotKeySet("{F10}","HotKeyPressed")
 Sleep(15000) ; 15 seconds
 
 ;Find Git
-Local $FirstTime = True
+Local $OneRingFirstTime = True
+Local $FirstTime
+   ;MsgBox($MB_SYSTEMMODAL, "", "1First Time =" & $OneRingFirstTime)
 Local $BSRestarts = 0
 Local $GitPath
 Local $MyDate = ""
@@ -42,15 +44,16 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   If NOT IsMachineActive() Then
-	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
-	  RestartBS()
-   EndIf
+   ;If NOT IsMachineActive() Then
+;	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
+;	  RestartBS()
+;   EndIf
 
-   IF $FirstTime = True Then
+   ;MsgBox($MB_SYSTEMMODAL, "", "First Time =" & $OneRingFirstTime)
+   IF $OneRingFirstTime = True Then
 	  LogMessage("First time in OneRing, starting scripts")
 	  RestartBS()
-	  $FirstTime = False
+	  $OneRingFirstTime = False
    EndIf
 
 
