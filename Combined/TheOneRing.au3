@@ -47,6 +47,7 @@ While 1
    If NOT IsMachineActive() Then
 	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
 	  RestartBS()
+	  $OneRingFirstTime = False
    EndIf
 
    ;MsgBox($MB_SYSTEMMODAL, "", "First Time =" & $OneRingFirstTime)
