@@ -44,10 +44,10 @@ While 1
    EndIf
 
    ;Check that BS is running every 10 minutes
-   ;If NOT IsMachineActive() Then
-;	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
-;	  RestartBS()
-;   EndIf
+   If NOT IsMachineActive() Then
+	  LogMessage("Restarting Bluestacks -  " & @ComputerName,5)
+	  RestartBS()
+   EndIf
 
    ;MsgBox($MB_SYSTEMMODAL, "", "First Time =" & $OneRingFirstTime)
    IF $OneRingFirstTime = True Then
