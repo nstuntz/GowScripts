@@ -35,8 +35,8 @@ Global Const $MSBuyGoldColor = 14319616
 Global Const $MSCityMenu = [165,725]
 Global $MSCityScreenColor = 6729417 ; this goes back into city
 Global $MSMapMenuColor = 3702948 ; this leaves city
-Global Const $MSGoldExitButton = [580,45]
-Global Const $MSGetGoldButton = 16702022
+Global Const $MSGoldExitButton = [570,40];[580,45]
+Global Const $MSGetGoldButton = 14916690;16702022
 
 ;Logout
 Global Const $MSMoreMenu = [555,710]
