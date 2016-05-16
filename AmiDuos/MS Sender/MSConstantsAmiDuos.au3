@@ -1,11 +1,17 @@
 #include-once
 
+;7.17.2015.04 - Updated to handle dark energy conversion. Updated login logic around gold button searching
+;7.22.2015.04 - Updated to include startup script variables
+;8.14.2015.01 - Updated to decrypt the password
+;8.30.2015.01 - Updated to have the new shielding logic
+Global Const $VersionNumber = "2.1.2016.01"
+
 ;for when we need to kill bluestacks and restart. Happens when clicking the GoW Icon does nothing
 ;"C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe"
 
 Global Const $GOWVBHostWindow[] = [100,0]
 Global Const $GoW500by800IconLocation[] = [200,320]
-Global Const $GOWWindowSize[] = [500,800]
+Global Const $GOWWindowSize[] = [300,700]
 Global Const $GOWRandomSpotForBlankScreenCheck = [340,700]
 
 ;;;;;; MOVED TO GowLocalConstantsBluestacks
@@ -68,9 +74,9 @@ Global Const $FirstToken = [518,532] ; 541,372 - 11264  518,532 - 11264
 Global Const $SecondToken = [537,629] ; 546,509 - 11264 537,629 - 11264
 
 ;Quit Game Dialog
-Global Const $QuitGameDialogYesButton = [540,428] ;411,435 - 2631720
-Global Const $QuitGameDialogNoButton = [500,428] ;289,433 - 2631720
-Global Const $YesQuitWhite = 4474438 ;13684944 - old quit dialog box
+Global Const $QuitGameDialogYesButton = [411,435] ;411,435 - 2631720
+Global Const $QuitGameDialogNoButton = [289,433] ;289,433 - 2631720
+Global Const $YesQuitWhite = 2631720 ;13684944 - old quit dialog box
 
 ;More Menu
 Global Const $MoreMenu = [555,710]
@@ -80,9 +86,9 @@ Global Const $AccountButton2 = [410,160]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
-Global Const $MarchesButton = [193,515] ;[314,491]  ; ; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
+Global Const $MarchesButton = [314,491]  ; [193,515]; -  ; 4th row Left/bottom ;[875,200] - 3rd row Right/Top
 Global Const $MarchesButton2 = [314,421]
-Global Const $MarchesButtonColor = 15395813 ;1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
+Global Const $MarchesButtonColor = 1512207; 4th row(1000,640) ;7362600 - 3rd row(875,200) ; ;6308896
 Global Const $MarchesButtonColorAlt = 13159348
 ;Global Const $MarchesButtonColor = 2102272 193,515 - 13159348
 ;Helps set
@@ -96,7 +102,7 @@ Global Const $AllianceHelpHelpAllButton = [550,610]
 Global Const $HelpButton = [560,585] ; 560,585 - 14726291
 Global Const $HelpButtonColor = 10117447
 Global Const $HelpButtonColorAlt = 14726291 ;14726291 ;6303776 ;4742248 ;3676168 ; 6303776       4221056
-Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298,14203814,14661014]
+Global Const $HelpButtonColorArray[] = [10117447,14726291, 14596506,11957837,14662298,14203814]
 Global Const $NOHelpColor = 12663823
 ;Boucers
 Global Const $AthenaGift = [165,495] ; Old = [265,565]
@@ -121,6 +127,7 @@ Global Const $QuestChance = [485,614 ]; 485,614 - 11230223
 Global Const $QuestChanceUseButton = [351,340] ;  - 11264
 
 ;Log File Name
+Global Const $LogFileName = "Log.txt"
 Global $OpenFailureCount = 0
 
 ;SpeedupNoButton
@@ -152,32 +159,34 @@ Global Const $ShieldCountDownBlueAlt = 6002065
 Global Const $ShieldNotEnoughGoldButton = [300,265]
 
 ;Banking
-Global Const $HelpTopMember = [560,230] ; Blue Color
-Global Const $HelpNumberOffsetX = 58
+
 Global Const $HelpSecondMember = [590,310] ; Blue Color
 Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 								   [623,245], _ ;Wood
 								   [687,245], _ ;Ore
 								   [751,245], _ ;Food
 								   [815,245]] ; Silver
-;Global Const $HelpRSSMax[][] = [[575,342], _ ;Stone
-;								   [640,342], _ ;Wood
-;								   [705,342], _ ;Ore
-;								   [770,342], _ ;Food
-;								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
-Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
-								   [415,216], _ ;Wood
-								   [415,269], _ ;Ore
-								   [415,322], _ ;Food
-								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
-Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
-Global Const $RSSHelpButton = [410,575] ; Blue
-Global Const $RSSOKButton = [500,285] ; Blue
-Global Const $MarketLocation = [190,465];[185,385] ; this is after being zeroed on the screen
+
+
+Global Const $HelpTopMember = [666,315] ; Blue Color
+Global Const $HelpNumberOffsetX = 61
+Global Const $HelpRSSMax[][] = [[516,209], _ ;Stone
+								   [516,299], _ ;Wood
+								   [516,389], _ ;Ore
+								   [516,479], _ ;Food
+								   [516,467]] ; Silver      This is after it scrolls
+Global Const $MarketLocation = [390,390] ; this is after being zeroed on the screen
+Global Const $MaxMarchesExceeded = [300,300]
+Global Const $RSSHelpButton = [625,645] ; Blue
+Global Const $RSSOKButton = [570,315] ; Blue
+Global Const $Blue = 4162976
+Global Const $GreyedOutButton = 5855581
+
+
+Global Const $DoneAmountEntryButton = [700,790] ; Blue color
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
-Global Const $MaxMarchesExceeded = [400,255]
 
 Global Const $SessionTimeoutButton = [410,250]
 
@@ -216,10 +225,6 @@ Global Const $RallySendButton = [356,295] ;356,295 - 16711
 ;Global Const $MarchCheckColor = 3088
 
 ;Buildings
-Global Const $BuildingIcon = [125,141]
-Global Const $BuildingIcon2 = [125,171]
-Global Const $BuildingIconColor = 5047813
-
 Global Const $BuildingUpgradeButton = [560,275]
 Global Const $BuildingUpgradeHelpButton = [540,320]
 Global Const $MaxedBuildingCoords = [475, 175, 570, 280]
@@ -287,7 +292,6 @@ Global Const $BuildingCheck[] = [900,450]
 Global Const $White = 16777215 ;16317688
 Global Const $WhiteArray = [16777215,15527148]
 Global Const $Orange = 11230223
-Global Const $Blue = 16711
 Global Const $GreenCollect = 11264
 Global Const $Purple = 3672136
 Global Const $Black = 0
@@ -297,7 +301,7 @@ Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16711
 Global Const $AccountButtonColor = 16777215
 Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618,14935011]
-Global Const $GreyedOutButton = 4670530
+
 Global Const $ExitAppErrorColor = 1577765
 
 ;Paused?
@@ -343,7 +347,7 @@ Global Const $GiftGetClearButton[] = [550,256] ; [608,208] - 550,265 - 3737603
 Global Const $GiftGetClearButtonRed = 3737603
 
 ;Treasury Collection
-Global Const $TreasuryLocation[] = [180,390] ; 191,359 - 8411962
+Global Const $TreasuryLocation[] = [191,359] ; 191,359 - 8411962
 Global Const $Treasury7[] = [460,256] ; 460,256 - 10719353
 Global Const $Treasury14[] = [430,345] ; 430,345 - 10587767
 Global Const $Treasury30[] = [463,446] ; 463,446 - 10653304
@@ -362,7 +366,7 @@ Global Const $HeroImage[] = [111,25,168,95]
 Global Const $TreasuryImage[] = [135,270,245,390]
 
 Global Const $ShieldTime[] = [190,148,495,170]
-Global Const $ShieldCount[] = [125,535,215,600]
+Global Const $ShieldCount[] = [125,495,575,610]
 Global Const $RssProduction[] = [1111,1111,1111,1111]
 Global Const $SilverProduction[] = [1111,1111,1111,1111]
 
