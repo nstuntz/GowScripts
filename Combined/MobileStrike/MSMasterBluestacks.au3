@@ -79,8 +79,8 @@ Func RunMSCity()
    SaveGoldImageMS()
    SaveHeroImageMS()
    ;Only get Treasury image if the SH can use it
-   If Login_StrongHoldLevel() > 14 Then
-	  SaveTreasuryImage()
+   If Login_Treasury() = 1 Then
+	  SaveTreasuryImageMS()
    EndIf
 
    local $MSbuilt = 0
@@ -121,7 +121,7 @@ Func RunMSCity()
    EndIf
 
    ;Local $MStimerTreasury = TimerInit()
-   ;Treasury()
+   TreasuryMS()
    ;Login_WritePerformanceLog(TimerDiff($MStimerTreasury), "Treasury")
 
    If Not CheckForCityScreenMS(0) Then

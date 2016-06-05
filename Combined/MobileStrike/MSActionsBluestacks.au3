@@ -606,6 +606,95 @@ Func CheckShieldColorMS()
    ClickCityScreenMS()
 EndFunc
 
+
+;This will attempt to collect and restart treasury if login says to.
+Func TreasuryMS()
+   ;Check to see if the city is set to Rally
+   If Login_Treasury() = 0 Then
+	  LogMessage("City not set to collect Treasury",1)
+	  Return
+   EndIf
+
+   LogMessage("City set to collect Treasury",1)
+
+   ;Check to see if we should check the treasury
+   Local $MSminonTreasury = 10080 ;7 days. We only invest for 7d for now
+   If ((($MSminonTreasury - (_DateDiff('n',Login_LastTreasury(),GetNowUTCCalc()))) < 0) OR (Login_LastTreasury() = 0)) Then
+	  ;It has been more than 30 days since last treasury collection. Or they have never collected.
+	  LogMessage("Attempting to collect Treasury or make deposit",1)
+	  ;Click on the treasury
+	  SendMouseClick($MSTreasuryLocation[0],$MSTreasuryLocation[1])
+	  Sleep(2000)
+
+	  ;there is an upgrade prompt here. We could potentially do a different deposit based on this if wanted
+	  If PollForColor($MSUpgradeTreasury[0],$MSUpgradeTreasury[1],$MSBlue, 2000) Then
+			SendMouseClick($MSUpgradeTreasury[0],$MSUpgradeTreasury[1])
+			Sleep(2000)
+	  EndIf
+
+	  ;If last login is 0 (null in db) then check 7 and 14 as well.
+	  If(Login_LastTreasury() = 0) Then
+		 ;Check Treasury Level 7
+		 Local $MScollected = 0
+		 SendMouseClick($MSTreasury1[0],$MSTreasury1[1])
+		 If PollForColor($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1],$MSTreasuryCollectColor, 2000) Then
+			SendMouseClick($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1])
+			Sleep(2000)
+			$MScollected = 1
+			LogMessage("Treasury 1d Collected",2)
+		 Else
+			;if we went it but did not collect we have to go back out again
+			SendMouseClick($MSTreasuryBack[0],$MSTreasuryBack[1])
+			Sleep(2000)
+		 EndIf
+
+		 ;we did not collect the 7d one, so try a 14d
+		 If ($MScollected = 0) Then
+			SendMouseClick($MSTreasury3[0],$MSTreasury3[1])
+			If PollForColor($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1],$MSTreasuryCollectColor, 2000) Then
+			   SendMouseClick($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1])
+			   Sleep(2000)
+			   LogMessage("Treasury 3d Collected",2)
+			Else
+			   ;if we went it but did not collect we have to go back out again
+			   SendMouseClick($MSTreasuryBack[0],$MSTreasuryBack[1])
+			   Sleep(2000)
+			EndIf
+		 EndIf
+
+	  EndIf
+
+	  SendMouseClick($MSTreasury7[0],$MSTreasury7[1])
+	  ;Check to see if I can collect
+	  If PollForColor($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1],$MSTreasuryCollectColor, 2000) Then
+		 SendMouseClick($MSTreasuryCollectButton[0],$MSTreasuryCollectButton[1])
+		 Sleep(2000)
+		 SendMouseClick($MSTreasury7[0],$MSTreasury7[1])
+		 Sleep(2000)
+		 LogMessage("Treasury Collected",1)
+	  EndIf
+
+	  ;Check to see if we can make a deposit
+	  If PollForColor($MSTreasuryDepositButton[0],$MSTreasuryDepositButton[1],$MSBlue, 2000) Then
+		 ;MouseClickDrag("left",$MSTreasuryDragCoords[0],$MSTreasuryDragCoords[1],$MSTreasuryDragCoords[2],$MSTreasuryDragCoords[3],20)
+		 SendMouseClick($MSTreasuryDepositButton[0],$MSTreasuryDepositButton[1])
+
+		 ;Check to see if the black bar is there before setting LastTreasury
+		 If PollForColor($MSTreasuryRunningCheck[0],$MSTreasuryRunningCheck[1],$MSBlack,3000) Then
+			LogMessage("Treasury Deposit Made",2)
+			Login_UpdateLastTreasury()
+		 EndIf
+		 ;If it doesn't appear to be accruing, then leave the LastTreasury date so it tries again next login.
+		 ;There doesnt seem like a lot of potential to not work, if it looks like it is failing we can trying to invest again.
+	  EndIf
+
+   EndIf
+
+   ClickCityScreen()
+
+EndFunc
+
+
 Func LogoutMS()
 
    ;Logout Script

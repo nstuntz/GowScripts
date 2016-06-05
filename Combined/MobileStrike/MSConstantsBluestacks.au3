@@ -157,6 +157,26 @@ Global Const $MSQuitGameDialogNoButton = [500,428] ;289,433 - 2631720
 Global Const $MSYesQuitWhite = 4474438 ;13684944 - old quit dialog box
 
 
+;Treasury Collection
+Global Const $MSTreasuryLocation[] = [260,405] ; 191,359 - 8411962
+Global Const $MSTreasury1[] = [530,240] ; 460,256 - 10719353
+Global Const $MSTreasury3[] = [530,330] ; 430,345 - 10587767
+Global Const $MSTreasury7[] = [530,420] ; 463,446 - 10653304
+Global Const $MSTreasuryBack[] = [130,45] ; 146,51 - 9800838
+Global Const $MSTreasuryCollectButton[] = [450,455] ; 449,454 - 11230223
+Global Const $MSTreasuryCollectColor = 14319616 ; OLD=11033608 ; This is Orange color
+Global Const $MSUpgradeTreasury[] = [300,415]
+Global Const $MSTreasuryDepositButton[] = [495,500] ;  4162976
+Global Const $MSTreasuryRunningCheck[] = [460,440] ; 468,471 - 0
+;Global Const $MSTreasuryDragCoords[] = [158,442,402,443] ; 158,442 to 402,443 - 3551013
+
+
+Global Const $MSTreasuryImage[] = [200,340,300,430]
+
+
+Global Const $MSBlue = 4162976
+Global Const $MSBlack = 0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;NOT USED YET
 ;Items Menu
 Global Const $MSItemsMenu = [328,710]
@@ -250,10 +270,8 @@ Global Const $MSRallySendButton = [356,295] ;356,295 - 16711
 Global Const $MSWhite = 16777215 ;16317688
 Global Const $MSWhiteArray = [16777215,15527148]
 Global Const $MSOrange = 11230223
-Global Const $MSBlue = 16711
 Global Const $MSGreenCollect = 11264
 Global Const $MSPurple = 3672136
-Global Const $MSBlack = 0
 Global Const $MSRedNoButton = 3737603
 Global Const $MSBuildingBeige = 10521720
 Global Const $MSStrongholdUpgradeArrowColor = 13663240
@@ -286,23 +304,6 @@ Global $MSg_bPaused = false
 ;Global Const $MSAndroidHomeButtonBottom  = [690,711]
 Global Const $MSAndroidHomeButton  = [1190,420]
 Global Const $MSAndroidHomeButtonBottom  = [190,780]
-
-
-
-;Treasury Collection
-Global Const $MSTreasuryLocation[] = [191,359] ; 191,359 - 8411962
-Global Const $MSTreasury7[] = [460,256] ; 460,256 - 10719353
-Global Const $MSTreasury14[] = [430,345] ; 430,345 - 10587767
-Global Const $MSTreasury30[] = [463,446] ; 463,446 - 10653304
-Global Const $MSTreasuryBack[] = [146,51] ; 146,51 - 9800838
-Global Const $MSTreasuryCollectButton[] = [449,454] ; 449,454 - 11230223
-Global Const $MSTreasuryCollectColor = 11230223 ; OLD=11033608 ; This is Orange color
-Global Const $MSTreasuryDepositButton[] = [522,497] ; 522,497 - 16711
-Global Const $MSTreasuryRunningCheck[] = [468,471] ; 468,471 - 0
-Global Const $MSTreasuryDragCoords[] = [158,442,402,443] ; 158,442 to 402,443 - 3551013
-
-
-Global Const $MSTreasuryImage[] = [135,270,245,390]
 
 Global Const $MSRssProduction[] = [1111,1111,1111,1111]
 Global Const $MSSilverProduction[] = [1111,1111,1111,1111]
