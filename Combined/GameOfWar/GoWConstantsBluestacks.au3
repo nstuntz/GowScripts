@@ -344,14 +344,14 @@ Global Const $GiftGetClearButtonRed = 3737603
 
 ;Treasury Collection
 Global Const $TreasuryLocation[] = [180,390] ; 191,359 - 8411962
-Global Const $Treasury7[] = [460,256] ; 460,256 - 10719353
-Global Const $Treasury14[] = [430,345] ; 430,345 - 10587767
-Global Const $Treasury30[] = [463,446] ; 463,446 - 10653304
+Global Const $Treasury7[] = [460,340] ; 460,256 - 10719353
+Global Const $Treasury14[] = [460,425] ; 430,345 - 10587767
+Global Const $Treasury30[] = [460,510] ; 463,446 - 10653304
 Global Const $TreasuryBack[] = [146,51] ; 146,51 - 9800838
 Global Const $TreasuryCollectButton[] = [449,454] ; 449,454 - 11230223
 Global Const $TreasuryCollectColor = 11230223 ; OLD=11033608 ; This is Orange color
 Global Const $TreasuryDepositButton[] = [522,497] ; 522,497 - 16711
-Global Const $TreasuryRunningCheck[] = [468,471] ; 468,471 - 0
+Global Const $TreasuryRunningCheck[] = [468,540] ; 468,471 - 0
 Global Const $TreasuryDragCoords[] = [158,442,402,443] ; 158,442 to 402,443 - 3551013
 
 ;Image Positions

@@ -21,7 +21,7 @@ Global Const $MSDeviceLockedLogoutButtonColor = 14816813
 
 Global Const $MSFirstPinBox = [230,150]
 Global Const $MSSecondPinBox = [315,150]
-Global Const $MSPinBoxColor = 16777215
+Global Const $MSPinBoxColor = 15592941
 Global Const $MSEmailPinCodeButton = [540,260]
 
 ;Gold Screen

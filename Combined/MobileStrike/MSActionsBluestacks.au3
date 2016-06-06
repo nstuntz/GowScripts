@@ -28,9 +28,6 @@ Func LoginMS($MSemail, $MSpwd)
 	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
 
-	  ;Checking for PinPrompt
-
-
 	  ;Check if you are already logged in Use the last attempt, don't do it lots
 	  If CheckForCityScreenMS(4) Then
 		 LogMessage("Ok, we are already logged in so just keep going")
