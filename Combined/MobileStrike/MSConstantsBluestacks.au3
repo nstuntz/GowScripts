@@ -127,7 +127,7 @@ Global Const $MSHelpRSSMax[][] = [[422,162], _ ;Stone
 								   [422,415], _ ;Food
 								   [422,415]] ; Silver      This is after it scrolls
 Global Const $MSRSSHelpButton = [525,590]
-Global Const $MSRSSHelpButtonColor = 4162718
+Global Const $MSRSSHelpButtonColor = 4097181
 
 Global Const $MSRSSOKButton = [480,260]
 Global Const $MSRSSOKButtonColor = 4162976

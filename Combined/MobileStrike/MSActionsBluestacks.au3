@@ -333,7 +333,7 @@ Func GiftsMS()
 			;SendMouseClick($MSGiftGetClearButton[0],$MSGiftGetClearButton[1])
 			;Sleep(2000)
 			$MSGiftCount= $MSGiftCount+1
-			if $MSGiftCount > 200 Then
+			if $MSGiftCount > 400 Then
 			   LogMessage("Hit gift count limit.")
 			   ExitLoop
 			EndIf
