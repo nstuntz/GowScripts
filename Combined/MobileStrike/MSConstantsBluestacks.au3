@@ -44,7 +44,7 @@ Global Const $MSMoreMenu = [555,710]
 Global Const $MSAccountButton = [410,230]
 Global Const $MSAccountButtonColor = 16777215
 Global Const $MSAccountButtonColors = [15000778,14934985]
-Global Const $MSLogoutButton = [400,605]
+Global Const $MSLogoutButton = [400,600]
 Global Const $MSLogoutButtonColor = 14619434
 Global Const $MSLogoutYesButton = [295,275]
 Global Const $MSLogoutYesButtonColor = 4162976
@@ -119,7 +119,7 @@ Global Const $MSAllianceHelpHelpAllButtonColor = 14319616
 
 ;Banking
 Global Const $MSHelpTopMember = [550,263]
-Global Const $MSHelpTopMemberColor = 4886442
+Global Const $MSHelpTopMemberColor = 4820649
 Global Const $MSHelpNumberOffsetX = 59
 Global Const $MSHelpRSSMax[][] = [[422,162], _ ;Stone
 								   [422,247], _ ;Wood
