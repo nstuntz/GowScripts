@@ -99,7 +99,7 @@ Global Const $MSQuestsAliaance = [430,460]
 Global Const $MSQuestsEmpire = [430,220]
 Global Const $MSQuestsStart = [555,178]
 Global Const $MSQuestsCollect = [560,180]
-Global Const $MSQuestsCollectColor = 4162976
+Global Const $MSQuestsCollectColor = 4162975
 Global Const $MSNoQuestsColor = 1515301
 
 Global Const $MSQuestsEmpireCollect = [558,286] ; 558,286 - 11264
@@ -149,7 +149,7 @@ Global Const $MSGiftBoxColorArray[] = [867850,802314]
 Global Const $MSGiftButton[] = [542,237]
 Global Const $MSGiftGetClearButton[] = [535,290] ; [608,208] - 550,265 - 3737603
 Global Const $MSGiftGetClearButtonBlue = 4097181
-Global Const $MSGiftGetClearButtonRed = 14553641
+Global Const $MSGiftGetClearButtonRed = 14487848 ; 14553641 -NS-7/2/16
 
 ;Quit Game Dialog
 Global Const $MSQuitGameDialogYesButton = [540,428] ;411,435 - 2631720
