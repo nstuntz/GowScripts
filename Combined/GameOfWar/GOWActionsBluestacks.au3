@@ -223,10 +223,12 @@ Func Login($email, $pwd)
 
    ;Check if there was a login failure
    If PollForColor($LoginFailureButton[0],$LoginFailureButton[1],$Blue,3000, "$Blue at $LoginFailureButton") Then
-	  LogMessage("Login Failed.  Bad Username/Pwd.",5 )
-	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
-	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
-	  Return False
+	  If(PollForNotColor($ConnectionInteruptButton[0],$ConnectionInteruptButton[1],$Blue,3000)) Then
+		 LogMessage("Login Failed.  Bad Username/Pwd.",5 )
+		 LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
+		 Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
+		 Return False
+	  EndIf
    EndIf
 
 
@@ -1809,7 +1811,11 @@ Func ClickGoldButton()
 		 Sleep(1000)
 	  EndIf
 	  Sleep(500)
-	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 3000)) Then
+	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor, 2000)) Then
+		 Send("{ESC}")
+		 Return True
+	  EndIf
+	  If (PollForPixelSearch($GoldSearchLeft,$GoldSearchTop,$GoldSearchRight,$GoldSearchBottom, $BuyGoldColor2, 2000)) Then
 		 Send("{ESC}")
 		 Return True
 	  EndIf

@@ -43,14 +43,14 @@ Global Const $EmailPinCodeButton = [540,260]
 
 ;Menus
 Global Const $CityMenu = [165,725]
-Global $CityScreenColor = 4993559 ;winter2014=1053712 ; Fall2014= 1050624 ; - Old standard one - 1051656     7377064
-Global $MapMenuColor = 2246954 ;winter2014=4744320; fall2014 = 7888928 ; - Old Map Color 9471048   5788760
+Global $CityScreenColor = 4749916 ;winter2014=1053712 ; Fall2014= 1050624 ; - Old standard one - 1051656     7377064
+Global $MapMenuColor = 3617581 ;winter2014=4744320; fall2014 = 7888928 ; - Old Map Color 9471048   5788760
 Global $SleepOnLogout = 0
 
 Global $storedPIN = ""
 
 ;;;;Connection Code Interupted Bluestacks only. Appears on every login it looks like
-Global Const $ConnectionInteruptButton = [430,260]
+Global Const $ConnectionInteruptButton = [465,260]
 Global Const $TermsAndConditionsButton = [250,450]
 ;Items Menu
 Global Const $ItemsMenu = [328,710]
@@ -322,6 +322,7 @@ Global Const $GoldSearchRight = 270
 Global Const $GoldBuyButton = [1135,340]
 Global Const $GoldBuyButton2 = [1135,540]
 Global Const $BuyGoldColor = 11230223
+Global Const $BuyGoldColor2 = 4465926
 Global Const $GetGoldButton = 6962190
 ;Global Const $GetGoldButton = 3672064
 
