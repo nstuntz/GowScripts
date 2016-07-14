@@ -30,6 +30,7 @@ Global Const $MSGoldSearchTop = 675
 Global Const $MSGoldSearchBottom = 760
 Global Const $MSGoldSearchRight = 265
 Global Const $MSBuyGoldColor = 14319616
+Global Const $MSBuyGoldColor2 = 5780480
 
 ;Menus
 Global Const $MSCityMenu = [165,725]
