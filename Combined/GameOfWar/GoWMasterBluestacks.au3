@@ -78,12 +78,12 @@ Func RunGoWCity()
    ;MouseClickDrag("left",120,220,575,380,20)
 
    ;Save the image resources
-   SaveRSSImage()
+   ;SaveRSSImage()
 
    ;Save the City Image
-   SaveCityImage()
-   SaveGoldImage()
-   SaveHeroImage()
+   ;SaveCityImage()
+  ; SaveGoldImage()
+ ;  SaveHeroImage()
    ;Only get Treasury image if the SH can use it
    If Login_StrongHoldLevel() > 14 Then
 	  SaveTreasuryImage()
