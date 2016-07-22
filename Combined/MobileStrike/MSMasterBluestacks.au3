@@ -70,6 +70,7 @@ Func RunMSCity()
 	  Return
    EndIf
 
+    ;MsgBox($MB_SYSTEMMODAL, "", "1" )
    Login_WritePerformanceLog(TimerDiff($MStimerLogin), "Login")
    ;Save the image resources
    ;SaveRSSImageMS()
@@ -78,19 +79,24 @@ Func RunMSCity()
   ; SaveCityImageMS()
    ;SaveGoldImageMS()
   ; SaveHeroImageMS()
-   ;Only get Treasury image if the SH can use it
+   ;Only get Treasury image if the SH can use it ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
+
+    ;MsgBox($MB_SYSTEMMODAL, "", "1" )
    If Login_Treasury() = 1 Then
-	  SaveTreasuryImageMS()
+	 ; SaveTreasuryImageMS()
    EndIf
 
    local $MSbuilt = 0
+    ;MsgBox($MB_SYSTEMMODAL, "", "1" )
 
    ;Local $MStimerAthenaGift = TimerInit()
    CollectAthenaGiftMS()
+   ; MsgBox($MB_SYSTEMMODAL, "", "1" )
    ;Login_WritePerformanceLog(TimerDiff($MStimerAthenaGift), "Athena")
 
    ;Local $MStimerSecretGift = TimerInit()
    CollectSecretGiftMS()
+   ; MsgBox($MB_SYSTEMMODAL, "", "1" )
    ;Login_WritePerformanceLog(TimerDiff($MStimerSecretGift), "Collect Secret Gift")
 
    If Not CheckForCityScreenMS(0) Then

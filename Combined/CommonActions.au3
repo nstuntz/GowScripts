@@ -223,31 +223,31 @@ EndFunc
 
 Func SaveImage($imageName,$left,$top,$right,$bottom)
 
-   Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
+   ;Local $sFilePath = @ScriptDir & '\' & $imageName & '.jpg'
    ;Local $URL = "http://localhost:52417/api/Upload"
    ;Local $URL = "https://ets-tfs.cloudapp.net/api/Upload"
 
-   _ScreenCapture_SetJPGQuality (25)
+   ;_ScreenCapture_SetJPGQuality (25)
 
 
-   _GDIPlus_Startup()
-   Local $hHBmp = _ScreenCapture_Capture("", $left,$top,$right,$bottom)
-   Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
-   _WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
+  ; _GDIPlus_Startup()
+   ;Local $hHBmp = _ScreenCapture_Capture("", $left,$top,$right,$bottom)
+   ;Local $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBmp) ;convert GDI bitmap to GDI+ bitmap
+   ;_WinAPI_DeleteObject($hHBmp) ;release GDI bitmap resource because not needed anymore
 
    ;_GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
 
-   _GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
+   ;_GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
 
    ;_GDIPlus_BitmapDispose($hBitmap)
-   _GDIPlus_ImageDispose($hBitmap)
+   ;_GDIPlus_ImageDispose($hBitmap)
 
-   _GDIPlus_Shutdown()
+   ;_GDIPlus_Shutdown()
 
-   Local $sFile = FileOpen($sFilePath, 16)
+   ;Local $sFile = FileOpen($sFilePath, 16)
 
-   $sFileRead = BinaryToString(FileRead($sFile))
-   FileClose($sFile)
+   ;$sFileRead = BinaryToString(FileRead($sFile))
+   ;FileClose($sFile)
 #comments-start
    $sBoundary = "mymultipartboundary"
 
@@ -276,7 +276,7 @@ Func SaveImage($imageName,$left,$top,$right,$bottom)
    Else
    #comments-end
 	  ;Save to the new server too
-	  SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
+	 ; SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
    ;EndIf
 
 
