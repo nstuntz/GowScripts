@@ -55,7 +55,7 @@ Global $MSstoredPIN = ""
 
 ;;;;Connection Code Interupted Bluestacks only. Appears on every login it looks like
 Global Const $MSConnectionInteruptButton = [394,257]
-Global Const $MSConnectionInteruptButtonColor = 4162975
+Global Const $MSConnectionInteruptButtonColor = [4162975,5017771]
 Global Const $MSTermsAndConditionsButton = [250,450]
 
 ;Secret Gift

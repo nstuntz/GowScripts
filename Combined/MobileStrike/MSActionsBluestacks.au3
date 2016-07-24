@@ -142,7 +142,7 @@ Func LoginMS($MSemail, $MSpwd)
    Sleep(1000) ;3 seconds because of the quest poping up
 
 ;;;;Bluestack connection code interupt. Poll for a few seconds then move on
-   If PollForColor($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSBlue,1500, "$MSBlue at $MSConnectionInteruptButton") Then
+   If PollForColors($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSConnectionInteruptButtonColor,2000, "$MSBlue at $MSConnectionInteruptButton") Then
 	  SendMouseClick($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1])
 	  Sleep(500)
    EndIf
