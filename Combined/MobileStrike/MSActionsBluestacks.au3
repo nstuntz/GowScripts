@@ -1001,11 +1001,15 @@ Func ClickGoldButtonMS()
 		 Sleep(1000)
 	  EndIf
 	  Sleep(500)
-	  If (PollForPixelSearch($MSGoldSearchLeft,$MSGoldSearchTop,$MSGoldSearchRight,$MSGoldSearchBottom, $MSBuyGoldColor, 1500)) Then
+	  If (PollForPixelSearch($MSGoldSearchLeft,$MSGoldSearchTop,$MSGoldSearchRight,$MSGoldSearchBottom, $MSBuyGoldColor, 1000)) Then
 		 Send("{ESC}")
 		 Return True
 	  EndIf
-	  If (PollForPixelSearch($MSGoldSearchLeft,$MSGoldSearchTop,$MSGoldSearchRight,$MSGoldSearchBottom, $MSBuyGoldColor2, 1500)) Then
+	  If (PollForPixelSearch($MSGoldSearchLeft,$MSGoldSearchTop,$MSGoldSearchRight,$MSGoldSearchBottom, $MSBuyGoldColor2, 1000)) Then
+		 Send("{ESC}")
+		 Return True
+	  EndIf
+	  If (PollForPixelSearch($MSGoldSearchLeft,$MSGoldSearchTop,$MSGoldSearchRight,$MSGoldSearchBottom, $MSBuyGoldColor3, 1000)) Then
 		 Send("{ESC}")
 		 Return True
 	  EndIf

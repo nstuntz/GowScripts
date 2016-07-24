@@ -260,6 +260,7 @@ Func Login($email, $pwd)
 
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $ClickedGoldScreen Then
+	  Sleep(500)
 	  If Not CheckForColor($CityMenu[0],$CityMenu[1],$MapMenuColor) Then
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
 		 LogMessage("Old City Color = " & $MapMenuColor,5  )
