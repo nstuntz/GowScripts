@@ -31,6 +31,7 @@ Global Const $MSGoldSearchBottom = 760
 Global Const $MSGoldSearchRight = 265
 Global Const $MSBuyGoldColor = 14319616
 Global Const $MSBuyGoldColor2 = 5780480
+Global Const $MSBuyGoldColor3 = 933924
 
 ;Menus
 Global Const $MSCityMenu = [165,725]
@@ -44,7 +45,7 @@ Global Const $MSMoreMenu = [555,710]
 ;Global Const $MSRedeemButton = [952,642]
 Global Const $MSAccountButton = [410,230]
 Global Const $MSAccountButtonColor = 16777215
-Global Const $MSAccountButtonColors = [15000778,14934985]
+Global Const $MSAccountButtonColors = [15000778,14934985,14934984]
 Global Const $MSLogoutButton = [400,600]
 Global Const $MSLogoutButtonColor = 14619434
 Global Const $MSLogoutYesButton = [295,275]
