@@ -500,7 +500,7 @@ Func ShieldMS($MSattempt)
    ;MsgBox($MSMB_SYSTEMMODAL,"","Left: " & $MSShieldTime[0]  + $MSshieldCoord[0] - $MSShieldButton[0] & " Top: " & $MSShieldTime[1] & " Right: " & $MSShieldTime[2]  + $MSshieldCoord[0] - $MSShieldButton[0]& " Bottom: " & $MSShieldTime[3])
    ;Save Shield Time
    ;SaveShieldTimeImage($MSShieldTime[0] + $MSshieldCoord[0] - $MSShieldButton[0],$MSShieldTime[1],$MSShieldTime[2]  + $MSshieldCoord[0] - $MSShieldButton[0],$MSShieldTime[3])
-   ;SaveShieldTimeImage()
+   SaveShieldTimeImage()
    LogMessage("$MSShieldColor at $MSShieldButton: " & PixelGetColor($MSShieldButton[0],$MSShieldButton[1]))
 
    Local $MSminonShield = 4320 ;1440= 24Hr ,  4320 = 3 day

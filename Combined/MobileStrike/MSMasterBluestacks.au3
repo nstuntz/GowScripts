@@ -73,12 +73,12 @@ Func RunMSCity()
     ;MsgBox($MB_SYSTEMMODAL, "", "1" )
    Login_WritePerformanceLog(TimerDiff($MStimerLogin), "Login")
    ;Save the image resources
-   ;SaveRSSImageMS()
+   SaveRSSImageMS()
 
    ;Save the City Image
-  ; SaveCityImageMS()
-   ;SaveGoldImageMS()
-  ; SaveHeroImageMS()
+   SaveCityImageMS()
+   SaveGoldImageMS()
+   SaveHeroImageMS()
    ;Only get Treasury image if the SH can use it ;MsgBox($MB_SYSTEMMODAL, "", $openRet )
 
     ;MsgBox($MB_SYSTEMMODAL, "", "1" )
