@@ -276,7 +276,7 @@ Func SaveImage($imageName,$left,$top,$right,$bottom)
    Else
    #comments-end
 	  ;Save to the new server too
-	 ; SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
+	  SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
    ;EndIf
 
 
