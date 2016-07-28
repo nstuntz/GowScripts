@@ -103,7 +103,7 @@ Global Const $AthenaGift = [165,495] ; Old = [265,565]
 Global Const $NoAthenaGiftColor = 13092798 ; old = 5933875
 
 Global Const $AthenaGiftCollectButton = [411,460] ;411,460 - 11230223
-Global Const $SecretGift = [165,570]
+Global Const $SecretGift = [458,578]
 Global Const $SecretGiftCollectButton = [411,430] ;411,430 - 11230223
 Global Const $SecretGiftCollectButtonColor = 11230223
 

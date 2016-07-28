@@ -59,7 +59,7 @@ Global Const $MSConnectionInteruptButtonColor = [4162975,5017771]
 Global Const $MSTermsAndConditionsButton = [250,450]
 
 ;Secret Gift
-Global Const $MSSecretGift = [165,570]
+Global Const $MSSecretGift = [458,589]
 Global Const $MSSecretGiftCollectButton = [350,500] ;411,430 - 11230223
 Global Const $MSNoSecretGiftCollectButton = [350,450] ;411,430 - 11230223
 Global Const $MSSecretGiftCollectButtonColor = 14319616

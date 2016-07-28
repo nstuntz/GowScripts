@@ -753,6 +753,8 @@ Func OpenMS($MSattempts)
 
    LogMessage("Attempting to open MS: " & $MSattempts,1)
    ;Check if we have an Icon, if not try exiting MS or using the home button for Android
+
+   #comments-start
    If Not PollForColor( $MSIcon[0],$MSIcon[1], $MSColor, 5000) Then
 	  LogMessage("***  We dont have the Icon trying to reset")
 	  Local $MSTries = 1
@@ -793,20 +795,22 @@ Func OpenMS($MSattempts)
 
 	  EndIf
    EndIf
+   #comments-end
 
    ;double click the Icon
-   SendMouseClick($MSIcon[0],$MSIcon[1])
-   sleep(100)
-   SendMouseClick($MSIcon[0],$MSIcon[1])
-   sleep(10000)
+   ;SendMouseClick($MSIcon[0],$MSIcon[1])
+   ;sleep(100)
+   ;SendMouseClick($MSIcon[0],$MSIcon[1])
+   ;sleep(10000)
    ;;;;; added to handle that the VM shifts to a new spot.
+   Run('"C:\Program Files (x86)\BlueStacks\HD-RunApp.exe" -p com.epicwaronline.ms -a com.mz.jix.SplashActivity')
 
    If WinGetState ( "BlueStacks") = 0 Then
 	  LogMessage("No bluestacks window to move.  Attempting to reopen Bluestacks.")
 	  return OpenMS($MSattempts+1)
    EndIf
 
-
+   Sleep(2500)
    WinMove("BlueStacks","",$MSVBHostWindow[0],$MSVBHostWindow[1],$MSWindowSize[0],$MSWindowSize[1])
    ;quit()
 
@@ -851,12 +855,12 @@ Func OpenMS($MSattempts)
 			LogMessage("Looks like we are expecting a PIN")
 
 			   ;Check for PIN Prompt using the stored PIN. Enter it and then sleep a bit and ESC the gold screen and logout.
-			CheckForPinPromptMS(StringToASCIIArray($MSstoredPIN))
+			CheckForPinPromptMS(StringToASCIIArray($MSFilePIN))
 			Sleep(15000)
 
 			Send("ESC")
 			Sleep(2000)
-			If PollForColor($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSBlue,3000, "$MSBlue at $MSConnectionInteruptButton") Then
+			If PollForColors($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSConnectionInteruptButtonColor,3000, "$MSConnectionInteruptButtonColor at $MSConnectionInteruptButton") Then
 			   SendMouseClick($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1])
 			   Sleep(500)
 			EndIf
@@ -880,7 +884,7 @@ Func OpenMS($MSattempts)
 			   LogMessage("Looks like we are in MS")
 			   Send("ESC")
 			   Sleep(2000)
-			   If PollForColor($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSBlue,3000, "$MSBlue at $MSConnectionInteruptButton") Then
+			   If PollForColors($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1],$MSConnectionInteruptButtonColor,3000, "$MSConnectionInteruptButtonColor at $MSConnectionInteruptButton") Then
 				  SendMouseClick($MSConnectionInteruptButton[0],$MSConnectionInteruptButton[1])
 				  Sleep(500)
 			   EndIf
