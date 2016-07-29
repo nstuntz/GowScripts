@@ -489,7 +489,7 @@ Func Login_PINMS()
    EndIf
 
    FileWriteLine($PINFileName,"#include-once")
-   FileWriteLine($PINFileName,'Global $filePIN = "' & $_PIN & '"')
+   FileWriteLine($PINFileName,'Global $MSFilePIN = "' & $_PIN & '"')
 
    $MSstoredPIN = $_PIN
    return $_PIN
