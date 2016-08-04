@@ -74,8 +74,8 @@ Global Const $MSShieldCount[] = [130,555,210,595]
 
 ;Shielding
 Global Const $MSBoostsIcon = [565,245]
-Global Const $MSShieldColor = 16514042
-Global Const $MSShieldColorAlt = 15658214
+Global Const $MSShieldColor = 15264748
+Global Const $MSShieldColorAlt = 15001576
 Global Const $MSShieldSearchLeft = 155
 Global Const $MSShieldSearchTop = 120
 Global Const $MSShieldSearchRight = 155
