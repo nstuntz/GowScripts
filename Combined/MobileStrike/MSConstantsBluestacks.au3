@@ -121,7 +121,7 @@ Global Const $MSAllianceHelpHelpAllButtonColor = 14319616
 
 ;Banking
 Global Const $MSHelpTopMember = [550,263]
-Global Const $MSHelpTopMemberColor = 4820649
+Global Const $MSHelpTopMemberColor = 4162976
 Global Const $MSHelpNumberOffsetX = 59
 Global Const $MSHelpRSSMax[][] = [[422,162], _ ;Stone
 								   [422,247], _ ;Wood
