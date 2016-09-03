@@ -159,7 +159,7 @@ Global Const $ShieldCountDownBlueAlt = 6002065
 Global Const $ShieldNotEnoughGoldButton = [300,265]
 
 ;Banking
-Global Const $HelpTopMember = [690,270] ; Blue Color
+Global Const $HelpTopMember = [675,320] ; Blue Color
 Global Const $HelpNumberOffsetX = 60
 Global Const $HelpSecondMember = [590,310] ; Blue Color
 Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
@@ -181,7 +181,7 @@ Global Const $HelpRSSMax[][] = [[509,209], _ ;Stone
 
 Global Const $DoneAmountEntryButton = [700,790] ; Blue color
 Global Const $RSSHelpButton = [645,645] ; Blue
-Global Const $RSSOKButton = [500,285] ; Blue
+Global Const $RSSOKButton = [500,310] ; Blue
 Global Const $MarketLocation = [275,475] ; this is after being zeroed on the screen
 Global Enum $eStone,$eWood,$eOre,$eFood,$eSilver
 Global Const $MaxMarchesExceeded = [530,300]

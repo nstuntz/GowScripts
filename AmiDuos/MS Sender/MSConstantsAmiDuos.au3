@@ -175,11 +175,11 @@ Global Const $HelpNumberOffsetX = 61
 Global Const $HelpRSSMax[][] = [[516,209], _ ;Stone
 								   [516,299], _ ;Wood
 								   [516,389], _ ;Ore
-								   [516,479], _ ;Food
+								   [516,472], _ ;Food
 								   [516,467]] ; Silver      This is after it scrolls
 Global Const $MarketLocation = [390,390] ; this is after being zeroed on the screen
 Global Const $MaxMarchesExceeded = [300,300]
-Global Const $RSSHelpButton = [625,645] ; Blue
+Global Const $RSSHelpButton = [650,655] ; Blue
 Global Const $RSSOKButton = [570,315] ; Blue
 Global Const $Blue = 4162976
 Global Const $GreyedOutButton = 5855581

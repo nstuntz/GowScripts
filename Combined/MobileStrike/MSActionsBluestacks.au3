@@ -413,7 +413,7 @@ Func SendRSSMS($MStype, $MSnonSilverType)
 	  EndIf
 
 	  ;Removed the restriction to only add other rss on food.
-	  If ($MStype = $MSeSilver And $MSnonSilverType >0) Then
+	  If ($MStype = $MSeSilver) Then
 		 LogMessage("Banking - Maxing silver march with rss",2)
 		 ;SendMouseClick($MSHelpRSSMax[$MSeFood][0],$MSHelpRSSMax[$MSeFood][1])
 		 SendMouseClick($MSHelpRSSMax[$MSnonSilverType][0],$MSHelpRSSMax[$MSnonSilverType][1])
