@@ -30,6 +30,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 ;			if found break loop return True
 ;			else continue
    If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 5000, "$Blue at $HelpTopMember(1)") Then
+	  Sleep(100)
 	  SendMouseClick($HelpTopMember[0] ,$HelpTopMember[1] + ($offset - 1) * $HelpNumberOffsetX)
    Else
 	  return false
@@ -92,7 +93,7 @@ Func SendRSS($type, $nonSilverType, $offset)
 	  Endif
 
 	  ;MouseMove($HelpTopMember[0],$HelpTopMember[1])
-	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 1000, "$Blue at $HelpTopMember(2)") Then
+	  If PollForColor($HelpTopMember[0],$HelpTopMember[1], $Blue, 3000, "$Blue at $HelpTopMember(2)") Then
 		 ExitLoop
 	  EndIf
 
