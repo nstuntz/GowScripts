@@ -1,0 +1,114 @@
+----- 2 queues ------
+
+
+pixel at 240 is: 4211271
+pixel at 241 is: 4145479
+pixel at 242 is: 4079686
+pixel at 243 is: 10001310
+pixel at 244 is: 15988471
+pixel at 245 is: 15790835
+pixel at 246 is: 15527662
+pixel at 247 is: 15330284
+pixel at 248 is: 15265004
+pixel at 249 is: 15264747
+pixel at 250 is: 14935781
+pixel at 251 is: 11976384
+pixel at 252 is: 10262668
+pixel at 253 is: 14277333
+pixel at 254 is: 15001574
+pixel at 255 is: 14935782
+pixel at 256 is: 15132905
+pixel at 257 is: 14935783
+pixel at 258 is: 13883353
+pixel at 259 is: 11581629
+pixel at 260 is: 9872817
+pixel at 261 is: 10332852
+pixel at 262 is: 12632251
+pixel at 263 is: 10854289
+pixel at 264 is: 13817299
+pixel at 265 is: 14541283
+pixel at 266 is: 14607332
+pixel at 267 is: 9278102
+pixel at 268 is: 3619136
+pixel at 269 is: 3619392
+pixel at 270 is: 3750721
+pixel at 271 is: 3685186
+pixel at 272 is: 3684673
+pixel at 273 is: 4211528
+
+
+
+
+------ no queues ------
+
+
+
+pixel at 130 is: 4342855
+pixel at 131 is: 4145477
+pixel at 132 is: 3882307
+pixel at 133 is: 3948100
+pixel at 134 is: 4606030
+pixel at 135 is: 15133162
+pixel at 136 is: 15790835
+pixel at 137 is: 15725042
+pixel at 138 is: 15330284
+pixel at 139 is: 15265004
+pixel at 140 is: 15264748
+pixel at 141 is: 15133160
+pixel at 142 is: 14804451
+pixel at 143 is: 9409941
+pixel at 144 is: 12763835
+pixel at 145 is: 15264486
+pixel at 146 is: 14869989
+pixel at 147 is: 15067368
+pixel at 148 is: 15001319
+pixel at 149 is: 14607076
+pixel at 150 is: 10726320
+pixel at 151 is: 12766161
+pixel at 152 is: 7702680
+pixel at 153 is: 14343387
+pixel at 154 is: 11183771
+pixel at 155 is: 11775649
+pixel at 156 is: 14409696
+pixel at 157 is: 14607332
+pixel at 158 is: 13028815
+
+
+
+--- 1 queue running ---
+
+pixel at 202 is: 4737614
+pixel at 203 is: 8095605
+pixel at 204 is: 7175779
+pixel at 205 is: 4541002
+pixel at 206 is: 4211014
+pixel at 207 is: 3948099
+pixel at 208 is: 4276808
+pixel at 209 is: 4606029
+pixel at 210 is: 15001833
+pixel at 211 is: 15856628
+pixel at 212 is: 15725298
+pixel at 213 is: 15396077
+pixel at 214 is: 15264748
+pixel at 215 is: 15264748
+pixel at 216 is: 15133161
+pixel at 217 is: 14869988
+pixel at 218 is: 9344406
+pixel at 219 is: 12500406
+pixel at 220 is: 15330022
+pixel at 221 is: 14869989
+pixel at 222 is: 15067368
+pixel at 223 is: 15001576
+pixel at 224 is: 14672869
+pixel at 225 is: 11055285
+pixel at 226 is: 13094869
+pixel at 227 is: 7965594
+pixel at 228 is: 14541023
+pixel at 229 is: 11315359
+pixel at 230 is: 11512475
+pixel at 231 is: 14409440
+pixel at 232 is: 14607332
+pixel at 233 is: 13226193
+pixel at 234 is: 3619136
+pixel at 235 is: 3684928
+pixel at 236 is: 3684929
