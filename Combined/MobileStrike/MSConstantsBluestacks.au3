@@ -62,7 +62,7 @@ Global Const $MSTermsAndConditionsButton = [250,450]
 Global Const $MSSecretGift = [458,589]
 Global Const $MSSecretGiftCollectButton = [350,500] ;411,430 - 11230223
 Global Const $MSNoSecretGiftCollectButton = [350,450] ;411,430 - 11230223
-Global Const $MSSecretGiftCollectButtonColor = 14319616
+Global Const $MSSecretGiftCollectButtonColors = [14319616,16770417]
 
 ;Image Positions [left, top, right, bottom]
 Global Const $MSRssImage[] = [200,70,560,95]

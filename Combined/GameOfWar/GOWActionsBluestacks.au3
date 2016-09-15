@@ -318,7 +318,7 @@ Func CollectAthenaGift($count = 0)
    ;Collect the bouncer
    SendMouseClick($AthenaGift[0],$AthenaGift[1])
    ;Just a pause to speed it up
-   PollForColor($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1],$SecretGiftCollectButtonColor,4000,"$SecretGiftCollectButtonColor at $SecretGiftCollectButton")
+   PollForColor($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1],$SecretGiftCollectButtonColor,4000,"$SecretGiftCollectButtonColor at $AthenaGiftCollectButton")
    SendMouseClick($AthenaGiftCollectButton[0],$AthenaGiftCollectButton[1])
    Sleep(3500) ; longer sleep because it pops stuff up
 

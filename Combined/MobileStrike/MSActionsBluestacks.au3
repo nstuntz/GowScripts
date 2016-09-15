@@ -220,12 +220,12 @@ Func CollectAthenaGiftMS($MScount = 0)
    ;Collect the bouncer
    SendMouseClick($MSAthenaGift[0],$MSAthenaGift[1])
    ;Just a pause to speed it up
-   PollForColor($MSAthenaGiftCollectButton[0],$MSAthenaGiftCollectButton[1],$MSSecretGiftCollectButtonColor,4000,"$MSSecretGiftCollectButtonColor at $MSSecretGiftCollectButton")
+   PollForColors($MSAthenaGiftCollectButton[0],$MSAthenaGiftCollectButton[1],$MSSecretGiftCollectButtonColors,4000,"$MSSecretGiftCollectButtonColor at $MSSecretGiftCollectButton")
    SendMouseClick($MSAthenaGiftCollectButton[0],$MSAthenaGiftCollectButton[1])
    Sleep(3500) ; longer sleep because it pops stuff up
 
    CollectAthenaGiftMS($MScount+1)
-   Login_AthenaGiftCollected()
+   ;Login_AthenaGiftCollected()
 
 EndFunc
 
@@ -233,7 +233,7 @@ Func CollectSecretGiftMS()
    ;Collect the bouncer
    SendMouseClick($MSSecretGift[0],$MSSecretGift[1])
    ;Just a pause to speed it up
-   If PollForColor($MSSecretGiftCollectButton[0],$MSSecretGiftCollectButton[1],$MSSecretGiftCollectButtonColor,4000,"$MSSecretGiftCollectButtonColor at $MSSecretGiftCollectButton") Then
+   If PollForColors($MSSecretGiftCollectButton[0],$MSSecretGiftCollectButton[1],$MSSecretGiftCollectButtonColors,4000,"$MSSecretGiftCollectButtonColor at $MSSecretGiftCollectButton") Then
 	  SendMouseClick($MSSecretGiftCollectButton[0],$MSSecretGiftCollectButton[1])
    Else
 	  SendMouseClick($MSNoSecretGiftCollectButton[0],$MSNoSecretGiftCollectButton[1])
