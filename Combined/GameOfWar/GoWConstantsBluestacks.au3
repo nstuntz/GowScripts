@@ -77,6 +77,8 @@ Global Const $MoreMenu = [555,710]
 Global Const $RedeemButton = [952,642]
 Global Const $AccountButton = [410,230]
 Global Const $AccountButton2 = [410,160]
+Global Const $AccountButtonColor = 16777215
+Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618,14935011]
 ;Global Const $LogoutButton = [1010,550]
 Global Const $LogoutButton = [435,510]
 Global Const $LogoutYesButton = [300,285]
@@ -295,8 +297,6 @@ Global Const $RedNoButton = 3737603
 Global Const $BuildingBeige = 10521720
 Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16711
-Global Const $AccountButtonColor = 16777215
-Global Const $AccountButtonColors = [16777215,16711422,4405554,724238,921618,14935011]
 Global Const $GreyedOutButton = 4670530
 Global Const $ExitAppErrorColor = 1577765
 
