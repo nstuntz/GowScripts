@@ -237,7 +237,7 @@ Func SaveImage($imageName,$left,$top,$right,$bottom)
 
    ;_GDIPlus_ImageRotateFlip($hBitmap, 1) ;rotate image by 90 degrees without flipping
 
-   ;_GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
+   _GDIPlus_ImageSaveToFile($hBitmap,$sFilePath)
 
    ;_GDIPlus_BitmapDispose($hBitmap)
    _GDIPlus_ImageDispose($hBitmap)
@@ -275,8 +275,9 @@ Func SaveImage($imageName,$left,$top,$right,$bottom)
 	  LogMessage("Image(ets) Saved - Response = " & $oReceived,1)
    Else
    #comments-end
+
 	  ;Save to the new server too
-;;;	  SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
+	  SaveImageMinion($imageName,$sFileRead,$left,$top,$right,$bottom)
    ;EndIf
 
 
