@@ -123,11 +123,16 @@ Global Const $MSAllianceHelpHelpAllButtonColor = 14319616
 Global Const $MSHelpTopMember = [550,263]
 Global Const $MSHelpTopMemberColor = 4162976
 Global Const $MSHelpNumberOffsetX = 59
-Global Const $MSHelpRSSMax[][] = [[422,162], _ ;Stone
-								   [422,247], _ ;Wood
-								   [422,331], _ ;Ore
+;Global Const $MSHelpRSSMax[][] = [[422,162], _ ;Stone
+;								   [422,247], _ ;Wood
+;								   [422,331], _ ;Ore
+;								   [422,415], _ ;Food
+;								   [422,415]] ; Silver      This is after it scrolls
+Global Const $MSHelpRSSMax[][] = [[422,331], _ ;Stone
+								   [422,162], _ ;Wood
+								   [422,415], _ ;Ore
 								   [422,415], _ ;Food
-								   [422,415]] ; Silver      This is after it scrolls
+								   [422,247]] ; Silver      This is after it scrolls
 Global Const $MSRSSHelpButton = [525,590]
 Global Const $MSRSSHelpButtonColor = 4097181
 
