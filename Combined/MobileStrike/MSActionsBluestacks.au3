@@ -416,11 +416,18 @@ Func SendRSSMS($MStype, $MSnonSilverType)
 	  If ($MStype = $MSeSilver) Then
 		 LogMessage("Banking - Maxing silver march with rss",2)
 		 ;SendMouseClick($MSHelpRSSMax[$MSeFood][0],$MSHelpRSSMax[$MSeFood][1])
-		 SendMouseClick($MSHelpRSSMax[$MSnonSilverType][0],$MSHelpRSSMax[$MSnonSilverType][1])
+		 If ($MSnonSilverType = 3) Then
+			;Here we have food so scroll down to max and then scroll up
+			MouseClickDrag("left",390,300,390,140)
+			SendMouseClick($MSHelpRSSMax[$MSnonSilverType][0],$MSHelpRSSMax[$MSnonSilverType][1])
+			MouseClickDrag("left",390,140,390,300)
+		 Else
+			SendMouseClick($MSHelpRSSMax[$MSnonSilverType][0],$MSHelpRSSMax[$MSnonSilverType][1])
+		 EndIf
 		 Sleep(500)
 	  EndIf
 
-	  If ($MStype = $MSeSilver) Then
+	  If ($MStype = 3) Then
 		 ;Scroll for silver
 		 MouseClickDrag("left",390,300,390,140)
 	  EndIf
