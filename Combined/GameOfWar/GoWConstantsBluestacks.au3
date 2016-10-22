@@ -168,12 +168,17 @@ Global Const $HelpRSSBoxes[][] = [[559,245], _ ;Stone
 ;								   [770,342], _ ;Food
 ;								   [835,342]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
-Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
-								   [415,216], _ ;Wood
-								   [415,269], _ ;Ore
-								   [415,322], _ ;Food
-								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
+;Global Const $HelpRSSMax[][] = [[415,162], _ ;Stone
+;								   [415,216], _ ;Wood
+;								   [415,269], _ ;Ore
+;								   [415,322], _ ;Food
+;								   [415,375]] ; Silver      Stone - Wood - Ore - Food - Silver  64 px offset
 
+Global Const $HelpRSSMax[][] = [[415,269], _ ;Stone
+								   [415,162], _ ;Wood
+								   [415,322], _ ;Ore
+								   [415,375], _ ;Food
+								   [415,216]] ; Silver
 Global Const $DoneAmountEntryButton = [1142,223] ; Blue color
 Global Const $RSSHelpButton = [410,575] ; Blue
 Global Const $RSSOKButton = [500,285] ; Blue
