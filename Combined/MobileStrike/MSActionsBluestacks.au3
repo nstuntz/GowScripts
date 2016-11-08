@@ -944,8 +944,8 @@ EndFunc
 Func CheckForPinPromptMS($MSpinArray)
    ;LogMessage("Checking for PIN")
    ;Local $MSpinArray = StringToASCIIArray(Login_PINMS())
-   If PollForColor($MSFirstPinBox[0],$MSFirstPinBox[1],$MSPinBoxColor,3000, "$MSPinBoxColor at $MSFirstPinBox") Then
-	  If CheckForColor($MSSecondPinBox[0],$MSSecondPinBox[1],$MSPinBoxColor) Then
+   If PollForColors($MSFirstPinBox[0],$MSFirstPinBox[1],$MSPinBoxColor,3000, "$MSPinBoxColor at $MSFirstPinBox") Then
+	  If PollForColors($MSSecondPinBox[0],$MSSecondPinBox[1],$MSPinBoxColor,1000,"$MSPinBoxColor at $MSSecondPinBox") Then
 
 		 LogMessage("PIN is needed",2)
 		 Sleep(500)
