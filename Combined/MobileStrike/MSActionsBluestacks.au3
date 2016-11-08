@@ -24,7 +24,7 @@ Func LoginMS($MSemail, $MSpwd)
 	  return false;
    EndIf
 
-   If Not PollForColor( $MSUserNameTextBox[0],$MSUserNameTextBox[1], $MSUserNameTextBoxColor,1000, "$MSUserNameTextBoxColor at $MSUserNameTextBox") Then
+   If Not PollForColors( $MSUserNameTextBox[0],$MSUserNameTextBox[1], $MSUserNameTextBoxColor,1000, "$MSUserNameTextBoxColor at $MSUserNameTextBox") Then
 	  LogMessage("No UsernameText box Checking if we are already logged in.")
 
 
@@ -163,12 +163,13 @@ Func LoginMS($MSemail, $MSpwd)
 
    ;Assume if there was a gold screen then we logged in ok and set the city/map colors
    If $MSClickedGoldScreen Then
-	  If Not CheckForColor($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor) Then
+	  If Not PollForColors($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor,500,"Check for $MSMapMenuColor in LoginMS" ) Then
 		 LogMessage("******************* Resetting City and Map Colors ***********************",5 )
-		 LogMessage("Old City Color = " & $MSMapMenuColor,5  )
+		 LogMessage("Old City Color = " & $MSMapMenuColor[0],5  )
+		 LogMessage("Old City Color = " & $MSMapMenuColor[1],5  )
 		 LogMessage("Old Map Color = " & $MSCityScreenColor,5  )
-		 $MSMapMenuColor  = PixelGetColor($MSCityMenu[0],$MSCityMenu[1])
-		 LogMessage("New City Color = " & $MSMapMenuColor,5  )
+		 $MSMapMenuColor[0]  = PixelGetColor($MSCityMenu[0],$MSCityMenu[1])
+		 LogMessage("New City Color = " & $MSMapMenuColor[0],5  )
 		 SendMouseClick($MSCityMenu[0],$MSCityMenu[1])
 		 Sleep(1000)
 		 $MSCityScreenColor = PixelGetColor($MSCityMenu[0],$MSCityMenu[1])
@@ -178,7 +179,7 @@ Func LoginMS($MSemail, $MSpwd)
 	  EndIf
    EndIf
 
-   ;If we didn't get the fity screen bailout
+   ;If we didn't get the city screen bailout
    If Not CheckForCityScreenMS(0) Then
 	  LogMessage("NO city screen after login, in login function",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
@@ -989,7 +990,7 @@ EndFunc
 Func ClickCityScreenMS()
 
    ;LogMessage("----- Checking for CityScreenColor: " & $MSCityScreenColor)
-   If Not CheckForColor($MSCityMenu[0],$MSCityMenu[1],$MSCityScreenColor) Then
+   If Not PollForColors($MSCityMenu[0],$MSCityMenu[1],$MSCityScreenColor,500, "ClickCityScreenMS Color Poll") Then
 	  LogMessage("*** Got the wrong color for the city screen")
    Else
 	  SendMouseClick($MSCityMenu[0],$MSCityMenu[1])
@@ -1037,9 +1038,9 @@ EndFunc
 Func CheckForCityScreenMS($MSattempts)
 
    ;Check for the gold button
-   Local $MSHasGoldButton = CheckForColor($MSGoldExitButton[0],$MSGoldExitButton[1],$MSGetGoldButton)
+   Local $MSHasGoldButton = PollForColors($MSGoldExitButton[0],$MSGoldExitButton[1],$MSGetGoldButton,500)
    ;Check for the map menu item
-   Local $MSHasMapButton = CheckForColor($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor)
+   Local $MSHasMapButton = PollForColors($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor,500,"CheckFor CityMS Screen")
 
    If $MSHasGoldButton AND $MSHasMapButton Then
 	  ;LogMessage("Got City screen. Attempt=" & $MSattempts)
@@ -1108,7 +1109,7 @@ Func CheckForWorldScreenMS($MSattempts)
 	  EndIf
 
 	  ;If we are on the City click into the city
-	  If CheckForColor($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor) Then
+	  If PollForColors($MSCityMenu[0],$MSCityMenu[1],$MSMapMenuColor,500,"Check for $MSMapMenuColor in CheckForWorldScreenMS") Then
 		 SendMouseClick($MSCityMenu[0],$MSCityMenu[1])
 		 Sleep(1000)
 	  EndIf

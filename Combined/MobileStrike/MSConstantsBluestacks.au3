@@ -9,7 +9,7 @@ Global Const $MSRandomSpotForBlankScreenCheck = [340,700]
 
 ;Login Set
 Global Const $MSUserNameTextBox = [330,300]
-Global Const $MSUserNameTextBoxColor = 15592941
+Global Const $MSUserNameTextBoxColor = [15592941,16252154]
 Global Const $MSPasswordTextBox = [330,360]
 Global Const $MSLoginButton = [445,415]
 Global Const $MSLoginButtonInitalColor = 5723995
@@ -35,10 +35,10 @@ Global Const $MSBuyGoldColor3 = 933924
 
 ;Menus
 Global Const $MSCityMenu = [165,725]
-Global $MSCityScreenColor = 6729417 ; this goes back into city
-Global $MSMapMenuColor = 3702948 ; this leaves city
+Global $MSCityScreenColor = [6729417,6860488] ; this goes back into city
+Global $MSMapMenuColor = [3702948,3506340] ; this leaves city
 Global Const $MSGoldExitButton = [570,40];[580,45]
-Global Const $MSGetGoldButton = 14916690;16702022
+Global Const $MSGetGoldButton = [14916690,15048277,6045730];16702022
 
 ;Logout
 Global Const $MSMoreMenu = [555,710]
