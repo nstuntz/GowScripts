@@ -1691,6 +1691,7 @@ Func CheckForPinPrompt($pinArray)
 		 LogMessage("Entering PIN number: " & $pinArray)
 		 SendMouseClick($FirstPinBox[0],$FirstPinBox[1])
 		 For $i = 0 to UBound($pinArray)-1
+			Sleep(500)
 			Send(Chr($pinArray[$i]))
 			Sleep(500)
 		 Next

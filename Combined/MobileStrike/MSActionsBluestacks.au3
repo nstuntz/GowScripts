@@ -957,6 +957,7 @@ Func CheckForPinPromptMS($MSpinArray)
 
 		 SendMouseClick($MSFirstPinBox[0],$MSFirstPinBox[1])
 		 For $MSi = 0 to UBound($MSpinArray)-1
+			Sleep(500)
 			Send(Chr($MSpinArray[$MSi]))
 			Sleep(500)
 		 Next
