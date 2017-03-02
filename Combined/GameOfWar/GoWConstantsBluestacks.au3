@@ -298,11 +298,11 @@ Global Const $Blue = 16711
 Global Const $GreenCollect = 11264
 Global Const $Purple = 3672136
 Global Const $Black = 0
-Global Const $RedNoButton = 3737603
+Global Const $RedNoButton = 4067079 ;3737603
 Global Const $BuildingBeige = 10521720
 Global Const $StrongholdUpgradeArrowColor = 13663240
 Global Const $BlueOKButton = 16711
-Global Const $GreyedOutButton = 4670530
+Global Const $GreyedOutButton = 4736322 ;4670530
 Global Const $ExitAppErrorColor = 1577765
 
 ;Paused?
