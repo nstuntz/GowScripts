@@ -47,7 +47,7 @@ Global Const $MSAccountButton = [410,230]
 Global Const $MSAccountButtonColor = 16777215
 Global Const $MSAccountButtonColors = [15000778,14934985,14934984,12895404, 12764075]
 Global Const $MSLogoutButton = [400,600]
-Global Const $MSLogoutButtonColor = 14619434
+Global Const $MSLogoutButtonColor = 13318461 ;14619434
 Global Const $MSLogoutYesButton = [295,275]
 Global Const $MSLogoutYesButtonColor = 4162976
 
