@@ -15,7 +15,7 @@ Global Const $MSLoginButton = [445,415]
 Global Const $MSLoginButtonInitalColor = 5263444  ; 5723995
 Global Const $MSLoginButtonReadyColor = 4162975
 Global Const $MSLoginFailureButton = [392,259]
-Global Const $MSLoginButtonFailueColor = 4162975
+Global Const $MSLoginButtonFailueColor = 3963278  ; 4162975
 Global Const $MSDeviceLockedLogoutButton = [500,325]
 Global Const $MSDeviceLockedLogoutButtonColor = 14816813
 
