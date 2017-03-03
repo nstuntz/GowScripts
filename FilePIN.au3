@@ -1,2 +1,2 @@
 #include-once
-Global $filePIN = "7777"
+Global $filePIN = ""

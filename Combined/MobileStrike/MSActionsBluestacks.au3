@@ -830,7 +830,7 @@ Func OpenMS($MSattempts)
    For $MS1 = 0 to 6 Step 1
 
 	  ;Check for 5 seconds for the login button
-	  If PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSGreyedOutButton at $MSLoginButton") Then
+	  If PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton") Then
 		 ExitLoop
 	  EndIf
 	  $MSwinSize = WinGetClientSize("BlueStacks")
@@ -843,7 +843,7 @@ Func OpenMS($MSattempts)
    Next
 
 
-   If Not PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSGreyedOutButton at $MSLoginButton") Then
+   If Not PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton") Then
 
 	  LogMessage("Did not see login page")
 	  ;Here we dont have a logout button. There are 3 scenarios
