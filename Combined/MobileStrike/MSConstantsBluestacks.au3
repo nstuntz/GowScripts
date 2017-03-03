@@ -282,7 +282,7 @@ Global Const $MSPurple = 3672136
 Global Const $MSRedNoButton = 3737603
 Global Const $MSBuildingBeige = 10521720
 Global Const $MSStrongholdUpgradeArrowColor = 13663240
-Global Const $MSBlueOKButton = 16711
+Global Const $MSBlueOKButton = 3963278 ; 16711
 Global Const $MSGreyedOutButton = 4670530
 Global Const $MSExitAppErrorColor = 1385254
 
