@@ -86,7 +86,7 @@ Global Const $MSShieldButton24Hr = [520,400]
 Global Const $MSShieldButton3Day = [520,535]
 
 Global Const $MSShieldReplaceButton = [490,280]
-Global Const $MSShieldReplaceButtonColor = 4162976
+Global Const $MSShieldReplaceButtonColor = 3963278 ; 4162976
 Global Const $MSShieldVerifyMaxLength = [485,165]
 Global Const $MSShieldCountDownBlue = 3241360
 Global Const $MSShieldCountDownBlueAlt = 6002065
@@ -282,7 +282,7 @@ Global Const $MSPurple = 3672136
 Global Const $MSRedNoButton = 3737603
 Global Const $MSBuildingBeige = 10521720
 Global Const $MSStrongholdUpgradeArrowColor = 13663240
-Global Const $MSBlueOKButton = 3963278 ; 16711
+Global Const $MSBlueOKButton = 16711
 Global Const $MSGreyedOutButton = 4670530
 Global Const $MSExitAppErrorColor = 1385254
 
