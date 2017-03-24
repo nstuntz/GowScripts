@@ -99,7 +99,7 @@ Func LoginMS($MSemail, $MSpwd)
    ;Send($MSpwd)
 
    ;Check that the login button is there
-   If Not PollForColor($MSLoginButton[0],$MSLoginButton[1],$MSLoginButtonReadyColor,3000, "$MSLoginButtonReadyColor at $MSLoginButton") Then
+   If Not PollForColors($MSLoginButton[0],$MSLoginButton[1],$MSLoginButtonReadyColor,3000, "$MSLoginButtonReadyColor at $MSLoginButton") Then
 	  LogMessage("Login Failed.  Login button isn't the right color",5 )
 	  LogMessage("Increasing Login Attempts to " & Login_LoginAttempts()+1,5 )
 	  Login_UpdateLoginAttempts(Login_LoginAttempts() +1)
@@ -727,7 +727,7 @@ Func LogoutMS()
    EndIf
 
    ;Logout
-   If PollForColor($MSLogoutButton[0],$MSLogoutButton[1], $MSLogoutButtonColor, 5000, "$MSLogoutButtonColor at $MSLogoutButton") Then
+   If PollForColors($MSLogoutButton[0],$MSLogoutButton[1], $MSLogoutButtonColor, 5000, "$MSLogoutButtonColor at $MSLogoutButton") Then
 	  SendMouseClick($MSLogoutButton[0],$MSLogoutButton[1])
    Else
 	  LogMessage("Dont have the logout button to logout")
@@ -735,7 +735,7 @@ Func LogoutMS()
    EndIf
 
    ;Yes Logout
-   If PollForColor($MSLogoutYesButton[0],$MSLogoutYesButton[1], $MSLogoutYesButtonColor, 5000, "$MSLogoutYesButtonColor at $MSLogoutYesButton") Then
+   If PollForColors($MSLogoutYesButton[0],$MSLogoutYesButton[1], $MSLogoutYesButtonColor, 5000, "$MSLogoutYesButtonColor at $MSLogoutYesButton") Then
 	  SendMouseClick($MSLogoutYesButton[0],$MSLogoutYesButton[1])
    Else
 	  LogMessage("Dont have the account yes logout button")
@@ -830,7 +830,7 @@ Func OpenMS($MSattempts)
    For $MS1 = 0 to 6 Step 1
 
 	  ;Check for 5 seconds for the login button
-	  If PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton") Then
+	  If PollForColors($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton") Then
 		 ExitLoop
 	  EndIf
 	  $MSwinSize = WinGetClientSize("BlueStacks")
@@ -843,7 +843,7 @@ Func OpenMS($MSattempts)
    Next
 
 
-   If Not PollForColor($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton") Then
+   If Not PollForColors($MSLoginButton[0],$MSLoginButton[1], $MSLoginButtonInitalColor, 5000, "$MSLoginButtonInitalColor at $MSLoginButton-2") Then
 
 	  LogMessage("Did not see login page")
 	  ;Here we dont have a logout button. There are 3 scenarios

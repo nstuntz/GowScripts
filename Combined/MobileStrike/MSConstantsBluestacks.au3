@@ -1,5 +1,7 @@
 #include-once
 
+;123-Git- Testing
+
 
 Global Const $MSVBHostWindow[] = [100,0]
 Global Const $MS500by800IconLocation[] = [200,320]
@@ -12,10 +14,10 @@ Global Const $MSUserNameTextBox = [330,300]
 Global Const $MSUserNameTextBoxColor = [15592941,16252154]
 Global Const $MSPasswordTextBox = [330,360]
 Global Const $MSLoginButton = [445,415]
-Global Const $MSLoginButtonInitalColor = 5263444  ; 5723995
-Global Const $MSLoginButtonReadyColor = 3963278 ; 4162975
+Global Const $MSLoginButtonInitalColor = [5723995,5197652]
+Global Const $MSLoginButtonReadyColor = [4162975,3963021]
 Global Const $MSLoginFailureButton = [392,259]
-Global Const $MSLoginButtonFailueColor = 3963278  ; 4162975
+Global Const $MSLoginButtonFailueColor = 4162975
 Global Const $MSDeviceLockedLogoutButton = [500,325]
 Global Const $MSDeviceLockedLogoutButtonColor = 14816813
 
@@ -47,9 +49,9 @@ Global Const $MSAccountButton = [410,230]
 Global Const $MSAccountButtonColor = 16777215
 Global Const $MSAccountButtonColors = [15000778,14934985,14934984,12895404, 12764075]
 Global Const $MSLogoutButton = [400,600]
-Global Const $MSLogoutButtonColor = 13318461 ;14619434
+Global Const $MSLogoutButtonColor = [14619434,13318461]
 Global Const $MSLogoutYesButton = [295,275]
-Global Const $MSLogoutYesButtonColor = 3963278 ;4162976
+Global Const $MSLogoutYesButtonColor = [4162976,3963278]
 
 Global $MSstoredPIN = ""
 
@@ -86,7 +88,7 @@ Global Const $MSShieldButton24Hr = [520,400]
 Global Const $MSShieldButton3Day = [520,535]
 
 Global Const $MSShieldReplaceButton = [490,280]
-Global Const $MSShieldReplaceButtonColor = 3963278 ; 4162976
+Global Const $MSShieldReplaceButtonColor = 4162976
 Global Const $MSShieldVerifyMaxLength = [485,165]
 Global Const $MSShieldCountDownBlue = 3241360
 Global Const $MSShieldCountDownBlueAlt = 6002065
@@ -101,7 +103,7 @@ Global Const $MSQuestsAliaance = [430,460]
 Global Const $MSQuestsEmpire = [430,220]
 Global Const $MSQuestsStart = [555,178]
 Global Const $MSQuestsCollect = [560,180]
-Global Const $MSQuestsCollectColor = 3619648; 4162975
+Global Const $MSQuestsCollectColor = 4162975
 Global Const $MSNoQuestsColor = 1515301
 
 Global Const $MSQuestsEmpireCollect = [558,286] ; 558,286 - 11264
